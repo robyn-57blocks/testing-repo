@@ -1,0 +1,434 @@
+@import 'vungle-ad-core-mixins';
+@import 'vungle-ad-core-breakpoints';
+@import 'vungle-ad-core';
+@import 'vungle-ad-dynamic-templates';
+
+
+/* ----- Vungle Design Framework - CSS creative styling ----- */
+
+#vungle-footer {
+	#{$portrait}, #{$square} {
+		right: auto;
+	}
+	
+	#{$landscape} {
+		right: 0;
+	}
+}
+	
+#vungle-ad {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	box-sizing: border-box;
+
+	transition: opacity 0.3s ease-in-out;
+	
+	.relative-container {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+#video-container {
+	position: absolute;
+	width: 100%;
+	height: 50%;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: auto;
+	z-index: 100;
+	
+	#{$landscape} {
+		width: 40%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		right: auto;
+	}
+	
+	&.ratio916 {
+		#{$portrait-xs} {
+			height: 62%;
+		}
+		#{$portrait-s} {
+			height: 60%;
+		}
+		#{$portrait-m} {
+			height: 55%;
+		}
+		#{$portrait-l}, #{$portrait-xl} {
+			height: 40%;
+		}
+	}
+
+	&.ratio169 {
+		#{$landscape} {
+			width: 60%;
+		}
+	}
+	
+	&.ratio11 {
+		#{$portrait-xs}, #{$portrait-s} {
+			height: 65%;
+		}
+		#{$portrait-m} {
+			height: 60%;
+		}
+		#{$portrait-l}, #{$portrait-xl} {
+			height: 40%;
+		}
+		
+		#{$landscape-xs}, #{$landscape-s} {
+			width: 50%;
+		}
+		#{$landscape-m} {
+			width: 55%;
+		}
+		#{$landscape-l}, #{$landscape-xl} {
+			width: 60%;
+		}
+	}
+	
+	#video-holder {
+		position: absolute;
+		bottom: 0;
+		top: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		height: 100%;
+		width: 100%;
+		
+		video {
+			position: absolute;
+			display: block;
+		    height: 100%;
+		    width: 100%;
+		    padding: 0;
+		    
+		    &.corner-radius {
+			    @include border-radius($vungle-border-radius);
+		    }
+		}
+	}
+}
+
+#app-info-container {
+	position: absolute;
+	width: 100%;
+	height: 50%;
+	margin: auto;
+	top: auto;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+	overflow: hidden;
+	
+	#{$landscape} {
+		width: 60%;
+		left: auto;
+	}
+	
+	#carousel-container {
+		width: 100%;
+		height: 100%;
+		position: relative;
+	}
+	
+	#carousel {
+		height: 100%;
+		
+		.z-slide-content {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			overflow: hidden;
+			-webkit-animation: appear 0.8s ease-in-out;
+			animation: appear 0.8s ease-in-out;
+			-webkit-animation-fill-mode: forwards;
+			animation-fill-mode: forwards;
+		}
+		.z-slide-item {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+			-webkit-transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86) !important;
+			transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86) !important;
+			transition: all 0.3s !important;
+			-webkit-transition: all 0.3s !important;
+			
+			
+			&:first-child .card-content {
+				#{$portrait} {
+					padding: 2.5vw 7vw;
+				}
+				#{$landscape} {
+					padding: 2.5vw 4vw;
+				}
+			}
+			
+		}
+		@-webkit-keyframes appear {
+			0% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+		@keyframes appear {
+			0% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+		.z-slide-item.show {
+			opacity: 1;
+		}
+		.z-slide-item.hide {
+			opacity: 0;
+		}
+		.z-slide-item.hide-initial {
+			transition: none !important;
+			-webkit-transition: none !important;
+		}
+		.z-slide-item.hide-item {
+			opacity: 0;
+		}
+		
+		.card {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			box-sizing: border-box;
+			padding: 1.5vw 1.5vw 0 1.5vw;
+			
+			#{$landscape-xs} {
+				padding: 2vh 2vh 0 2vh;
+			}
+			#{$landscape-s} {
+				padding: 3vh 3vh 0 3vh;
+			}
+			#{$landscape-m} {
+				padding: 4vh 4vh 0 4vh;
+			}
+			
+
+		}
+		
+		.card-content {
+			width: 100%;
+			height: 100%;
+			background: $vungle-dt-light-theme-card;
+			position: relative;
+			text-align: center;
+			box-sizing: border-box;
+			padding: 2.5vw;
+			@include border-radius($vungle-border-radius $vungle-border-radius 0 0);
+			
+			#{$light-theme} {
+				background: $vungle-dt-light-theme-card;
+			}
+			#{$dark-theme} {
+				background: $vungle-dt-dark-theme-card;
+			}
+			
+			&.vertical-scroll {
+				overflow-y: scroll;
+				-webkit-overflow-scrolling: touch;
+			}
+			
+			.card-positioning {
+				position: relative;
+				width: 100%;
+			}
+			
+			
+			.star-rating-user {
+				width: 80%;
+				background: rgba(0, 0, 0, 0.15);
+				text-align: center;
+				display: inline-block;
+				@include border-radius($vungle-border-radius);
+	
+				
+				#{$square} {
+					padding: 2vw 0;
+					margin: 2vw 0;
+				}
+				
+				#{$portrait} {		
+					padding: 2vw 0;
+					margin: 2vw 0;
+				}
+				
+				#{$landscape} {
+					padding: 2vh 0;
+					margin: 2vh 0;
+				}
+				
+				p {
+					font-weight: 400;
+					margin: 0.5em 0 0 0;
+				}
+			}
+			
+			.store-description {
+				text-align: left;
+				font-weight: 400;
+				color: $white;
+				
+				#{$square} {
+					padding: 1.5vw;
+				}
+				#{$portrait} {
+					padding: 5vw;
+				}
+				#{$landscape} {
+					padding: 1.5vw;
+				}
+			}
+		}
+		
+		.vungle-icon {
+			
+			#{$square} {
+				height: 12vw;
+			}
+			
+			#{$portrait-xs} {
+				height: 18vw;
+			}
+			#{$portrait-s}, #{$portrait-m}, #{$portrait-l}, #{$portrait-xl} {
+				height: 16vw;
+			}
+			
+			#{$landscape-xs} {
+				height: 13vw;
+			}
+			#{$landscape-s}, #{$landscape-m}, #{$landscape-l}, #{$landscape-xl} {
+				height: 14vw;
+			}
+			
+			img {
+				position: absolute;
+				max-width: 100%;
+				max-height: 100%;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				margin: auto;
+			}
+		}
+	}
+	
+	.app-info-container-cta {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		
+		.cta-positioning {
+			box-sizing: border-box;
+			padding: 0 1.5vw 3.5vw 1.5vw;
+			
+			#{$landscape-xs} {
+				padding: 0 2vh 2vh 2vh;
+			}
+			#{$landscape-s} {
+				padding: 0 3vh 3vh 3vh;
+			}
+			#{$landscape-m} {
+				padding: 0 4vh 4vh 4vh;
+			}
+		}
+		
+		.vungle-cta {
+			display: block;
+			border-radius: 0 0 $vungle-border-radius $vungle-border-radius;
+		}
+	}
+	
+	.tooltip-holder {
+		svg {
+			#{$light-theme} {
+				@include color-opacity(fill, $vungle-dt-light-theme-text, $opacity: 0.3);
+			}
+			#{$dark-theme} {
+				@include color-opacity(fill, $vungle-dt-dark-theme-text, $opacity: 0.3);
+			}
+			
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			
+			#{$square} {
+				@include flexible-sizing(height, 1vh, 3vh, 3.5vh);
+			}
+			#{$portrait} {
+				@include flexible-sizing(height, 1vh, 3vh, 4vh);
+			}
+			#{$landscape} {
+				@include flexible-sizing(height, 3vw, 3.5vw, 4vw);
+			}
+		}
+		.arrow-left {
+			left: 0.5vw;
+			@include animation('arrow-left 1.4s infinite');
+		}
+		.arrow-right {
+			right: 0.5vw;
+			@include animation('arrow-right 1.4s infinite');
+		}
+		
+		@keyframes arrow-left {
+			0% {
+				opacity: 0;
+				transform: translateX(0.5em);
+			}
+			80% {
+				opacity: 1;
+				transform: translateX(0.1em);
+			}
+			100% {
+				opacity: 0;
+				transform: translateX(0.1em);
+			}
+		}
+		@keyframes arrow-right {
+			0% {
+				opacity: 0;
+				transform: translateX(-0.5em);
+			}
+			80% {
+				opacity: 1;
+				transform: translateX(-0.1em);
+			}
+			100% {
+				opacity: 0;
+				transform: translateX(-0.1em);
+			}
+		}
+	}
+}
