@@ -1,9 +1,7 @@
 /* ----- Vungle Design Framework - JS ad core initialisation ----- */
 
-//Template setup
-var debug = false;
-var dynamicTemplate = true;
-var theme = 'dark'; //light or dark
+var debug = true;
+
 var vungleAdSizes = ['xl','l','m','s','xs'];
 
 function initVungleAd() {
@@ -13,17 +11,23 @@ function initVungleAd() {
 	var longestSide = (Math.max(vungleAdContainer.offsetHeight, vungleAdContainer.offsetWidth));
 	var shortestSide = (Math.min(vungleAdContainer.offsetHeight, vungleAdContainer.offsetWidth));
 		
-/*
-	The original innerWidth/Height potentially breaks ad when viewed on the latest Chrome,
-	so we have gone ahead and used offsetWidth/Height within the body tag CSS
+	/*
+		The original innerWidth/Height potentially breaks ad when viewed on the latest Chrome,
+		so we have gone ahead and used offsetWidth/Height within the body tag CSS
+		
+		var longestSide = (Math.max(window.innerHeight, window.innerWidth));
+		var shortestSide = (Math.min(window.innerHeight, window.innerWidth));
+	*/
 	
-	var longestSide = (Math.max(window.innerHeight, window.innerWidth));
-	var shortestSide = (Math.min(window.innerHeight, window.innerWidth));
-*/
+	if (typeof theme === 'undefined' || theme === null) {
+		theme = 'dark';
+	}
+	if (typeof debug === 'undefined' || debug === null) {
+		debug = false;
+	}	
 
 	var range = ((longestSide-shortestSide)/longestSide)*100;
-	var adClassName, dtClassName;
-	var dtClassName = dynamicTemplate ? ' dt' : '';
+	var adClassName;
 	
 	if (longestSide === shortestSide){
 		//Square ad unit
@@ -44,13 +48,17 @@ function initVungleAd() {
 		} else {
 			adClassName = 'landscape landscape-'+vungleAdSizes[vungleAdSizes.length - 1]+' oob';
 		}
-	}		
+	}	
+	
+	console.log("TEST: "+adClassName);	
 	
 	//Append body tag with appropriate classnames
-	document.body.className = adClassName + ' ' + theme + ' ' + getOS() + dtClassName;
+	document.body.className = adClassName + ' ' + theme + ' ' + getOS();
 	
-	// -- Debug mode: Displays the Vungle boilerplate classes to help you
-	//    identify each classname if you wish to make additional stylistic changes
+	/* 	
+		Debug mode: Displays the Vungle boilerplate classes to help you
+		identify each classname if you wish to make additional stylistic changes
+	*/
 	if (debug) {
 		var adClassDebug;
 		if (adClassName.indexOf('oob') >= 0) {
