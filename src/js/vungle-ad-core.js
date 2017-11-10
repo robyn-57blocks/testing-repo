@@ -1,7 +1,5 @@
 /* ----- Vungle Design Framework - JS ad core initialisation ----- */
 
-var debug = true;
-
 var vungleAdSizes = ['xl','l','m','s','xs'];
 
 function initVungleAd() {
@@ -49,35 +47,47 @@ function initVungleAd() {
 			adClassName = 'landscape landscape-'+vungleAdSizes[vungleAdSizes.length - 1]+' oob';
 		}
 	}	
-	
-	console.log("TEST: "+adClassName);	
-	
+		
 	//Append body tag with appropriate classnames
 	document.body.className = adClassName + ' ' + theme + ' ' + getOS();
+	
+	window.addEventListener('resize', function(event){
+		vungleAd.style.opacity = 0;
+		
+		if (this.resizeTimer) {
+			clearTimeout(this.resizeTimer);
+		}
+		this.resizeTimer = setTimeout(function(){
+		    initVungleAd();
+			vungleAd.style.opacity = 1;
+		}, 200);
+	});
 	
 	/* 	
 		Debug mode: Displays the Vungle boilerplate classes to help you
 		identify each classname if you wish to make additional stylistic changes
 	*/
-	if (debug) {
-		var adClassDebug;
-		if (adClassName.indexOf('oob') >= 0) {
-			adClassDebug = '<span>Out of Bounds</span>';
-		} else {
-			adClassDebug = '<span>'+adClassName+'</span>';
-		}
-			
-		if (document.getElementById("vungle-ad-debug") === null) {
-			var debugElem = document.createElement("div");
-			debugElem.setAttribute("id", "vungle-ad-debug");
-			debugElem.className = adClassName;
-			debugElem.innerHTML = adClassDebug;
-
-			document.body.appendChild(debugElem);
-		} else {
-			var debugContainer = document.getElementById("vungle-ad-debug");
-			debugContainer.className = adClassName;
-			debugContainer.innerHTML = adClassDebug;
+	if (typeof debug !== 'undefined' || debug !== null) {
+		if (debug) {
+			var adClassDebug;
+			if (adClassName.indexOf('oob') >= 0) {
+				adClassDebug = '<span>Out of Bounds</span>';
+			} else {
+				adClassDebug = '<span>'+adClassName+'</span>';
+			}
+				
+			if (document.getElementById("vungle-ad-debug") === null) {
+				var debugElem = document.createElement("div");
+				debugElem.setAttribute("id", "vungle-ad-debug");
+				debugElem.className = adClassName;
+				debugElem.innerHTML = adClassDebug;
+	
+				document.body.appendChild(debugElem);
+			} else {
+				var debugContainer = document.getElementById("vungle-ad-debug");
+				debugContainer.className = adClassName;
+				debugContainer.innerHTML = adClassDebug;
+			}
 		}
 	}
 }
