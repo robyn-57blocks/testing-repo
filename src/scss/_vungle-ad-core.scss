@@ -183,6 +183,13 @@ body > * {
 // - Vungle Ad Creative
 #vungle-ad {
 	background-color: $black;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
 	
 	#{$light-theme} {
 		background-color: $vungle-light-theme-background;
