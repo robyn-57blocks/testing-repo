@@ -199,51 +199,6 @@ body > * {
 	}		
 }
 
-// -- Vungle Footer
-#vungle-footer {
-	position: absolute;
-	bottom: 0;
-	margin: 0 auto;
-	display: block;
-	text-align: center;
-	width: 100%;
-	box-sizing: border-box;
-	z-index: 100;
-	
-	svg {
-		@include flexible-sizing(height, 0.2vh, 0.6em, 0.8em, 15px);
-		display: block;
-		fill: $vungle-light-theme-footer;
-	}
-	
-	.vungle-logo-fill {
-		fill: $vungle-dt-dark-theme-text;
-		
-		#{$light-theme} {
-			fill: $vungle-dt-light-theme-text;
-		}
-		#{$dark-theme} {
-			fill: $vungle-dt-dark-theme-text;
-		}
-	}
-	
-	&.left svg {
-		float: left;
-		padding: 0px 0px 3px $vungle-margin-portrait;
-	}
-	&.right svg {
-		float: right;
-		padding: 0 $vungle-margin-portrait 3px 0;
-	}
-	&.center svg {
-		width: auto;
-		left: 0;
-		right: 0;
-		margin: auto;
-		padding: 0 0 3px 0;
-	}
-}
-
 .star-rating, .star-rating-user {
 	svg {
 		display: inline-block;
