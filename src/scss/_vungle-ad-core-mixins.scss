@@ -2,41 +2,42 @@
 
 // -- Vungle-specific styling
 @mixin os-icon-border-radius {
-	#{$ios} {
-		border-radius: 26%/24%;
-	}
-	#{$android} {
-		border-radius: 20%;
-	}
-	#{$windows} {
-		border-radius: 0;
-	}
+    #{$ios} {
+        border-radius: 26%/24%;
+    }
+    #{$android} {
+        border-radius: 20%;
+    }
+    #{$windows} {
+        border-radius: 0;
+    }
 }
 
 
 // -- Helpers
 @mixin border-radius($radius: 5px) {
-	-webkit-background-clip: padding-box;
-	-webkit-border-radius: $radius;
-	-moz-background-clip: padding-box;
-	-moz-border-radius: $radius;
-	border-radius: $radius;
-	background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+    -webkit-border-radius: $radius;
+    -moz-background-clip: padding-box;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+    background-clip: padding-box;
 }
 
 @mixin box-shadow($shadow1, $shadow2:false) {
- $params: $shadow1;
-  @if $shadow2 
-    { $params: $shadow1, $shadow2; }
-  -webkit-box-shadow: $params;
-     -moz-box-shadow: $params;
-          box-shadow: $params;
+    $params: $shadow1;
+    @if $shadow2 {
+        $params: $shadow1, $shadow2;
+    }
+    -webkit-box-shadow: $params;
+    -moz-box-shadow: $params;
+    box-shadow: $params;
 }
 
 @mixin inset-box-shadow($horizontal: 0px, $vertical: 1px, $blur: 2px, $color: #CCC) {
-	-webkit-box-shadow: inset $horizontal $vertical $blur $color;
-	-moz-box-shadow: inset $horizontal $vertical $blur $color;
-	box-shadow: inset $horizontal $vertical $blur $color;
+    -webkit-box-shadow: inset $horizontal $vertical $blur $color;
+    -moz-box-shadow: inset $horizontal $vertical $blur $color;
+    box-shadow: inset $horizontal $vertical $blur $color;
 }
 
 @mixin animation($animate...) {
@@ -51,93 +52,102 @@
         }
     }
     -webkit-animation: $animations;
-    -moz-animation:    $animations;
-    -o-animation:      $animations;
-    animation:         $animations;
+    -moz-animation : $animations;
+    -o-animation : $animations;
+    animation : $animations;
 }
 
 @mixin breakpoint-width($point) {
-	@media (max-width: $point) { @content; }
+    @media (max-width: $point) {
+        @content;
+    }
 }
 
 @mixin flexible-sizing($property, $responsive, $min, $max: false, $fallback: false) {
-	
-/// Viewport sized typography with minimum and maximum values
-///
-/// @author Eduardo Boucas (@eduardoboucas)
-///
-/// @param {Number}   $responsive  - Viewport-based size
-/// @param {Number}   $min         - Minimum font size (px)
-/// @param {Number}   $max         - Maximum font size (px)
-///                                  (optional)
-/// @param {Number}   $fallback    - Fallback for viewport-
-///                                  based units (optional)
-///
-/// @example scss - 5vw font size (with 50px fallback), 
-///                 minumum of 35px and maximum of 150px
-///  @include responsive-font(5vw, 35px, 150px, 50px);
-///
-	
-	$responsive-unitless: $responsive / ($responsive - $responsive + 1);
-	$dimension: if(unit($responsive) == 'vh', 'height', 'width');
-	$min-breakpoint: $min / $responsive-unitless * 100;
-	
-	#{$property}: $responsive;
-	
-	@media (max-#{$dimension}: #{$min-breakpoint}) {
-		#{$property}: $min;
-	}
 
-	@if $max {
-		$max-breakpoint: $max / $responsive-unitless * 100;
+    /// Viewport sized typography with minimum and maximum values
+    ///
+    /// @author Eduardo Boucas (@eduardoboucas)
+    ///
+    /// @param {Number}   $responsive  - Viewport-based size
+    /// @param {Number}   $min         - Minimum font size (px)
+    /// @param {Number}   $max         - Maximum font size (px)
+    ///                                  (optional)
+    /// @param {Number}   $fallback    - Fallback for viewport-
+    ///                                  based units (optional)
+    ///
+    /// @example scss - 5vw font size (with 50px fallback), 
+    ///                 minumum of 35px and maximum of 150px
+    ///  @include responsive-font(5vw, 35px, 150px, 50px);
+    ///
+    $responsive-unitless: $responsive / ($responsive - $responsive + 1);
+    $dimension: if(unit($responsive)=='vh', 'height', 'width');
+    $min-breakpoint: $min / $responsive-unitless * 100;
 
-		@media (min-#{$dimension}: #{$max-breakpoint}) {
-			#{$property}: $max;
-		}
-	}
+    #{$property}: $responsive;
 
-	@if $fallback {
-		#{$property}: $fallback;
-	}
+    @media (max-#{$dimension}: #{$min-breakpoint}) {
+        #{$property}: $min;
+    }
 
-	#{$property}: $responsive;
+    @if $max {
+        $max-breakpoint: $max / $responsive-unitless * 100;
+
+        @media (min-#{$dimension}: #{$max-breakpoint}) {
+            #{$property}: $max;
+        }
+    }
+
+    @if $fallback {
+        #{$property}: $fallback;
+    }
+
+    #{$property}: $responsive;
 }
 
 @mixin linear-gradient($angle, $color-stops...) {
-  $_angle-with-vendor-prefix: "";
-  $_angle: "";
-  @if $angle == "to top" or $angle == "bottom" {
-    $_angle-with-vendor-prefix: bottom;
-    $_angle: to top;
-  } @else if $angle == "to right" or $angle == "left" {
-    $_angle-with-vendor-prefix: left;
-    $_angle: to right;
-  } @else if $angle == "to bottom" or $angle == "top" {
-    $_angle-with-vendor-prefix: top;
-    $_angle: to bottom;
-  } @else if $angle == "to left" or $angle == "right" {
-    $_angle-with-vendor-prefix: right;
-    $_angle: to left;
-  } @else if $angle == "to top right" or $angle == "bottom left" {
-    $_angle-with-vendor-prefix: bottom left;
-    $_angle: to top right;
-  } @else if $angle == "to bottom right" or $angle == "top left" {
-    $_angle-with-vendor-prefix: top left;
-    $_angle: to bottom right;
-  } @else if $angle == "to bottom left" or $angle == "top right" {
-    $_angle-with-vendor-prefix: top right;
-    $_angle: to bottom left;
-  } @else if $angle == "to top left" or $angle == "bottom right" {
-    $_angle-with-vendor-prefix: bottom right;
-    $_angle: to top left;
-  } @else {
-    $_angle-with-vendor-prefix: $angle % 360;
-    $_angle: (90 - $angle) % 360;
-  }
-  background: -webkit-linear-gradient($_angle-with-vendor-prefix, $color-stops);
-  background: -moz-linear-gradient($_angle-with-vendor-prefix, $color-stops);
-  background: -o-linear-gradient($_angle-with-vendor-prefix, $color-stops);
-  background: linear-gradient($_angle, $color-stops);
+    $_angle-with-vendor-prefix: "";
+    $_angle: "";
+    @if $angle=="to top" or $angle=="bottom" {
+        $_angle-with-vendor-prefix: bottom;
+        $_angle: to top;
+    }
+    @else if $angle=="to right" or $angle=="left" {
+        $_angle-with-vendor-prefix: left;
+        $_angle: to right;
+    }
+    @else if $angle=="to bottom" or $angle=="top" {
+        $_angle-with-vendor-prefix: top;
+        $_angle: to bottom;
+    }
+    @else if $angle=="to left" or $angle=="right" {
+        $_angle-with-vendor-prefix: right;
+        $_angle: to left;
+    }
+    @else if $angle=="to top right" or $angle=="bottom left" {
+        $_angle-with-vendor-prefix: bottom left;
+        $_angle: to top right;
+    }
+    @else if $angle=="to bottom right" or $angle=="top left" {
+        $_angle-with-vendor-prefix: top left;
+        $_angle: to bottom right;
+    }
+    @else if $angle=="to bottom left" or $angle=="top right" {
+        $_angle-with-vendor-prefix: top right;
+        $_angle: to bottom left;
+    }
+    @else if $angle=="to top left" or $angle=="bottom right" {
+        $_angle-with-vendor-prefix: bottom right;
+        $_angle: to top left;
+    }
+    @else {
+        $_angle-with-vendor-prefix: $angle % 360;
+        $_angle: (90 - $angle) % 360;
+    }
+    background: -webkit-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+    background: -moz-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+    background: -o-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+    background: linear-gradient($_angle, $color-stops);
 }
 
 @mixin color-opacity($property: background, $color: $black, $opacity: 1) {
