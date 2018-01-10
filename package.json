@@ -4,8 +4,7 @@
   "description": "VCL Design Framework - Boilerplate for Vungle ad units and designs",
   "main": "vungle-core.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "scss": "node-sass --watch src/scss -o public"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "handlebars": "^4.0.10"
