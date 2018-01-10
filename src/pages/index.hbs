@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+    <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0, user-scalable=no" />
     <meta name="author" content="Vungle">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <!-- Design Framework Stylesheets -->
-    <link rel="stylesheet" href="vungle.min.css">{{!-- Include creative-specific stylesheets here --}}
+    <link rel="stylesheet" href="vungle.min.css">
+    <!-- Include creative-specific CSS here -->
     {{> partials/style-includes }}
-        <title>Vungle</title>
+    <title>Vungle</title>
 </head>
 
 <body id="vungle-ad-container">
@@ -33,7 +33,7 @@
         </a>
     </div>
     <div id="vungle-ad">
-        {{!-- Include creative-specific HTML here --}}
+        <!-- Include creative-specific HTML here -->
         {{> partials/creative }}
     </div>
 </body>
@@ -56,6 +56,6 @@
         event.preventDefault();
     }
 </script>
-{{!-- Include creative-specific JS here --}}
+<!-- Include creative-specific JS here -->
 {{> partials/js-includes }}
 </html>
