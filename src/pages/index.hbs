@@ -7,10 +7,9 @@
     <meta name="author" content="Vungle">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- Design Framework Stylesheets -->
-    <link rel="stylesheet" href="vungle.min.css">
-    {{!-- Include creative-specific stylesheets here --}}
+    <link rel="stylesheet" href="vungle.min.css">{{!-- Include creative-specific stylesheets here --}}
     {{> partials/style-includes }}
-    <title>Vungle</title>
+        <title>Vungle</title>
 </head>
 
 <body id="vungle-ad-container">
@@ -20,12 +19,12 @@
             <svg version="1.1" id="svg-vungle-dt-close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 414.9 416.2" style="enable-background:new 0 0 414.9 416.2;" xml:space="preserve">
                 <g>
                     <path class="svg-vungle-dt-close-background" d="M82.7,1h-4H2.1c55.7,0,70.9,39.8,75,61.5v198c0,26.3,13.2,49.4,33.3,63.2c12.6,9.1,28.1,14.5,44.8,14.5h195
-					c20.9,3.4,64.1,17.5,64.1,75.5v-75.5h0.2l0-337.1H82.7z" />
+                    c20.9,3.4,64.1,17.5,64.1,75.5v-75.5h0.2l0-337.1H82.7z" />
                     <g id="Layer_3_2_">
                         <g id="close_2_">
                             <g>
                                 <polygon class="svg-vungle-dt-close-icon" points="326.7,270.1 246,189.4 164.7,270.1 145.3,250.7 226.7,169.3 145.3,88.6 164.7,69.3 246,150 
-								326.7,69.3 346.1,88.6 265.4,169.3 346.1,250.7 				" />
+                                326.7,69.3 346.1,88.6 265.4,169.3 346.1,250.7               " />
                             </g>
                         </g>
                     </g>
@@ -40,7 +39,23 @@
 </body>
 <!-- Design Framework Javascript -->
 <script src="vungle.min.js"></script>
+<script>
+    var debug = false;
+
+    var vungleAd = document.getElementById('vungle-ad');
+
+    window.onload = function() {
+        initVungleAd();
+    };
+
+    window.addEventListener('resize', function(event) {
+
+    });
+
+    document.ontouchmove = function(event) {
+        event.preventDefault();
+    }
+</script>
 {{!-- Include creative-specific JS here --}}
 {{> partials/js-includes }}
-
 </html>
