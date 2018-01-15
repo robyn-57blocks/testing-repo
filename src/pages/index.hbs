@@ -14,7 +14,7 @@
 
 <body id="vungle-ad-container">
     <div id="vungle-header">
-        <a id="vungle-close" href="javascript:void(0)" onclick="callSDK('close')">
+        <a id="vungle-close" class="hide" href="javascript:void(0)" onclick="callSDK('close')">
             <!-- CLOSE ICON -->
             <svg version="1.1" id="svg-vungle-dt-close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 414.9 416.2" style="enable-background:new 0 0 414.9 416.2;" xml:space="preserve">
                 <g>
@@ -37,24 +37,11 @@
         {{> partials/creative }}
     </div>
 </body>
-<script src="vungle.min.js"></script>
 <script>
-    var debug = false;
-
-    var vungleAd = document.getElementById('vungle-ad');
-
-    window.onload = function() {
-        initVungleAd();
-    };
-
-    window.addEventListener('resize', function(event) {
-
-    });
-
-    document.ontouchmove = function(event) {
-        event.preventDefault();
-    }
+var VUNGLE_TIMER = 'TIMER'; // can be either NOTIMER or TIMER
 </script>
+<script src="vungle.min.js"></script>
 <!-- Include creative-specific JS here -->
 {{> partials/js-includes }}
+
 </html>

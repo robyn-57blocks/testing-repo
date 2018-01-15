@@ -1,5 +1,22 @@
 /* ----- Vungle Design Framework - JS ad core initialisation ----- */
 
+
+var debug = false;
+
+var vungleAd = document.getElementById('vungle-ad');
+
+window.onload = function() {
+    initVungleAd();
+};
+
+// window.addEventListener('resize', function(event) {
+
+// });
+
+document.ontouchmove = function(event) {
+    event.preventDefault();
+}
+
 var vungleAdSizes = ['xl', 'l', 'm', 's', 'xs'];
 
 function initVungleAd() {
@@ -10,11 +27,11 @@ function initVungleAd() {
     var shortestSide = (Math.min(vungleAdContainer.offsetHeight, vungleAdContainer.offsetWidth));
 
     /*
-    	The original innerWidth/Height potentially breaks ad when viewed on the latest Chrome,
-    	so we have gone ahead and used offsetWidth/Height within the body tag CSS
-    	
-    	var longestSide = (Math.max(window.innerHeight, window.innerWidth));
-    	var shortestSide = (Math.min(window.innerHeight, window.innerWidth));
+        The original innerWidth/Height potentially breaks ad when viewed on the latest Chrome,
+        so we have gone ahead and used offsetWidth/Height within the body tag CSS
+        
+        var longestSide = (Math.max(window.innerHeight, window.innerWidth));
+        var shortestSide = (Math.min(window.innerHeight, window.innerWidth));
     */
 
     if (typeof theme === 'undefined' || theme === null) {
@@ -63,9 +80,9 @@ function initVungleAd() {
         }, 200);
     });
 
-    /* 	
-    	Debug mode: Displays the Vungle boilerplate classes to help you
-    	identify each classname if you wish to make additional stylistic changes
+    /*  
+        Debug mode: Displays the Vungle boilerplate classes to help you
+        identify each classname if you wish to make additional stylistic changes
     */
     if (typeof debug !== 'undefined' || debug !== null) {
         if (debug) {
@@ -91,19 +108,17 @@ function initVungleAd() {
         }
     }
 
-    var VUNGLE_TIMER = 'NOTIMER'; // can be either NOTIMER or TIMER
-
     /* close button timer implementation */
 
     var close = document.getElementById('vungle-close');
 
-    switch (Settings.timer) {
+    switch (VUNGLE_TIMER) {
         case 'NOTIMER':
 
             revealCloseButton();
             break;
         case 'TIMER':
-        
+
             var closeRevealDelay = 4000;
             var closeRevealInteractionDelay = 1000;
 
@@ -117,14 +132,7 @@ function initVungleAd() {
 }
 
 function revealCloseButton() {
-
-    var close = document.getElementById('vungle-close');
-
-    close.className = '';
-
-    setTimeout(function() {
-        close.style.WebkitTransition = 'opacity 0.5s';
-    }, 0);
+    document.getElementById('vungle-close').className = '';
 }
 
 function callSDK(event) {

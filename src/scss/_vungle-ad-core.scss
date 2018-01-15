@@ -116,6 +116,16 @@ body > * {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+#vungle-close {
+    opacity: 1;
+    -webkit-transition: opacity 0.5s;
+}
+
+#vungle-close.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
 #vungle-ad-container {
 	position: absolute;
 	width: 100%;
