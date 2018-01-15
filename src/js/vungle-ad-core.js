@@ -1,5 +1,7 @@
 /* ----- Vungle Design Framework - JS ad core initialisation ----- */
 
+var closeRevealDelay = 4000;
+var closeRevealInteractionDelay = 1000;
 
 var debug = false;
 
@@ -118,9 +120,6 @@ function initVungleAd() {
             revealCloseButton();
             break;
         case 'TIMER':
-
-            var closeRevealDelay = 4000;
-            var closeRevealInteractionDelay = 1000;
 
             setTimeout(revealCloseButton, closeRevealDelay);
 
