@@ -7,13 +7,9 @@ var debug = false;
 
 var vungleAd = document.getElementById('vungle-ad');
 
-window.onload = function() {
-    initVungleAd();
-};
-
-// window.addEventListener('resize', function(event) {
-
-// });
+window.addEventListener('load', function() {
+	initVungleAd();
+});
 
 document.ontouchmove = function(event) {
     event.preventDefault();
