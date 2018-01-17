@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "copy-dir": "^0.3.0",
-    "design-framework": "git+ssh://git@bitbucket.org/vungle_creative_labs/vcl-design-framework.git",
     "foundation": "^4.2.1",
     "glob-copy": "^0.1.0",
     "gulp-jszip": "^0.1.2",
