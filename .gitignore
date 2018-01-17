@@ -11,6 +11,7 @@ Thumbs.db
 *.css.map
 node_modules/
 public
+build/
 
 # Ignore packaged files
 *.sw*
@@ -37,3 +38,5 @@ public
 *.psd
 *.ai
 *.pdf
+
+package-lock.json
