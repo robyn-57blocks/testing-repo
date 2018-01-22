@@ -42,18 +42,19 @@
         <!-- Include creative-specific HTML here -->
         {{> partials/creative }}
     </div>
+    
+    <script>
+    var VUNGLE_TIMER = 'TIMER'; // can be either NOTIMER or TIMER
+    </script>
+        <!-- @if NODE_ENV='prod' -->
+            <script src="vungle.min.js"></script>
+        <!-- @endif -->
+        <!-- @if NODE_ENV='dev' -->
+            <script src="vungle-ad-helpers.js"></script>
+            <script src="vungle-ad-core.js"></script>
+        <!-- @endif -->
+    <!-- Include creative-specific JS here -->
+    {{> partials/js-includes }}
 </body>
-<script>
-var VUNGLE_TIMER = 'TIMER'; // can be either NOTIMER or TIMER
-</script>
-	<!-- @if NODE_ENV='prod' -->
-		<script src="vungle.min.js"></script>
-	<!-- @endif -->
-	<!-- @if NODE_ENV='dev' -->
-		<script src="vungle-ad-helpers.js"></script>
-		<script src="vungle-ad-core.js"></script>
-	<!-- @endif -->
-<!-- Include creative-specific JS here -->
-{{> partials/js-includes }}
 
 </html>
