@@ -3,8 +3,6 @@
 var closeRevealDelay = 4000;
 var closeRevealInteractionDelay = 1000;
 
-var debug = false;
-
 var vungleAd = document.getElementById('vungle-ad');
 
 window.addEventListener('load', function() {
