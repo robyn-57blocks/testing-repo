@@ -6,7 +6,13 @@
     <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0, user-scalable=no" />
     <meta name="author" content="Vungle">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="vungle.min.css">
+	    <!-- @if NODE_ENV='prod' -->
+	    	<link rel="stylesheet" href="vungle.min.css">
+	    <!-- @endif -->
+	    <!-- @if NODE_ENV='dev' -->
+	    	<link rel="stylesheet" href="vungle-ad-core-imports.css">
+	    	<link rel="stylesheet" href="vungle-creative.css">
+	    <!-- @endif -->
     <!-- Include creative-specific CSS here -->
     {{> partials/style-includes }}
     <title>Vungle</title>
@@ -40,7 +46,13 @@
 <script>
 var VUNGLE_TIMER = 'TIMER'; // can be either NOTIMER or TIMER
 </script>
-<script src="vungle.min.js"></script>
+	<!-- @if NODE_ENV='prod' -->
+		<script src="vungle.min.js"></script>
+	<!-- @endif -->
+	<!-- @if NODE_ENV='dev' -->
+		<script src="vungle-ad-helpers.js"></script>
+		<script src="vungle-ad-core.js"></script>
+	<!-- @endif -->
 <!-- Include creative-specific JS here -->
 {{> partials/js-includes }}
 
