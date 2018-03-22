@@ -108,14 +108,7 @@ body {
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
-
-	&.light {
-		background-color: $vungle-light-theme-background;
-	}
-	&.dark {
-		background-color: $vungle-dark-theme-background;
-	}	
-
+	background-color: $black; //This background should remain black for instances where there is a device notch
 }
 
 body > * {
@@ -196,9 +189,13 @@ body > * {
 	}
 }
 
-// - Vungle Ad Creative
+// -- Vungle Ad Creative
 #vungle-ad {
-	background-color: $black;
+	transition: opacity 0.02s linear;
+	-webkit-transition: opacity 0.02s linear;
+}
+
+#vungle-ad, .endcard-view {
 	position: absolute;
 	margin: auto;
 	top: 0;
@@ -206,51 +203,6 @@ body > * {
 	overflow: hidden;
 	height: 100%;
 	width: 100%;
-	font-size: 0;
-	
-	#{$light-theme} {
-		background-color: $vungle-light-theme-background;
-	}
-	#{$dark-theme} {
-		background-color: $vungle-dark-theme-background;
-	}		
-}
-
-.star-rating, .star-rating-user {
-	svg {
-		display: inline-block;
-		vertical-align:middle;
-		height: 1em;
-		width: 1em;
-	}
-	
-	.vungle-star-full, .vungle-star-half {
-		#{$light-theme} {
-			fill: $vungle-dt-light-theme-text;
-		}
-		#{$dark-theme} {
-			fill: $vungle-yellow;
-		}
-	}
-}
-
-.vungle-icon {
-	position: relative;
-	width: 100%;
-
-	img {
-		border-radius: 20%;
-		@include os-icon-border-radius;
-	}
-}
-
-.vungle-cta {
-	font-weight: 500;
-	background: $vungle-green;
-	color: $white;
-	padding: 4% 2%;
-	font-family: $vungle-typography;
-	text-align: center;
 }
 
 #vungle-ad-debug {
@@ -260,58 +212,110 @@ body > * {
     height: 100%;
     z-index: 99999;
     top: 0; left: 0; bottom: 0; right: 0; 
-    opacity: 0.5;
     pointer-events: none;
+    background-color: rgba(0,0,0,0.3);
     
-    span {
+    p {
 		text-align: center;
 		position: absolute;
+		width: 80%;
 		left: 50%;
 		top: 50%;
 		-webkit-transform: translate(-50%, -50%);
 		transform: translate(-50%, -50%);
 		font-family: sans-serif;
-		font-size: 2em;
+
+		#{$landscape} {
+			width: 60%;
+		}
     }
-    
-    &.square {
-	    background-color: rgba(60, 194, 92, 0.7);
-	}
-	&.portrait-xs {
-	    background-color: rgba(248, 150, 30, 0.7);
-	}
-	&.portrait-s {
-	    background-color: rgba(248, 150, 30, 0.6);
-	}
-	&.portrait-m {
-	    background-color: rgba(248, 150, 30, 0.5);
-	}
-	&.portrait-l {
-	    background-color: rgba(248, 150, 30, 0.4);
-	}
-	&.portrait-xl {
-	    background-color: rgba(248, 150, 30, 0.3);
-	}
-	&.landscape-xs {
-	    background-color: rgba(0, 176, 240, 0.7);
-	}
-	&.landscape-s {
-	    background-color: rgba(0, 176, 240, 0.6);
-	}
-	&.landscape-m {
-	    background-color: rgba(0, 176, 240, 0.5);
-	}
-	&.landscape-l {
-	    background-color: rgba(0, 176, 240, 0.4);
-	}
-	&.landscape-xl {
-	    background-color: rgba(0, 176, 240, 0.3);
-	}
+
+    span {
+		display: block;
+		padding: 0.5em 1em;
+		background: rgba(0,0,0,0.35);
+		font-size: 1em;
+		color: $white;
+		font-weight: 400;
+		-webkit-backdrop-filter: blur(2px);
+		backdrop-filter: blur(2px);
+
+		&.title {
+			font-size: 1.7em;
+			background: rgba(0,0,0,0.8);
+		}
+
+		b {
+			font-weight: 600;
+		}
+
+		&:first-child {
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+		}
+		&:last-child {
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+		}
+		&:nth-child(3) {
+			box-shadow: inset 0px 11px 0 -10px rgba(0,0,0,0.1), inset 0px -11px 0 -10px rgba(0,0,0,0.1); 
+		}
+
+		#{$landscape} {
+			font-size: 0.85em;
+
+			&.title {
+				font-size: 1.5em;
+			}
+		}
+
+		&.title {
+			#{$square} {
+		    	background-color: rgba(113, 127, 155, 0.65); //717F9B
+			}
+			#{$portrait-xs} {
+			    background-color: rgba(215, 129, 106, 0.65); //D7816A
+			}
+			#{$portrait-s} {
+			    background-color: rgba(222, 151, 133, 0.65); //DE9785
+			}
+			#{$portrait-m} {
+			    background-color: rgba(229, 174, 160, 0.65); //E5AEA0
+			}
+			#{$portrait-l} {
+			    background-color: rgba(236, 197, 187, 0.65); //ECC5BB
+			}
+			#{$portrait-xl} {
+			    background-color: rgba(2244, 220, 214, 0.65); //F4DCD6
+			}
+			#{$landscape-xs} {
+			    background-color: rgba(126, 145, 111, 0.65); //7E916F
+			}
+			#{$landscape-s} {
+			    background-color: rgba(158, 180, 139, 0.65); //9EB48B
+			}
+			#{$landscape-m} {
+			    background-color: rgba(180, 203, 161, 0.65); //B4CBA1
+			}
+			#{$landscape-l} {
+			    background-color: rgba(195, 213, 180, 0.65); //C3D5B4
+			}
+			#{$landscape-xl} {
+			    background-color: rgba(210, 223, 198, 0.65); //D2DFC6
+			}
+		}
+    }
 	
 	&.oob {
-	    background-color: rgba(255, 0, 0, 0.9);
+	    background-color: rgba(255, 0, 0, 0.4);
+
+	    span {
+	    	&.title {
+	    		background-color: rgba(255, 0, 0, 0.65) !important;
+	    	}
+	    }
 	    
-	    & span {
+	    & p {
 		    color: #ffffff;
 		    font-weight: bold;
 	    }

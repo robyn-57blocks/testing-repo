@@ -4,8 +4,9 @@ var VungleAd = {};
 
 var closeRevealDelay = 4000;
 var closeRevealInteractionDelay = 1000;
+var minimumPercentageContainerSize = 45;
 
-VungleAd.adSizes = ['xl', 'l', 'm', 's', 'xs'];
+VungleAd.adSizes = ['xs', 's', 'm', 'l', 'xl'];
 
 var vungleAd = document.getElementById('vungle-ad');
 
@@ -26,7 +27,7 @@ window.addEventListener('resize', function(event) {
     this.resizeTimer = setTimeout(function() {
         renderVungleAdSizingClass();
         vungleAd.style.opacity = 1;
-    }, 200);
+    }, 20);
 });
 
 function initVungleAd() {
@@ -49,7 +50,10 @@ function renderVungleAdSizingClass() {
     }
     // @endif
 
-    var range = ((longestSide - shortestSide) / longestSide) * 100;
+    var minimumContainerSize = (minimumPercentageContainerSize / 100 * longestSide);
+    var adSizeSegmentLength = (longestSide - minimumContainerSize) / VungleAd.adSizes.length;
+    var arrayCount = Math.floor((shortestSide - minimumContainerSize)/adSizeSegmentLength);
+
     var adShape, computedSize;
     var adSizeClass = '';
 
@@ -57,11 +61,11 @@ function renderVungleAdSizingClass() {
         //Square ad unit
         adShape = 'square';
 
-    } else if (window.innerHeight > window.innerWidth) {
+    } else if (document.body.clientHeight > document.body.clientWidth) {
         //Portrait ad unit
         adShape = 'portrait';
-        if (VungleAd.adSizes[(Math.ceil(range / 10) * 1) - 1]) {
-            computedSize = VungleAd.adSizes[(Math.ceil(range / 10) * 1) - 1];
+        if (VungleAd.adSizes[arrayCount]) {
+            computedSize = VungleAd.adSizes[arrayCount];
             adSizeClass = ' portrait-' + computedSize;
         } else {
             computedSize = VungleAd.adSizes[VungleAd.adSizes.length - 1];
@@ -70,14 +74,15 @@ function renderVungleAdSizingClass() {
     } else {
         //Landscape ad unit
         adShape = 'landscape';
-        if (VungleAd.adSizes[(Math.ceil(range / 10) * 1) - 1]) {
-            computedSize = VungleAd.adSizes[(Math.ceil(range / 10) * 1) - 1];
+        if (VungleAd.adSizes[arrayCount]) {
+            computedSize = VungleAd.adSizes[arrayCount];
             adSizeClass = ' landscape-' + computedSize;
         } else {
-            computedSize = VungleAd.adSizes[VungleAd.adSizes.length - 1];
+            computedSize = VungleAd.adSizes[arrayCount];
             adSizeClass = ' landscape-' + computedSize + ' oob';
         }
     }
+
     adClassName = adShape.concat(adSizeClass);
 
     //Append body tag with appropriate classnames
@@ -93,13 +98,24 @@ function renderVungleAdSizingClass() {
         Debug mode: Displays the Vungle boilerplate classes to help you
         identify each classname if you wish to make additional stylistic changes
     */
+
     if (typeof debug !== 'undefined' && debug !== null) {
         if (debug) {
             var adClassDebug;
             if (adClassName.indexOf('oob') >= 0) {
-                adClassDebug = '<span>Out of Bounds</span>';
+                adClassDebug = '<p><span class="title">Out of Bounds</span>\
+                                <span>Pixel Density: <b>'+window.devicePixelRatio+'</b></span>\
+                                <span>Longest Side: <b>'+longestSide+'px</b></span>\
+                                <span>Shortest Side: <b>'+shortestSide+'px</b></span>\
+                                <span>Minimum Container Size: <b>'+minimumContainerSize+'px</b></span>\
+                                </p>';
             } else {
-                adClassDebug = '<span>' + adClassName + '</span>';
+                adClassDebug = '<p><span class="title">' + adClassName + '</span>\
+                                <span>Pixel Density: <b>'+window.devicePixelRatio+'</b></span>\
+                                <span>Longest Side: <b>'+longestSide+'px</b></span>\
+                                <span>Shortest Side: <b>'+shortestSide+'px</b></span>\
+                                <span>Minimum Container Size: <b>'+minimumContainerSize+'px</b></span>\
+                                </p>';
             }
 
             if (document.getElementById("vungle-ad-debug") === null) {
