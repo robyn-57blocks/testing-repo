@@ -145,11 +145,14 @@ body > * {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-tap-highlight-color: transparent;
 	z-index: 1000000;
+	height: 1.8em;
 	
 	a {
 		display: block;
 		padding: 0px 0px 5px 20px;
-		@include flexible-sizing(height, 1vh, 1.750em, 1.8em, 1.750em);
+		height: 100%;
+		width: auto;
+		right: 0;
 		
 		svg {
 			right: 0;
@@ -185,6 +188,23 @@ body > * {
 		}
 		.svg-vungle-dt-close-icon {
 			fill: $vungle-dt-dark-theme-text;
+		}
+	}
+
+	#{$windows} {
+		a {
+			background: red;
+			padding: 0px 0px 5px 5px;
+			height: 2.1em;
+
+			svg {
+				margin-top: 5px;
+				margin-right: 5px;
+			}
+		}
+
+		.svg-vungle-dt-close-background {
+			display: none;
 		}
 	}
 }
@@ -223,7 +243,7 @@ body > * {
 		top: 50%;
 		-webkit-transform: translate(-50%, -50%);
 		transform: translate(-50%, -50%);
-		font-family: sans-serif;
+		font-family: $vungle-typography;
 
 		#{$landscape} {
 			width: 60%;
@@ -233,15 +253,15 @@ body > * {
     span {
 		display: block;
 		padding: 0.5em 1em;
-		background: rgba(0,0,0,0.35);
-		font-size: 1em;
+		background: rgba(100, 100, 100, 0.35);
 		color: $white;
 		font-weight: 400;
 		-webkit-backdrop-filter: blur(2px);
 		backdrop-filter: blur(2px);
+		@include responsive-font(3vw, 0.9em, 1.1em);
 
 		&.title {
-			font-size: 1.7em;
+			@include responsive-font(2.5vw, 1.4em, 1.7em);
 			background: rgba(0,0,0,0.8);
 		}
 
@@ -262,10 +282,18 @@ body > * {
 		}
 
 		#{$landscape} {
-			font-size: 0.85em;
+			@include responsive-font(2vw, 0.7em, 0.9em);
 
 			&.title {
-				font-size: 1.5em;
+				@include responsive-font(2vw, 1.5em, 1.8em);
+			}
+		}
+
+		#{$square} {
+			@include responsive-font(2vw, 0.7em, 0.9em);
+
+			&.title {
+				@include responsive-font(2vw, 1.5em, 1.8em);
 			}
 		}
 
