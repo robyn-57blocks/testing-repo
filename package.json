@@ -1,6 +1,6 @@
 {
   "name": "vcl-design-framework",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "VCL Design Framework - Boilerplate for Vungle ad units and designs",
   "main": "vungle.min.js",
   "scripts": {
