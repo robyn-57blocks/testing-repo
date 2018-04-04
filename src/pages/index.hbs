@@ -12,7 +12,7 @@
 <!-- @if NODE_ENV='dev' -->
 	<link rel="stylesheet" href="vungle-creative.css">
 <!-- @endif -->
-    <!-- Include creative-specific CSS here -->
+    <!-- @ifdef THIRDPARTY --><!-- Include creative-specific CSS here --><!-- @endif -->
     {{> partials/style-includes }}
     <title>Vungle</title>
 </head>
@@ -38,12 +38,12 @@
         </a>
     </div>
     <div id="vungle-ad">
-        <!-- Creative-specific view -->
-        <div class="endcard-view"> 
+        <div class="endcard-view">
+            <!-- @ifdef THIRDPARTY --><!-- Include creative-specific HTML here --><!-- @endif --> 
             {{> partials/creative }}
         </div>
     </div>
-    
+
     <script>
         var theme = '<token>THEME</token>'; // Theme value can be either 'light' or 'dark'
         var closeButtonTimer = '<token>TIMER</token>'; // Timer value can be either 'NOTIMER' or 'TIMER'
@@ -55,8 +55,19 @@
     <script src="vungle-ad-helpers.js"></script>
     <script src="vungle-ad-core.js"></script>
 <!-- @endif -->
-    <!-- Include creative-specific JS here -->
+    <!-- @ifdef THIRDPARTY --><!-- Include creative-specific JS here --><!-- @endif -->
     {{> partials/js-includes }}
+<!-- @if NODE_ENV='prod' -->
+    <!-- @ifdef THIRDPARTY -->
+        <script src="vungle-creative.js"></script>
+    <!-- @endif -->
+    <!-- @ifdef !THIRDPARTY -->
+        <script src="vungle-creative.min.js"></script>
+    <!-- @endif -->
+<!-- @endif -->
+<!-- @if NODE_ENV='dev' -->
+    <script src="vungle-creative.js"></script>
+<!-- @endif -->
 </body>
 
 </html>
