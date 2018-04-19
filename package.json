@@ -1,7 +1,7 @@
 {
-  "name": "vcl-design-framework",
-  "version": "1.0.2",
-  "description": "VCL Design Framework - Boilerplate for Vungle ad units and designs",
+  "name": "design-framework-core",
+  "version": "1.0.3",
+  "description": "Design Framework Core",
   "main": "vungle.min.js",
   "scripts": {
     "start": "gulp --dev",
@@ -35,11 +35,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vungle/vcl-design-framework.git"
+    "url": "bitbucket.org:vungle_creative_labs/design-framework-core"
   },
   "author": "Vungle Creative Labs",
   "license": "LicenseRef-LICENSE",
   "bugs": {
-    "url": "bitbucket.org:vungle_creative_labs/vcl-design-framework"
+    "url": "bitbucket.org:vungle_creative_labs/design-framework-core"
   }
 }
