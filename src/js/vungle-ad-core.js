@@ -44,7 +44,7 @@ function renderVungleAdSizingClass() {
     if (typeof theme === 'undefined' || theme === null) {
         theme = 'dark';
     }
-    // @ifdef NODE_ENV='dev' 
+    // @if NODE_ENV='dev' 
     if (typeof debug === 'undefined' || debug === null) {
         debug = false;
     }
