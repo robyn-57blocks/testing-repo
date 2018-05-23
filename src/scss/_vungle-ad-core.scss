@@ -10,29 +10,11 @@ $vungle-pink: #d82667;
 $white: #ffffff;
 $black: #000000;
 
-
-// - Dynamic Template Specific
-$vungle-light-theme-background: #e8e8e8;
-$vungle-dt-light-theme-close-background: rgba(240, 240, 240, 0.5);
-$vungle-dt-light-theme-card: rgba(0,0,0,0.1);
-$vungle-dt-light-theme-text: #1a1a1a;
-
-$vungle-dark-theme-background: #000000;
-$vungle-dt-dark-theme-close-background: rgba(25, 25, 25, 0.5);
-$vungle-dt-dark-theme-card: rgba(255,255,255,0.07);
-$vungle-dt-dark-theme-text: #fafafa;
-
-$vungle-light-theme-close-fill: #1a1a1a;
-$vungle-light-theme-tooltip: rgba(255,255,255,1);
-$vungle-light-theme-footer: rgba(255,255,255,0.5);
-$vungle-dark-theme-close-fill: #f0f0f0;
-$vungle-dark-theme-tooltip: rgba(0,0,0,1);
-$vungle-dark-theme-footer: rgba(0,0,0,0.5);
-
-$card-background: rgba(255,255,255,0.2);
-$vungle-border-radius: calc((1vw + 1vh) / 2.5);
-$vungle-margin-portrait: 1.5vw;
-$video-box-shadow: rgba(0, 0, 0, 0.4) 0 0 10px;
+// - Default Ad Themes
+$vungle-ad-light-theme-fill: #e8e8e8;
+$vungle-ad-light-theme-stroke: rgba(0,0,0,0.3);
+$vungle-ad-dark-theme-fill: #000000;
+$vungle-ad-dark-theme-stroke: rgba(255,255,255,0.6);
 
 // - Typography
 $vungle-typography: -apple-system, "Segoe UI", "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -108,7 +90,7 @@ body {
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
-	background-color: $black; //This background should remain black for instances where there is a device notch
+	background-color: $black; //This background is defined to style viewport safe areas
 }
 
 body > * {
@@ -118,7 +100,7 @@ body > * {
 
 #vungle-close {
     opacity: 1;
-    -webkit-transition: opacity 0.5s;
+    -webkit-transition: opacity 0.35s;
 }
 
 #vungle-close.hide {
@@ -144,14 +126,11 @@ body > * {
 	right: 0;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-tap-highlight-color: transparent;
-	z-index: 1000000;
-	height: 1.8em;
+	z-index: 10000000;
 	
 	a {
 		display: block;
-		padding: 0px 0px 5px 20px;
-		height: 100%;
-		width: auto;
+		padding: 0.8em 0.8em 0.5em 1.2em;
 		right: 0;
 		
 		svg {
@@ -159,51 +138,32 @@ body > * {
 			margin: 0;
 			padding: 0;
 			vertical-align: text-bottom;
-			height: 100%;
-			width: auto;
+			height: 1.1em;
+			width: 1.1em;
+		}
+
+		&:active {
+			opacity: 0.55;
 		}
 	}
 	
-	.svg-vungle-dt-close-background {
-		display: inline;
-		fill: $vungle-dt-dark-theme-close-background;
-	}
-	.svg-vungle-dt-close-icon {
-		fill: $vungle-dt-dark-theme-text;
+	.svg-vungle-ad-close-icon {
+		fill: $vungle-ad-dark-theme-fill;
+		stroke: $vungle-ad-dark-theme-stroke;
+		stroke-width: 14;
+		stroke-miterlimit: 10;
 	}
 	
 	#{$light-theme} {
-		.svg-vungle-dt-close-background {
-			display: inline;
-			fill: $vungle-dt-light-theme-close-background;
-		}
-		.svg-vungle-dt-close-icon {
-			fill: $vungle-dt-light-theme-text;
+		.svg-vungle-ad-close-icon {
+			fill: $vungle-ad-light-theme-fill;
+			stroke: $vungle-ad-light-theme-stroke;
 		}
 	}
 	#{$dark-theme} {
-		.svg-vungle-dt-close-background {
-			display: inline;
-			fill: $vungle-dt-dark-theme-close-background;
-		}
-		.svg-vungle-dt-close-icon {
-			fill: $vungle-dt-dark-theme-text;
-		}
-	}
-
-	#{$windows} {
-		a {
-			padding: 0px 0px 5px 5px;
-			height: 2.1em;
-
-			svg {
-				margin-top: 5px;
-				margin-right: 5px;
-			}
-		}
-
-		.svg-vungle-dt-close-background {
-			display: none;
+		.svg-vungle-ad-close-icon {
+			fill: $vungle-ad-dark-theme-fill;
+			stroke: $vungle-ad-dark-theme-stroke;
 		}
 	}
 }
