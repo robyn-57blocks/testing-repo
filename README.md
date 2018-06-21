@@ -1,3 +1,13 @@
+# DEPRECATED
+
+The code for this project has been moved into this repo....
+
+https://bitbucket.org/vungle_creative_labs/design-framework-components/src/master/
+
+...and can be found at 
+
+design-framework-components/components/vungle
+
 # VCL - Design Framework
 
 The Design Framework defines a 'boilerplate' of reusable components of all our Ad units through the work produced by VCL. This boilerplate is designed to modularise components which we use for bespoke creative, Dynamic Templates/Native, and our future full-native ad experiences (such as AR).
