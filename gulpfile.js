@@ -1,138 +1,35 @@
-'use strict';
-
-const browserSync = require('browser-sync').create();
-const del = require('del');
-const newer = require('gulp-newer');
 const gulp = require('gulp');
-const sass = require('gulp-sass');
-const env = require('gulp-util').env;
-const compileHandlebars = require('gulp-compile-handlebars');
-const handlebars = require('gulp-handlebars');
-const rename = require('gulp-rename');
-const declare = require('gulp-declare');
-const concat = require('gulp-concat');
-const execSync = require('child_process').execSync;
-const fs = require('fs');
-const cleanCSS = require('gulp-clean-css');
-const uglify = require('gulp-uglify');
-const pump = require('pump');
-const zip = require('gulp-jszip');
+const gulpSequence = require('gulp-sequence');
+const version = require('./gulp-scripts/version');
 
-const config = {
-    src: './src',
-    build: './build',
-    dist: './dist',
-    home: './',
-    watchers: [{
-        match: ['./src/*'],
-        tasks: ['scss', 'js']
-    }]
-};
+// gulp scripts
+const { setEnvDev, setEnvProd } = require('./gulp-scripts/env.js');
 
-gulp.task('clean', () => {
-    del(config.build);
-    return del(config.dist);
-})
+gulp.task('set:env:dev', setEnvDev);
+gulp.task('set:env:prod', setEnvProd);
+//gulp.task('upversion', version.upversion);
+//gulp.task('saveversion', version.saveversion);
+//gulp.task('autoversion', version.autoversion);
+gulp.task('clean', require('./gulp-scripts/clean.js'));
+gulp.task('build:js', require('./gulp-scripts/build-js.js'));
+gulp.task('build:sass', require('./gulp-scripts/build-sass.js'));
+gulp.task('build:html', require('./gulp-scripts/build-html.js'));
+gulp.task('build:inline', require('./gulp-scripts/build-inline.js'));
+gulp.task('gen:bundle', require('./gulp-scripts/bundle.js'));
+gulp.task('watch', ['build'], require('./gulp-scripts/watch.js')); 
 
-gulp.task('watch', () => {
-    config.watchers.forEach(item => {
-        gulp.watch(item.match, item.tasks);
-    });
+// BUILD TASKS
+gulp.task('build', (cb) => { gulpSequence('clean', 'build:all')(cb) });
+gulp.task('build:all', (cb) => {
+    console.log('Building for '+process.env.NODE_ENV+' environment')
+    gulpSequence([
+        'build:html',
+        'build:js',
+        'build:sass'
+    ], 'build:inline')(cb)
 });
 
-gulp.task('build', ['html', 'scss', 'js'], () => {
-    // build completed    
-});
-
-//This task will clean the build directory, check for updates and then watch file changes
-gulp.task('default', ['clean'], done => {
-    gulp.start('update');
-    gulp.start('serve');
-    gulp.start('watch');
-});
-
-//Copy index.hbs file to build folder
-gulp.task('html', () => {
-    return gulp.src(`${config.src}` + '/pages/**/*.hbs')
-/*
-        .pipe(compileHandlebars({}, {
-            ignorePartials: false,
-            batch: [`${config.src}`]
-        }))
-        .pipe(rename({
-            extname: '.html'
-        }))
-*/
-        .pipe(gulp.dest(config.build));
-});
-
-//Compile Sass files
-gulp.task('scss', function() {
-    return gulp.src([
-            `${config.pages}/scss/*.scss`,
-            `${config.src}` + '/scss/**/*.scss'
-        ])
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(config.build))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
-});
-
-gulp.task('js', function() {
-    return gulp.src([
-            `${config.pages}/js/*.js`,
-            `${config.src}` + '/js/**/*.js'
-        ])
-        .pipe(gulp.dest(config.build))
-        .pipe(browserSync.reload({
-            stream: true
-        }));
-});
-
-
-//Minification and Prepare files for Production
-gulp.task('htmlDest', function() {
-    return gulp.src(`${config.build}` + '/*.hbs')
-        .pipe(gulp.dest(`${config.dist}/pages`));
-});
-
-gulp.task('cssMin', function() {
-    return gulp.src(`${config.build}` + '/*.css')
-        .pipe(concat('vungle.min.css'))
-        .pipe(cleanCSS({ compatibility: 'ie8' }))
-        .pipe(gulp.dest(`${config.dist}/scss`));
-});
-
-gulp.task('jsMin', function(cb) {
-    pump([
-            gulp.src(`${config.build}` + '/*.js'),
-            concat('vungle.min.js'),
-            uglify(),
-            gulp.dest(`${config.dist}/js`)
-        ],
-        cb
-    );
-});
-
-
-//Prepare Framework for Production
-gulp.task('dist', ['clean', 'build'], done => {
-    gulp.start('minifyDist');
-});
-
-
-//Minify JS, CSS and copy index.hbs to dist folder
-gulp.task('minifyDist', ['htmlDest', 'jsMin', 'cssMin']);
-
-
-//Runs Browser Sync on port 8080 once updated files are in the build directory
-gulp.task('serve', ['build'], () => {
-    browserSync.init({
-        port: 8080,
-        open: false,
-        notify: false,
-        files: [`${config.build}`],
-        server: config.build
-    });
-});
+// MAIN ACTIONS
+gulp.task('default', gulpSequence('set:env:dev', 'watch'));
+gulp.task('serve:prod', gulpSequence('set:env:prod', 'watch'));
+gulp.task('bundle:prod', gulpSequence('set:env:prod', 'build', 'gen:bundle'));

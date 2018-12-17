@@ -27,3 +27,7 @@ $dark-theme: 'body.dark &';
 $ios: 'body.ios &';
 $android: 'body.android &';
 $windows: 'body.windows &';
+
+// -- OS Device Breakpoints
+$windows-large-screen: '900px';
+$tablet: '768px';

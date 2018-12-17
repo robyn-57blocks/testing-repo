@@ -42,6 +42,13 @@
 
 /*Privacy Icon*/
 
+#privacy-wrapper #privacy-icon {
+    &.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
 #privacy-wrapper #privacy-icon #privacy-external {
     width: 3vmin;
     display: inline-block;

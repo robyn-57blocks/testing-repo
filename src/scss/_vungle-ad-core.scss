@@ -9,6 +9,7 @@ $vungle-yellow: #f6d64e;
 $vungle-pink: #d82667;
 $white: #ffffff;
 $black: #000000;
+$grey: #b0b5b5;
 
 // - Default Ad Themes
 $vungle-ad-light-theme-fill: #e8e8e8;
@@ -19,6 +20,8 @@ $vungle-ad-dark-theme-stroke: rgba(255,255,255,0.6);
 // - Typography
 $vungle-typography: -apple-system, "Segoe UI", "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
+// - UI
+$vungle-ui-modal-background: rgba(0,0,0,0.7);
 
 // -- Reset
 html, body, div, span, applet, object, iframe,
@@ -108,7 +111,7 @@ body > * {
     pointer-events: none;
 }
 
-#vungle-ad-container {
+#dynamic {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -118,6 +121,36 @@ body > * {
 	right: 0;
 	margin: auto;
 }
+
+#vungle-ad {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	overflow: hidden;
+}
+
+#vungle-fullscreen-video {
+ 	position: absolute;
+ 	transform: translate(-50%, -50%);
+ 	top: 50%;
+ 	left: 50%;
+ 	width: 100%;
+ 	font-size: 0;
+
+ 	&.hide {
+ 		display: none;
+
+ 		> video {
+ 			display: none;
+ 		}
+ 	}
+}
+
 
 // -- Vungle header close button
 #vungle-header {
@@ -132,18 +165,87 @@ body > * {
 		display: block;
 		padding: 0.8em 0.8em 0.5em 1.2em;
 		right: 0;
+
+		#{$windows} {
+			padding: 0.25em 0.25em 0.45em 0.45em;
+
+			@media all and (min-width: $windows-large-screen) {
+				padding: 0.5em 0.5em 0.5em 0.5em;
+			}
+		}
 		
 		svg {
 			right: 0;
 			margin: 0;
 			padding: 0;
-			vertical-align: text-bottom;
+			vertical-align: bottom;
 			height: 1.1em;
 			width: 1.1em;
+
+			#{$windows} {
+				height: 1em;
+				width: 1em;
+				margin-bottom: 0.2em;
+				margin-right: 0.1em;
+
+				@media all and (min-width: $windows-large-screen) {
+					height: 1.5em;
+					width: 1.5em;
+					margin-right: 0.3em;
+				}
+			}
 		}
 
 		&:active {
 			opacity: 0.55;
+		}
+	}
+
+	#background-vungle-ad-close {
+
+		#{$light-theme} {
+			background: $vungle-ad-light-theme-stroke;
+		}
+
+		#{$dark-theme} {
+			background: $vungle-ad-dark-theme-stroke;
+		}
+
+		#{$ios}, #{$android} {
+			background: none;
+		}
+
+		#{$windows} {
+			padding: 0.3em 0.6em 0.3em 0.6em;
+
+			@media all and (min-width: $windows-large-screen) {
+				padding: 0.5em 0.8em 0.5em 0.8em;
+			}
+		}
+
+		span {
+			display: none;
+
+			#{$light-theme} {
+				color: $vungle-ad-light-theme-fill;
+			}
+
+			#{$dark-theme} {
+				color: $vungle-ad-dark-theme-fill;
+			}
+
+			#{$windows} {
+				display: inline-block;
+				font-family: $vungle-typography;
+				font-weight: 300;
+				font-size: 1.2em;
+				line-height: 1.3em;
+
+				@media all and (min-width: $windows-large-screen) {
+					font-size: 1.8em;
+					line-height: 1.2em;
+				}
+			}
 		}
 	}
 	
@@ -166,15 +268,269 @@ body > * {
 			stroke: $vungle-ad-dark-theme-stroke;
 		}
 	}
+
+	#{$windows} {
+		.svg-vungle-ad-close-icon {
+			stroke: none;
+		}
+	}
+}
+
+// -- Vungle Ad UI Elements
+#ad-notification-modal {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	transition: opacity 0.5s ease-in-out;
+	background: $vungle-ui-modal-background;
+
+	&.hide {
+		opacity: 0;
+		pointer-events: none;
+
+		.ad-notification-modal-content {
+			bottom: -100%;
+		}
+	}
+
+	.ad-notification-modal-content {
+		position: absolute;
+		bottom: 0;
+		margin: auto;
+		width: 100%;
+		background: $white;
+		z-index: 5000;
+		box-sizing: border-box;
+		padding: 0 10vw 14vw;
+		transition: bottom 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+
+		#{$landscape} {
+			padding: 0 10vw 9vw;
+		}
+
+		&:after {
+			content: "";
+			background: $white;
+			border-radius: 100%;
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%) translateY(-20%);
+			z-index: -1;
+
+			width: calc(120vw + 20vh);
+	    	height: calc(20vw + 15vh);
+
+	    	#{$landscape} {
+	    		width: calc(120vw + 10vh);
+	    		height: calc(15vw + 0vh);
+	    	}
+		}
+
+		h3 {
+			text-align: center;
+			color: $black;
+			font-family: $vungle-typography;
+			@include responsive-font(4.5vw, 1.4em, 2em);
+			font-weight: 700;
+			padding: 5vw 0 1.5em;
+
+			#{$landscape} {
+				padding: 2vw 0 1em;
+				@include responsive-font(4.5vw, 1.2em, 1.5em);
+			}
+		}
+
+		p {
+			text-align: center;
+			color: $black;
+			font-family: $vungle-typography;
+			@include responsive-font(2.5vw, 0.9em, 1.2em);
+			line-height: calc(120%);
+			padding: 0;
+		}
+
+		.ad-notification-modal-buttons {
+			width: 100%;
+			padding: 5vw 0 0;
+
+			#{$landscape} {
+				padding: 1.4em 0 0;
+				display: flex;
+			}
+
+			a {
+				width: 100%;
+				max-width: 50vw;
+				margin: auto;
+				display: block;
+				color: $black;
+				font-family: $vungle-typography;
+				@include responsive-font(3.5vw, 1.2em, 1.4em);
+				padding: 0.8em 0;
+				text-align: center;
+				border-radius: 2em;
+				margin-top: 0.5em;
+
+				#{$landscape} {
+					padding: 0.3em 0;
+					flex: 1;
+					margin: 0 1em 0 1em;
+					@include responsive-font(3.5vw, 1em, 1.2em);
+					padding: 0.5em 0;
+				}
+
+				&:first-child {
+					margin-top: 0;
+				}
+				&:last-child {
+					margin-bottom: 0;
+				}
+
+				&.action-border-green {
+					background: #05c237;
+					color: $white;
+				}
+				&.action-sub-grey {
+					background: $white;
+					color: $grey;
+				}
+			}
+		}
+	}
+}
+
+#gdpr-notification-view {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: $white;
+	z-index: 3000;
+
+	&.hide {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.ad-notification-modal-content {
+		position: absolute;
+		left: 0%;
+		top: 50%;
+		margin: 0 auto;
+		width: 100%;
+		background: $white;
+		z-index: 5000;
+		box-sizing: border-box;
+		padding: 0 10vw;
+		transform: translate(0%, -50%);
+
+		.gdpr-notification-icon {
+			background: $vungle-light-blue;
+			border-radius: 10000px;
+			padding: 1.5vw;
+			width: 17vw;
+			left: 0;
+			right: 0;
+			margin: auto;
+
+			svg {
+				display: block;
+			}
+
+			.target-icon {
+				fill: $white;
+			}
+
+			#{$landscape} {
+				display: none;
+
+				@media all and (min-width: $tablet) {
+					display: block;
+					width: 8vw;
+				}
+			}
+		}
+
+		h3 {
+			text-align: center;
+			color: $black;
+			font-family: $vungle-typography;
+			@include responsive-font(4.5vw, 1.4em, 2em);
+			font-weight: 700;
+			padding: 5vw 0 1.5em;
+
+			#{$landscape} {
+				padding: 2vw 0 1em;
+				@include responsive-font(4.5vw, 1.2em, 1.5em);
+
+				@media all and (min-width: $tablet) {
+					@include responsive-font(4.5vw, 1.7em, 1.9em);
+				}
+			}
+		}
+
+		p {
+			text-align: center;
+			color: $black;
+			font-family: $vungle-typography;
+			@include responsive-font(2.5vw, 0.9em, 1.2em);
+			line-height: calc(120%);
+			padding: 0;
+		}
+
+		.gdpr-notification-buttons {
+			width: 100%;
+			padding: 5vw 0 0;
+
+			a {
+				width: 100%;
+				max-width: 50vw;
+				margin: auto;
+				display: block;
+				color: $black;
+				font-family: $vungle-typography;
+				@include responsive-font(3.5vw, 1.2em, 1.4em);
+				padding: 0.8em 0;
+				text-align: center;
+				border-radius: 2em;
+				margin-top: 0.5em;
+
+				&:first-child {
+					margin-top: 0;
+				}
+				&:last-child {
+					margin-bottom: 0;
+				}
+
+				&.action-border-green {
+					background: #05c237;
+					color: $white;
+				}
+				&.action-sub-grey {
+					background: $white;
+					color: $grey;
+				}
+			}
+		}
+	}
 }
 
 // -- Vungle Ad Creative
 #vungle-ad {
 	transition: opacity 0.02s linear;
 	-webkit-transition: opacity 0.02s linear;
+	position: relative;
 }
 
-#vungle-ad, .endcard-view {
+#vungle-ad.video-endcard, #vungle-ad.endcard, .endcard-view, #ad-iframe {
 	position: absolute;
 	margin: auto;
 	top: 0;
