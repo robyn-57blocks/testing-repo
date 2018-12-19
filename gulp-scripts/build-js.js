@@ -9,6 +9,8 @@ const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const source = require('vinyl-source-stream');
 const uglify = require('gulp-uglify');
+const preprocessify = require('preprocessify');
+const uglifyes = require('gulp-uglify-es').default;
 
 // gulp scripts
 const isEnvDev = require('./env.js').isEnvDev;
@@ -27,9 +29,10 @@ module.exports = function() {
     return browserify({ entries: config.src + '/js/main.js' })
         .transform("babelify", {
             presets: ["es2015"],
-            // allow imports from node_modules 
-            // see https://github.com/babel/babelify#why-arent-files-in-node_modules-being-transformed
             global: true
+        })
+        .transform(preprocessify, {
+            context: { NODE_ENV: isEnvDev() ? 'dev': 'prod'}
         })
         .bundle()
         .pipe(source(config.src + '/js/main.js'))
@@ -39,7 +42,7 @@ module.exports = function() {
             path.extname = '.min.js';
         }))
         .pipe(buffer())
-        // .pipe(uglify())
+        .pipe(uglifyes())
         .pipe(gulp.dest(config.dist))
         .pipe(livereload());
 }

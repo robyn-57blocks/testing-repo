@@ -26,7 +26,7 @@ gulp.task('build:all', (cb) => {
         'build:html',
         'build:js',
         'build:sass'
-    ], 'build:inline')(cb)
+    ])(cb)
 });
 
 // MAIN ACTIONS
