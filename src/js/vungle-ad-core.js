@@ -96,10 +96,7 @@ var adcore = {
         //     tokens.privacy = true;
         // }
 
-        // init privacy if token says to do so
-        // if (tokens && tokens.privacy === true) {
-        //     AdPrivacy.init();
-        // }
+        AdPrivacy.init();
 
         //-------
 

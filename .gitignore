@@ -21,6 +21,7 @@ build/
 *.jar
 *.rar
 *.tar
+*.zip
 
 # Ignore media files which are probably large in file size
 *.wmv
