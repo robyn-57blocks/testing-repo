@@ -237,7 +237,7 @@ var adcore = {
             var shortestSide = (Math.min(vungleAdContainer.offsetHeight, vungleAdContainer.offsetWidth));
 
             if (typeof theme === 'undefined' || theme === null) {
-                theme = 'dark';
+                theme = 'light';
             }
 
 
