@@ -28,17 +28,6 @@ var adcore = {
 
         VungleAd.init();
 
-        // overide tokens where applicable
-        if (window.vungleSettings) {
-
-            for (var key in window.vungleSettings) {
-                if (window.vungleSettings.hasOwnProperty(key)) {
-
-                    tokens[key] = window.vungleSettings[key];
-                }
-            }
-        }
-
         window.callSDK = function(event) {
             if (!(window.vungle && window.vungle.mraidBridgeExt)) {
                 // console log successful SDK call in dev mode
@@ -61,19 +50,6 @@ var adcore = {
         for (var i = 0; i < ctaElements.length; i++) {
             ctaElements[i].addEventListener('click', ctaButtonClicked, false);
         }
-
-        var theme;
-
-        // if (tokens) {
-        //     theme = tokens.theme;
-        // } else {
-        //     console.error('No tokens supplied');
-        // }
-
-        // default privacy to true if not set
-        // if (tokens && typeof tokens.privacy === 'undefined') {
-        //     tokens.privacy = true;
-        // }
 
         AdPrivacy.init();
 
@@ -215,6 +191,7 @@ var adcore = {
             var longestSide = (Math.max(vungleAdContainer.offsetHeight, vungleAdContainer.offsetWidth));
             var shortestSide = (Math.min(vungleAdContainer.offsetHeight, vungleAdContainer.offsetWidth));
 
+            var theme;
             if (typeof theme === 'undefined' || theme === null) {
                 theme = 'light';
             }
