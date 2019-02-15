@@ -12,7 +12,7 @@ gulp.task('set:env:prod', setEnvProd);
 //gulp.task('autoversion', version.autoversion);
 gulp.task('clean', require('./gulp-scripts/clean.js'));
 gulp.task('build:js', require('./gulp-scripts/build-js.js'));
-gulp.task('build:iframe-dependencies', require('./gulp-scripts/build-iframe-dependencies.js'));
+gulp.task('build:resources', require('./gulp-scripts/build-resources.js'));
 gulp.task('build:sass', require('./gulp-scripts/build-sass.js'));
 gulp.task('build:html', require('./gulp-scripts/build-html.js'));
 gulp.task('build:inline', require('./gulp-scripts/build-inline.js'));
@@ -33,4 +33,4 @@ gulp.task('build:all', (cb) => {
 // MAIN ACTIONS
 gulp.task('default', gulpSequence('set:env:dev', 'watch'));
 gulp.task('serve:prod', gulpSequence('set:env:prod', 'watch'));
-gulp.task('bundle:prod', gulpSequence('set:env:prod', 'build', 'build:inline', 'build:iframe-dependencies', 'gen:bundle'));
+gulp.task('bundle:prod', gulpSequence('set:env:prod', 'build', 'build:inline', 'build:resources', 'gen:bundle'));

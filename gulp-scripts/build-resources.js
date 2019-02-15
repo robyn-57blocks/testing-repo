@@ -19,7 +19,7 @@ const config = require('./config.js');
 module.exports = function() {
 
     return [
-        gulp.src(config.src + '/js/ad-js-injection.js')
+        gulp.src([`${config.src}/js/ad-js-injection.js`, `${config.src}/js/mraid.js`])
         .pipe(preprocess({context: { NODE_ENV: isEnvDev() ? 'dev': 'prod'}}))
         .pipe(gulp.dest(config.dist))
     ];
