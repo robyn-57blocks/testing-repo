@@ -2,7 +2,7 @@ import { default as AdCore } from './vungle-ad-core.js';
 
 window.addEventListener('load', function() {
     AdCore.init(function() {
-        console.log('ready');
+        console.log('VUNGLE AD - ready');
     });
 });
 
