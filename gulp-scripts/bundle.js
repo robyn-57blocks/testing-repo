@@ -9,7 +9,7 @@ module.exports = function() {
 
     return gulp.src(`${config.dist}` + '/*')
         .pipe(zip({
-            name: 'bundle.zip',
+            name: 'df-dist.zip',
             outpath: './'
         }));
 };
