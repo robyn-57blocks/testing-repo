@@ -22,7 +22,7 @@ var adcore = {
 
         var achievedReward;
         var gdprConsentRequired = false;
-        var defaultMaxAdDuration = 45;
+        var defaultEndcardOnlyDurationSeconds = 25; //25 seconds
 
         var minimumPercentageContainerSize = 45;
 
@@ -129,12 +129,12 @@ var adcore = {
         }
 
         function getMaxAdDuration() {
-            if (!VungleAd.tokens.hasOwnProperty("MAX_AD_DURATION_SECONDS")) {
+            if (!VungleAd.tokens.hasOwnProperty("ENDCARD_ONLY_DURATION_SECONDS")) {
                 //use hardcoded value
-                return defaultMaxAdDuration;
+                return defaultEndcardOnlyDurationSeconds;
             } else {
                 //use token value
-                return parseFloat(VungleAd.tokens.MAX_AD_DURATION_SECONDS);
+                return parseFloat(VungleAd.tokens.ENDCARD_ONLY_DURATION_SECONDS);
             }
         }
 
