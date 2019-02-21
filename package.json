@@ -9,7 +9,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "node ./gulp-scripts/commit-validation.js"
+      "commit-msg": "node ./gulp-scripts/commit-validation.js"
     }
   },
   "dependencies": {
