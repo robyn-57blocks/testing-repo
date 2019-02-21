@@ -17,8 +17,10 @@ pipelines:
              - git config --global user.email "vungle.services@vungle.com"
              - git remote -v
              - git remote show origin
+             # install gulp
+             - npm i gulp-cli -g
              # install node modules
-             - npm i
+             - npm i 
              # build dist folder
              - gulp bundle:prod
              # increment version
