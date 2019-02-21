@@ -1,7 +1,6 @@
 const gulp = require('gulp');
 const gulpSequence = require('gulp-sequence');
 const version = require('./gulp-scripts/versioning.js');
-const commitValidation = require('./gulp-scripts/commit-validation.js');
 
 // gulp scripts
 const { setEnvDev, setEnvProd } = require('./gulp-scripts/env.js');
