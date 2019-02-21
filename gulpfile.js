@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const gulpSequence = require('gulp-sequence');
-const version = require('./gulp-scripts/version');
+const version = require('./gulp-scripts/versioning');
+const commitValidation = require('./gulp-scripts/commit-validation.js');
 
 // gulp scripts
 const { setEnvDev, setEnvProd } = require('./gulp-scripts/env.js');
@@ -34,3 +35,8 @@ gulp.task('build:all', (cb) => {
 gulp.task('default', gulpSequence('set:env:dev', 'watch'));
 gulp.task('serve:prod', gulpSequence('set:env:prod', 'watch'));
 gulp.task('bundle:prod', gulpSequence('set:env:prod', 'build', 'build:inline', 'build:resources', 'gen:bundle'));
+gulp.task('bundle:pipelines-deploy', gulpSequence('set:env:prod', 'build', 'build:inline', 'build:resources', 'gen:bundle', version.getNewVersion));
+gulp.task('bump:version', version.getNewVersion);
+
+gulp.task('validate:prod', commitValidation.validate);
+

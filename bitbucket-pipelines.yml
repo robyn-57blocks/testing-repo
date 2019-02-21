@@ -1,0 +1,55 @@
+# This is a sample build configuration for JavaScript.
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: node:8.9.4
+
+pipelines:
+  branches:
+    master:
+      - step:
+          script:
+             # identity setup for git push
+             - git config --global user.name "Vungle Services"
+             - git config --global user.email "vungle.services@vungle.com"
+             - git remote -v
+             - git remote show origin
+             # install node modules
+             - npm i
+             # install gettext
+             - apt-get -y install gettext
+             # populate env file
+             - envsubst < .env-live > .env
+             # copy env file
+             - scp .env ${USERNAME}@${HOST}:${APP_DIR}/.env
+             # build dist folder
+             - gulp bundle:prod
+             # increment version
+             - gulp bump:version
+             # Get version from package.json
+             - declare -x VERSION=$(node -pe "require('./package.json').version")
+             # display version 
+             - echo $VERSION
+             # config setup for git push
+             - git config --global push.default simple 
+             # Commit package.json 
+             - git add package.json
+             # push Commit with message ,"skip CI" Required to avoid re-running this CI upon git push
+             - git commit -m "bumped to version $VERSION [skip CI]" 
+             - git push origin
+             # commit will be tagged with version
+             - git tag $VERSION
+             - git remote -v
+             # push new tagging
+             - git push origin --tags
+             # install python
+             - apt-get update && apt-get install -y python-dev
+             # download pip 
+             - curl -O https://bootstrap.pypa.io/get-pip.py
+             # install pip
+             - python get-pip.py
+             # install aws CLI 
+             - pip install awscli
+             # copy files to s3 bucket 
+             - aws s3 cp /dist/* s3://core-files/
