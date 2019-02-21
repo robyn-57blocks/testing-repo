@@ -1,4 +1,6 @@
 var fs = require('fs-extra');
-     // const commitMessage = fs.readFileSync('./git/COMMIT_EDITMSG', 'utf8');
-     // console.log(commitMessage)
+     const commitMessage = fs.readFile('./git/COMMIT_EDITMSG');
+     console.log(commitMessage)
+     console.error('works');
+     fail();
 
