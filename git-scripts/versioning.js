@@ -2,15 +2,14 @@ const fs = require('fs-extra')
 const semver = require('semver');
 const git = require('git-last-commit');
 
+getNewVersion();
 
-
-module.exports.getNewVersion = async function(cb) {
+async function getNewVersion() {
     let pkg = await fs.readJson('./package.json')
     let increment = await getIncrement()
     let newVersion = semver.inc(pkg.version, increment)
     pkg.version = newVersion
     await fs.writeJson(`./package.json`, pkg)
-    cb()
 }
 
 async function getIncrement() {
