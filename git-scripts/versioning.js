@@ -15,6 +15,7 @@ async function getNewVersion() {
 async function getIncrement() {
     try {
         let lastCommit = await getLastCommitMessage()
+        console.log(lastCommit);
         if (lastCommit.notes !== 'master')
             return // only version master branch.
         
