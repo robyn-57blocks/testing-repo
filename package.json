@@ -1,16 +1,15 @@
 {
   "name": "design-framework-core",
-  "version": "1.0.5",
+  "version": null,
   "description": "Design Framework Core",
   "main": "vungle.min.js",
   "scripts": {
     "start": "gulp --dev",
-    "build": "gulp",
-    "precommit": "gulp validate:prod"
+    "build": "gulp"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run precommit"
+      "pre-commit": "node ./gulp-scripts/commit-validation.js"
     }
   },
   "dependencies": {
