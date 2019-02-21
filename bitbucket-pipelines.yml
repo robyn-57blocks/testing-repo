@@ -51,3 +51,4 @@ pipelines:
              - pip install awscli
              # copy files to s3 bucket 
              - aws s3 cp ./dist/ s3://design-framework-core/$VERSION/ --recursive
+             - aws s3 cp ./dist/ s3://design-framework-core/latest/ --recursive
