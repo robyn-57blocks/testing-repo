@@ -19,10 +19,6 @@ pipelines:
              - git remote show origin
              # install node modules
              - npm i
-             # populate env file
-             - envsubst < .env-live > .env
-             # copy env file
-             - scp .env ${USERNAME}@${HOST}:${APP_DIR}/.env
              # build dist folder
              - gulp bundle:prod
              # increment version
