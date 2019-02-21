@@ -51,7 +51,7 @@ pipelines:
              - pip install awscli
              # copy files to s3 bucket with versioned folder
              - aws s3 cp ./dist/ s3://design-framework-core/$VERSION/ --recursive
-             - aws s3 cp bundle.zip s3://design-framework-core/$VERSION/ --recursive
+             - aws s3 cp ./df-dist.zip s3://design-framework-core/$VERSION/ --recursive
              # overwrite latest folder with new version
              - aws s3 cp ./dist/ s3://design-framework-core/latest/ --recursive
-             - aws s3 cp bundle.zip s3://design-framework-core/$VERSION/ --recursive
+             - aws s3 cp ./df-dist.zip s3://design-framework-core/$VERSION/ --recursive
