@@ -7,7 +7,7 @@ image: node:8.9.4
 
 pipelines:
   branches:
-    master:
+    development:
       - step:
           script:
              # identity setup for git push
@@ -52,4 +52,4 @@ pipelines:
              # install aws CLI 
              - pip install awscli
              # copy files to s3 bucket 
-             - aws s3 cp /dist/* s3://core-files/
+             - aws s3 cp ./dist/ s3://design-framework-core/$VERSION/ --recursive

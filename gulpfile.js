@@ -37,5 +37,5 @@ gulp.task('serve:prod', gulpSequence('set:env:prod', 'watch'));
 gulp.task('bundle:prod', gulpSequence('set:env:prod', 'build', 'build:inline', 'build:resources', 'gen:bundle'));
 gulp.task('bundle:pipelines-deploy', gulpSequence('set:env:prod', 'build', 'build:inline', 'build:resources', 'gen:bundle', version.getNewVersion));
 gulp.task('bump:version', version.getNewVersion);
-gulp.task('validate', commitValidation.validate);
+
 

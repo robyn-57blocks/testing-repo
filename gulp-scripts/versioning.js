@@ -14,8 +14,9 @@ module.exports.getNewVersion = async function(cb) {
 async function getIncrement() {
     try {
         let lastCommit = await getLastCommitMessage()
-        if(lastCommit.notes !== 'master')
-          return // only version master branch.
+        if (lastCommit.notes !== 'master')
+            return // only version master branch.
+        
         const increments = ['[PATCH]', '[MINOR]', '[MAJOR]'];
         for (var i = 0; i < increments.length; i++) {
             if (lastCommit.subject.includes(increments[i]))
@@ -31,9 +32,9 @@ async function getIncrement() {
 async function getLastCommitMessage() {
     return new Promise(function(resolve, reject) {
         git.getLastCommit(function(err, commit) {
-            if (err){
-              console.error(err)
-              process.exit(1)
+            if (err) {
+                console.error(err)
+                process.exit(1)
             }
             resolve(commit);
         });
