@@ -5,20 +5,20 @@ const git = require('git-last-commit');
 getNewVersion();
 
 async function getNewVersion() {
+    let lastCommit = await getLastCommitMessage()
+    if (lastCommit.notes !== 'development')
+        return // only version master branch.
+
     let pkg = await fs.readJson('./package.json')
-    let increment = await getIncrement()
-    let newVersion = semver.inc(pkg.version, increment)
+    let increment = await getIncrement(lastCommit)
+    let newVersion = semver.inc(pkg.version, increment) || pkg.version;
     pkg.version = newVersion
     await fs.writeJson(`./package.json`, pkg)
 }
 
-async function getIncrement() {
+
+async function getIncrement(lastCommit) {
     try {
-        let lastCommit = await getLastCommitMessage()
-        console.log(lastCommit);
-        if (lastCommit.notes !== 'master')
-            return // only version master branch.
-        
         const increments = ['[PATCH]', '[MINOR]', '[MAJOR]'];
         for (var i = 0; i < increments.length; i++) {
             if (lastCommit.subject.includes(increments[i]))
