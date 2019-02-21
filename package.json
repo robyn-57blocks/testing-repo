@@ -5,6 +5,7 @@
   "main": "vungle.min.js",
   "scripts": {
     "start": "gulp --dev",
+    "versioning": "node ./git-scripts/versioning.js",
     "build": "gulp"
   },
   "husky": {

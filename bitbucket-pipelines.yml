@@ -24,7 +24,7 @@ pipelines:
              # build dist folder
              - gulp bundle:prod
              # increment version
-             - gulp bump:version
+             - npm run versioning
              # Get version from package.json
              - declare -x VERSION=$(node -pe "require('./package.json').version")
              # display version 
