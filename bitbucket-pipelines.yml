@@ -10,6 +10,8 @@ pipelines:
     development:
       - step:
           script:
+             # install gettext
+             - apt-get update && apt-get install -y gettext
              # identity setup for git push
              - git config --global user.name "Vungle Services"
              - git config --global user.email "vungle.services@vungle.com"
@@ -17,8 +19,6 @@ pipelines:
              - git remote show origin
              # install node modules
              - npm i
-             # install gettext
-             - apt-get -y install gettext
              # populate env file
              - envsubst < .env-live > .env
              # copy env file
