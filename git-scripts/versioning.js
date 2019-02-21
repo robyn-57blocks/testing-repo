@@ -2,18 +2,20 @@ const fs = require('fs-extra')
 const semver = require('semver');
 const git = require('git-last-commit');
 
+const checkedBranch = 'development'
+
 getNewVersion();
 
 async function getNewVersion() {
     let lastCommit = await getLastCommitMessage()
-    if (lastCommit.notes !== 'development')
-        return // only version master branch.
-
-    let pkg = await fs.readJson('./package.json')
-    let increment = await getIncrement(lastCommit)
-    let newVersion = semver.inc(pkg.version, increment) || pkg.version;
-    pkg.version = newVersion
-    await fs.writeJson(`./package.json`, pkg)
+    console.log(lastCommit);
+    if (lastCommit.notes === checkedBranch || lastCommit.branch === checkedBranch) {
+        let pkg = await fs.readJson('./package.json')
+        let increment = await getIncrement(lastCommit)
+        let newVersion = semver.inc(pkg.version, increment) || pkg.version;
+        pkg.version = newVersion
+        await fs.writeJson(`./package.json`, pkg)
+    }
 }
 
 
