@@ -6,6 +6,7 @@
   "scripts": {
     "start": "gulp --dev",
     "versioning": "node ./git-scripts/versioning.js",
+    "create-version-file": "node ./git-scripts/version-information.js",
     "build": "gulp"
   },
   "husky": {

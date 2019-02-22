@@ -25,6 +25,8 @@ pipelines:
              - npm run versioning
              # build dist folder
              - gulp bundle:prod
+             # Write version to a JSON file in dist
+             - npm run create-version-file
              # Get version from package.json
              - declare -x VERSION=$(node -pe "require('./package.json').version")
              # display version 
@@ -55,3 +57,5 @@ pipelines:
              # overwrite latest folder with new version
              - aws s3 cp ./dist/ s3://design-framework-core/latest/ --recursive
              - aws s3 cp df-dist.zip s3://design-framework-core/latest/ 
+             # Store JSON file in latest to see the current version
+             - aws s3 cp ./s3/version-info.json s3://design-framework-core/latest/ 
