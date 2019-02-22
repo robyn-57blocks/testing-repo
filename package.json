@@ -1,6 +1,6 @@
 {
   "name": "design-framework-core",
-  "version": "1.0.12",
+  "version": "0.0.9",
   "description": "Design Framework Core",
   "main": "vungle.min.js",
   "scripts": {
