@@ -21,10 +21,10 @@ pipelines:
              - npm i gulp-cli -g
              # install node modules
              - npm i 
-             # build dist folder
-             - gulp bundle:prod
              # increment version
              - npm run versioning
+             # build dist folder
+             - gulp bundle:prod
              # Get version from package.json
              - declare -x VERSION=$(node -pe "require('./package.json').version")
              # display version 
