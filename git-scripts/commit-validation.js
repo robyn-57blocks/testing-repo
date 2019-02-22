@@ -2,7 +2,7 @@ var fs = require('fs-extra');
 const commitMessage = fs.readFileSync('./.git/COMMIT_EDITMSG', 'utf8');
 const head = fs.readFileSync('./.git/HEAD', 'utf8');
 const branch = head.substring(head.lastIndexOf('/') + 1, head.length).trim() || head.trim();
-if (branch === "development") {
+if (branch === "master") {
     const increments = ['[PATCH]', '[MINOR]', '[MAJOR]'];
     let counter = 0;
     let pointer;
