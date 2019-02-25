@@ -42,7 +42,7 @@ module.exports = function() {
             path.extname = '.min.js';
         }))
         .pipe(buffer())
-        // .pipe(uglifyes())
+        .pipe(uglifyes())
         .pipe(gulp.dest(config.dist))
         .pipe(livereload());
 }
