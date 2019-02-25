@@ -33,3 +33,4 @@ gulp.task('build:all', (cb) => {
 gulp.task('default', gulpSequence('set:env:dev', 'watch'));
 gulp.task('serve:prod', gulpSequence('set:env:prod', 'watch'));
 gulp.task('bundle:prod', gulpSequence('set:env:prod', 'build', 'build:inline', 'build:resources', 'gen:bundle'));
+
