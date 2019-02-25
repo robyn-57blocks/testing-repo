@@ -10,12 +10,16 @@ const prettify = require('gulp-html-prettify');
 const isEnvDev = require('./env.js').isEnvDev;
 const config = require('./config.js');
 
+const templateVariables = {
+    version: require('../package.json').version
+}
+
 module.exports = function() {
     gulp.src(config.src + '/*.html')
         .pipe(gulp.dest(config.dist))
 
     return gulp.src(`${config.src}/index.hbs`)
-        .pipe(compileHandlebars({}, {
+        .pipe(compileHandlebars(templateVariables, {
             ignorePartials: true,
             // batch: [`${config.templates}`]
         }))
