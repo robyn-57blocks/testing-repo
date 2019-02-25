@@ -144,5 +144,18 @@ export default {
                 }
             }
         }
+    },
+
+    getApiIdFromUrl: function(ctaUrl) {
+        if (!ctaUrl) {
+            return null;
+        }
+
+        var uriArr = ctaUrl.match(/\/id([0-9]*)/i);
+        if (uriArr && uriArr[1]) {
+            return uriArr[1];
+        }
+        return null;
     }
+
 };

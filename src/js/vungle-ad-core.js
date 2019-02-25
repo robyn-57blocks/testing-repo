@@ -20,13 +20,24 @@ var adcore = {
         //check for either vungle or standard MRAID
         vungleMRAID.checkMRAIDStatus();
 
-        var achievedReward;
+        var achievedReward, isStoreViewPrepared, mraidVersion;
+        var blockCtaEvent = false;
+        var dynamicElement = null;
+        var placementType = null; //["fullscreen", "Unknown", "flexview", "flexfeed", "mrec"]
+        var storeViewTypes = ["unknown", "fullscreen"];
         var gdprConsentRequired = false;
-        var defaultEndcardOnlyDurationSeconds = 25; //25 seconds
 
+        var defaultEndcardOnlyDurationSeconds = 25; //25 seconds
         var minimumPercentageContainerSize = 45;
 
         VungleAd.init();
+
+        var appStoreId = AdHelper.getApiIdFromUrl(VungleAd.tokens.CTA_BUTTON_URL);
+        placementType = window.vungle.mraid.getPlacementType().trim().toLowerCase();
+
+        if ("getMraidVersion" in window.vungle.mraidExt) {
+            mraidVersion = window.vungle.mraidExt.getMraidVersion();
+        }
 
         window.callSDK = function(event) {
             if (!(window.vungle && window.vungle.mraidBridgeExt)) {
@@ -35,14 +46,9 @@ var adcore = {
                 return;
             }
 
-            // remove iframe to stop all sound
-            if (document.getElementById('ad-content')) {
-                document.getElementById('ad-content').remove();
+            if (!blockCtaEvent) {
+                ctaButtonClicked();
             }
-
-            ctaButtonClicked();
-
-            // return actionClicked(event);
         };
 
         //attach CTA click on all elements with class mraid-cta
@@ -52,8 +58,6 @@ var adcore = {
         }
 
         AdPrivacy.init();
-
-        //-------
 
         document.getElementById('ad-notification-modal-title-text').innerHTML = VungleAd.tokens.INCENTIVIZED_TITLE_TEXT;
         document.getElementById('ad-notification-modal-body-text').innerHTML = VungleAd.tokens.INCENTIVIZED_BODY_TEXT;
@@ -81,6 +85,38 @@ var adcore = {
 
         var fullscreenVideoElement = document.getElementById('vungle-fullscreen-video');
 
+        function getDynamicElement() {
+            if (!dynamicElement) {
+                    dynamicElement = document.querySelector("#dynamic");
+            }
+            return dynamicElement;
+        }
+
+        getDynamicElement().addEventListener("vungle.events.preparestore.finished", onNotifyPresentStoreViewFinished);
+        getDynamicElement().addEventListener("vungle.events.preparestore.success", onNotifyPrepareStoreViewSuccess);
+
+        function prepareStoreView() {
+            console.log('3 prepare store view: '+appStoreId);
+            window.vungle.mraidExt.prepareStoreView(appStoreId);
+        }
+
+        function onNotifyPrepareStoreViewSuccess() {
+            console.log('on notify prepare store view success');
+            isStoreViewPrepared = true;
+        }
+
+        function onNotifyPresentStoreViewFinished() {
+            console.log('1 on notify present store view finished');
+            // In-app store view is supported only on iOS. We should trigger this.prepareStoreView() only for iOS.
+            isStoreViewPrepared = false;
+            if (AdHelper.getOS() === "ios" && storeViewTypes.indexOf(placementType) !== -1) {
+                console.log('2 call prepare store view');
+                prepareStoreView();
+            }
+        }
+
+        onNotifyPresentStoreViewFinished();
+        
         switch (VungleAd.tokens.CREATIVE_VIEW_TYPE) {
             case "video_and_endcard":
                 fullscreenVideoElement.src = tokens.video;
@@ -170,7 +206,6 @@ var adcore = {
             //INLINE VIDEO TEMPLATE
 
             //FULL SCREEN VIDEO TEMPLATE
-
         }
 
         function successfulViewEventTimer(eventTimer) {
@@ -293,7 +328,6 @@ var adcore = {
                 }
             }
             // @endif
-
         }
 
         function revealAdNotificationModal() {
@@ -395,8 +429,17 @@ var adcore = {
             window.vungle.mraidBridgeExt.notifyEventValuePairEvent("postroll.click", 1);
             window.vungle.mraidBridgeExt.notifyEventValuePairEvent("download", 1);
 
-            vungleMRAID.open(VungleAd.tokens.CTA_BUTTON_URL);
-            vungleMRAID.close();
+            // 6.3.2 Hack - IOS-2140
+            if (!mraidVersion && AdHelper.getOS() === "ios" && appStoreId && isStoreViewPrepared) {
+                //Block future CTA events on 6.3.2 to avoid StoreKit bug
+                blockCtaEvent = true;
+            }
+
+            if (AdHelper.getOS() === "ios" && appStoreId && isStoreViewPrepared) {
+                window.vungle.mraidExt.presentStoreView(appStoreId);
+            } else {
+                vungleMRAID.open(VungleAd.tokens.CTA_BUTTON_URL);
+            }
         }
     }
 };
