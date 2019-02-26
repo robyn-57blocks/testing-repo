@@ -39,6 +39,8 @@ var adcore = {
             mraidVersion = window.vungle.mraidExt.getMraidVersion();
         }
 
+        var operatingSystem = window.vungle.mraidExt.getOS().trim();
+
         window.callSDK = function(event) {
             if (!(window.vungle && window.vungle.mraidBridgeExt)) {
                 // console log successful SDK call in dev mode
@@ -96,26 +98,24 @@ var adcore = {
         getDynamicElement().addEventListener("vungle.events.preparestore.success", onNotifyPrepareStoreViewSuccess);
 
         function prepareStoreView() {
-            console.log('3 prepare store view: '+appStoreId);
             window.vungle.mraidExt.prepareStoreView(appStoreId);
         }
 
         function onNotifyPrepareStoreViewSuccess() {
-            console.log('on notify prepare store view success');
             isStoreViewPrepared = true;
         }
 
         function onNotifyPresentStoreViewFinished() {
-            console.log('1 on notify present store view finished');
             // In-app store view is supported only on iOS. We should trigger this.prepareStoreView() only for iOS.
             isStoreViewPrepared = false;
-            if (AdHelper.getOS() === "ios" && storeViewTypes.indexOf(placementType) !== -1) {
-                console.log('2 call prepare store view');
+            if (operatingSystem === "ios" && storeViewTypes.indexOf(placementType) !== -1) {
                 prepareStoreView();
             }
         }
 
-        onNotifyPresentStoreViewFinished();
+        if (mraidVersion) {
+            onNotifyPresentStoreViewFinished();
+        }
         
         switch (VungleAd.tokens.CREATIVE_VIEW_TYPE) {
             case "video_and_endcard":
@@ -430,12 +430,12 @@ var adcore = {
             window.vungle.mraidBridgeExt.notifyEventValuePairEvent("download", 1);
 
             // 6.3.2 Hack - IOS-2140
-            if (!mraidVersion && AdHelper.getOS() === "ios" && appStoreId && isStoreViewPrepared) {
+            if (!mraidVersion && operatingSystem === "ios" && appStoreId && isStoreViewPrepared) {
                 //Block future CTA events on 6.3.2 to avoid StoreKit bug
                 blockCtaEvent = true;
             }
 
-            if (AdHelper.getOS() === "ios" && appStoreId && isStoreViewPrepared) {
+            if (operatingSystem === "ios" && appStoreId && isStoreViewPrepared) {
                 window.vungle.mraidExt.presentStoreView(appStoreId);
             } else {
                 vungleMRAID.open(VungleAd.tokens.CTA_BUTTON_URL);
