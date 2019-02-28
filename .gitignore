@@ -12,6 +12,7 @@ Thumbs.db
 node_modules/
 public
 build/
+dist/
 
 # Ignore packaged files
 *.sw*
