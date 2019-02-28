@@ -1,0 +1,287 @@
+#vungle-close {
+    opacity: 1;
+    -webkit-transition: opacity 0.35s;
+}
+
+#vungle-close.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+// -- Vungle header close button
+#vungle-header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    z-index: 10000000;
+
+    a {
+        display: block;
+        padding: 0.8em 0.8em 0.5em 1.2em;
+        right: 0;
+
+        // #{$windows} {
+        //     padding: 0.25em 0.25em 0.45em 0.45em;
+
+        //     @media all and (min-width: $windows-large-screen) {
+        //         padding: 0.5em 0.5em 0.5em 0.5em;
+        //     }
+        // }
+
+        // svg {
+        //     right: 0;
+        //     margin: 0;
+        //     padding: 0;
+        //     vertical-align: bottom;
+        //     height: 1.1em;
+        //     width: 1.1em;
+
+        //     #{$windows} {
+        //         height: 1em;
+        //         width: 1em;
+        //         margin-bottom: 0.2em;
+        //         margin-right: 0.1em;
+
+        //         @media all and (min-width: $windows-large-screen) {
+        //             height: 1.5em;
+        //             width: 1.5em;
+        //             margin-right: 0.3em;
+        //         }
+        //     }
+        // }
+
+        &:active {
+            opacity: 0.55;
+        }
+    }
+
+    #vungle-ad-close-icon-container {
+
+        // #{$light-theme} {
+        // 	background: $vungle-ad-light-theme-stroke;
+        // }
+
+        // #{$dark-theme} {
+        // 	background: $vungle-ad-dark-theme-stroke;
+        // }
+
+        // #{$ios}, #{$android} {
+        // 	background: none;
+        // }
+
+        // #{$windows} {
+        // 	padding: 0.3em 0.6em 0.3em 0.6em;
+
+        // 	@media all and (min-width: $windows-large-screen) {
+        // 		padding: 0.5em 0.8em 0.5em 0.8em;
+        // 	}
+        // }
+
+        span {
+            display: none;
+
+            // #{$light-theme} {
+            // 	color: $vungle-ad-light-theme-fill;
+            // }
+
+            // #{$dark-theme} {
+            // 	color: $vungle-ad-dark-theme-fill;
+            // }
+
+            // #{$windows} {
+            // 	display: inline-block;
+            // 	font-family: $vungle-typography;
+            // 	font-weight: 300;
+            // 	font-size: 1.2em;
+            // 	line-height: 1.3em;
+
+            // 	@media all and (min-width: $windows-large-screen) {
+            // 		font-size: 1.8em;
+            // 		line-height: 1.2em;
+            // 	}
+            // }
+        }
+    }
+
+    // .svg-vungle-ad-close-icon {
+    // 	fill: $vungle-ad-dark-theme-fill;
+    // 	stroke: $vungle-ad-dark-theme-stroke;
+    // 	stroke-width: 14;
+    // 	stroke-miterlimit: 10;
+    // }
+
+    // #{$light-theme} {
+    // 	.svg-vungle-ad-close-icon {
+    // 		fill: $vungle-ad-light-theme-fill;
+    // 		stroke: $vungle-ad-light-theme-stroke;
+    // 	}
+    // }
+    // #{$dark-theme} {
+    // 	.svg-vungle-ad-close-icon {
+    // 		fill: $vungle-ad-dark-theme-fill;
+    // 		stroke: $vungle-ad-dark-theme-stroke;
+    // 	}
+    // }
+
+    // #{$windows} {
+    // 	.svg-vungle-ad-close-icon {
+    // 		stroke: none;
+    // 	}
+    // }
+}
+
+
+$modifier:2;
+
+@function modifySize($args) {
+    @return $args * $modifier;
+}
+
+#vungle-ad-close-icon-container {
+    right: 2.5vh;
+    top: 3vh;
+    position: absolute;
+    height: modifySize(40pt);
+    width: modifySize(40pt);
+    text-align: center;
+    border-radius: modifySize(50pt);
+}
+
+#vungle-ad-timer-countdown {
+    color: rgba(255, 255, 255, 1);
+    display: inline-block;
+    line-height: modifySize(40pt);
+    float: left;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    font-size: modifySize(17pt);
+}
+
+#vungle-ad-close-icon-container.rewarded #vungle-ad-timer-countdown {
+    margin-left: 50%;
+    transition: margin-left .5s ease-in-out;
+}
+
+#vungle-ad-close-icon-container.rewarded #vungle-ad-reward-timer.open #vungle-ad-timer-countdown {
+    margin-left: 25%;
+}
+
+#vungle-ad-reward-timer {
+    position: absolute;
+    background: rgba(50, 50, 50, 0.7);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    border-radius: modifySize(50pt);
+    z-index: -1;
+    transition: width .5s ease-in-out, box-shadow .5s ease-in-out, background .5s ease-in-out;
+}
+
+#vungle-ad-reward-timer.open {
+    background: rgba(50, 50, 50, 0.7);
+    width: 200%;
+    -webkit-box-shadow: inset 0pt 0pt 0pt modifySize(.5pt) rgba(255, 255, 255, .5);
+    -moz-box-shadow: inset 0pt 0pt 0pt modifySize(.5pt) rgba(255, 255, 255, .5);
+    box-shadow: inset 0pt 0pt 0pt modifySize(.5pt) rgba(255, 255, 255, .5);
+}
+
+#vungle-ad-timer-svg-background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    // width: modifySize(40pt);
+    // height: modifySize(40pt);
+    transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+#vungle-ad-timer-svg-background.animation circle {
+    stroke-dasharray: modifySize(113pt);
+    stroke-dashoffset: modifySize(113pt);
+    stroke-linecap: round;
+    stroke-width: modifySize(2pt);
+    stroke: white;
+    fill: none;
+}
+
+#vungle-ad-timer-svg-background.animation.play circle {
+    animation: countdown 5s linear infinite forwards;
+}
+
+#vungle-ad-timer-svg-background.background {
+    border-radius: 50%;
+    -webkit-box-shadow: inset 0pt 0pt 0pt 0pt rgba(255, 255, 255, 1);
+    -moz-box-shadow: inset 0pt 0pt 0pt 0pt rgba(255, 255, 255, 1);
+    box-shadow: inset 0pt 0pt 0pt 0pt rgba(255, 255, 255, 1);
+    transition: box-shadow .7s ease-in-out;
+}
+
+#vungle-ad-close-icon-container.fill .background {
+    -webkit-box-shadow: inset 0pt 0pt 0pt modifySize(54pt) rgba(255, 255, 255, 1);
+    -moz-box-shadow: inset 0pt 0pt 0pt modifySize(54pt) rgba(255, 255, 255, 1);
+    box-shadow: inset 0pt 0pt 0pt modifySize(54pt) rgba(255, 255, 255, 1);
+}
+
+#vungle-ad-timer-svg-background.background circle {
+    stroke-width: modifySize(2pt);
+    stroke: rgba(255, 255, 255, 0.5);
+    fill: rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 0 10pt #fff;
+    transition: fill .25s .1s ease-in-out;
+}
+
+
+#vungle-ad-close-icon-container.fill #vungle-ad-timer-svg-background.background circle {
+    fill: rgba(255, 255, 255, 1);
+}
+
+#vungle-ad-close-icon-container.pulse {
+    animation: expand-contract .4s .4s linear;
+}
+
+#vungle-ad-close-icon {
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: .25s .1s ease-in-out;
+    opacity: 0;
+}
+
+#vungle-ad-close-icon-container.rewarded #vungle-ad-close-icon {
+    opacity: 0;
+}
+
+#vungle-ad-close-icon-container.fill .close {
+    opacity: 1;
+}
+
+@keyframes expand-contract {
+    from {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+
+@keyframes countdown {
+    from {
+        stroke-dashoffset: modifySize(113pt);
+    }
+
+    to {
+        stroke-dashoffset: modifySize(0pt);
+    }
+}

@@ -293,7 +293,6 @@ var adcore = {
             VungleAd.theme = theme;
             VungleAd.os = AdHelper.getOS();
 
-            // @if NODE_ENV='dev' 
             /*  
                 Debug mode: Displays the Vungle boilerplate classes to help you
                 identify each classname if you wish to make additional stylistic changes
@@ -330,7 +329,6 @@ var adcore = {
                     debugContainer.innerHTML = adClassDebug;
                 }
             }
-            // @endif
         }
 
         function revealAdNotificationModal() {

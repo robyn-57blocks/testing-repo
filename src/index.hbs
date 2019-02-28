@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Vungle Design Framework {{version}} -->
     <meta charset="utf-8">
@@ -26,24 +27,32 @@
         if(window.location.hostname === 'localhost') {
             window.location.href = 'http://127.0.0.1:' + window.location.port + window.location.pathname;
         }
-    </script> 
+    </script>
     <!-- /build -->
     <title>Vungle</title>
 </head>
 
 <body id="dynamic">
-        <div id="vungle-header">
-        <a id="vungle-close" class="hide" href="javascript:void(0)">
+    <div id="vungle-header">
+        <a id="vungle-close" class="" href="javascript:void(0)">
             <!-- CLOSE ICON -->
-            <div id="background-vungle-ad-close">
-                <svg version="1.1" id="svg-vungle-ad-close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-         viewBox="0 0 321.2 321" style="enable-background:new 0 0 321.2 321;" xml:space="preserve">
+            <div id="vungle-ad-close-icon-container">
+                <!-- Countdown text -->
+                <div id="vungle-ad-reward-timer">
+                    <div id="vungle-ad-timer-countdown"></div>
+                </div>
+                <!-- Circle ring -->
+                <svg id="vungle-ad-timer-svg-background" class="background">
+                    <circle r="45%" cx="50%" cy="50%"></circle>
+                </svg>
+                <!-- Close icon -->
+                <svg version="1.1" id="vungle-ad-close-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 321.2 321" style="enable-background:new 0 0 321.2 321;" xml:space="preserve">
                     <g>
                         <g id="svg-vungle-ad-close-icon-layer-1">
                             <g id="svg-vungle-ad-close-icon-layer-close">
                                 <g>
                                     <polygon class="svg-vungle-ad-close-icon" points="280.8,309.5 161,189.8 40.4,309.5 11.6,280.8 132.4,160 11.6,40.3 40.4,11.5 161,131.3 280.8,11.5 
-                                        309.5,40.3 189.8,160 309.5,280.8                "/>
+                                        309.5,40.3 189.8,160 309.5,280.8" />
                                 </g>
                             </g>
                         </g>
@@ -53,14 +62,12 @@
             </div>
         </a>
     </div>
-
     <div id="vungle-fullscreen-video">
         <video id="fullscreen-video" preload playsinline muted autoplay width="100%"></video>
     </div>
     <div id="vungle-ad">
         <div id="endcard-view" class="endcard-view"></div>
     </div>
-
     <aside id="ad-notification-modal" class="hide">
         <div class="ad-notification-modal-content">
             <h3 id="ad-notification-modal-title-text"></h3>
@@ -71,18 +78,16 @@
             </div>
         </div>
     </aside>
-
     <aside id="gdpr-notification-view" class="hide">
         <div class="ad-notification-modal-content">
             <div class="gdpr-notification-icon">
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-         viewBox="0 0 96.5 96.6" style="enable-background:new 0 0 96.5 96.6;" xml:space="preserve">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 96.5 96.6" style="enable-background:new 0 0 96.5 96.6;" xml:space="preserve">
                     <g transform="translate(0,-952.36218)">
                         <path class="target-icon" d="M46.2,953.6v12.1c-17.7,1-31.9,15.2-32.9,32.9H1.2v4h12.1c1,17.7,15.2,31.9,32.9,32.9v12.1h4v-12.1
                             c17.7-1,31.9-15.2,32.9-32.9h12.1v-4H83.2c-1-17.7-15.2-31.9-32.9-32.9v-12.1H46.2z M46.2,969.7v14.1c-7.8,0.9-14,7.1-14.9,14.9
                             H17.3C18.3,983.1,30.7,970.7,46.2,969.7z M50.2,969.7c15.5,1,27.9,13.4,28.9,28.9H65.1c-0.9-7.8-7.1-14-14.9-14.9V969.7z
                              M40.9,993.3c10.8-8.1,22.8,3.9,14.7,14.7C44.8,1016.1,32.8,1004.1,40.9,993.3z M17.3,1002.6h14.1c0.9,7.8,7.1,14,14.9,14.9v14.1
-                            C30.7,1030.6,18.3,1018.2,17.3,1002.6z M65.1,1002.6h14.1c-1,15.5-13.4,28-28.9,28.9v-14.1C58,1016.6,64.2,1010.4,65.1,1002.6z"/>
+                            C30.7,1030.6,18.3,1018.2,17.3,1002.6z M65.1,1002.6h14.1c-1,15.5-13.4,28-28.9,28.9v-14.1C58,1016.6,64.2,1010.4,65.1,1002.6z" />
                     </g>
                 </svg>
             </div>
@@ -94,7 +99,6 @@
             </div>
         </div>
     </aside>
-
     <!-- PRIVACY START HTML -->
     <div id="privacy-wrapper">
         <div id="privacy-icon" class="privacy-container">
@@ -106,16 +110,15 @@
             c10,11.7,49.8,12.4,49.8,58.5H195.5z" />
                 </g>
             </svg>
-            <span> Privacy 
-                <svg id="privacy-external" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                     viewBox="0 0 194.818 194.818" style="enable-background:new 0 0 194.818 194.818;" xml:space="preserve">
-                <g>
-                    <path class="privacy-external-path" d="M185.818,2.161h-57.04c-4.971,0-9,4.029-9,9s4.029,9,9,9h35.312l-86.3,86.3c-3.515,3.515-3.515,9.213,0,12.728
+            <span> Privacy
+                <svg id="privacy-external" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 194.818 194.818" style="enable-background:new 0 0 194.818 194.818;" xml:space="preserve">
+                    <g>
+                        <path class="privacy-external-path" d="M185.818,2.161h-57.04c-4.971,0-9,4.029-9,9s4.029,9,9,9h35.312l-86.3,86.3c-3.515,3.515-3.515,9.213,0,12.728
                         c1.758,1.757,4.061,2.636,6.364,2.636s4.606-0.879,6.364-2.636l86.3-86.3v35.313c0,4.971,4.029,9,9,9s9-4.029,9-9v-57.04
-                        C194.818,6.19,190.789,2.161,185.818,2.161z"/>
-                    <path class="privacy-external-path" d="M149,77.201c-4.971,0-9,4.029-9,9v88.456H18v-122h93.778c4.971,0,9-4.029,9-9s-4.029-9-9-9H9c-4.971,0-9,4.029-9,9v140
-                        c0,4.971,4.029,9,9,9h140c4.971,0,9-4.029,9-9V86.201C158,81.23,153.971,77.201,149,77.201z"/>
-                </g>
+                        C194.818,6.19,190.789,2.161,185.818,2.161z" />
+                        <path class="privacy-external-path" d="M149,77.201c-4.971,0-9,4.029-9,9v88.456H18v-122h93.778c4.971,0,9-4.029,9-9s-4.029-9-9-9H9c-4.971,0-9,4.029-9,9v140
+                        c0,4.971,4.029,9,9,9h140c4.971,0,9-4.029,9-9V86.201C158,81.23,153.971,77.201,149,77.201z" />
+                    </g>
                 </svg>
             </span>
         </div>
@@ -139,9 +142,10 @@
             </div>
         </div>
     </div>
-    <!-- PRIVACY END HTML --> 
+    <!-- PRIVACY END HTML -->
     <!-- build:js vungle.min.js -->
     <script src="js/main.js" type="module"></script>
     <!-- /build -->
 </body>
+
 </html>
