@@ -24,6 +24,7 @@ var adcore = {
         var blockCtaEvent = false;
         var dynamicElement = null;
         var placementType = null; //["fullscreen", "Unknown", "flexview", "flexfeed", "mrec"]
+        var creativeViewType = null;
         var storeViewTypes = ["unknown", "fullscreen"];
         var gdprConsentRequired = false;
 
@@ -85,8 +86,6 @@ var adcore = {
         //Called when Ad loads
         renderVungleAdSizingClass();
 
-        var fullscreenVideoElement = document.getElementById('vungle-fullscreen-video');
-
         function getDynamicElement() {
             if (!dynamicElement) {
                     dynamicElement = document.querySelector("#dynamic");
@@ -116,40 +115,48 @@ var adcore = {
         if (mraidVersion) {
             onNotifyPresentStoreViewFinished();
         }
-        
-        switch (VungleAd.tokens.CREATIVE_VIEW_TYPE) {
-            case "video_and_endcard":
-                fullscreenVideoElement.src = tokens.video;
-                fullscreenVideoElement.addEventListener('ended', function() {
-                    fullscreenVideoElement.className = 'hide';
+
+        function presentAd() {
+            if (VungleAd.tokens.hasOwnProperty("CREATIVE_VIEW_TYPE")) {
+                creativeViewType = VungleAd.tokens.CREATIVE_VIEW_TYPE.trim().toLowerCase();
+            }
+
+            switch (creativeViewType) {
+                case "video_and_endcard":
                     if (onEndcardStart) {
                         //run any code defined in main.js
                         onEndcardStart();
                     }
-                });
-                break;
-            case "inline_video_endcard":
-                fullscreenVideoElement.src = tokens.video;
-                if (typeof fullscreenVideoElement.loop == 'boolean') { // loop supported
-                    fullscreenVideoElement.loop = true;
-                } else { // loop property not supported
-                    fullscreenVideoElement.addEventListener('ended', function() {
-                        this.currentTime = 0;
-                        this.play();
-                    }, false);
-                }
-                if (onEndcardStart) {
-                    //run any code defined in main.js
-                    onEndcardStart();
-                }
-                break;
-            case "Endcard":
-                if (onEndcardStart) {
-                    //run any code defined in main.js
-                    onEndcardStart();
-                }
-                fullscreenVideoElement.className = 'hide';
-                break;
+                    break;
+                case "inline_video_endcard":
+                    if (onEndcardStart) {
+                        //run any code defined in main.js
+                        onEndcardStart();
+                    }
+                    break;
+                case "endcard":
+                    if (onEndcardStart) {
+                        //run any code defined in main.js
+                        onEndcardStart();
+                    }
+                    renderAdIFrame();
+                    break;
+                case undefined:
+                    //default to endcard only
+                    if (onEndcardStart) {
+                        //run any code defined in main.js
+                        onEndcardStart();
+                    }
+                    renderAdIFrame();
+                    break;
+                default:
+                    //default to endcard only
+                    if (onEndcardStart) {
+                        //run any code defined in main.js
+                        onEndcardStart();
+                    }
+                    renderAdIFrame();
+            }
         }
 
         if (("getConsentRequired" in window.vungle.mraid)) {
@@ -158,10 +165,10 @@ var adcore = {
             if (gdprConsentRequired) {
                 revealGDPRNotificationView();
             } else {
-                renderAdIFrame();
+                presentAd();
             }
         } else {
-            renderAdIFrame();
+            presentAd();
         }
 
         function getMaxAdDuration() {
