@@ -196,8 +196,6 @@ var adcore = {
                 console.log('NON-INCENTIVISED - close icon delay:' + delaySeconds);
             }
 
-            delaySeconds = 3;
-
             //ENDCARD ONLY TEMPLATE
             if (delaySeconds == 0) {
                 revealCloseButton(0,rewardedAdDuration);
