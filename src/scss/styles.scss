@@ -1,5 +1,23 @@
-@import './vungle-ad-core-imports.scss';
+// *** Vendor ***
+@import './base/sanitise';
 
-.endcard-view {
-	background-color: $black;
-}
+// *** Settings ***
+@import './base/settings';
+@import './base/colours';
+
+// *** Utils ***
+@import './utils/mixins';
+@import './utils/functions';
+
+// *** Base ***
+@import './base/typography';
+@import './base/breakpoints';
+@import './base/core';
+
+// *** Components ***
+@import './components/close';
+@import './components/privacy';
+@import './components/default-notification-modal';
+@import './components/gdpr-notification-modal';
+@import './components/ad-debug';
+@import './components/video';

@@ -14,7 +14,7 @@ async function getNewVersion() {
         let increment = await getIncrement(lastCommit)
         let newVersion = semver.inc(pkg.version, increment) || pkg.version;
         pkg.version = newVersion
-        await fs.writeJson(`./package.json`, pkg)
+        await fs.writeJson(`./package.json`, pkg,{spaces:1})
     }
 }
 
