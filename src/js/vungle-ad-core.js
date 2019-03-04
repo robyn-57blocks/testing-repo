@@ -189,9 +189,11 @@ var adcore = {
                 console.log('NON-INCENTIVISED - close icon delay:' + delaySeconds);
             }
 
+            delaySeconds = 3;
+
             //ENDCARD ONLY TEMPLATE
             if (delaySeconds == 0) {
-                revealCloseButton(0);
+                revealCloseButton(0,rewardedAdDuration);
                 successfulViewEventTimer(rewardedAdDuration);
                 console.log('SUCCESSFUL VIEW - ' + rewardedAdDuration);
             } else if (delaySeconds == 9999) {
@@ -199,13 +201,13 @@ var adcore = {
                 successfulViewEventTimer(getMaxAdDuration());
                 console.log('SUCCESSFUL VIEW - ' + getMaxAdDuration());
             } else {
-                revealCloseButton(delaySeconds);
+                revealCloseButton(delaySeconds,rewardedAdDuration);
                 successfulViewEventTimer(rewardedAdDuration);
                 console.log('SUCCESSFUL VIEW - ' + rewardedAdDuration);
             }
 
             //INLINE VIDEO TEMPLATE
-
+            
             //FULL SCREEN VIDEO TEMPLATE    
         }
 
@@ -381,16 +383,20 @@ var adcore = {
             }
         }
 
-        function revealCloseButton(showCloseButtonTime = 0) {
+        function revealCloseButton(showCloseButtonTime = 0, rewardedAdDuration) {
             console.log('TIMER CLOSE ICON - begin');
             var closeButton = document.getElementById('vungle-close');
 
-            showCloseButtonTime = showCloseButtonTime * 1000;
+            if(typeof rewardedAdDuration === 'undefined')
+                rewardedAdDuration = showCloseButtonTime;
 
-            adClose.initTimer({
-                time: showCloseButtonTime,
+            AdClose.initTimer({
+                time: VungleAd.isAdIncentivised() ? rewardedAdDuration : showCloseButtonTime,
                 rewarded: VungleAd.isAdIncentivised()
             })
+
+            var showCloseButtonTimeMilliSeconds = showCloseButtonTime * 1000;
+
 
             setTimeout(function() {
                 console.log('TIMER CLOSE ICON - complete');
@@ -414,7 +420,7 @@ var adcore = {
                         vungleMRAID.close();
                     }
                 };
-            }, showCloseButtonTime);
+            }, showCloseButtonTimeMilliSeconds);
         }
 
         function revealPrivacyButton() {

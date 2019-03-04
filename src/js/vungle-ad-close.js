@@ -9,32 +9,37 @@ import { default as AdHelper } from './vungle-ad-helpers.js';
 var countdownContainer = document.getElementById('vungle-ad-close-icon-container');
 var countdownNumberEl = document.getElementById('vungle-ad-timer-countdown');
 var rewardTimer = document.getElementById('vungle-ad-reward-timer');
+var interval,countdown
 
 function endCloseTimer(rewarded) {
     AdHelper.addClass(countdownContainer, 'fill')
     if (rewarded)
-        AdHelper.addClass(rewardTimer, 'open')
+        AdHelper.addClass(countdownContainer, 'open')
 }
 
 function initTimer(settings) {
-    var countdown = settings.time;
+    var countdown = parseInt(settings.time);
 
     if (settings.rewarded)
-        AdHelper.addClass(rewardTimer, 'rewarded')
+        AdHelper.addClass(countdownContainer, 'rewarded')
+    // AdHelper.addClass(document.body, 'windows')
 
 
     countdownNumberEl.textContent = countdown;
 
-    var interval = setInterval(function() {
+    interval = setInterval(function() {
         countdown = --countdown <= 0 ? '' : countdown;
         countdownNumberEl.textContent = countdown;
     }, 1000);
+
+
     setTimeout(function() {
         clearInterval(interval);
-    }, time * 1000)
+    }, countdown * 1000)
 }
 
 function endRewardTimer() {
-    AdHelper.removeClass(rewardTimer, 'open')
+    AdHelper.removeClass(countdownContainer, 'open')
     AdHelper.addClass(countdownContainer, 'pulse')
+    countdownNumberEl.textContent = '';
 }

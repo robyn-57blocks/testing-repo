@@ -123,35 +123,90 @@ body > * {
     display: block;
     padding: 0.8em 0.8em 0.5em 1.2em;
     right: 0; }
+    body.windows #vungle-header a {
+      padding: 0.25em 0.25em 0.45em 0.45em; }
+      @media all and (min-width: 900px) {
+        body.windows #vungle-header a {
+          padding: 0.5em 0.5em 0.5em 0.5em; } }
     #vungle-header a:active {
       opacity: 0.55; }
   #vungle-header #vungle-ad-close-icon-container span {
     display: none; }
+    body.windows #vungle-header #vungle-ad-close-icon-container span {
+      display: inline-block;
+      opacity: 0;
+      font-family: -apple-system, "Segoe UI", "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      position: absolute;
+      top: 47%;
+      right: 27%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-size: 17.6pt;
+      line-height: 17.6pt;
+      transition: opacity .5s .2s ease-in-out; }
+      @media all and (min-width: 900px) {
+        body.windows #vungle-header #vungle-ad-close-icon-container span {
+          font-size: 21pt;
+          line-height: 22pt;
+          top: 47%; } }
 
 #vungle-ad-close-icon-container {
   right: 2.5vh;
   top: 3vh;
   position: absolute;
-  height: 80pt;
-  width: 80pt;
+  height: 20pt;
+  width: 20pt;
   text-align: center;
-  border-radius: 100pt; }
+  border-radius: 25pt; }
+  body.windows #vungle-ad-close-icon-container {
+    border-radius: 0;
+    width: 32pt;
+    height: 28pt; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-close-icon-container {
+        width: 40pt;
+        height: 35pt; } }
 
 #vungle-ad-timer-countdown {
   color: white;
   display: inline-block;
-  line-height: 80pt;
+  line-height: 20pt;
   float: left;
   margin-left: 50%;
   transform: translateX(-50%);
-  font-size: 34pt; }
+  font-size: 9.5pt;
+  font-family: -apple-system, "Segoe UI", "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center; }
+  body.windows #vungle-ad-timer-countdown {
+    font-size: 13.6pt;
+    width: 32pt;
+    line-height: 28pt; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-timer-countdown {
+        font-size: 17pt;
+        width: 40pt;
+        line-height: 35pt; } }
 
 #vungle-ad-close-icon-container.rewarded #vungle-ad-timer-countdown {
   margin-left: 50%;
-  transition: margin-left .5s ease-in-out; }
+  transition: margin-left .5s ease-in-out, border .5s .2s ease-in-out; }
+  body.windows #vungle-ad-close-icon-container.rewarded #vungle-ad-timer-countdown {
+    border-right: 0px solid rgba(255, 255, 255, 0); }
 
-#vungle-ad-close-icon-container.rewarded #vungle-ad-reward-timer.open #vungle-ad-timer-countdown {
-  margin-left: 25%; }
+body.windows #vungle-ad-close-icon-container.rewarded.open #vungle-ad-timer-countdown {
+  border-right: 0.8px solid rgba(255, 255, 255, 0.3); }
+  @media all and (min-width: 900px) {
+    body.windows #vungle-ad-close-icon-container.rewarded.open #vungle-ad-timer-countdown {
+      border-right: 1px solid rgba(255, 255, 255, 0.3); } }
+
+#vungle-ad-close-icon-container.rewarded.open #vungle-ad-reward-timer #vungle-ad-timer-countdown {
+  margin-left: 30%; }
+  body.windows #vungle-ad-close-icon-container.rewarded.open #vungle-ad-reward-timer #vungle-ad-timer-countdown {
+    margin-left: 16.8pt; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-close-icon-container.rewarded.open #vungle-ad-reward-timer #vungle-ad-timer-countdown {
+        margin-left: 21pt; } }
 
 #vungle-ad-reward-timer {
   position: absolute;
@@ -160,16 +215,23 @@ body > * {
   height: 100%;
   top: 0;
   right: 0;
-  border-radius: 100pt;
+  border-radius: 25pt;
   z-index: -1;
   transition: width .5s ease-in-out, box-shadow .5s ease-in-out, background .5s ease-in-out; }
+  body.windows #vungle-ad-reward-timer {
+    border-radius: 0; }
 
-#vungle-ad-reward-timer.open {
+body.windows #vungle-ad-close-icon-container.fill:not(.open) #vungle-ad-reward-timer {
+  width: 245%; }
+
+#vungle-ad-close-icon-container.open #vungle-ad-reward-timer {
   background: rgba(50, 50, 50, 0.7);
-  width: 200%;
-  -webkit-box-shadow: inset 0pt 0pt 0pt 1pt rgba(255, 255, 255, 0.5);
-  -moz-box-shadow: inset 0pt 0pt 0pt 1pt rgba(255, 255, 255, 0.5);
-  box-shadow: inset 0pt 0pt 0pt 1pt rgba(255, 255, 255, 0.5); }
+  width: 43.5pt; }
+  body.windows #vungle-ad-close-icon-container.open #vungle-ad-reward-timer {
+    width: 112pt; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-close-icon-container.open #vungle-ad-reward-timer {
+        width: 140pt; } }
 
 #vungle-ad-timer-svg-background {
   width: 100%;
@@ -178,12 +240,14 @@ body > * {
   top: 0;
   right: 0;
   transform: rotateY(-180deg) rotateZ(-90deg); }
+  body.windows #vungle-ad-timer-svg-background {
+    display: none; }
 
 #vungle-ad-timer-svg-background.animation circle {
-  stroke-dasharray: 226pt;
-  stroke-dashoffset: 226pt;
+  stroke-dasharray: 56.5pt;
+  stroke-dashoffset: 56.5pt;
   stroke-linecap: round;
-  stroke-width: 4pt;
+  stroke-width: 1pt;
   stroke: white;
   fill: none; }
 
@@ -198,12 +262,12 @@ body > * {
   transition: box-shadow .7s ease-in-out; }
 
 #vungle-ad-close-icon-container.fill .background {
-  -webkit-box-shadow: inset 0pt 0pt 0pt 108pt white;
-  -moz-box-shadow: inset 0pt 0pt 0pt 108pt white;
-  box-shadow: inset 0pt 0pt 0pt 108pt white; }
+  -webkit-box-shadow: inset 0pt 0pt 0pt 27pt white;
+  -moz-box-shadow: inset 0pt 0pt 0pt 27pt white;
+  box-shadow: inset 0pt 0pt 0pt 27pt white; }
 
 #vungle-ad-timer-svg-background.background circle {
-  stroke-width: 4pt;
+  stroke-width: 1pt;
   stroke: rgba(255, 255, 255, 0.5);
   fill: rgba(255, 255, 255, 0.2);
   box-shadow: inset 0 0 10pt #fff;
@@ -211,6 +275,9 @@ body > * {
 
 #vungle-ad-close-icon-container.fill #vungle-ad-timer-svg-background.background circle {
   fill: white; }
+
+body.windows #vungle-ad-close-icon-container.fill span {
+  opacity: 1 !important; }
 
 #vungle-ad-close-icon-container.pulse {
   animation: expand-contract .4s .4s linear; }
@@ -220,14 +287,38 @@ body > * {
   height: 100%;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   transition: .25s .1s ease-in-out;
   opacity: 0; }
+  body.windows #vungle-ad-close-icon {
+    transition: opacity .5s .2s ease-in-out;
+    fill: #fff;
+    width: 13.6pt; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-close-icon {
+        width: 17pt; } }
+
+body.windows .open #vungle-ad-close-icon, body.windows
+.fill #vungle-ad-close-icon {
+  left: -32.8pt; }
+  @media all and (min-width: 900px) {
+    body.windows .open #vungle-ad-close-icon, body.windows
+    .fill #vungle-ad-close-icon {
+      left: -41pt; } }
+
+.fill #vungle-ad-close-icon {
+  opacity: 1; }
 
 #vungle-ad-close-icon-container.rewarded #vungle-ad-close-icon {
   opacity: 0; }
+  body.windows #vungle-ad-close-icon-container.rewarded #vungle-ad-close-icon {
+    padding-left: 3.2px; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-close-icon-container.rewarded #vungle-ad-close-icon {
+        padding-left: 4px; } }
 
-#vungle-ad-close-icon-container.fill .close {
+#vungle-ad-close-icon-container.fill #vungle-ad-close-icon {
   opacity: 1; }
 
 @keyframes expand-contract {
@@ -240,7 +331,7 @@ body > * {
 
 @keyframes countdown {
   from {
-    stroke-dashoffset: 226pt; }
+    stroke-dashoffset: 56.5pt; }
   to {
     stroke-dashoffset: 0pt; } }
 
@@ -1439,35 +1530,90 @@ table {
     display: block;
     padding: 0.8em 0.8em 0.5em 1.2em;
     right: 0; }
+    body.windows #vungle-header a {
+      padding: 0.25em 0.25em 0.45em 0.45em; }
+      @media all and (min-width: 900px) {
+        body.windows #vungle-header a {
+          padding: 0.5em 0.5em 0.5em 0.5em; } }
     #vungle-header a:active {
       opacity: 0.55; }
   #vungle-header #vungle-ad-close-icon-container span {
     display: none; }
+    body.windows #vungle-header #vungle-ad-close-icon-container span {
+      display: inline-block;
+      opacity: 0;
+      font-family: -apple-system, "Segoe UI", "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      position: absolute;
+      top: 47%;
+      right: 27%;
+      transform: translateY(-50%);
+      color: #fff;
+      font-size: 17.6pt;
+      line-height: 17.6pt;
+      transition: opacity .5s .2s ease-in-out; }
+      @media all and (min-width: 900px) {
+        body.windows #vungle-header #vungle-ad-close-icon-container span {
+          font-size: 21pt;
+          line-height: 22pt;
+          top: 47%; } }
 
 #vungle-ad-close-icon-container {
   right: 2.5vh;
   top: 3vh;
   position: absolute;
-  height: 80pt;
-  width: 80pt;
+  height: 20pt;
+  width: 20pt;
   text-align: center;
-  border-radius: 100pt; }
+  border-radius: 25pt; }
+  body.windows #vungle-ad-close-icon-container {
+    border-radius: 0;
+    width: 32pt;
+    height: 28pt; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-close-icon-container {
+        width: 40pt;
+        height: 35pt; } }
 
 #vungle-ad-timer-countdown {
   color: white;
   display: inline-block;
-  line-height: 80pt;
+  line-height: 20pt;
   float: left;
   margin-left: 50%;
   transform: translateX(-50%);
-  font-size: 34pt; }
+  font-size: 9.5pt;
+  font-family: -apple-system, "Segoe UI", "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center; }
+  body.windows #vungle-ad-timer-countdown {
+    font-size: 13.6pt;
+    width: 32pt;
+    line-height: 28pt; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-timer-countdown {
+        font-size: 17pt;
+        width: 40pt;
+        line-height: 35pt; } }
 
 #vungle-ad-close-icon-container.rewarded #vungle-ad-timer-countdown {
   margin-left: 50%;
-  transition: margin-left .5s ease-in-out; }
+  transition: margin-left .5s ease-in-out, border .5s .2s ease-in-out; }
+  body.windows #vungle-ad-close-icon-container.rewarded #vungle-ad-timer-countdown {
+    border-right: 0px solid rgba(255, 255, 255, 0); }
 
-#vungle-ad-close-icon-container.rewarded #vungle-ad-reward-timer.open #vungle-ad-timer-countdown {
-  margin-left: 25%; }
+body.windows #vungle-ad-close-icon-container.rewarded.open #vungle-ad-timer-countdown {
+  border-right: 0.8px solid rgba(255, 255, 255, 0.3); }
+  @media all and (min-width: 900px) {
+    body.windows #vungle-ad-close-icon-container.rewarded.open #vungle-ad-timer-countdown {
+      border-right: 1px solid rgba(255, 255, 255, 0.3); } }
+
+#vungle-ad-close-icon-container.rewarded.open #vungle-ad-reward-timer #vungle-ad-timer-countdown {
+  margin-left: 30%; }
+  body.windows #vungle-ad-close-icon-container.rewarded.open #vungle-ad-reward-timer #vungle-ad-timer-countdown {
+    margin-left: 16.8pt; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-close-icon-container.rewarded.open #vungle-ad-reward-timer #vungle-ad-timer-countdown {
+        margin-left: 21pt; } }
 
 #vungle-ad-reward-timer {
   position: absolute;
@@ -1476,16 +1622,23 @@ table {
   height: 100%;
   top: 0;
   right: 0;
-  border-radius: 100pt;
+  border-radius: 25pt;
   z-index: -1;
   transition: width .5s ease-in-out, box-shadow .5s ease-in-out, background .5s ease-in-out; }
+  body.windows #vungle-ad-reward-timer {
+    border-radius: 0; }
 
-#vungle-ad-reward-timer.open {
+body.windows #vungle-ad-close-icon-container.fill:not(.open) #vungle-ad-reward-timer {
+  width: 245%; }
+
+#vungle-ad-close-icon-container.open #vungle-ad-reward-timer {
   background: rgba(50, 50, 50, 0.7);
-  width: 200%;
-  -webkit-box-shadow: inset 0pt 0pt 0pt 1pt rgba(255, 255, 255, 0.5);
-  -moz-box-shadow: inset 0pt 0pt 0pt 1pt rgba(255, 255, 255, 0.5);
-  box-shadow: inset 0pt 0pt 0pt 1pt rgba(255, 255, 255, 0.5); }
+  width: 43.5pt; }
+  body.windows #vungle-ad-close-icon-container.open #vungle-ad-reward-timer {
+    width: 112pt; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-close-icon-container.open #vungle-ad-reward-timer {
+        width: 140pt; } }
 
 #vungle-ad-timer-svg-background {
   width: 100%;
@@ -1494,12 +1647,14 @@ table {
   top: 0;
   right: 0;
   transform: rotateY(-180deg) rotateZ(-90deg); }
+  body.windows #vungle-ad-timer-svg-background {
+    display: none; }
 
 #vungle-ad-timer-svg-background.animation circle {
-  stroke-dasharray: 226pt;
-  stroke-dashoffset: 226pt;
+  stroke-dasharray: 56.5pt;
+  stroke-dashoffset: 56.5pt;
   stroke-linecap: round;
-  stroke-width: 4pt;
+  stroke-width: 1pt;
   stroke: white;
   fill: none; }
 
@@ -1514,12 +1669,12 @@ table {
   transition: box-shadow .7s ease-in-out; }
 
 #vungle-ad-close-icon-container.fill .background {
-  -webkit-box-shadow: inset 0pt 0pt 0pt 108pt white;
-  -moz-box-shadow: inset 0pt 0pt 0pt 108pt white;
-  box-shadow: inset 0pt 0pt 0pt 108pt white; }
+  -webkit-box-shadow: inset 0pt 0pt 0pt 27pt white;
+  -moz-box-shadow: inset 0pt 0pt 0pt 27pt white;
+  box-shadow: inset 0pt 0pt 0pt 27pt white; }
 
 #vungle-ad-timer-svg-background.background circle {
-  stroke-width: 4pt;
+  stroke-width: 1pt;
   stroke: rgba(255, 255, 255, 0.5);
   fill: rgba(255, 255, 255, 0.2);
   box-shadow: inset 0 0 10pt #fff;
@@ -1527,6 +1682,9 @@ table {
 
 #vungle-ad-close-icon-container.fill #vungle-ad-timer-svg-background.background circle {
   fill: white; }
+
+body.windows #vungle-ad-close-icon-container.fill span {
+  opacity: 1 !important; }
 
 #vungle-ad-close-icon-container.pulse {
   animation: expand-contract .4s .4s linear; }
@@ -1536,14 +1694,38 @@ table {
   height: 100%;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   transition: .25s .1s ease-in-out;
   opacity: 0; }
+  body.windows #vungle-ad-close-icon {
+    transition: opacity .5s .2s ease-in-out;
+    fill: #fff;
+    width: 13.6pt; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-close-icon {
+        width: 17pt; } }
+
+body.windows .open #vungle-ad-close-icon, body.windows
+.fill #vungle-ad-close-icon {
+  left: -32.8pt; }
+  @media all and (min-width: 900px) {
+    body.windows .open #vungle-ad-close-icon, body.windows
+    .fill #vungle-ad-close-icon {
+      left: -41pt; } }
+
+.fill #vungle-ad-close-icon {
+  opacity: 1; }
 
 #vungle-ad-close-icon-container.rewarded #vungle-ad-close-icon {
   opacity: 0; }
+  body.windows #vungle-ad-close-icon-container.rewarded #vungle-ad-close-icon {
+    padding-left: 3.2px; }
+    @media all and (min-width: 900px) {
+      body.windows #vungle-ad-close-icon-container.rewarded #vungle-ad-close-icon {
+        padding-left: 4px; } }
 
-#vungle-ad-close-icon-container.fill .close {
+#vungle-ad-close-icon-container.fill #vungle-ad-close-icon {
   opacity: 1; }
 
 @keyframes expand-contract {
@@ -1556,7 +1738,7 @@ table {
 
 @keyframes countdown {
   from {
-    stroke-dashoffset: 226pt; }
+    stroke-dashoffset: 56.5pt; }
   to {
     stroke-dashoffset: 0pt; } }
 
