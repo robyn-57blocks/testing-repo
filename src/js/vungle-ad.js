@@ -39,10 +39,9 @@ export default {
             "CREATIVE_VIEW_TYPE": "endcard",
             "INCENTIVIZED_CONTINUE_TEXT": "Continue",
             "VIDEO_PROGRESS_BAR": "true",
-            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "10",
-            "CLOSE_BUTTON_DELAY_SECONDS": "5",
-            "INCENTIVIZED_TITLE_TEXT": "Close this ad?",
-            "ENDCARD_ONLY_DURATION_SECONDS": "10"
+            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "9999",
+            "CLOSE_BUTTON_DELAY_SECONDS": "10",
+            "INCENTIVIZED_TITLE_TEXT": "Close this ad?"
         }`);
 
         window.vungle = {

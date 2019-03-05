@@ -198,7 +198,7 @@ var adcore = {
 
             //ENDCARD ONLY TEMPLATE
             if (delaySeconds == 0) {
-                revealCloseButton(0,rewardedAdDuration);
+                revealCloseButton(0, rewardedAdDuration);
                 successfulViewEventTimer(rewardedAdDuration);
                 console.log('SUCCESSFUL VIEW - ' + rewardedAdDuration);
             } else if (delaySeconds == 9999) {
@@ -206,13 +206,17 @@ var adcore = {
                 successfulViewEventTimer(getMaxAdDuration());
                 console.log('SUCCESSFUL VIEW - ' + getMaxAdDuration());
             } else {
-                revealCloseButton(delaySeconds,rewardedAdDuration);
+                if (rewardedAdDuration >= delaySeconds) {
+                    revealCloseButton(delaySeconds, rewardedAdDuration);
+                } else {
+                    revealCloseButton(rewardedAdDuration, rewardedAdDuration);
+                }
                 successfulViewEventTimer(rewardedAdDuration);
                 console.log('SUCCESSFUL VIEW - ' + rewardedAdDuration);
             }
 
             //INLINE VIDEO TEMPLATE
-            
+
             //FULL SCREEN VIDEO TEMPLATE    
         }
 
@@ -392,7 +396,7 @@ var adcore = {
             console.log('TIMER CLOSE ICON - begin');
             var closeButton = document.getElementById('vungle-close');
 
-            if(typeof rewardedAdDuration === 'undefined')
+            if (typeof rewardedAdDuration === 'undefined')
                 rewardedAdDuration = showCloseButtonTime;
 
             AdClose.initTimer({

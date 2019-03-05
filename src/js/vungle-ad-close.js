@@ -13,7 +13,7 @@ var interval,countdown
 
 function endCloseTimer(rewarded) {
     AdHelper.addClass(countdownContainer, 'fill')
-    if (rewarded)
+    if (rewarded && countdownNumberEl.textContent !== '' )
         AdHelper.addClass(countdownContainer, 'open')
 }
 
