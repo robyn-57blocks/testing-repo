@@ -11,9 +11,9 @@ var countdownNumberEl = document.getElementById('vungle-ad-timer-countdown');
 var rewardTimer = document.getElementById('vungle-ad-reward-timer');
 var interval,countdown
 
-function endCloseTimer(rewarded, showCloseOnStart) {
+function endCloseTimer(rewarded,rewardedAdDuration, showCloseOnStart) {
     AdHelper.addClass(countdownContainer, 'fill')
-    if (rewarded && countdownNumberEl.textContent !== '' && !showCloseOnStart )
+    if (rewarded && countdownNumberEl.textContent !== '' && (!showCloseOnStart || rewardedAdDuration > 0))
         AdHelper.addClass(countdownContainer, 'open')
 }
 

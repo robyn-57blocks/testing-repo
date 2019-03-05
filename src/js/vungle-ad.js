@@ -39,14 +39,14 @@ export default {
             "CREATIVE_VIEW_TYPE": "endcard",
             "INCENTIVIZED_CONTINUE_TEXT": "Continue",
             "VIDEO_PROGRESS_BAR": "true",
-            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "10",
-            "CLOSE_BUTTON_DELAY_SECONDS": "5",
+            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "50",
+            "CLOSE_BUTTON_DELAY_SECONDS": "50",
             "INCENTIVIZED_TITLE_TEXT": "Close this ad?"
         }`);
 
         window.vungle = {
             mraidExt: {
-                getIncentivized: function() { return true; },
+                getIncentivized: function() { return false; },
                 useCustomPrivacy: function() { return true; },
                 getOS: function() { return "ios"; }
             },
