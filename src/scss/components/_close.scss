@@ -1,10 +1,10 @@
-$ios-android-modifier:.5;
+$ios-android-modifier:.045;
 $windows-modifier:.8;
 $windows-large-modifier:1;
 
-$closeHeight:40pt;
+$closeHeight:40em;
 
-$windowsCloseHeight:35pt;
+$windowsCloseHeight:35em;
 
 #vungle-close {
     opacity: 1;
@@ -19,14 +19,16 @@ $windowsCloseHeight:35pt;
 // -- Vungle header close button
 #vungle-header {
 
-    #{$windows}{
-        opacity:1;
+    #{$windows} {
+        opacity: 1;
     }
-    #{$android}{
-        opacity:1;
+
+    #{$android} {
+        opacity: 1;
     }
-    #{$ios}{
-        opacity:1;
+
+    #{$ios} {
+        opacity: 1;
     }
 
     opacity:0;
@@ -36,7 +38,7 @@ $windowsCloseHeight:35pt;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
     z-index: 999998;
- 
+
     a {
         display: block;
         padding: 0.8em 0.8em 0.5em 1.2em;
@@ -98,13 +100,13 @@ $windowsCloseHeight:35pt;
                 right: 27%;
                 transform: translateY(-50%);
                 color: #fff;
-                font-size: modifySize(22pt, $windows-modifier);
-                line-height: modifySize(22pt, $windows-modifier);
+                font-size: modifySize(22em, $windows-modifier);
+                line-height: modifySize(22em, $windows-modifier);
                 transition: opacity .5s .2s ease-in-out;
 
                 @media all and (min-width: $windows-large-screen) {
-                    font-size: modifySize(21pt, $windows-large-modifier);
-                    line-height: modifySize(22pt, $windows-large-modifier);
+                    font-size: modifySize(21em, $windows-large-modifier);
+                    line-height: modifySize(22em, $windows-large-modifier);
                     top: 47%;
                 }
             }
@@ -134,22 +136,22 @@ $windowsCloseHeight:35pt;
 }
 
 #vungle-ad-close-icon-container {
-    right: 2.5vh;
-    top: 3vh;
+    right: 1.6em;
+    top: 1.6em;
     position: absolute;
     height: modifySize($closeHeight, $ios-android-modifier);
     width: modifySize($closeHeight, $ios-android-modifier);
     text-align: center;
-    border-radius: modifySize(50pt, $ios-android-modifier);
+    border-radius: modifySize(50em, $ios-android-modifier);
 
 
     #{$windows} {
         border-radius: 0;
-        width: modifySize(40pt, $windows-modifier);
+        width: modifySize(40em, $windows-modifier);
         height: modifySize($windowsCloseHeight, $windows-modifier);
 
         @media all and (min-width: $windows-large-screen) {
-            width: modifySize(40pt, $windows-large-modifier);
+            width: modifySize(40em, $windows-large-modifier);
             height: modifySize($windowsCloseHeight, $windows-large-modifier);
         }
     }
@@ -158,28 +160,32 @@ $windowsCloseHeight:35pt;
 #vungle-ad-timer-countdown {
     color: rgba(255, 255, 255, 1);
     display: inline-block;
-    line-height: modifySize(40pt, $ios-android-modifier);
+    // line-height: modifySize(20em, $ios-android-modifier);
+    line-height: auto;
     float: left;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    font-size: modifySize(19pt, $ios-android-modifier);
+    margin-left: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: modifySize(19em, $ios-android-modifier);
     font-family: $vungle-typography;
     text-align: center;
 
     #{$ios} {
-        line-height: modifySize(42pt, $ios-android-modifier);
+        left: 52%;
     }
 
     #{$windows} {
-        font-size: modifySize(17pt, $windows-modifier);
+        font-size: modifySize(17em, $windows-modifier);
         width: modifySize($closeHeight, $windows-modifier);
-        line-height: modifySize(35pt, $windows-modifier);
+        line-height: modifySize(35em, $windows-modifier);
 
 
         @media all and (min-width: $windows-large-screen) {
-            font-size: modifySize(17pt, $windows-large-modifier);
+            font-size: modifySize(17em, $windows-large-modifier);
             width: modifySize($closeHeight, $windows-large-modifier);
-            line-height: modifySize(35pt, $windows-large-modifier);
+            line-height: modifySize(35em, $windows-large-modifier);
         }
 
 
@@ -188,7 +194,7 @@ $windowsCloseHeight:35pt;
 
 #vungle-ad-close-icon-container.rewarded #vungle-ad-timer-countdown {
 
-    margin-left: 50%;
+    // margin-left: 50%;
     transition: margin-left .5s ease-in-out, border .5s .2s ease-in-out;
 
     #{$windows} {
@@ -211,10 +217,10 @@ $windowsCloseHeight:35pt;
 
 
     #{$windows} {
-        margin-left: modifySize(21pt, $windows-modifier);
+        margin-left: modifySize(21em, $windows-modifier);
 
         @media all and (min-width: $windows-large-screen) {
-            margin-left: modifySize(21pt, $windows-large-modifier);
+            margin-left: modifySize(21em, $windows-large-modifier);
         }
     }
 
@@ -228,7 +234,7 @@ $windowsCloseHeight:35pt;
     height: 100%;
     top: 0;
     right: 0;
-    border-radius: modifySize(50pt, $ios-android-modifier);
+    border-radius: modifySize(50em, $ios-android-modifier);
     z-index: -1;
     transition: width .5s ease-in-out, box-shadow .5s ease-in-out, background .5s ease-in-out;
 
@@ -247,13 +253,13 @@ $windowsCloseHeight:35pt;
 
 #vungle-ad-close-icon-container.open #vungle-ad-reward-timer {
     background: rgba(50, 50, 50, 0.7);
-    width: modifySize(87pt, $ios-android-modifier);
+    width: modifySize(87em, $ios-android-modifier);
 
     #{$windows} {
-        width: modifySize(140pt, $windows-modifier);
+        width: modifySize(140em, $windows-modifier);
 
         @media all and (min-width: $windows-large-screen) {
-            width: modifySize(140pt, $windows-large-modifier);
+            width: modifySize(140em, $windows-large-modifier);
         }
     }
 }
@@ -271,16 +277,16 @@ $windowsCloseHeight:35pt;
     position: absolute;
     top: 0;
     right: 0;
-    // width: modifySize(40pt,$ios-android-modifier);
-    // height: modifySize(40pt,$ios-android-modifier);
+    // width: modifySize(40em,$ios-android-modifier);
+    // height: modifySize(40em,$ios-android-modifier);
     transform: rotateY(-180deg) rotateZ(-90deg);
 }
 
 #vungle-ad-timer-svg-background.animation circle {
-    stroke-dasharray: modifySize(113pt, $ios-android-modifier);
-    stroke-dashoffset: modifySize(113pt, $ios-android-modifier);
+    stroke-dasharray: modifySize(113em, $ios-android-modifier);
+    stroke-dashoffset: modifySize(113em, $ios-android-modifier);
     stroke-linecap: round;
-    stroke-width: modifySize(2pt, $ios-android-modifier);
+    stroke-width: modifySize(2em, $ios-android-modifier);
     stroke: white;
     fill: none;
 }
@@ -291,23 +297,31 @@ $windowsCloseHeight:35pt;
 
 #vungle-ad-timer-svg-background.background {
     border-radius: 50%;
-    -webkit-box-shadow: inset 0pt 0pt 0pt 0pt rgba(255, 255, 255, 1);
-    -moz-box-shadow: inset 0pt 0pt 0pt 0pt rgba(255, 255, 255, 1);
-    box-shadow: inset 0pt 0pt 0pt 0pt rgba(255, 255, 255, 1);
+    -webkit-box-shadow: inset 0em 0em 0em 0em rgba(255, 255, 255, 1);
+    -moz-box-shadow: inset 0em 0em 0em 0em rgba(255, 255, 255, 1);
+    box-shadow: inset 0em 0em 0em 0em rgba(255, 255, 255, 1);
     transition: box-shadow .7s ease-in-out;
 }
 
 #vungle-ad-close-icon-container.fill .background {
-    -webkit-box-shadow: inset 0pt 0pt 0pt modifySize(54pt, $ios-android-modifier) rgba(255, 255, 255, 1);
-    -moz-box-shadow: inset 0pt 0pt 0pt modifySize(54pt, $ios-android-modifier) rgba(255, 255, 255, 1);
-    box-shadow: inset 0pt 0pt 0pt modifySize(54pt, $ios-android-modifier) rgba(255, 255, 255, 1);
+    -webkit-box-shadow: inset 0em 0em 0em modifySize(54em, $ios-android-modifier) rgba(255, 255, 255, 1);
+    -moz-box-shadow: inset 0em 0em 0em modifySize(54em, $ios-android-modifier) rgba(255, 255, 255, 1);
+    box-shadow: inset 0em 0em 0em modifySize(54em, $ios-android-modifier) rgba(255, 255, 255, 1);
 }
 
 #vungle-ad-timer-svg-background.background circle {
-    stroke-width: modifySize(2pt, $ios-android-modifier);
+    stroke-width: modifySize(2em, $ios-android-modifier);
     stroke: rgba(255, 255, 255, 0.5);
     fill: rgba(255, 255, 255, 0.2);
-    box-shadow: inset 0 0 10pt #fff;
+
+
+
+    #{$android} {
+        stroke-width: modifySize(.5em, $ios-android-modifier);
+        stroke: rgba(255, 255, 255, 0.5);
+    }
+
+    box-shadow: inset 0 0 10em #fff;
     transition: fill .25s .1s ease-in-out;
 }
 
@@ -337,13 +351,19 @@ $windowsCloseHeight:35pt;
     transition: .25s .1s ease-in-out;
     opacity: 0;
 
+
+    #{$ios} {
+        left: 52%;
+        top: 52%;
+    }
+
     #{$windows} {
         transition: opacity .5s .2s ease-in-out;
         fill: #fff;
-        width: modifySize(17pt, $windows-modifier);
+        width: modifySize(17em, $windows-modifier);
 
         @media all and (min-width: $windows-large-screen) {
-            width: modifySize(17pt, $windows-large-modifier);
+            width: modifySize(17em, $windows-large-modifier);
         }
     }
 }
@@ -351,10 +371,10 @@ $windowsCloseHeight:35pt;
 .open #vungle-ad-close-icon,
 .fill #vungle-ad-close-icon {
     #{$windows} {
-        left: modifySize(-41pt, $windows-modifier);
+        left: modifySize(-41em, $windows-modifier);
 
         @media all and (min-width: $windows-large-screen) {
-            left: modifySize(-41pt, $windows-large-modifier);
+            left: modifySize(-41em, $windows-large-modifier);
         }
     }
 }
@@ -396,10 +416,10 @@ $windowsCloseHeight:35pt;
 
 @keyframes countdown {
     from {
-        stroke-dashoffset: modifySize(113pt, $ios-android-modifier);
+        stroke-dashoffset: modifySize(113em, $ios-android-modifier);
     }
 
     to {
-        stroke-dashoffset: modifySize(0pt, $ios-android-modifier);
+        stroke-dashoffset: modifySize(0em, $ios-android-modifier);
     }
 }

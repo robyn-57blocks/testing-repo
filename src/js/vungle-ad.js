@@ -39,7 +39,7 @@ export default {
             "CREATIVE_VIEW_TYPE": "endcard",
             "INCENTIVIZED_CONTINUE_TEXT": "Continue",
             "VIDEO_PROGRESS_BAR": "true",
-            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "9999",
+            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "20",
             "CLOSE_BUTTON_DELAY_SECONDS": "10",
             "INCENTIVIZED_TITLE_TEXT": "Close this ad?"
         }`);
@@ -57,7 +57,7 @@ export default {
                 notifySuccessfulViewAd: function() { console.log('TIMER SUCCESSFUL VIEW - notifySuccessfulViewAd event sent'); return true }
             },
             mraid: {
-                getConsentRequired: function() { return true; },
+                getConsentRequired: function() { return false; },
                 getConsentTitleText: function() { return "Ad-Interaction Data Collection"; },
                 getConsentBodyText: function() { return "With permission, Vungle collects your ad-interaction data to serve relevant ads to you. Note: you’ll see ads independent of your selection, but they may not be as relevant. Do you consent to data tracking for more relevant ads?"; },
                 getConsentAcceptButtonText: function() { return "I consent"; },

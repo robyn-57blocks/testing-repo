@@ -411,7 +411,7 @@ var adcore = {
                 console.log('TIMER CLOSE ICON - complete');
                 closeButton.className = '';
 
-                AdClose.endCloseTimer(VungleAd.isAdIncentivised());
+                AdClose.endCloseTimer(VungleAd.isAdIncentivised(), showCloseButtonTimeMilliSeconds === 0);
 
                 closeButton.onclick = function() {
 
