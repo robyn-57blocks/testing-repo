@@ -166,6 +166,10 @@ $windowsCloseHeight:35pt;
     font-family: $vungle-typography;
     text-align: center;
 
+    #{$ios} {
+        line-height: modifySize(42pt, $ios-android-modifier);
+    }
+
     #{$windows} {
         font-size: modifySize(17pt, $windows-modifier);
         width: modifySize($closeHeight, $windows-modifier);
