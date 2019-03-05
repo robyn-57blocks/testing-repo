@@ -173,6 +173,7 @@ $windowsCloseHeight:35em;
     text-align: center;
 
     #{$ios} {
+        top: 52%;
         left: 52%;
     }
 
@@ -213,7 +214,7 @@ $windowsCloseHeight:35em;
 }
 
 #vungle-ad-close-icon-container.rewarded.open #vungle-ad-reward-timer #vungle-ad-timer-countdown {
-    margin-left: 30%;
+    left: 30%;
 
 
     #{$windows} {
