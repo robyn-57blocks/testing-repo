@@ -1,6 +1,6 @@
-$ios-android-modifier:.045;
-$windows-modifier:.8;
-$windows-large-modifier:1;
+$ios-android-modifier:.040;
+$windows-modifier:.05;
+$windows-large-modifier:.07;
 
 $closeHeight:40em;
 
@@ -136,8 +136,8 @@ $windowsCloseHeight:35em;
 }
 
 #vungle-ad-close-icon-container {
-    right: 1.6em;
-    top: 1.6em;
+    right: 1em;
+    top: 1em;
     position: absolute;
     height: modifySize($closeHeight, $ios-android-modifier);
     width: modifySize($closeHeight, $ios-android-modifier);
