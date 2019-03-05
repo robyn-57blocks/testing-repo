@@ -3,6 +3,7 @@
 import { default as AdHelper } from './vungle-ad-helpers.js';
 import { default as MRAIDHelper } from './vungle-ad-mraid-helper.js';
 import { default as AdPrivacy } from './vungle-ad-privacy.js';
+import { default as AdClose } from './vungle-ad-close.js';
 import { default as VungleAd } from './vungle-ad.js';
 
 var adcore = {
@@ -88,7 +89,7 @@ var adcore = {
 
         function getDynamicElement() {
             if (!dynamicElement) {
-                    dynamicElement = document.querySelector("#dynamic");
+                dynamicElement = document.querySelector("#dynamic");
             }
             return dynamicElement;
         }
@@ -182,37 +183,41 @@ var adcore = {
         }
 
         function closeButtonTimer() {
-            var closeButton = document.getElementById('vungle-close');
+            // var closeButton = document.getElementById('vungle-close');
             var delaySeconds, rewardedAdDuration;
 
             rewardedAdDuration = (80 / 100) * getMaxAdDuration(); //80% of max ad duration
 
             if (VungleAd.isAdIncentivised()) {
                 delaySeconds = parseFloat(VungleAd.tokens.INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS);
-                console.log('INCENTIVISED - close icon delay:'+delaySeconds);
+                console.log('INCENTIVISED - close icon delay:' + delaySeconds);
             } else {
                 delaySeconds = parseFloat(VungleAd.tokens.CLOSE_BUTTON_DELAY_SECONDS);
-                console.log('NON-INCENTIVISED - close icon delay:'+delaySeconds);
+                console.log('NON-INCENTIVISED - close icon delay:' + delaySeconds);
             }
 
             //ENDCARD ONLY TEMPLATE
             if (delaySeconds == 0) {
-                revealCloseButton(0);
+                revealCloseButton(0, rewardedAdDuration);
                 successfulViewEventTimer(rewardedAdDuration);
-                console.log('SUCCESSFUL VIEW - '+rewardedAdDuration);
+                console.log('SUCCESSFUL VIEW - ' + rewardedAdDuration);
             } else if (delaySeconds == 9999) {
                 revealCloseButton(getMaxAdDuration());
                 successfulViewEventTimer(getMaxAdDuration());
-                console.log('SUCCESSFUL VIEW - '+getMaxAdDuration());
+                console.log('SUCCESSFUL VIEW - ' + getMaxAdDuration());
             } else {
-                revealCloseButton(delaySeconds);
+                if (rewardedAdDuration >= delaySeconds) {
+                    revealCloseButton(delaySeconds, rewardedAdDuration);
+                } else {
+                    revealCloseButton(rewardedAdDuration, rewardedAdDuration);
+                }
                 successfulViewEventTimer(rewardedAdDuration);
-                console.log('SUCCESSFUL VIEW - '+rewardedAdDuration);
+                console.log('SUCCESSFUL VIEW - ' + rewardedAdDuration);
             }
 
             //INLINE VIDEO TEMPLATE
 
-            //FULL SCREEN VIDEO TEMPLATE
+            //FULL SCREEN VIDEO TEMPLATE    
         }
 
         function successfulViewEventTimer(eventTimer) {
@@ -221,6 +226,8 @@ var adcore = {
 
             setTimeout(function() {
                 achievedReward = true;
+                AdClose.endRewardTimer();
+
                 console.log('TIMER SUCCESSFUL VIEW - complete');
 
                 window.vungle.mraidBridgeExt.notifySuccessfulViewAd();
@@ -385,15 +392,27 @@ var adcore = {
             }
         }
 
-        function revealCloseButton(showCloseButtonTime = 0) {
+        function revealCloseButton(showCloseButtonTime = 0, rewardedAdDuration) {
             console.log('TIMER CLOSE ICON - begin');
             var closeButton = document.getElementById('vungle-close');
 
-            showCloseButtonTime = showCloseButtonTime * 1000;
+            if (typeof rewardedAdDuration === 'undefined')
+                rewardedAdDuration = showCloseButtonTime;
+
+            AdClose.initTimer({
+                time: VungleAd.isAdIncentivised() ? rewardedAdDuration : showCloseButtonTime,
+                rewarded: VungleAd.isAdIncentivised()
+            })
+
+            var showCloseButtonTimeMilliSeconds = showCloseButtonTime * 1000;
+
 
             setTimeout(function() {
                 console.log('TIMER CLOSE ICON - complete');
                 closeButton.className = '';
+
+                AdClose.endCloseTimer(VungleAd.isAdIncentivised(),rewardedAdDuration, showCloseButtonTimeMilliSeconds === 0);
+
                 closeButton.onclick = function() {
 
                     var onClickTimeStamp = new Date();
@@ -410,7 +429,7 @@ var adcore = {
                         vungleMRAID.close();
                     }
                 };
-            }, showCloseButtonTime);
+            }, showCloseButtonTimeMilliSeconds);
         }
 
         function revealPrivacyButton() {
