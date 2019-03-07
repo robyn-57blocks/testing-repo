@@ -39,14 +39,15 @@ export default {
             "CREATIVE_VIEW_TYPE": "endcard",
             "INCENTIVIZED_CONTINUE_TEXT": "Continue",
             "VIDEO_PROGRESS_BAR": "true",
-            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "50",
-            "CLOSE_BUTTON_DELAY_SECONDS": "50",
-            "INCENTIVIZED_TITLE_TEXT": "Close this ad?"
+            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "9999",
+            "CLOSE_BUTTON_DELAY_SECONDS": "5",
+            "INCENTIVIZED_TITLE_TEXT": "Close this ad?",
+            "ENDCARD_ONLY_DURATION_SECONDS":"5"
         }`);
 
         window.vungle = {
             mraidExt: {
-                getIncentivized: function() { return false; },
+                getIncentivized: function() { return true; },
                 useCustomPrivacy: function() { return true; },
                 getOS: function() { return "ios"; }
             },
