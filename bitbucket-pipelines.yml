@@ -22,7 +22,7 @@ pipelines:
 
              # - npm i gulp-cli -g
              # install node modules
-             # - npm i 
+             - npm i 
              # increment version
              - npm run versioning
              # build dist folder
