@@ -4,14 +4,18 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: node:8.9.4
+definitions:
+  caches:
+    globalnode: /usr/local/lib/node_modules
 
 pipelines:
-  # branches:
-    default:
+  branches:
+    master:
       - step:
-          name: "hello"
+          name: "Setup git and NPM install."
+          caches:
+             - node
           script:
-             - echo 'hello'
              # identity setup for git push
              - git config --global user.name "Vungle Services"
              - git config --global user.email "vungle.services@vungle.com"
@@ -21,16 +25,22 @@ pipelines:
              - npm i gulp-cli -g
              # install node modules
              - npm i 
+      - step:
+          name: "Run versioning."
+          script:             
              # increment version
              - npm run versioning
              # build dist folder
-             # - gulp bundle:prod
+             - gulp bundle:prod
              # Write version to a JSON file in dist
              - npm run create-version-file
              # Get version from package.json
              - declare -x VERSION=$(node -pe "require('./package.json').version")
              # display version 
              - echo $VERSION
+      - step:
+          name: "Commit new version."
+          script:
              # config setup for git push
              - git config --global push.default simple 
              # Commit package.json 
@@ -43,19 +53,22 @@ pipelines:
              - git remote -v
              # push new tagging
              - git push origin --tags
-             # install python
-             # - apt-get update && apt-get install -y python-dev
-             # # download pip 
-             # - curl -O https://bootstrap.pypa.io/get-pip.py
-             # # install pip
-             # - python get-pip.py
-             # # install aws CLI 
-             # - pip install awscli
-             # # copy files to s3 bucket with versioned folder
-             # - aws s3 cp ./dist/ s3://design-framework-core/$VERSION/ --recursive
-             # - aws s3 cp df-dist.zip s3://design-framework-core/$VERSION/ 
-             # # overwrite latest folder with new version
-             # - aws s3 cp ./dist/ s3://design-framework-core/latest/ --recursive
-             # - aws s3 cp df-dist.zip s3://design-framework-core/latest/ 
-             # # Store JSON file in latest to see the current version
-             # - aws s3 cp ./s3/version-info.json s3://design-framework-core/latest/ 
+      - step:
+          name: "Push to S3 bucket."
+          script:
+             install python
+             - apt-get update && apt-get install -y python-dev
+             # download pip 
+             - curl -O https://bootstrap.pypa.io/get-pip.py
+             # install pip
+             - python get-pip.py
+             # install aws CLI 
+             - pip install awscli
+             # copy files to s3 bucket with versioned folder
+             - aws s3 cp ./dist/ s3://design-framework-core/$VERSION/ --recursive
+             - aws s3 cp df-dist.zip s3://design-framework-core/$VERSION/ 
+             # overwrite latest folder with new version
+             - aws s3 cp ./dist/ s3://design-framework-core/latest/ --recursive
+             - aws s3 cp df-dist.zip s3://design-framework-core/latest/ 
+             # Store JSON file in latest to see the current version
+             - aws s3 cp ./s3/version-info.json s3://design-framework-core/latest/ 

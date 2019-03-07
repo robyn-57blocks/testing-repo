@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 const semver = require('semver');
 const git = require('git-last-commit');
 
-const checkedBranch = 'development'
+const checkedBranch = 'master'
 
 getNewVersion();
 
