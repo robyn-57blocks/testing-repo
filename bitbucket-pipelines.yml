@@ -56,7 +56,7 @@ pipelines:
       - step:
           name: "Push to S3 bucket."
           script:
-             install python
+             # install python
              - apt-get update && apt-get install -y python-dev
              # download pip 
              - curl -O https://bootstrap.pypa.io/get-pip.py
