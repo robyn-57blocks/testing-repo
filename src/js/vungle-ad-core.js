@@ -29,7 +29,7 @@ var adcore = {
         var storeViewTypes = ["unknown", "fullscreen"];
         var gdprConsentRequired = false;
 
-        var defaultEndcardOnlyDurationSeconds = 25; //25 seconds
+        var defaultEndcardOnlyDurationSeconds = 30; //30 seconds
         var minimumPercentageContainerSize = 45;
 
         VungleAd.init();
@@ -195,6 +195,7 @@ var adcore = {
                 delaySeconds = parseFloat(VungleAd.tokens.CLOSE_BUTTON_DELAY_SECONDS);
                 console.log('NON-INCENTIVISED - close icon delay:' + delaySeconds);
             }
+
 
             //ENDCARD ONLY TEMPLATE
             if (delaySeconds == 0) {
@@ -411,7 +412,7 @@ var adcore = {
                 console.log('TIMER CLOSE ICON - complete');
                 closeButton.className = '';
 
-                AdClose.endCloseTimer(VungleAd.isAdIncentivised(),rewardedAdDuration, showCloseButtonTimeMilliSeconds === 0);
+                AdClose.endCloseTimer(VungleAd.isAdIncentivised(),rewardedAdDuration === null, showCloseButtonTimeMilliSeconds === 0);
 
                 closeButton.onclick = function() {
 
