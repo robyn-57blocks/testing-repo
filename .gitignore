@@ -13,6 +13,7 @@ node_modules/
 public
 build/
 dist/
+s3/
 
 # Ignore packaged files
 *.sw*

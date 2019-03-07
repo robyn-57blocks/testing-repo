@@ -12,7 +12,7 @@ pipelines:
           name: "hello"
           script:
              - echo 'hello'
-             # identity x setup for git push
+             # identity setup for git push
              # - git config --global user.name "Vungle Services"
              # - git config --global user.email "vungle.services@vungle.com"
              # - git remote -v
@@ -35,7 +35,7 @@ pipelines:
              - declare -x VERSION=$(node -pe "require('./package.json').version")
              # display version 
              - echo $VERSION
-
+             
              # config setup for git push
              # - git config --global push.default simple 
              # Commit package.json 
