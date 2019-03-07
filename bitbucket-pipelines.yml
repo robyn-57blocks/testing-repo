@@ -27,10 +27,10 @@ pipelines:
              - gulp bundle:prod
              # Write version to a JSON file in dist
              # - npm run create-version-file
-             # Get version from package.json
-             # - declare -x VERSION=$(node -pe "require('./package.json').version")
+             Get version from package.json
+             - declare -x VERSION=$(node -pe "require('./package.json').version")
              # display version 
-             # - echo $VERSION
+             - echo $VERSION
              # config setup for git push
              # - git config --global push.default simple 
              # Commit package.json 
