@@ -13,36 +13,36 @@ pipelines:
              # install gettext
              - apt-get update && apt-get install -y gettext
              # identity setup for git push
-             - git config --global user.name "Vungle Services"
-             - git config --global user.email "vungle.services@vungle.com"
-             - git remote -v
-             - git remote show origin
+             # - git config --global user.name "Vungle Services"
+             # - git config --global user.email "vungle.services@vungle.com"
+             # - git remote -v
+             # - git remote show origin
              # install gulp
              - npm i gulp-cli -g
              # install node modules
              - npm i 
              # increment version
-             - npm run versioning
+             # - npm run versioning
              # build dist folder
              - gulp bundle:prod
              # Write version to a JSON file in dist
-             - npm run create-version-file
+             # - npm run create-version-file
              # Get version from package.json
-             - declare -x VERSION=$(node -pe "require('./package.json').version")
+             # - declare -x VERSION=$(node -pe "require('./package.json').version")
              # display version 
-             - echo $VERSION
+             # - echo $VERSION
              # config setup for git push
-             - git config --global push.default simple 
+             # - git config --global push.default simple 
              # Commit package.json 
-             - git add package.json
+             # - git add package.json
              # push Commit with message ,"skip CI" Required to avoid re-running this CI upon git push
-             - git commit -m "bumped to version $VERSION [skip CI]" 
-             - git push origin
+             # - git commit -m "bumped to version $VERSION [skip CI]" 
+             # - git push origin
              # commit will be tagged with version
-             - git tag $VERSION
-             - git remote -v
+             # - git tag $VERSION. 
+             # - git remote -v
              # push new tagging
-             - git push origin --tags
+             # - git push origin --tags
              # install python
              - apt-get update && apt-get install -y python-dev
              # download pip 
