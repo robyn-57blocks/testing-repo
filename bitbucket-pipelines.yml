@@ -43,7 +43,7 @@ pipelines:
              - git commit -m "bumped to version $VERSION [skip CI]" 
              - git push origin
              # commit will be tagged with version
-             - git tag $VERSION. 
+             - git tag $VERSION
              - git remote -v
              # push new tagging
              - git push origin --tags
