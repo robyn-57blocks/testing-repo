@@ -12,7 +12,7 @@ pipelines:
   branches:
     master:
       - step:
-          name: "Setup git and NPM install."
+          name: "Increment version"
           caches:
              - node
           script:
@@ -24,10 +24,7 @@ pipelines:
              # install gulp
              - npm i gulp-cli -g
              # install node modules
-             - npm i 
-      - step:
-          name: "Run versioning."
-          script:             
+             - npm i          
              # increment version
              - npm run versioning
              # build dist folder
@@ -38,9 +35,6 @@ pipelines:
              - declare -x VERSION=$(node -pe "require('./package.json').version")
              # display version 
              - echo $VERSION
-      - step:
-          name: "Commit new version."
-          script:
              # config setup for git push
              - git config --global push.default simple 
              # Commit package.json 
@@ -53,9 +47,6 @@ pipelines:
              - git remote -v
              # push new tagging
              - git push origin --tags
-      - step:
-          name: "Push to S3 bucket."
-          script:
              # install python
              - apt-get update && apt-get install -y python-dev
              # download pip 
