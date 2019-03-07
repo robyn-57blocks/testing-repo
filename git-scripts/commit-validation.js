@@ -1,6 +1,3 @@
-process.exit(0)
-
-
 var fs = require('fs-extra');
 const commitMessage = fs.readFileSync('./.git/COMMIT_EDITMSG', 'utf8');
 const head = fs.readFileSync('./.git/HEAD', 'utf8');
