@@ -27,7 +27,7 @@ pipelines:
              - gulp bundle:prod
              # Write version to a JSON file in dist
              # - npm run create-version-file
-             Get version from package.json
+             # Get version from package.json
              - declare -x VERSION=$(node -pe "require('./package.json').version")
              # display version 
              - echo $VERSION
