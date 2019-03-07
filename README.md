@@ -34,4 +34,4 @@ gulp bundle:prod
 
 
 ## License
-© Vungle. All Rights Reserved.
+© Vungle. All Rights Reserved. 
