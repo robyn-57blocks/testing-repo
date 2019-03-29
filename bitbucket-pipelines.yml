@@ -17,7 +17,7 @@ pipelines:
              - node
           script:
              # update install python
-             - apt-get install python3 
+             - apt-get install python-dev
              # identity setup for git push
              - git config --global user.name "Vungle Services"
              - git config --global user.email "vungle.services@vungle.com"
