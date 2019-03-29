@@ -57,7 +57,7 @@ pipelines:
              - curl -O https://bootstrap.pypa.io/get-pip.py
              # install pip
              - python get-pip.py
-             # install aws CLI 
+             # install aws CLI  
              - pip install awscli
              # copy files to s3 bucket with versioned folder
              - aws s3 cp ./dist/ s3://design-framework-core/$VERSION/ --recursive
