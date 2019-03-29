@@ -3,7 +3,7 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: node:8.9.4
+image: nikolaik/python-nodejs:python3.5-nodejs8
 definitions:
   caches:
     globalnode: /usr/local/lib/node_modules
@@ -16,10 +16,6 @@ pipelines:
           caches:
              - node
           script:
-            # install python
-             - add-apt-repository ppa:deadsnakes/ppa
-             - apt update
-             - apt install python3.4 
              # identity setup for git push
              - git config --global user.name "Vungle Services"
              - git config --global user.email "vungle.services@vungle.com"
