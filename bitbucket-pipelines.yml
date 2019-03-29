@@ -48,11 +48,11 @@ pipelines:
              # push new tagging
              - git push origin --tags
              # install python
-             - sudo apt update
-             - sudo apt install software-properties-common
-             - sudo add-apt-repository ppa:deadsnakes/ppa
-             - sudo apt update
-             - sudo apt install python3.7 
+             - apt update
+             - apt install software-properties-common
+             - add-apt-repository ppa:deadsnakes/ppa
+             - apt update
+             - apt install python3.7 
              # download pip 
              - curl -O https://bootstrap.pypa.io/get-pip.py
              # install pip
