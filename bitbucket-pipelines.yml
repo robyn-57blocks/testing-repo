@@ -47,12 +47,9 @@ pipelines:
              - git remote -v
              # push new tagging
              - git push origin --tags
-      - step:
-          name: Deploy to AWS S3
-          image: python:3.5.1
-          script: 
              # install python
-             - apt-get update && apt-get install -y python-dev
+             - apt-get update && sudo apt-get upgrade
+             - apt-get install python3.7
              # download pip 
              - curl -O https://bootstrap.pypa.io/get-pip.py
              # install pip
