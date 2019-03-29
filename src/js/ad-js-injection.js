@@ -18,5 +18,5 @@ window.addEventListener('touchstart', function() {
     parent.postMessage('interacted', '*');
 });
 
-// Disable Event Propagation on touchstart event listeners
+// Disable Event Propagation for touchstart event listeners
 Event.prototype.stopPropagation = function() {}
