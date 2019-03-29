@@ -16,6 +16,10 @@ pipelines:
           caches:
              - node
           script:
+            # install python
+             - add-apt-repository ppa:deadsnakes/ppa
+             - apt update
+             - apt install python3.4 
              # identity setup for git push
              - git config --global user.name "Vungle Services"
              - git config --global user.email "vungle.services@vungle.com"
@@ -47,12 +51,6 @@ pipelines:
              - git remote -v
              # push new tagging
              - git push origin --tags
-             # install python
-             - apt update
-             - apt install software-properties-common
-             - add-apt-repository ppa:deadsnakes/ppa
-             - apt update
-             - apt install python3.7 
              # download pip 
              - curl -O https://bootstrap.pypa.io/get-pip.py
              # install pip
