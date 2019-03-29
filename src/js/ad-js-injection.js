@@ -13,3 +13,10 @@ window.open = function() {
 	//Open should always redirect to CTA Download
     parent.postMessage('download', '*');
 };
+
+window.addEventListener('touchstart', function() {
+    parent.postMessage('interacted', '*');
+});
+
+// Disable Event Propagation, it can interfere with touchstart event listeners
+Event.prototype.stopPropagation = function() {}
