@@ -37,7 +37,7 @@ export default {
         return mraid;
     };
 
-    async function checkMRAIDStatus() {
+    function checkMRAIDStatus() {
         return new Promise(function(resolve, reject) {
             if (getMRAID() && getMRAID().getState() === "loading") {
                 var i = 0;

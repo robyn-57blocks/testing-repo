@@ -7,10 +7,11 @@ import { default as AdClose } from './vungle-ad-close.js';
 import { default as VungleAd } from './vungle-ad.js';
 
 var adcore = {
-    init: async function(onEndcardStart) {
+    init: function(onEndcardStart) {
 
-        await MRAIDHelper.checkMRAIDStatus();
-        this.controller(onEndcardStart);
+        MRAIDHelper.checkMRAIDStatus().then(() => {
+           this.controller(onEndcardStart); 
+        })
 
     },
     controller: function(onEndcardStart) {
