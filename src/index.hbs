@@ -34,20 +34,40 @@
 
 <body id="dynamic">
     <div id="vungle-header">
-        <a id="vungle-close" class="" href="javascript:void(0)">
+
+        <a id="vungle-fullscreen-video-close" class="hide" href="javascript:void(0)">
             <!-- CLOSE ICON -->
-            <div id="vungle-ad-close-icon-container">
+            <div id="vungle-fullscreen-video-close-icon-container">
+                <!-- Close icon -->
+                <svg version="1.1" class="vungle-close-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 321.2 321" style="enable-background:new 0 0 321.2 321;" xml:space="preserve">
+                    <g>
+                        <g class="svg-vungle-close-icon-layer-1">
+                            <g class="svg-vungle-close-icon-layer-close">
+                                <g>
+                                    <polygon class="svg-vungle-close-icon" points="280.8,309.5 161,189.8 40.4,309.5 11.6,280.8 132.4,160 11.6,40.3 40.4,11.5 161,131.3 280.8,11.5 
+                                        309.5,40.3 189.8,160 309.5,280.8" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+        </a>
+
+        <a id="vungle-endcard-close" class="hide" href="javascript:void(0)">
+            <!-- CLOSE ICON -->
+            <div id="vungle-endcard-close-icon-container">
                 <!-- Countdown text -->
-                <div id="vungle-ad-reward-timer">
-                    <div id="vungle-ad-timer-countdown"></div>
+                <div id="vungle-endcard-reward-timer">
+                    <div id="vungle-endcard-timer-countdown"></div>
                 </div>
                 <!-- Close icon -->
-                <svg version="1.1" id="vungle-ad-close-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 321.2 321" style="enable-background:new 0 0 321.2 321;" xml:space="preserve">
+                <svg version="1.1" class="vungle-close-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 321.2 321" style="enable-background:new 0 0 321.2 321;" xml:space="preserve">
                     <g>
-                        <g id="svg-vungle-ad-close-icon-layer-1">
-                            <g id="svg-vungle-ad-close-icon-layer-close">
+                        <g class="svg-vungle-close-icon-layer-1">
+                            <g class="svg-vungle-close-icon-layer-close">
                                 <g>
-                                    <polygon class="svg-vungle-ad-close-icon" points="280.8,309.5 161,189.8 40.4,309.5 11.6,280.8 132.4,160 11.6,40.3 40.4,11.5 161,131.3 280.8,11.5 
+                                    <polygon class="svg-vungle-close-icon" points="280.8,309.5 161,189.8 40.4,309.5 11.6,280.8 132.4,160 11.6,40.3 40.4,11.5 161,131.3 280.8,11.5 
                                         309.5,40.3 189.8,160 309.5,280.8" />
                                 </g>
                             </g>
@@ -59,6 +79,10 @@
         </a>
     </div>
     <div id="vungle-ad">
+        <div id="fullscreen-video-view" class="fullscreen-video-view">
+            <video muted id="fullscreen-video" playsinline webkit-playsinline></video>
+            <progress id="fullscreen-video-progress" class="progress-bar" max="100" value="0"><span>0</span></progress>
+        </div>
         <div id="endcard-view" class="endcard-view"></div>
     </div>
     <aside id="ad-notification-modal" class="hide">

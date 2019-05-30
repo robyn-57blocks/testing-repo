@@ -17,7 +17,7 @@ export default {
         this.tokens = JSON.parse(`
         {
             "PRIVACY_BODY_TEXT": "Vungle, Inc. understands the importance of privacy. Vungle operates a mobile ad network (the 'Ad Network' or the 'Services') through which Vungle displays targeted, contextual ads.",
-            "MAIN_VIDEO": "/var/mobile/Containers/Data/Application/9C037305-5FBF-46BE-BCD5-31F0BC7B1F21/Library/Caches/com.vungle.ads/91904af6c89397f7822d169463c283b45bd6ee03/E2B84F77F71188171435856769024_34f9e557a05.1.5.12373212277748154277.mp4",
+            "MAIN_VIDEO": "http://172.31.0.85:8888/resources/portrait.mp4",
             "CTA_BUTTON_URL": "https://www.microsoft.com/en-us/p/bingo-blitz-free-bingo-slots/9nblggh42r8p",
             "INCENTIVIZED_CLOSE_TEXT": "Close",
             "CTA_BUTTON_TEXT": "Download",
@@ -36,13 +36,14 @@ export default {
             "START_MUTED": "false",
             "APP_DESCRIPTION": "Playtika Holdings Corp",
             "POWERED_BY_VUNGLE": "/var/mobile/Containers/Data/Application/9C037305-5FBF-46BE-BCD5-31F0BC7B1F21/Library/Caches/com.vungle.ads/91904af6c89397f7822d169463c283b45bd6ee03/vungle.svg",
-            "CREATIVE_VIEW_TYPE": "endcard",
             "INCENTIVIZED_CONTINUE_TEXT": "Continue",
             "VIDEO_PROGRESS_BAR": "true",
-            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "9999",
-            "CLOSE_BUTTON_DELAY_SECONDS": "5",
             "INCENTIVIZED_TITLE_TEXT": "Close this ad?",
-            "ENDCARD_ONLY_DURATION_SECONDS":"5"
+            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "2",
+            "CLOSE_BUTTON_DELAY_SECONDS": "5",
+            "ENDCARD_ONLY_DURATION_SECONDS":"30",
+            "CREATIVE_VIEW_TYPE": "video_and_endcard",
+            "EC_CLOSE_BUTTON_DELAY_SECONDS":"5"
         }`);
 
         window.vungle = {
