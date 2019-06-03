@@ -279,7 +279,9 @@ var adcore = {
 
         function onVideoPlayComplete() {
             AdVideoPlayer.hideVideoView();
+            AdVideoPlayer.endVideoAttributionListeners();
             AdClose.hideVideoCloseButtonTimer();
+
             renderAdIFrame();
         }
 
@@ -445,9 +447,8 @@ var adcore = {
             adModalClose.onclick = function() {
                 if (creativeViewType === "video_and_endcard") {
                     AdHelper.addClass(adModal, 'hide');
-                    AdClose.hideVideoCloseButtonTimer();
                     revealPrivacyButton();
-                    renderAdIFrame();
+                    onVideoPlayComplete();
                 } else {
                     vungleMRAID.close();
                 }
