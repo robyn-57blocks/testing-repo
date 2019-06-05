@@ -1,0 +1,58 @@
+.footer {
+    position: fixed;
+    z-index: 100;
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: 50px;
+    bottom:0;
+    opacity:0;
+    // background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%);
+    // background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%);
+    // background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.4) 100%);
+    transition: $vungle-opacity-transition;
+    pointer-events:none;
+
+    &.show {
+        opacity: 1;
+        pointer-events:initial;
+    }
+
+    .icon-download {
+        font-size: 17pt;
+            color: $vungle-ad-dark-theme-fill;
+             -webkit-text-stroke:1px $vungle-ad-dark-theme-stroke;
+
+        #{$light-theme} {
+                color: $vungle-ad-light-theme-fill;
+                 -webkit-text-stroke:1px $vungle-ad-light-theme-stroke;
+        }
+
+        #{$dark-theme} {
+                color: $vungle-ad-dark-theme-fill;
+                -webkit-text-stroke:1px $vungle-ad-dark-theme-stroke;
+        }
+    }
+
+
+    .download {
+        width: 30px;
+        height: 30px;
+        padding: 20px 10px 10px 20px;
+        text-align: center;
+        line-height: 1em;
+
+        float: right;
+        cursor: pointer;
+
+        .download-icon {
+            width: 19px;
+            height: 19px;
+
+            position: absolute;
+            bottom: 4px;
+        }
+    }
+}
