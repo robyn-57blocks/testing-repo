@@ -16,10 +16,4 @@
 @import './base/core';
 
 // *** Components ***
-@import './components/close';
-@import './components/privacy';
-@import './components/default-notification-modal';
-@import './components/gdpr-notification-modal';
-@import './components/ad-debug';
-@import './components/video';
-@import './components/video_cta';
+@import './components/*';
