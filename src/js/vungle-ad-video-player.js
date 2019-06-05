@@ -27,6 +27,7 @@ function initVideo(videoSrc) {
     });
 
     fullscreenVideoElem.addEventListener('timeupdate', function(e) {
+        EventController.sendEvent('vungle-video-time-update', fullscreenVideoElem.currentTime);
         var percent = Math.floor((100 / fullscreenVideoElem.duration) * fullscreenVideoElem.currentTime);
         fullscreenVideoViewProgress.value = percent;
         fullscreenVideoViewProgress.getElementsByTagName('span')[0].innerHTML = percent;

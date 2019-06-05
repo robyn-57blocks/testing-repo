@@ -272,7 +272,7 @@ var adcore = {
 
         function renderAdFullscreenVideo() {
 
-            AdVideoCTA.initCTA({
+            AdVideoCTA.initCTAListener({
                 showCTA: AdHelper.isValid(VungleAd.tokens.VIDEO_SHOW_CTA) ? VungleAd.tokens.VIDEO_SHOW_CTA : null,
                 fullscreen: AdHelper.isValid(VungleAd.tokens.FULL_CTA) ? VungleAd.tokens.FULL_CTA : null,
                 delay: AdHelper.isValid(VungleAd.tokens.DOWNLOAD_BUTTON_DELAY_SECONDS) ? VungleAd.tokens.DOWNLOAD_BUTTON_DELAY_SECONDS : 0,

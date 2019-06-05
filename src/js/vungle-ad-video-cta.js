@@ -1,5 +1,5 @@
 export default {
-    initCTA,
+    initCTAListener,
 }
 
 import { default as AdHelper } from './vungle-ad-helpers.js';
@@ -11,18 +11,31 @@ var videoCta = document.getElementById('video-cta');
 var vungleAd = document.getElementById('vungle-ad');
 var footer = document.getElementById('video-footer');
 
-function initCTA(pkg) {
-    setTimeout(function() {
-        if (pkg.showCTA === 'true')
-            AdHelper.addClass(footer, 'show')
-        if (pkg.fullscreen === 'true') {
-            vungleAd.addEventListener('click', function() {
-                window.callSDK('download')
-            });
-        } else {
-            videoCta.addEventListener('click', function() {
-                window.callSDK('download')
-            });
+
+
+function initCTAListener(pkg) {
+    window.addEventListener('vungle-video-time-update', CTAListenerFunction);
+
+    function CTAListenerFunction(e) {
+        if (e.detail > parseInt(pkg.delay)) {
+            window.removeEventListener('vungle-video-time-update', CTAListenerFunction)
+            initCTA(pkg);
         }
-    }, parseInt(pkg.delay) * 1000)
+    }
+}
+
+
+
+function initCTA(pkg) {
+    if (pkg.showCTA === 'true')
+        AdHelper.addClass(footer, 'show')
+    if (pkg.fullscreen === 'true') {
+        vungleAd.addEventListener('click', function() {
+            window.callSDK('download')
+        });
+    } else {
+        videoCta.addEventListener('click', function() {
+            window.callSDK('download')
+        });
+    }
 }
