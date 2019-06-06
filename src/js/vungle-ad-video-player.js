@@ -5,6 +5,7 @@ export default {
     playVideo,
     pauseVideo,
     hideVideoView,
+    isVideoViewVisible,
     videoDuration,
     onVideoPlay,
     videoTPATCheckpointsIndex,
@@ -37,8 +38,12 @@ function initVideo(videoSrc) {
         //Send event to ad core to begin close button timer for video
         EventController.sendEvent('vungle-fullscreen-video-ready');
 
-        //Start event listener on video play to capture attribution/TPAT events
+        //Start event listeners for video start and TPAT attribution
         fullscreenVideoElem.addEventListener('timeupdate', onVideoPlay);
+        fullscreenVideoElem.addEventListener('vungle-fullscreen-video-ready', pauseVideo);
+        window.addEventListener('vungle-fullscreen-video-pause', pauseVideo);
+        window.addEventListener('vungle-fullscreen-video-play', playVideo);
+
         videoLengthReport();
         playVideo();
     });
@@ -53,7 +58,22 @@ function pauseVideo() {
 }
 
 function hideVideoView() {
+    //Remove event listeners for video pause and play if video view is no longer visible to the user
+    //This also allows the privacy iframe to be toggled without accidentally calling the video play/pause
+    window.removeEventListener('vungle-fullscreen-video-pause', pauseVideo);
+    window.removeEventListener('vungle-fullscreen-video-play', playVideo);
+
     AdHelper.addClass(fullscreenVideoView, 'hide');
+}
+
+function isVideoViewVisible() {
+    if (AdHelper.hasClass(fullscreenVideoView, 'hide')) {
+        //Video container is hidden
+        return false;
+    } else {
+        //Video container is visible
+        return true;
+    }
 }
 
 function videoDuration() {

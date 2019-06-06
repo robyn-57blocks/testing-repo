@@ -1,113 +1,82 @@
 export default {
+    init
+}
 
-    init: function() {
-        
-        var privacyTimer, privacySubTimer;
+import { default as AdHelper } from './vungle-ad-helpers.js';
+import { default as EventController } from './vungle-ad-event-controller.js';
+import { default as AdVideoPlayer } from './vungle-ad-video-player.js';
 
-        var prefix = ''; // stop clashes
-        var privacyUrl = 'http://vungle.com/privacy/';
-        var privacyDuration = 2000;
-        var privacySubDuration = 1000;
-        var privacySubHideDuration = 500;
-        var privacyIcon = document.getElementById(prefix + 'privacy-icon');
+var privacyTimer, privacySubTimer;
 
-        // add click events
-        document.getElementById(prefix + 'privacy-icon').addEventListener("click", privacyExtend);
-        document.getElementById(prefix + 'privacy-back-button-container').addEventListener("click", hideIframe);
+var prefix = ''; // stop clashes
+var privacyUrl = 'http://vungle.com/privacy/';
+var privacyDuration = 2000;
+var privacySubDuration = 1000;
+var privacySubHideDuration = 500;
+var privacyIcon = document.getElementById(prefix + 'privacy-icon');
 
-        function addClass(el, className) {
+function init() {
+    // add click events
+    document.getElementById(prefix + 'privacy-icon').addEventListener("click", privacyExtend);
+    document.getElementById(prefix + 'privacy-back-button-container').addEventListener("click", hideIframe);
+}
 
-            if (!(el instanceof HTMLDivElement)) {
-                el = document.getElementById(el);
-            }
+function hideIframe() {
+    var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
 
-            if (el.classList) {
-                el.classList.add(className);
-            } else if (!hasClass(el, className)) {
-                el.className += " " + className;
-            }
-        }
+    if (AdVideoPlayer.isVideoViewVisible) { EventController.sendEvent('vungle-fullscreen-video-play') };
 
-        function hasClass(el, className) {
+    AdHelper.removeClass(loadingPage, 'loaded');
 
-            if (el.classList) {
-                return el.classList.contains(className);
-            } else {
-                return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
-            }
-        }
+    document.getElementById(prefix + 'privacy-page-wrapper').style.display = "none";
+    document.getElementById(prefix + 'privacy-back-button-container').style.display = "none";
+}
 
-        function removeClass(el, className) {
+function showIFrame() {
+    var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
+    var privacyPg = document.getElementById(prefix + 'privacy-page');
 
-            if (!(el instanceof HTMLDivElement)) {
-                el = document.getElementById(el);
-            }
+    if (AdVideoPlayer.isVideoViewVisible) { EventController.sendEvent('vungle-fullscreen-video-pause') };
 
-            if (el.classList) {
-                el.classList.remove(className);
-            } else if (hasClass(el, className)) {
-                var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
-                el.className = el.className.replace(reg, ' ');
-            }
-        }
+    document.getElementById(prefix + 'privacy-page-wrapper').style.display = "initial";
+    document.getElementById(prefix + 'privacy-back-button-container').style.display = "initial";
 
-        function hideIframe() {
+    AdHelper.removeClass(loadingPage, 'loaded');
+    AdHelper.addClass(loadingPage, 'loading');
 
-            var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
+    privacyPg.onload = function() {
+        AdHelper.removeClass(loadingPage, 'loading');
+        AdHelper.addClass(loadingPage, 'loaded');
+    };
 
-            removeClass(loadingPage, 'loaded');
+    privacyPg.src = privacyUrl;
+}
 
-            document.getElementById(prefix + 'privacy-page-wrapper').style.display = "none";
-            document.getElementById(prefix + 'privacy-back-button-container').style.display = "none";
-        }
+function hidePrivacyIcon() {
+    AdHelper.removeClass(privacyIcon, 'privacy-extended');
 
-        function showIFrame() {
+    privacySubTimer = setTimeout(function() {
+        AdHelper.removeClass(privacyIcon, 'privacy-reverse');
+    }, privacySubHideDuration);
+}
 
-            var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
-            var privacyPg = document.getElementById(prefix + 'privacy-page');
+function privacyExtend() {
 
-            document.getElementById(prefix + 'privacy-page-wrapper').style.display = "initial";
-            document.getElementById(prefix + 'privacy-back-button-container').style.display = "initial";
-
-            removeClass(loadingPage, 'loaded');
-            addClass(loadingPage, 'loading');
-
-            privacyPg.onload = function() {
-                removeClass(loadingPage, 'loading');
-                addClass(loadingPage, 'loaded');
-            };
-
-            privacyPg.src = privacyUrl;
-        }
-
-        function hidePrivacyIcon() {
-
-            removeClass(privacyIcon, 'privacy-extended');
-
-            privacySubTimer = setTimeout(function() {
-                removeClass(privacyIcon, 'privacy-reverse');
-            }, privacySubHideDuration);
-        }
-
-        function privacyExtend() {
-
-            if (hasClass(privacyIcon, 'privacy-extended')) {
-                showIFrame();
-                hidePrivacyIcon();
-                return;
-            }
-
-            addClass(privacyIcon, 'privacy-extended');
-
-            clearTimeout(privacyTimer);
-
-            privacyTimer = setTimeout(function() {
-                hidePrivacyIcon();
-            }, privacyDuration);
-
-            privacySubTimer = setTimeout(function() {
-                addClass(privacyIcon, 'privacy-reverse');
-            }, privacySubDuration);
-        }
+    if (AdHelper.hasClass(privacyIcon, 'privacy-extended')) {
+        showIFrame();
+        hidePrivacyIcon();
+        return;
     }
-};
+
+    AdHelper.addClass(privacyIcon, 'privacy-extended');
+
+    clearTimeout(privacyTimer);
+
+    privacyTimer = setTimeout(function() {
+        hidePrivacyIcon();
+    }, privacyDuration);
+
+    privacySubTimer = setTimeout(function() {
+        AdHelper.addClass(privacyIcon, 'privacy-reverse');
+    }, privacySubDuration);
+}
