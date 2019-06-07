@@ -17,7 +17,7 @@ export default {
         this.tokens = JSON.parse(`
         {
             "PRIVACY_BODY_TEXT": "Vungle, Inc. understands the importance of privacy. Vungle operates a mobile ad network (the 'Ad Network' or the 'Services') through which Vungle displays targeted, contextual ads.",
-            "MAIN_VIDEO": "http://172.31.0.85:8888/resources/portrait.mp4",
+            "MAIN_VIDEO": "http://172.31.0.85:8888/resources/landscape2.mp4",
             "CTA_BUTTON_URL": "https://www.microsoft.com/en-us/p/bingo-blitz-free-bingo-slots/9nblggh42r8p",
             "INCENTIVIZED_CLOSE_TEXT": "Close",
             "CTA_BUTTON_TEXT": "Download",
@@ -33,7 +33,7 @@ export default {
             "CTA_BUTTON_TEXT_COLOR": "#fff",
             "PRIVACY_CONTINUE_TEXT": "Close",
             "INCENTIVIZED_BODY_TEXT": "Are you sure you want to skip this ad? You must finish watching to claim your reward.",
-            "START_MUTED": "false",
+            "START_MUTED": "true",
             "APP_DESCRIPTION": "Playtika Holdings Corp",
             "POWERED_BY_VUNGLE": "/var/mobile/Containers/Data/Application/9C037305-5FBF-46BE-BCD5-31F0BC7B1F21/Library/Caches/com.vungle.ads/91904af6c89397f7822d169463c283b45bd6ee03/vungle.svg",
             "INCENTIVIZED_CONTINUE_TEXT": "Continue",
@@ -56,7 +56,7 @@ export default {
                 notifyTPAT: function() { return true; },
                 notifyEventValuePairEvent: function() { return true; },
                 consentAction: function() { return true },
-                notifySuccessfulViewAd: function() { console.log('TIMER SUCCESSFUL VIEW - notifySuccessfulViewAd event sent'); return true }
+                notifySuccessfulViewAd: function() { return true }
             },
             mraid: {
                 getConsentRequired: function() { return false; },

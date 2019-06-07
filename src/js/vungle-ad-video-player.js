@@ -11,7 +11,10 @@ export default {
     videoTPATCheckpointsIndex,
     onVideoTPATCheckpoint,
     videoLengthReport,
-    endVideoAttributionListeners
+    endVideoAttributionListeners,
+    muteVideo,
+    unMuteVideo,
+    toggleVideoMute
 }
 
 import { default as AdHelper } from './vungle-ad-helpers.js';
@@ -23,10 +26,13 @@ var videoTPATCheckpointsReached = [];
 var fullscreenVideoElem = document.getElementById('fullscreen-video');
 var fullscreenVideoView = document.getElementById('fullscreen-video-view');
 var fullscreenVideoViewProgress = document.getElementById('fullscreen-video-progress');
+var videoMuteButton = document.getElementById('video-mute');
+var videoMuteIcon = document.getElementById('video-mute-icon');
+var videoUnMuteIcon = document.getElementById('video-unmute-icon');
 var videoSource, videoDurationCount, videoCurrentPlayTime, videoCheckpointIndex, videoPlaySuccessfulDuration;
 var videoViewedPerSecond = 0;
 
-function initVideo(videoSrc) {
+function initVideo(videoSrc, isMuted) {
     videoSource = videoSrc;
     fullscreenVideoElem.src = videoSource;
 
@@ -35,12 +41,20 @@ function initVideo(videoSrc) {
         videoDurationCount = fullscreenVideoElem.duration;
         videoPlaySuccessfulDuration = (80 / 100) * fullscreenVideoElem.duration;
 
+        //If video is set to not be muted, unmute video
+        if (isMuted === 'false') {
+                unMuteVideo();
+        } else {
+            muteVideo();
+        }
+
         //Send event to ad core to begin close button timer for video
         EventController.sendEvent('vungle-fullscreen-video-ready');
 
         //Start event listeners for video start and TPAT attribution
         fullscreenVideoElem.addEventListener('timeupdate', onVideoPlay);
         fullscreenVideoElem.addEventListener('vungle-fullscreen-video-ready', pauseVideo);
+        videoMuteButton.addEventListener('click', toggleVideoMute);
         window.addEventListener('vungle-fullscreen-video-pause', pauseVideo);
         window.addEventListener('vungle-fullscreen-video-play', playVideo);
 
@@ -58,12 +72,41 @@ function pauseVideo() {
 }
 
 function hideVideoView() {
+    pauseVideo();
     //Remove event listeners for video pause and play if video view is no longer visible to the user
     //This also allows the privacy iframe to be toggled without accidentally calling the video play/pause
     window.removeEventListener('vungle-fullscreen-video-pause', pauseVideo);
     window.removeEventListener('vungle-fullscreen-video-play', playVideo);
 
+    //Trigger TPAT event for video close
+    window.vungle.mraidBridgeExt.notifyTPAT("video.close");
+
     AdHelper.addClass(fullscreenVideoView, 'hide');
+}
+
+function toggleVideoMute() {
+    console.log("video is "+fullscreenVideoElem.muted);
+    if (fullscreenVideoElem.muted) {
+        //Trigger TPAT event for unmuting video audio
+        window.vungle.mraidBridgeExt.notifyTPAT("video.unmute");
+        unMuteVideo();
+    } else {
+        //Trigger TPAT event for muting video audio
+        window.vungle.mraidBridgeExt.notifyTPAT("video.mute");
+        muteVideo();
+    }
+}
+
+function muteVideo() {
+    AdHelper.addClass(videoUnMuteIcon, 'hide');
+    AdHelper.removeClass(videoMuteIcon, 'hide');
+    fullscreenVideoElem.muted = true;
+}
+
+function unMuteVideo() {
+    AdHelper.removeClass(videoUnMuteIcon, 'hide');
+    AdHelper.addClass(videoMuteIcon, 'hide');
+    fullscreenVideoElem.muted = false;
 }
 
 function isVideoViewVisible() {
