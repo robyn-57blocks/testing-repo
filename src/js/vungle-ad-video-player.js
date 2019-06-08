@@ -33,6 +33,9 @@ var videoSource, videoDurationCount, videoCurrentPlayTime, videoCheckpointIndex,
 var videoViewedPerSecond = 0;
 
 function initVideo(videoSrc, isMuted) {
+
+    AdHelper.removeClass(fullscreenVideoView, 'hide');
+
     videoSource = videoSrc;
     fullscreenVideoElem.src = videoSource;
 
@@ -77,6 +80,8 @@ function hideVideoView() {
     //This also allows the privacy iframe to be toggled without accidentally calling the video play/pause
     window.removeEventListener('vungle-fullscreen-video-pause', pauseVideo);
     window.removeEventListener('vungle-fullscreen-video-play', playVideo);
+
+    videoMuteButton.removeEventListener('click', toggleVideoMute);
 
     //Trigger TPAT event for video close
     window.vungle.mraidBridgeExt.notifyTPAT("video.close");
