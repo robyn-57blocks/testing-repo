@@ -1,0 +1,62 @@
+$ios-android-modifier:.040;
+
+$windows-modifier:.06;
+
+$windows-large-modifier:.09;
+
+$closeHeight:40em;
+
+$windowsCloseHeight:35em;
+
+.video-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    z-index: 500;
+
+    a {
+        display: block;
+        padding: 0.8em 0.8em 0.5em 1.2em;
+        cursor: pointer;
+    }
+
+    .video-header-audio-icon-container {
+        left: 0em;
+        top: 0em;
+        position: relative;
+        height: modifySize($closeHeight, $ios-android-modifier);
+        width: modifySize($closeHeight, $ios-android-modifier);
+        text-align: center;
+
+        #video-unmute-icon, #video-mute-icon {
+            position: absolute;
+            left: 0;
+            fill: $vungle-ad-dark-theme-fill;
+            stroke: $vungle-ad-dark-theme-stroke;
+            stroke-width: 14;
+            stroke-miterlimit: 10;
+            transition: opacity .2s .2s ease-in-out;
+
+            &.hide {
+                opacity: 0;
+            }
+        }
+
+        #{$light-theme} {
+            #video-unmute-icon, #video-mute-icon {
+                fill: $vungle-ad-light-theme-fill;
+                stroke: $vungle-ad-light-theme-stroke;
+            }
+        }
+
+        #{$dark-theme} {
+            #video-unmute-icon, #video-mute-icon {
+                fill: $vungle-ad-dark-theme-fill;
+                stroke: $vungle-ad-dark-theme-stroke;
+            }
+        }
+
+    }
+}
