@@ -14,12 +14,16 @@ export default {
     endVideoAttributionListeners
 }
 
+
+
+
+
 import { default as AdHelper } from './vungle-ad-helpers.js';
 import { default as EventController } from './vungle-ad-event-controller.js';
 
 var videoTPATCheckpoints = [0, 25, 50, 75, 100];
 var videoTPATCheckpointsReached = [];
-
+ 
 var fullscreenVideoElem = document.getElementById('fullscreen-video');
 var fullscreenVideoView = document.getElementById('fullscreen-video-view');
 var fullscreenVideoViewProgress = document.getElementById('fullscreen-video-progress');
@@ -31,7 +35,7 @@ function initVideo(videoSrc) {
     fullscreenVideoElem.src = videoSource;
 
     //Only start video once file is ready and source is set
-    fullscreenVideoElem.addEventListener('loadedmetadata', function () {
+    fullscreenVideoElem.addEventListener('loadedmetadata', function() {
         videoDurationCount = fullscreenVideoElem.duration;
         videoPlaySuccessfulDuration = (80 / 100) * fullscreenVideoElem.duration;
 
@@ -98,7 +102,7 @@ function endVideoAttributionListeners() {
 
     //Trigger videoViewed one final time after checkpoint.100 to ensure last event captures entire video duration
     if (videoTPATCheckpointsReached[videoTPATCheckpoints.length - 1] === true) {
-        console.log('%cvideoViewed '+Math.floor(videoDurationCount * 1000), "color: #BADA55");
+        console.log('%cvideoViewed ' + Math.floor(videoDurationCount * 1000), "color: #BADA55");
         window.vungle.mraidBridgeExt.notifyEventValuePairEvent("videoViewed", Math.floor(videoDurationCount * 1000));
     }
 
@@ -121,6 +125,7 @@ function videoTPATCheckpointsIndex(videoCurrentPlayTime, videoDurationCount) {
     }
 }
 
+
 function onVideoTPATCheckpoint() {
     videoCheckpointIndex = videoTPATCheckpointsIndex(videoCurrentPlayTime, videoDurationCount);
 
@@ -134,7 +139,7 @@ function onVideoTPATCheckpoint() {
 
     //Event value sent to the SDK each second during video play
     if (videoCurrentPlayTime > 0 && videoDurationCount && typeof videoDurationCount === "number" && videoViewedPerSecond <= Math.round(videoCurrentPlayTime)) {
-        console.log('%cvideoViewed '+Math.floor(videoCurrentPlayTime * 1000), "color: #BADA55");
+        console.log('%cvideoViewed ' + Math.floor(videoCurrentPlayTime * 1000), "color: #BADA55");
         window.vungle.mraidBridgeExt.notifyEventValuePairEvent("videoViewed", Math.floor(videoCurrentPlayTime * 1000));
         videoViewedPerSecond++;
     }
