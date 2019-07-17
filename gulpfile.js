@@ -15,9 +15,8 @@ gulp.task('build:resources', require('./gulp-scripts/build-resources.js'));
 gulp.task('build:sass', require('./gulp-scripts/build-sass.js'));
 gulp.task('build:html', require('./gulp-scripts/build-html.js'));
 gulp.task('build:inline', require('./gulp-scripts/build-inline.js'));
-gulp.task('build:fonts', require('./gulp-scripts/build-fonts.js'));
 gulp.task('gen:bundle', require('./gulp-scripts/bundle.js'));
-gulp.task('watch', ['build'], require('./gulp-scripts/watch.js')); 
+gulp.task('watch', ['build'], require('./gulp-scripts/watch.js'));
 
 // BUILD TASKS
 gulp.task('build', (cb) => { gulpSequence('clean', 'build:all')(cb) });
@@ -26,8 +25,7 @@ gulp.task('build:all', (cb) => {
     gulpSequence([
         'build:html',
         'build:js',
-        'build:sass',
-        'build:fonts',
+        'build:sass'
     ])(cb)
 });
 
@@ -35,4 +33,3 @@ gulp.task('build:all', (cb) => {
 gulp.task('default', gulpSequence('set:env:dev', 'watch'));
 gulp.task('serve:prod', gulpSequence('set:env:prod', 'watch'));
 gulp.task('bundle:prod', gulpSequence('set:env:prod', 'build', 'build:resources', 'build:inline', 'gen:bundle'));
-
