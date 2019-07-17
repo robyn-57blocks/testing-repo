@@ -12,7 +12,7 @@ var adcore = {
     init: function(onEndcardStart) {
 
         MRAIDHelper.checkMRAIDStatus().then(() => {
-           this.controller(onEndcardStart); 
+            this.controller(onEndcardStart);
         })
 
     },
@@ -76,6 +76,7 @@ var adcore = {
             event.preventDefault();
         };
 
+
         window.addEventListener('resize', function(event) {
             vungleAd.style.opacity = 0;
 
@@ -124,6 +125,13 @@ var adcore = {
         function presentAd() {
             if (VungleAd.tokens.hasOwnProperty("CREATIVE_VIEW_TYPE")) {
                 creativeViewType = VungleAd.tokens.CREATIVE_VIEW_TYPE.trim().toLowerCase();
+            }
+
+            if (typeof window.vungle.mraid.addEventListener !== 'undefined') {
+                window.vungle.mraid.addEventListener('viewableChange', function() {
+                    console.log(window.vungle.mraid.isViewable());
+                    onAdViewableChange();
+                })
             }
 
             switch (creativeViewType) {
@@ -191,7 +199,7 @@ var adcore = {
 
             window.removeEventListener('vungle-fullscreen-video-ready', videoCloseButtonTimer);
             var videoCloseButtonDelay, rewardedAdDuration;
-            
+
             if (VungleAd.isAdIncentivised()) {
                 videoCloseButtonDelay = parseFloat(VungleAd.tokens.INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS);
                 console.log('INCENTIVISED - video close icon delay:' + videoCloseButtonDelay);
@@ -210,7 +218,7 @@ var adcore = {
 
             //video+endcard uses ec_.... token rather than close button delay
 
-            if (creativeViewType === "video_and_endcard") { 
+            if (creativeViewType === "video_and_endcard") {
 
                 if (VungleAd.tokens.hasOwnProperty("EC_CLOSE_BUTTON_DELAY_SECONDS")) {
                     delaySeconds = parseFloat(VungleAd.tokens.EC_CLOSE_BUTTON_DELAY_SECONDS);
@@ -227,7 +235,7 @@ var adcore = {
                     delaySeconds = parseFloat(VungleAd.tokens.CLOSE_BUTTON_DELAY_SECONDS);
                     console.log('ENDCARD NON-INCENTIVISED - Close delay: ' + delaySeconds);
                 }
-                
+
                 if (delaySeconds == 0) {
                     revealEndcardCloseButton(0, rewardedAdDuration);
                     successfulViewEventTimer(rewardedAdDuration);
@@ -315,6 +323,18 @@ var adcore = {
                     endcardOnlyVideoAttribution();
             }
         }
+
+        function onAdViewableChange() {
+            // Pause and Resume 
+            var isViewable = MRAIDHelper.isViewable();
+            EventController.sendEvent('vungle-ad-viewable-change', isViewable)
+            if (isViewable) {
+                AdVideoPlayer.playVideo()
+            } else {
+                AdVideoPlayer.pauseVideo()
+            }
+        }
+
 
         function endcardOnlyVideoAttribution() {
             //Used to ensure endcard only (short-form) creatives are served successfully
@@ -505,7 +525,7 @@ var adcore = {
                             //send video.close TPAT event when close button on video is clicked
                             window.vungle.mraidBridgeExt.notifyTPAT("video.close");
                             window.vungle.mraidBridgeExt.notifyEventValuePairEvent("video.close", 1);
-                            
+
                             onVideoPlayComplete();
                         } else {
                             revealAdNotificationModal();
@@ -536,7 +556,7 @@ var adcore = {
 
             //if video+endcard use EC token and avoid rewarded dialogue box timer should run down to 0 and then display close button
 
-            if (creativeViewType === "video_and_endcard") { 
+            if (creativeViewType === "video_and_endcard") {
 
                 AdClose.initEndcardCloseButtonTimer({
                     time: showCloseButtonTime,
