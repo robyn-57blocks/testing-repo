@@ -31,15 +31,11 @@ export default {
     },
 
     validAndTrue: function(obj) {
-            if (typeof obj !== 'undefined' && obj)
-                return true
-            return false
+        return (typeof obj !== 'undefined' && obj);
     },
 
     isValid: function(obj) {
-            if (typeof obj !== 'undefined')
-                return true
-            return false
+        return (typeof obj !== 'undefined');
     },
 
     getOS: function() {
