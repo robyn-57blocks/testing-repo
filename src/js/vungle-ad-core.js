@@ -6,6 +6,7 @@ import { default as AdPrivacy } from './vungle-ad-privacy.js';
 import { default as AdClose } from './vungle-ad-close.js';
 import { default as VungleAd } from './vungle-ad.js';
 import { default as AdVideoPlayer } from './vungle-ad-video-player.js';
+import { default as AdVideoCTA } from './vungle-ad-video-cta.js';
 import { default as EventController } from './vungle-ad-event-controller.js';
 
 var adcore = {
@@ -280,6 +281,12 @@ var adcore = {
         }
 
         function renderAdFullscreenVideo() {
+            AdVideoCTA.initCTAListener({
+                showCTA: AdHelper.isValid(VungleAd.tokens.VIDEO_SHOW_CTA) ? VungleAd.tokens.VIDEO_SHOW_CTA : null,
+                fullscreen: AdHelper.isValid(VungleAd.tokens.FULL_CTA) ? VungleAd.tokens.FULL_CTA : null,
+                delay: AdHelper.isValid(VungleAd.tokens.DOWNLOAD_BUTTON_DELAY_SECONDS) ? VungleAd.tokens.DOWNLOAD_BUTTON_DELAY_SECONDS : 0,
+            });
+
             window.addEventListener('vungle-fullscreen-video-ready', videoCloseButtonTimer);
             window.addEventListener('vungle-fullscreen-video-successful-view', successfulViewEventTimer);
 
