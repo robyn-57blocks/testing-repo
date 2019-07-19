@@ -1,0 +1,309 @@
+{
+    "default_tokens": [
+        {
+            "token_name": "CLOSE_BUTTON_DELAY_SECONDS",
+            "properties": {
+                "display_name": "Close Button Delay",
+                "cacheable": false,
+                "data_type": "float",
+                "default_value": "0",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "VIDEO_CLOSE_BUTTON_DELAY_SECONDS",
+            "properties": {
+                "display_name": "Video Close Button Delay",
+                "cacheable": false,
+                "data_type": "float",
+                "default_value": "0",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "EC_CLOSE_BUTTON_DELAY_SECONDS",
+            "properties": {
+                "display_name": "Endcard Close Button Delay",
+                "cacheable": false,
+                "data_type": "float",
+                "default_value": "0",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS",
+            "properties": {
+                "display_name": "Incentivized Close Button Delay",
+                "cacheable": false,
+                "data_type": "float",
+                "default_value": "0",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "INCENTIVIZED_TITLE_TEXT",
+            "properties": {
+                "display_name": "Incentivized Dialog Title Text",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "Close this ad?",
+                "group_id": "Incentivized Dialog Box"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "INCENTIVIZED_BODY_TEXT",
+            "properties": {
+                "display_name": "Incentivized Dialog Body text",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "Are you sure you want to skip this ad? You must finish watching to claim your reward.",
+                "group_id": "Incentivized Dialog Box"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "INCENTIVIZED_CLOSE_TEXT",
+            "properties": {
+                "display_name": "Incentivized Dialog Close Button Text",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "Close",
+                "group_id": "Incentivized Dialog Box"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "INCENTIVIZED_CONTINUE_TEXT",
+            "properties": {
+                "display_name": "Incentivized Dialog Continue Button Text",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "Continue",
+                "group_id": "Incentivized Dialog Box"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "MAIN_VIDEO",
+            "properties": {
+                "display_name": "Video",
+                "cacheable": true,
+                "data_type": "video",
+                "default_value": "https://cdn-lb.vungle.com/templates/defaults/video/video.mp4",
+                "group_id": "Product Description"
+            },
+            "role": {
+                "name": "system",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
+            "token_name": "START_MUTED",
+            "properties": {
+                "display_name": "Start Muted",
+                "cacheable": false,
+                "data_type": "boolean",
+                "default_value": "false",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
+            "token_name": "FULL_CTA",
+            "properties": {
+                "display_name": "CTA Overlay",
+                "cacheable": false,
+                "data_type": "boolean",
+                "default_value": "false",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "DOWNLOAD_BUTTON_DELAY_SECONDS",
+            "properties": {
+                "display_name": "Video CTA Delay",
+                "cacheable": false,
+                "data_type": "float",
+                "default_value": "3.5",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "VIDEO_SHOW_CTA",
+            "properties": {
+                "display_name": "Video CTA",
+                "cacheable": false,
+                "data_type": "boolean",
+                "default_value": "false",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "CREATIVE_VIEW_TYPE",
+            "properties": {
+                "display_name": "Creative View Type",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "video_and_endcard",
+                "group_id": "Custom Creative Settings"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "ENDCARD",
+            "properties": {
+                "display_name": "Endcard",
+                "cacheable": true,
+                "data_type": "bundle",
+                "default_value": "https://cdn-lb.vungle.com/bundles/CUSTOM-CREATIVE.zip",
+                "group_id": "Custom Creative Settings"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "CTA_BUTTON_URL",
+            "properties": {
+                "display_name": "CTA URL",
+                "cacheable": false,
+                "data_type": "url",
+                "default_value": null,
+                "group_id": "Product Description"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": []
+            }
+        }
+    ]
+}
