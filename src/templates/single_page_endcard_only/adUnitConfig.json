@@ -150,9 +150,14 @@
                 "group_id": "Custom Creative Settings"
             },
             "role": {
-                "name": "system",
+                "name": "advertiser",
                 "valueRequired": true,
-                "overrides": []
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
             }
         },
         {
