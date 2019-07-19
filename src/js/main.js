@@ -13,11 +13,9 @@ var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
 eventer(messageEvent, function(e) {
     switch (e.data) {
         case 'close':
-            alert('close')
             window.callSDK('close');
             break;
         case 'download':
-            alert('download')
             window.callSDK('download');
             break;
     }
