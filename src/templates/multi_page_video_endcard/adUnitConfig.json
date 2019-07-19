@@ -21,26 +21,6 @@
             }
         },
         {
-            "token_name": "VIDEO_CLOSE_BUTTON_DELAY_SECONDS",
-            "properties": {
-                "display_name": "Video Close Button Delay",
-                "cacheable": false,
-                "data_type": "float",
-                "default_value": "0",
-                "group_id": "Button Controls"
-            },
-            "role": {
-                "name": "publisher",
-                "valueRequired": true,
-                "overrides": [
-                    {
-                        "name": "system",
-                        "priority": 1
-                    }
-                ]
-            }
-        },
-        {
             "token_name": "EC_CLOSE_BUTTON_DELAY_SECONDS",
             "properties": {
                 "display_name": "Endcard Close Button Delay",
