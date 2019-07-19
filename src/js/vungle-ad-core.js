@@ -8,6 +8,7 @@ import { default as VungleAd } from './vungle-ad.js';
 import { default as AdVideoPlayer } from './vungle-ad-video-player.js';
 import { default as AdVideoCTA } from './vungle-ad-video-cta.js';
 import { default as EventController } from './vungle-ad-event-controller.js';
+import { default as PostMessenger } from './vungle-ad-post-messenger.js';
 
 var adcore = {
     init: function(onEndcardStart) {
@@ -304,7 +305,8 @@ var adcore = {
 
         function renderAdIFrame() {
             document.getElementById('endcard-view').innerHTML = '<iframe id="ad-content" src="ad.html" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>';
-
+            EventController.sendEvent('vungle-ad-iframe-reload');
+            PostMessenger.init(); // Iframe Communication
             //send postroll.view TPAT event once iFrame has loaded
             window.vungle.mraidBridgeExt.notifyTPAT("postroll.view");
 
