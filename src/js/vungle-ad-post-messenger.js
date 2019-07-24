@@ -1,4 +1,5 @@
 export default { init, sendMessage }
+import { default as EventController } from './vungle-ad-event-controller.js';
 
 var iframe;
 var iframeLoaded = false;
@@ -27,8 +28,8 @@ function sendMessage(title, obj) {
         buffer.push(data)
 }
 
-window.sendMsg = function(title,obj){
-    sendMessage(title,obj);
+window.sendMsg = function(title, obj) {
+    sendMessage(title, obj);
 }
 
 function pushBufferedMessages() {
@@ -41,10 +42,15 @@ window.addEventListener('vungle-ad-iframe-reload', function() { iframeLoaded = f
 window.addEventListener('message', recieveMessage)
 
 function recieveMessage(e) {
-    if(e.data.length === 0)
+    if (e.data.length === 0)
         return
 
-    var data = JSON.parse(e.data)
+    var data;
+    try {
+        data = JSON.parse(e.data)
+    } catch (e) {
+        console.log(e)
+    }
 
     switch (data.title) {
         case "test":
@@ -54,6 +60,8 @@ function recieveMessage(e) {
             console.log('working2');
             break
     }
+
+    EventController.sendEvent('vungle-creative-message-' + data.title, data.obj)
 }
 
 sendMessage('hi')
