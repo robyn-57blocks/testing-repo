@@ -20,10 +20,50 @@
                 ]
             }
         },
-        {
-            "token_name": "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS",
+		{
+            "token_name": "CREATIVE_VIEW_TYPE",
             "properties": {
-                "display_name": "Incentivized Close Button Delay",
+                "display_name": "Creative View Type",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "endcard",
+                "group_id": "Custom Creative Settings"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "ENDCARD_ONLY_DURATION_SECONDS",
+            "properties": {
+                "display_name": "Single Page Endcard Maximum Duration",
+                "cacheable": false,
+                "data_type": "float",
+                "default_value": "25",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "EC_CLOSE_BUTTON_DELAY_SECONDS",
+            "properties": {
+                "display_name": "EndCard Close Button Delay",
                 "cacheable": false,
                 "data_type": "float",
                 "default_value": "0",
@@ -41,12 +81,32 @@
             }
         },
         {
-            "token_name": "ENDCARD_ONLY_DURATION_SECONDS",
+            "token_name": "VIDEO_CLOSE_BUTTON_DELAY_SECONDS",
             "properties": {
-                "display_name": "Single Page Endcard Maximum Duration",
+                "display_name": "Video Close Button Delay",
                 "cacheable": false,
                 "data_type": "float",
-                "default_value": "25",
+                "default_value": "0",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+		{
+            "token_name": "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS",
+            "properties": {
+                "display_name": "Incentivized Close Button Delay",
+                "cacheable": false,
+                "data_type": "float",
+                "default_value": "0",
                 "group_id": "Button Controls"
             },
             "role": {
@@ -141,23 +201,33 @@
             }
         },
         {
-            "token_name": "CREATIVE_VIEW_TYPE",
+            "token_name": "START_MUTED",
             "properties": {
-                "display_name": "Creative View Type",
+                "display_name": "Start Muted",
                 "cacheable": false,
-                "data_type": "string",
-                "default_value": "endcard",
-                "group_id": "Custom Creative Settings"
+                "data_type": "boolean",
+                "default_value": "false",
+                "group_id": "Advanced Settings"
             },
             "role": {
-                "name": "advertiser",
+                "name": "publisher",
                 "valueRequired": true,
-                "overrides": [
-                    {
-                        "name": "system",
-                        "priority": 1
-                    }
-                ]
+                "overrides": []
+            }
+        },
+        {
+            "token_name": "MAIN_VIDEO",
+            "properties": {
+                "display_name": "Video",
+                "cacheable": true,
+                "data_type": "video",
+                "default_value": "https://cdn-lb.vungle.com/templates/defaults/video/video.mp4",
+                "group_id": "Product Description"
+            },
+            "role": {
+                "name": "system",
+                "valueRequired": true,
+                "overrides": []
             }
         },
         {
@@ -181,21 +251,6 @@
             }
         },
         {
-            "token_name": "MAIN_VIDEO",
-            "properties": {
-                "display_name": "Video",
-                "cacheable": true,
-                "data_type": "video",
-                "default_value": "https://cdn-lb.vungle.com/templates/defaults/video/video.mp4",
-                "group_id": "Product Description"
-            },
-            "role": {
-                "name": "system",
-                "valueRequired": true,
-                "overrides": []
-            }
-        },
-        {
             "token_name": "CTA_BUTTON_URL",
             "properties": {
                 "display_name": "CTA URL",
@@ -209,6 +264,6 @@
                 "valueRequired": true,
                 "overrides": []
             }
-        }
+        }	
     ]
 }

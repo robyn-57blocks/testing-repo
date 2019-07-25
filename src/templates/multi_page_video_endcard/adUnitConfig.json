@@ -21,9 +21,69 @@
             }
         },
         {
+            "token_name": "CREATIVE_VIEW_TYPE",
+            "properties": {
+                "display_name": "Creative View Type",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "video_and_endcard",
+                "group_id": "Custom Creative Settings"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "ENDCARD_ONLY_DURATION_SECONDS",
+            "properties": {
+                "display_name": "Single Page Endcard Maximum Duration",
+                "cacheable": false,
+                "data_type": "float",
+                "default_value": "25",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
             "token_name": "EC_CLOSE_BUTTON_DELAY_SECONDS",
             "properties": {
                 "display_name": "Endcard Close Button Delay",
+                "cacheable": false,
+                "data_type": "float",
+                "default_value": "0",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "VIDEO_CLOSE_BUTTON_DELAY_SECONDS",
+            "properties": {
+                "display_name": "Video Close Button Delay",
                 "cacheable": false,
                 "data_type": "float",
                 "default_value": "0",
@@ -141,6 +201,21 @@
             }
         },
         {
+            "token_name": "START_MUTED",
+            "properties": {
+                "display_name": "Start Muted",
+                "cacheable": false,
+                "data_type": "boolean",
+                "default_value": "false",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
             "token_name": "MAIN_VIDEO",
             "properties": {
                 "display_name": "Video",
@@ -156,16 +231,36 @@
             }
         },
         {
-            "token_name": "START_MUTED",
+            "token_name": "ENDCARD",
             "properties": {
-                "display_name": "Start Muted",
-                "cacheable": false,
-                "data_type": "boolean",
-                "default_value": "false",
-                "group_id": "Advanced Settings"
+                "display_name": "Endcard",
+                "cacheable": true,
+                "data_type": "bundle",
+                "default_value": "https://cdn-lb.vungle.com/bundles/CUSTOM-CREATIVE.zip",
+                "group_id": "Custom Creative Settings"
             },
             "role": {
-                "name": "publisher",
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "CTA_BUTTON_URL",
+            "properties": {
+                "display_name": "CTA URL",
+                "cacheable": false,
+                "data_type": "url",
+                "default_value": null,
+                "group_id": "Product Description"
+            },
+            "role": {
+                "name": "advertiser",
                 "valueRequired": true,
                 "overrides": []
             }
@@ -228,61 +323,6 @@
                         "priority": 1
                     }
                 ]
-            }
-        },
-        {
-            "token_name": "CREATIVE_VIEW_TYPE",
-            "properties": {
-                "display_name": "Creative View Type",
-                "cacheable": false,
-                "data_type": "string",
-                "default_value": "video_and_endcard",
-                "group_id": "Custom Creative Settings"
-            },
-            "role": {
-                "name": "advertiser",
-                "valueRequired": true,
-                "overrides": [
-                    {
-                        "name": "system",
-                        "priority": 1
-                    }
-                ]
-            }
-        },
-        {
-            "token_name": "ENDCARD",
-            "properties": {
-                "display_name": "Endcard",
-                "cacheable": true,
-                "data_type": "bundle",
-                "default_value": "https://cdn-lb.vungle.com/bundles/CUSTOM-CREATIVE.zip",
-                "group_id": "Custom Creative Settings"
-            },
-            "role": {
-                "name": "advertiser",
-                "valueRequired": true,
-                "overrides": [
-                    {
-                        "name": "system",
-                        "priority": 1
-                    }
-                ]
-            }
-        },
-        {
-            "token_name": "CTA_BUTTON_URL",
-            "properties": {
-                "display_name": "CTA URL",
-                "cacheable": false,
-                "data_type": "url",
-                "default_value": null,
-                "group_id": "Product Description"
-            },
-            "role": {
-                "name": "advertiser",
-                "valueRequired": true,
-                "overrides": []
             }
         }
     ]
