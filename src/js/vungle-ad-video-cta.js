@@ -17,7 +17,7 @@ function initCTAListener(pkg) {
     window.addEventListener('vungle-video-time-update', CTAListenerFunction);
 
     function CTAListenerFunction(e) {
-        if (e.detail > parseInt(pkg.delay)) {
+        if (e.detail > parseFloat(pkg.delay)) {
             window.removeEventListener('vungle-video-time-update', CTAListenerFunction)
             initCTA(pkg);
         }
