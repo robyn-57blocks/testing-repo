@@ -45,23 +45,12 @@ function recieveMessage(e) {
     if (e.data.length === 0)
         return
 
-    var data;
+    var data = e.data;
     try {
         data = JSON.parse(e.data)
     } catch (e) {
         console.log(e)
     }
 
-    switch (data.title) {
-        case "test":
-            console.log('working');
-            break
-        case "test2":
-            console.log('working2');
-            break
-    }
-
-    EventController.sendEvent('vungle-creative-message-' + data.title, data.obj)
+    EventController.sendEvent(data.title || data, data.obj)
 }
-
-sendMessage('hi')
