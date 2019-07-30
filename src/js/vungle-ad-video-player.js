@@ -74,11 +74,6 @@ function initVideo(videoSrc, isMuted) {
     });
 }
 
-window.foobar = function(){
-    console.log(checkPauseResumeOverlays())
-}
-
-
 function checkPauseResumeOverlays() {
     for (var i = 0; i < overlays.length; i++)
         if (AdHelper.hasClass(overlays[i], 'active')) return false
