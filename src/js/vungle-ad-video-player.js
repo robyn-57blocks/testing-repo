@@ -26,7 +26,7 @@ import { default as EventController } from './vungle-ad-event-controller.js';
 
 var videoTPATCheckpoints = [0, 25, 50, 75, 100];
 var videoTPATCheckpointsReached = [];
- 
+
 var fullscreenVideoElem = document.getElementById('fullscreen-video');
 var fullscreenVideoView = document.getElementById('fullscreen-video-view');
 var fullscreenVideoViewProgress = document.getElementById('fullscreen-video-progress');
@@ -35,6 +35,10 @@ var videoMuteIcon = document.getElementById('video-mute-icon');
 var videoUnMuteIcon = document.getElementById('video-unmute-icon');
 var videoSource, videoDurationCount, videoCurrentPlayTime, videoCheckpointIndex, videoPlaySuccessfulDuration;
 var videoViewedPerSecond = 0;
+
+
+var overlays = document.querySelectorAll('[overlay]');
+
 
 function initVideo(videoSrc, isMuted) {
 
@@ -50,7 +54,7 @@ function initVideo(videoSrc, isMuted) {
 
         //If video is set to not be muted, unmute video
         if (isMuted === 'false') {
-                unMuteVideo();
+            unMuteVideo();
         } else {
             muteVideo();
         }
@@ -70,8 +74,20 @@ function initVideo(videoSrc, isMuted) {
     });
 }
 
+window.foobar = function(){
+    console.log(checkPauseResumeOverlays())
+}
+
+
+function checkPauseResumeOverlays() {
+    for (var i = 0; i < overlays.length; i++)
+        if (AdHelper.hasClass(overlays[i], 'active')) return false
+    return true
+}
+
 function playVideo() {
-    fullscreenVideoElem.play();
+    if (checkPauseResumeOverlays())
+        fullscreenVideoElem.play();
 }
 
 function pauseVideo() {
@@ -94,7 +110,7 @@ function hideVideoView() {
 }
 
 function toggleVideoMute() {
-    console.log("video is "+fullscreenVideoElem.muted);
+    console.log("video is " + fullscreenVideoElem.muted);
     if (fullscreenVideoElem.muted) {
         //Trigger TPAT event for unmuting video audio
         window.vungle.mraidBridgeExt.notifyTPAT("video.unmute");

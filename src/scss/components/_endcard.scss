@@ -1,3 +1,6 @@
-#endcard-view.inactive{
- pointer-events:none
+#endcard-view {
+    pointer-events: none;
+}
+#endcard-view.active {
+    pointer-events: initial
 }
