@@ -54,5 +54,3 @@ function receiveMessage(e) {
 
     EventController.sendEvent('vungle-creative-message-' + data.title, data.obj)
 }
-
-sendMessage('hi')
