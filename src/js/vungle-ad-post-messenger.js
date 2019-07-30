@@ -39,9 +39,9 @@ function pushBufferedMessages() {
 }
 
 window.addEventListener('vungle-ad-iframe-reload', function() { iframeLoaded = false })
-window.addEventListener('message', recieveMessage)
+window.addEventListener('message', receiveMessage)
 
-function recieveMessage(e) {
+function receiveMessage(e) {
     if (e.data.length === 0)
         return
 
@@ -50,15 +50,6 @@ function recieveMessage(e) {
         data = JSON.parse(e.data)
     } catch (e) {
         console.log(e)
-    }
-
-    switch (data.title) {
-        case "test":
-            console.log('working');
-            break
-        case "test2":
-            console.log('working2');
-            break
     }
 
     EventController.sendEvent('vungle-creative-message-' + data.title, data.obj)

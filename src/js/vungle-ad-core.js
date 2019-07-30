@@ -307,6 +307,7 @@ var adcore = {
             document.getElementById('endcard-view').innerHTML = '<iframe id="ad-content" src="ad.html" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>';
             EventController.sendEvent('vungle-ad-iframe-reload');
             PostMessenger.init(); // Iframe Communication
+            AdHelper.removeClass(document.getElementById('endcard-view'), 'inactive');
             //send postroll.view TPAT event once iFrame has loaded
             window.vungle.mraidBridgeExt.notifyTPAT("postroll.view");
 
