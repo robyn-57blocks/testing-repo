@@ -504,14 +504,14 @@ var adcore = {
 
             gdprViewConsentButton.onclick = function() {
                 window.vungle.mraidBridgeExt.consentAction("opted_in");
-                renderAdIFrame();
+                presentAd();
                 AdHelper.addClass(gdprView, 'hide');
                 AdHelper.removeClass(gdprView, 'active');
             }
 
             gdprViewDoNotConsentButton.onclick = function() {
                 window.vungle.mraidBridgeExt.consentAction("opted_out");
-                renderAdIFrame();
+                presentAd();
                 AdHelper.addClass(gdprView, 'hide');
                 AdHelper.removeClass(gdprView, 'active');
             }
