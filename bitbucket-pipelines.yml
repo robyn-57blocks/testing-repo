@@ -80,5 +80,5 @@ pipelines:
              # install aws CLI  
              - pip install awscli
              # copy files to s3 bucket with versioned folder
-             - aws s3 sync --delete ./dist/ s3://design-framework-core/staging/ --recursive
+             - aws s3 sync --delete ./dist/ s3://design-framework-core/staging/ 
              - aws s3 cp df-dist.zip s3://design-framework-core/staging/ 
