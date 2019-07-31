@@ -98,9 +98,6 @@ function hideVideoView() {
 
     videoMuteButton.removeEventListener('click', toggleVideoMute);
 
-    //Trigger TPAT event for video close
-    window.vungle.mraidBridgeExt.notifyTPAT("video.close");
-
     AdHelper.addClass(fullscreenVideoView, 'hide');
 }
 
