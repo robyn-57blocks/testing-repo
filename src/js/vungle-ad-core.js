@@ -296,6 +296,10 @@ var adcore = {
         }
 
         function onVideoPlayComplete() {
+            //Trigger TPAT event for video close
+            window.vungle.mraidBridgeExt.notifyTPAT("video.close");
+            window.vungle.mraidBridgeExt.notifyEventValuePairEvent("video.close", 1);
+
             AdVideoPlayer.hideVideoView();
             AdVideoPlayer.endVideoAttributionListeners();
             AdClose.hideVideoCloseButtonTimer();
@@ -535,10 +539,6 @@ var adcore = {
                         if (achievedReward) {
                             fullscreenVideoElem.removeEventListener('ended', onVideoPlayComplete, false);
 
-                            //send video.close TPAT event when close button on video is clicked
-                            window.vungle.mraidBridgeExt.notifyTPAT("video.close");
-                            window.vungle.mraidBridgeExt.notifyEventValuePairEvent("video.close", 1);
-
                             onVideoPlayComplete();
                         } else {
                             revealAdNotificationModal();
@@ -546,10 +546,6 @@ var adcore = {
                     } else {
                         console.log('VIDEO TIMER CLOSE ICON - non-incentivised');
                         fullscreenVideoElem.removeEventListener('ended', onVideoPlayComplete, false);
-
-                        //send video.close TPAT event when close button on video is clicked
-                        window.vungle.mraidBridgeExt.notifyTPAT("video.close");
-                        window.vungle.mraidBridgeExt.notifyEventValuePairEvent("video.close", 1);
 
                         onVideoPlayComplete();
                     }
