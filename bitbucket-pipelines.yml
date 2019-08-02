@@ -1,84 +1,116 @@
-# This is a sample build configuration for JavaScript.
-# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
-# Only use spaces to indent your .yml configuration.
-# -----
-# You can specify a custom docker image from Docker Hub as your build environment.
-image: nikolaik/python-nodejs:python3.5-nodejs8
+image: node:10.13.0
+
 definitions:
   caches:
-    globalnode: /usr/local/lib/node_modules
+    globalnodev4: /usr/local/lib/node_modules
 
 pipelines:
+  default:
+    - step:
+        name: Lint
+        caches:
+          - node
+        script:
+          - npm install
+          - npm run lint
   branches:
     master:
+        - step:
+            name: Upload template through dashboard
+            caches:
+              - globalnodev4
+            script:
+              - npm run pipeline
+              - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js push -e auto
+    release/*:
+        - step:
+            name: Release and Upload
+            caches:
+              - globalnodev4
+            script:
+              - npm run pipeline
+              - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly topup
+              - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js push -e auto
+    test-branch:
+        - step:
+            name: Release candidate
+            caches:
+              - globalnodev4
+            script:
+              - npm run pipeline
+              - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+              - git fetch
+              - git checkout package-lock.json
+              - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly stage
+  custom:
+    upload:
       - step:
-          name: "Increment version"
+          name: Upload template through dashboard
           caches:
-             - node
+            - globalnodev4
           script:
-             # identity setup for git push
-             - git config --global user.name "Vungle Services"
-             - git config --global user.email "vungle.services@vungle.com"
-             - git remote -v
-             - git remote show origin
-             # install gulp
-             - npm i gulp-cli -g
-             # install node modules
-             - npm i          
-             # increment version
-             - npm run versioning
-             # build dist folder
-             - gulp bundle:prod
-             # Write version to a JSON file in dist
-             - npm run create-version-file
-             # Get version from package.json
-             - declare -x VERSION=$(node -pe "require('./package.json').version")
-             # display version 
-             - echo $VERSION
-             # config setup for git push
-             - git config --global push.default simple 
-             # Commit package.json 
-             - git add package.json
-             # push Commit with message ,"skip CI" Required to avoid re-running this CI upon git push
-             - git commit -m "bumped to version $VERSION [skip CI]" 
-             - git push origin
-             # commit will be tagged with version
-             - git tag $VERSION
-             - git remote -v
-             # push new tagging
-             - git push origin --tags
-             # download pip 
-             - curl -O https://bootstrap.pypa.io/get-pip.py
-             # install pip
-             - python get-pip.py
-             # install aws CLI  
-             - pip install awscli
-             # copy files to s3 bucket with versioned folder
-             - aws s3 cp ./dist/ s3://design-framework-core/$VERSION/ --recursive
-             - aws s3 cp df-dist.zip s3://design-framework-core/$VERSION/ 
-             # overwrite latest folder with new version
-             - aws s3 cp ./dist/ s3://design-framework-core/latest/ --recursive
-             - aws s3 cp df-dist.zip s3://design-framework-core/latest/ 
-             # Store JSON file in latest to see the current version
-             - aws s3 cp ./s3/version-info.json s3://design-framework-core/latest/ 
-    staging:
+            - npm run pipeline
+            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js push -e auto -f true
+    bundle:
       - step:
-          name: "Push to Staging"
+          name: Bundle the template and share it through slack
           caches:
-             - node
+            - globalnodev4
           script:
-             # install gulp
-             - npm i gulp-cli -g
-             # install node modules
-             - npm i          
-             # build dist folder
-             - gulp bundle:prod
-             # download pip 
-             - curl -O https://bootstrap.pypa.io/get-pip.py
-             # install pip
-             - python get-pip.py
-             # install aws CLI  
-             - pip install awscli
-             # copy files to s3 bucket with versioned folder
-             - aws s3 sync --delete ./dist/ s3://design-framework-core/staging/ 
-             - aws s3 cp df-dist.zip s3://design-framework-core/staging/ 
+            - npm run pipeline
+            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js push -u false -f true
+    finish:
+      - step:
+          name: Merge release to master
+          caches:
+            - globalnodev4
+          script:
+            - npm run pipeline
+            - echo $MSG
+            - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+            - git fetch
+            - git checkout package-lock.json
+            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly finish -m "$MSG"
+    topup:
+      - step:
+          name: Topup release
+          caches:
+            - globalnodev4
+          script:
+            - npm run pipeline
+            - echo $MSG
+            - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+            - git fetch
+            - git checkout package-lock.json
+            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly topup -m "$MSG"
+    stage:
+      - step:
+          name: Release candidate
+          caches:
+            - globalnodev4
+          script:
+            - npm run pipeline
+            - echo $MSG
+            - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+            - git fetch
+            - git checkout package-lock.json
+            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly stage -m "$MSG"
+    sync:
+      - step:
+          name: Merge master to develop
+          caches:
+            - globalnodev4
+          script:
+            - npm run pipeline
+            - echo $MSG
+            - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+            - git fetch
+            - git checkout package-lock.json
+            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly sync -m "$MSG"
+    prepare:
+      - step:
+          name: Prepare for next pipeline
+          script:
+            - echo $MSG
+            - git commit --allow-empty -m "$MSG"
+            - git push origin
