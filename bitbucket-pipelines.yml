@@ -21,7 +21,7 @@ pipelines:
               - globalnodev4
             script:
               - npm run pipeline
-              - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js push -e auto
+              - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
     release/*:
         - step:
             name: Release and Upload
@@ -29,8 +29,8 @@ pipelines:
               - globalnodev4
             script:
               - npm run pipeline
-              - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly topup
-              - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js push -e auto
+              - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly topup
+              - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
     test-branch:
         - step:
             name: Release candidate
@@ -41,7 +41,7 @@ pipelines:
               - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
               - git fetch
               - git checkout package-lock.json
-              - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly stage
+              - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly stage
   custom:
     upload:
       - step:
@@ -50,7 +50,7 @@ pipelines:
             - globalnodev4
           script:
             - npm run pipeline
-            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js push -e auto -f true
+            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto -f true
     bundle:
       - step:
           name: Bundle the template and share it through slack
@@ -58,7 +58,7 @@ pipelines:
             - globalnodev4
           script:
             - npm run pipeline
-            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js push -u false -f true
+            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -u false -f true
     finish:
       - step:
           name: Merge release to master
@@ -70,7 +70,7 @@ pipelines:
             - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
             - git fetch
             - git checkout package-lock.json
-            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly finish -m "$MSG"
+            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly finish -m "$MSG"
     topup:
       - step:
           name: Topup release
@@ -82,7 +82,7 @@ pipelines:
             - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
             - git fetch
             - git checkout package-lock.json
-            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly topup -m "$MSG"
+            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly topup -m "$MSG"
     stage:
       - step:
           name: Release candidate
@@ -94,7 +94,7 @@ pipelines:
             - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
             - git fetch
             - git checkout package-lock.json
-            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly stage -m "$MSG"
+            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly stage -m "$MSG"
     sync:
       - step:
           name: Merge master to develop
@@ -106,7 +106,7 @@ pipelines:
             - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
             - git fetch
             - git checkout package-lock.json
-            - node /usr/local/lib/node_modules/vungle-dynamo-cli/src/index.js fly sync -m "$MSG"
+            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly sync -m "$MSG"
     prepare:
       - step:
           name: Prepare for next pipeline
