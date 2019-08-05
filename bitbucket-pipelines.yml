@@ -15,14 +15,14 @@ pipelines:
             name: Upload template through dashboard
             script:
               - npm run pipeline
-              - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
+              # - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
     release/*:
         - step:
             name: Release and Upload              - globalnodev4
             script:
               - npm run pipeline
               - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly topup
-              - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
+              # - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
     test-branch:
         - step:
             name: Release candidate              - globalnodev4
