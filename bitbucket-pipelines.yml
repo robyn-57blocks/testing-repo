@@ -25,7 +25,7 @@ pipelines:
               # - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
     test-branch:
         - step:
-            name: Release candidate           
+            name: Release candidate          
             script:
               - npm run pipeline
               - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
