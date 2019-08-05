@@ -1,8 +1,6 @@
 image: node:10.13.0
 
 definitions:
-  caches:
-    globalnodev4: /usr/local/lib/node_modules
 
 pipelines:
   default:
