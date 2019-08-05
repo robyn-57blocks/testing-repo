@@ -5,7 +5,7 @@ pipelines:
     - step:
         name: Lint
         caches:
-          - node
+          - node 
         script:
           - npm install
           - npm run lint
