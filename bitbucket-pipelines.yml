@@ -1,4 +1,4 @@
-image: node:10.13.0
+image: nikolaik/python-nodejs:python3.5-nodejs8
 
 pipelines:
   default:
@@ -16,6 +16,29 @@ pipelines:
             script:
               - npm run pipeline
               # - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
+              - declare -x VERSION=$(node -pe "require('./package.json').version")
+              # install gulp
+              - npm i gulp-cli -g
+              # install node modules
+              - npm i          
+              # build dist folder
+              - gulp bundle:prod
+              # download pip 
+              - curl -O https://bootstrap.pypa.io/get-pip.py
+              # install pip
+              - python get-pip.py
+              # install aws CLI  
+              - pip install awscli
+              # get version from package.json
+              - declare -x VERSION=$(node -pe "require('./package.json').version")
+              # copy files to s3 bucket with versioned folder
+              - aws s3 sync --delete ./dist/ s3://design-framework-core/staging/$VERSION 
+              - aws s3 cp df-dist.zip s3://design-framework-core/staging/$VERSION 
+              # Write version to a JSON file in dist
+              - aws s3 cp ./dist/ s3://design-framework-core/latest/ --recursive
+              - aws s3 cp df-dist.zip s3://design-framework-core/latest/ 
+              # Store JSON file in latest to see the current version
+              - aws s3 cp ./s3/version-info.json s3://design-framework-core/latest/ 
     release/*:
         - step:
             name: Release and Upload            
@@ -23,6 +46,23 @@ pipelines:
               - npm run pipeline
               - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly topup
               # - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
+              # get version from package.json
+              - declare -x VERSION=$(node -pe "require('./package.json').version")
+              # install gulp
+              - npm i gulp-cli -g
+              # install node modules
+              - npm i          
+              # build dist folder
+              - gulp bundle:prod
+              # download pip 
+              - curl -O https://bootstrap.pypa.io/get-pip.py
+              # install pip
+              - python get-pip.py
+              # install aws CLI  
+              - pip install awscli
+              # copy files to s3 bucket with versioned folder
+              - aws s3 sync --delete ./dist/ s3://design-framework-core/staging/$VERSION 
+              - aws s3 cp df-dist.zip s3://design-framework-core/staging/$VERSION 
     test-branch:
         - step:
             name: Release candidate          
