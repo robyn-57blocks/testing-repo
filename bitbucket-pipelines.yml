@@ -1,4 +1,4 @@
-image: nikolaik/python-nodejs:python3.5-nodejs10
+image: nikolaik/python-nodejs:python3.5-nodejs12
 
 pipelines:
   default:
