@@ -5,7 +5,7 @@
   "main": "vungle.min.js",
   "scripts": {
     "start": "gulp --dev",
-    "pipeline": "rm -rf package-lock.json && if [ ! -d \"/usr/local/lib/node_modules/design-framework-cli\" ]; then npm install -g git+ssh://git@bitbucket.org:vungle_creative_labs/design-framework-cli.git; fi && node /usr/local/lib/node_modules/design-framework-cli/src/index.js validate",
+    "pipeline": "rm -rf package-lock.json && if [ ! -d \"/usr/local/lib/node_modules/design-framework-cli\" ]; then npm install -g git+ssh://git@bitbucket.org:vungle_creative_labs/design-framework-cli.git; fi",
     "build": "gulp",
     "lint": "eslint src/ build/"
   },
