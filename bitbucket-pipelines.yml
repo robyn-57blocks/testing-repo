@@ -1,7 +1,5 @@
 image: node:10.13.0
 
-definitions:
-
 pipelines:
   default:
     - step:
