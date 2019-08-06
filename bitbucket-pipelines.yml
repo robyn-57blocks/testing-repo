@@ -21,7 +21,7 @@ pipelines:
               - globalnodev4
             script:
               - npm run pipeline
-              - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
+              - design-framework-cli push -e auto
               - declare -x VERSION=$(node -pe "require('./package.json').version")
               # install gulp
               - npm i gulp-cli -g
@@ -52,8 +52,8 @@ pipelines:
               - globalnodev4
             script:
               - npm run pipeline
-              - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly topup
-              # - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
+              - design-framework-cli fly topup
+              # - design-framework-cli push -e auto
               # get version from package.json
               - declare -x VERSION=$(node -pe "require('./package.json').version")
               # install gulp
@@ -81,7 +81,7 @@ pipelines:
               - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
               - git fetch
               - git checkout package-lock.json
-              - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly stage
+              - design-framework-cli fly stage
   custom:
     upload:
       - step:
@@ -90,7 +90,7 @@ pipelines:
             - globalnodev4
           script:
             - npm run pipeline
-            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto -f true
+            - design-framework-cli push -e auto -f true
     bundle:
       - step:
           name: Bundle the template and share it through slack
@@ -98,7 +98,7 @@ pipelines:
             - globalnodev4
           script:
             - npm run pipeline
-            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -u false -f true
+            - design-framework-cli push -u false -f true
     finish:
       - step:
           name: Merge release to master
@@ -110,7 +110,7 @@ pipelines:
             - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
             - git fetch
             - git checkout package-lock.json
-            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly finish -m "$MSG"
+            - design-framework-cli fly finish -m "$MSG"
     topup:
       - step:
           name: Topup release
@@ -122,7 +122,7 @@ pipelines:
             - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
             - git fetch
             - git checkout package-lock.json
-            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly topup -m "$MSG"
+            - design-framework-cli fly topup -m "$MSG"
     stage:
       - step:
           name: Release candidate
@@ -134,7 +134,7 @@ pipelines:
             - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
             - git fetch
             - git checkout package-lock.json
-            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly stage -m "$MSG"
+            - design-framework-cli fly stage -m "$MSG"
     sync:
       - step:
           name: Merge master to develop
@@ -146,7 +146,7 @@ pipelines:
             - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
             - git fetch
             - git checkout package-lock.json
-            - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly sync -m "$MSG"
+            - design-framework-cli fly sync -m "$MSG"
     prepare:
       - step:
           name: Prepare for next pipeline
