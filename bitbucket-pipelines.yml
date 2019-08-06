@@ -1,5 +1,9 @@
 image: nikolaik/python-nodejs:python3.5-nodejs12
 
+definitions:
+  caches:
+    globalnodev4: /usr/local/lib/node_modules
+
 pipelines:
   default:
     - step:
@@ -13,9 +17,11 @@ pipelines:
     master:
         - step:
             name: Upload template through dashboard
+          caches:
+            - globalnodev4
             script:
               - npm run pipeline
-              # - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
+              - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
               - declare -x VERSION=$(node -pe "require('./package.json').version")
               # install gulp
               - npm i gulp-cli -g
@@ -42,6 +48,8 @@ pipelines:
     release/*:
         - step:
             name: Release and Upload            
+          caches:
+            - globalnodev4
             script:
               - npm run pipeline
               - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly topup
@@ -66,6 +74,8 @@ pipelines:
     test-branch:
         - step:
             name: Release candidate          
+          caches:
+            - globalnodev4
             script:
               - npm run pipeline
               - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
@@ -78,6 +88,8 @@ pipelines:
           name: Upload template through dashboard
           caches:
             - globalnodev4
+          caches:
+            - globalnodev4
           script:
             - npm run pipeline
             - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto -f true
@@ -86,12 +98,16 @@ pipelines:
           name: Bundle the template and share it through slack
           caches:
             - globalnodev4
+          caches:
+            - globalnodev4
           script:
             - npm run pipeline
             - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -u false -f true
     finish:
       - step:
           name: Merge release to master
+          caches:
+            - globalnodev4
           caches:
             - globalnodev4
           script:
@@ -106,6 +122,8 @@ pipelines:
           name: Topup release
           caches:
             - globalnodev4
+          caches:
+            - globalnodev4
           script:
             - npm run pipeline
             - echo $MSG
@@ -116,6 +134,8 @@ pipelines:
     stage:
       - step:
           name: Release candidate
+          caches:
+            - globalnodev4
           caches:
             - globalnodev4
           script:
@@ -130,6 +150,8 @@ pipelines:
           name: Merge master to develop
           caches:
             - globalnodev4
+          caches:
+            - globalnodev4
           script:
             - npm run pipeline
             - echo $MSG
@@ -140,6 +162,8 @@ pipelines:
     prepare:
       - step:
           name: Prepare for next pipeline
+          caches:
+            - globalnodev4
           script:
             - echo $MSG
             - git commit --allow-empty -m "$MSG"
