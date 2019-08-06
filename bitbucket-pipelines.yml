@@ -17,8 +17,8 @@ pipelines:
     master:
         - step:
             name: Upload template through dashboard
-          caches:
-            - globalnodev4
+            caches:
+              - globalnodev4
             script:
               - npm run pipeline
               - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto
@@ -48,8 +48,8 @@ pipelines:
     release/*:
         - step:
             name: Release and Upload            
-          caches:
-            - globalnodev4
+            caches:
+              - globalnodev4
             script:
               - npm run pipeline
               - node /usr/local/lib/node_modules/design-framework-cli/src/index.js fly topup
@@ -74,8 +74,8 @@ pipelines:
     test-branch:
         - step:
             name: Release candidate          
-          caches:
-            - globalnodev4
+            caches:
+              - globalnodev4
             script:
               - npm run pipeline
               - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
@@ -88,8 +88,6 @@ pipelines:
           name: Upload template through dashboard
           caches:
             - globalnodev4
-          caches:
-            - globalnodev4
           script:
             - npm run pipeline
             - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -e auto -f true
@@ -98,16 +96,12 @@ pipelines:
           name: Bundle the template and share it through slack
           caches:
             - globalnodev4
-          caches:
-            - globalnodev4
           script:
             - npm run pipeline
             - node /usr/local/lib/node_modules/design-framework-cli/src/index.js push -u false -f true
     finish:
       - step:
           name: Merge release to master
-          caches:
-            - globalnodev4
           caches:
             - globalnodev4
           script:
@@ -122,8 +116,6 @@ pipelines:
           name: Topup release
           caches:
             - globalnodev4
-          caches:
-            - globalnodev4
           script:
             - npm run pipeline
             - echo $MSG
@@ -136,8 +128,6 @@ pipelines:
           name: Release candidate
           caches:
             - globalnodev4
-          caches:
-            - globalnodev4
           script:
             - npm run pipeline
             - echo $MSG
@@ -148,8 +138,6 @@ pipelines:
     sync:
       - step:
           name: Merge master to develop
-          caches:
-            - globalnodev4
           caches:
             - globalnodev4
           script:
