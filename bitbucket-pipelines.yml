@@ -7,7 +7,7 @@ definitions:
 pipelines:
   default:
     - step:
-        name: Lint
+        name: Lint 
         caches:
           - node 
         script:
