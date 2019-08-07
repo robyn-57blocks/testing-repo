@@ -24,7 +24,6 @@ pipelines:
               # increment version 
               - design-framework-cli fly finish -m "$MSG"
               # - design-framework-cli push -e auto
-              - declare -x VERSION=$(node -pe "require('./package.json').version")
               # install gulp
               - npm i gulp-cli -g
               # install node modules
@@ -40,8 +39,8 @@ pipelines:
               # get version from package.json
               - declare -x VERSION=$(node -pe "require('./package.json').version")
               # copy files to s3 bucket with versioned folder
-              - aws s3 sync --delete ./dist/ s3://design-framework-core-dev/$VERSION-testing
-              - aws s3 cp df-dist.zip s3://design-framework-core-dev/$VERSION-testing
+              - aws s3 sync --delete ./dist/ s3://design-framework-core-dev/$VERSION
+              - aws s3 cp df-dist.zip s3://design-framework-core-dev/$VERSION
               # Write version to a JSON file in dist
               - aws s3 cp ./dist/ s3://design-framework-core-dev/latest/ --recursive
               - aws s3 cp df-dist.zip s3://design-framework-core-dev/latest/ 
@@ -71,8 +70,8 @@ pipelines:
               # install aws CLI  
               - pip install awscli
               # copy files to s3 bucket with versioned folder
-              - aws s3 sync --delete ./dist/ s3://design-framework-core-dev/$VERSION-testing
-              - aws s3 cp df-dist.zip s3://design-framework-core-dev/$VERSION-testing
+              - aws s3 sync --delete ./dist/ s3://design-framework-core-dev/$VERSION
+              - aws s3 cp df-dist.zip s3://design-framework-core-dev/$VERSION
     test-branch:
         - step:
             name: Release candidate          
