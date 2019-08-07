@@ -46,7 +46,7 @@ pipelines:
               - aws s3 cp ./dist/ s3://design-framework-core/latest/ --recursive
               - aws s3 cp df-dist.zip s3://design-framework-core/latest/ 
               # Store JSON file in latest to see the current version
-              - aws s3 cp ./s3/version-info.json s3://design-framework-core/latest/ 
+              # - aws s3 cp ./s3/version-info.json s3://design-framework-core/latest/ 
     release/*:
         - step:
             name: Release and Upload            
