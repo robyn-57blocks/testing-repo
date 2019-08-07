@@ -11,13 +11,17 @@
 
 // *** Base ***
 @import './base/typography';
+@import './base/transitions';
 @import './base/breakpoints';
 @import './base/core';
 
 // *** Components ***
+@import './components/ad-debug';
 @import './components/close';
-@import './components/privacy';
 @import './components/default-notification-modal';
 @import './components/gdpr-notification-modal';
-@import './components/ad-debug';
+@import './components/privacy';
+@import './components/video-cta';
 @import './components/video';
+@import './components/video-mute';
+@import './components/endcard';

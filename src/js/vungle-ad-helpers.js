@@ -1,11 +1,11 @@
 /* ----- Vungle Design Framework - JS ad helper methods ----- */
 
-/*	addClass() - add a classname to an element
-	removeClass() - remove a classname from an element
-	hasClass() - check if an element has a class
-	getOS() - returns OS of browser user agent, either iOS, Android, Windows or null
-	vungleVideoType() - returns info on Vungle video (ratio, classname, original video width/height)
-	resizeVideo() - resizes video to fit parent container without visible black bars based on our supported ratios
+/*  addClass() - add a classname to an element
+    removeClass() - remove a classname from an element
+    hasClass() - check if an element has a class
+    getOS() - returns OS of browser user agent, either iOS, Android, Windows or null
+    vungleVideoType() - returns info on Vungle video (ratio, classname, original video width/height)
+    resizeVideo() - resizes video to fit parent container without visible black bars based on our supported ratios
 */
 
 export default {
@@ -28,6 +28,14 @@ export default {
 
     hasClass: function(elem, classString) {
         return (' ' + elem.className + ' ').indexOf(' ' + classString + ' ') > -1;
+    },
+
+    validAndTrue: function(obj) {
+        return (typeof obj !== 'undefined' && obj);
+    },
+
+    isValid: function(obj) {
+        return (typeof obj !== 'undefined');
     },
 
     getOS: function() {

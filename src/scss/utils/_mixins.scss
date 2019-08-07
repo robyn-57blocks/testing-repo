@@ -13,7 +13,6 @@
     }
 }
 
-
 // -- Helpers
 @mixin border-radius($radius: 5px) {
     -webkit-background-clip: padding-box;
@@ -22,6 +21,12 @@
     -moz-border-radius: $radius;
     border-radius: $radius;
     background-clip: padding-box;
+}
+
+@mixin appearance($appearance: none) {
+    -webkit-appearance: $appearance;
+    -moz-appearance: $appearance;
+    appearance: $appearance;
 }
 
 @mixin box-shadow($shadow1, $shadow2:false) {

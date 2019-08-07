@@ -8,14 +8,24 @@ $closeHeight:40em;
 
 $windowsCloseHeight:35em;
 
-#vungle-close {
+#vungle-fullscreen-video-close, #vungle-endcard-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    pointer-events: none;
     opacity: 1;
     -webkit-transition: opacity 0.35s;
+
+    & > .end {
+        pointer-events: visible;
+    }
 }
 
-#vungle-close.hide {
+#vungle-fullscreen-video-close.hide, #vungle-endcard-close.hide {
     opacity: 0;
     pointer-events: none;
+    display: none;
 }
 
 // -- Vungle header close button
@@ -58,9 +68,7 @@ $windowsCloseHeight:35em;
         }
     }
 
-    #vungle-ad-close-icon-container {
-
-
+    #vungle-fullscreen-video-close-icon-container, #vungle-endcard-close-icon-container {
         right: 0em;
         top: 0em;
         position: relative;
@@ -105,7 +113,7 @@ $windowsCloseHeight:35em;
         }
     }
 
-    #vungle-ad-close-icon {
+    .vungle-close-icon {
         fill: $vungle-ad-dark-theme-fill;
         stroke: $vungle-ad-dark-theme-stroke;
         stroke-width: 14;
@@ -113,14 +121,14 @@ $windowsCloseHeight:35em;
     }
 
     #{$light-theme} {
-        #vungle-ad-close-icon {
+        .vungle-close-icon {
             fill: $vungle-ad-light-theme-fill;
             stroke: $vungle-ad-light-theme-stroke;
         }
     }
 
     #{$dark-theme} {
-        #vungle-ad-close-icon {
+        .vungle-close-icon {
             fill: $vungle-ad-dark-theme-fill;
             stroke: $vungle-ad-dark-theme-stroke;
         }
@@ -128,7 +136,7 @@ $windowsCloseHeight:35em;
 
 }
 
-#vungle-ad-timer-countdown {
+#vungle-endcard-timer-countdown {
     color: rgba(255, 255, 255, 1);
     display: inline-block;
     line-height: auto;
@@ -156,7 +164,7 @@ $windowsCloseHeight:35em;
     }
 }
 
-#vungle-ad-close-icon-container.rewarded #vungle-ad-timer-countdown {
+#vungle-endcard-close-icon-container.rewarded #vungle-endcard-timer-countdown {
     transition: margin-left .5s ease-in-out, border .5s .2s ease-in-out;
 
     #{$windows} {
@@ -164,13 +172,13 @@ $windowsCloseHeight:35em;
     }
 }
 
-.end #vungle-ad-timer-countdown {
+.end #vungle-endcard-timer-countdown {
     #{$windows} {
         opacity: 0;
     }
 }
 
-#vungle-ad-reward-timer {
+#vungle-endcard-reward-timer {
     position: absolute;
     background: rgba(50, 50, 50, 0.7);
     width: 100%;
@@ -186,11 +194,11 @@ $windowsCloseHeight:35em;
     }
 }
 
-.show #vungle-ad-reward-timer {
+.show #vungle-endcard-reward-timer {
     opacity: 1;
 }
 
-#vungle-ad-close-icon-container.end:not(.open) #vungle-ad-reward-timer {
+#vungle-endcard-close-icon-container.end:not(.open) #vungle-endcard-reward-timer {
     transition: opacity .5s ease-in-out, box-shadow .5s ease-in-out;
     opacity: 0;
 
@@ -202,23 +210,23 @@ $windowsCloseHeight:35em;
 }
 
 
-#vungle-ad-close-icon-container.end .background {
+#vungle-endcard-close-icon-container.end .background {
     -webkit-box-shadow: inset 0em 0em 0em modifySize(54em, $ios-android-modifier) rgba(255, 255, 255, 1);
     -moz-box-shadow: inset 0em 0em 0em modifySize(54em, $ios-android-modifier) rgba(255, 255, 255, 1);
     box-shadow: inset 0em 0em 0em modifySize(54em, $ios-android-modifier) rgba(255, 255, 255, 1);
 }
 
-#vungle-ad-close-icon-container.end #vungle-ad-timer-svg-background.background circle {
+#vungle-endcard-close-icon-container.end #vungle-endcard-timer-svg-background.background circle {
     fill: rgba(255, 255, 255, 1);
 }
 
-#vungle-ad-close-icon-container.end span {
+#vungle-endcard-close-icon-container.end span {
     #{$windows} {
         opacity: 1 !important;
     }
 }
 
-#vungle-ad-close-icon {
+.vungle-close-icon {
     width: 70%;
     height: 100%;
     position: absolute;
@@ -245,11 +253,11 @@ $windowsCloseHeight:35em;
     }
 }
 
-.end #vungle-ad-close-icon {
+.end .vungle-close-icon {
     opacity: 1
 }
 
-#vungle-ad-close-icon-container.rewarded #vungle-ad-close-icon {
+#vungle-endcard-close-icon-container.rewarded .vungle-close-icon {
     opacity: 0;
 
     #{$windows} {
@@ -261,8 +269,8 @@ $windowsCloseHeight:35em;
     }
 }
 
-#vungle-ad-close-icon-container.open #vungle-ad-close-icon,
-#vungle-ad-close-icon-container.end #vungle-ad-close-icon {
+#vungle-endcard-close-icon-container.open .vungle-close-icon,
+#vungle-endcard-close-icon-container.end .vungle-close-icon {
     transition: opacity .5s .5s ease-in-out;
     opacity: 1;
 

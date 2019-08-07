@@ -1,0 +1,55 @@
+.footer {
+    position: fixed;
+    z-index: 100;
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: 3.2em;
+    bottom:.5em;
+    opacity:0;
+    transition: $vungle-opacity-transition;
+    pointer-events:none;
+
+    &.show {
+        opacity: 1;
+        pointer-events:initial;
+    }
+
+    .download svg{
+        stroke-width:14;
+            fill: $vungle-ad-dark-theme-fill;
+            stroke: $vungle-ad-dark-theme-stroke;
+
+        #{$light-theme} {
+                fill: $vungle-ad-light-theme-fill;
+                stroke: $vungle-ad-light-theme-stroke;
+        }
+
+        #{$dark-theme} {
+                fill: $vungle-ad-dark-theme-fill;
+               stroke: $vungle-ad-dark-theme-stroke;
+        }
+    }
+
+
+    .download {
+        width: 1.5em;
+        height: 1.5em;
+        padding: 1.25em 0.62em 0.62em 1.25em;
+        text-align: center;
+        line-height: 1em;
+
+        float: right;
+        cursor: pointer;
+
+        .download-icon {
+            width: 1.1em;
+            height: 1.1em;
+
+            position: absolute;
+            bottom: 0.33em;
+        }
+    }
+}

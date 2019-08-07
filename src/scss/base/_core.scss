@@ -61,19 +61,22 @@ body > * {
 	transition: opacity 0.02s linear;
 	-webkit-transition: opacity 0.02s linear;
 	position: relative;
+	background-color: $black; // some iOS versions do not show a background behind the endcard.
+
+	.fullscreen-video-view, .endcard-view {
+		position: absolute;
+		margin: auto;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+		height: 100%;
+		width: 100%;
+	}
+
+	.fullscreen-video-view.hide {
+		display: none;
+	}
 }
 
-#vungle-ad.video-endcard, #vungle-ad.endcard, .endcard-view, #ad-iframe {
-	position: absolute;
-	margin: auto;
-	top: 0;
-	left: 0;
-	overflow: hidden;
-	height: 100%;
-	width: 100%;
-}
 
-// some iOS versions do not show a background behind the endcard.
-.endcard-view {
-	background-color: $black;
-}
+

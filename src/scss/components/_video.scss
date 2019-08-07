@@ -1,32 +1,40 @@
-// #video {
-//     position: absolute;
-//     transform: translate(-50%, -50%);
-//     top: 50%;
-//     left: 50%;
+#fullscreen-video-view {
 
-//     &.hide {
-//         display: none;
-//     }
-// }
+	#fullscreen-video {
+	 	position: absolute;
+	 	height: 100%;
+	 	width: 100%;
+	 	top: 0;
+	 	left: 0;
+	 	bottom: 0;
+	 	right: 0;
+	 	margin: auto;
 
-#video.video-inline {
-    top: 0%;
-    transform: translate(-50%, 0%);
-}
+	 	&.hide {
+	 		display: none;
+	 	}
+	}
 
-#vungle-fullscreen-video {
- 	position: absolute;
- 	transform: translate(-50%, -50%);
- 	top: 50%;
- 	left: 50%;
- 	width: 100%;
- 	font-size: 0;
+	progress {
+		@include appearance(none);
+        border: none;
+        background: rgba(0,0,0,0.5);
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 3px;
+	}
 
- 	&.hide {
- 		display: none;
+	progress::-webkit-progress-bar {
+		background: rgba(0,0,0,0.5);
+	}
 
- 		> video {
- 			display: none;
- 		}
- 	}
+	progress::-webkit-progress-value {
+		background: $vungle-green;
+	}
+
+	progress::-moz-progress-bar {
+        background: $vungle-green;
+    }
+
 }
