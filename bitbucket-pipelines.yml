@@ -14,13 +14,15 @@ pipelines:
           - npm install
           - npm run lint
   branches:
-    master:
+    test-master:
         - step:
             name: Upload template through dashboard
             caches:
               - globalnodev4
             script:
               - npm run pipeline
+              # increment version 
+              - design-framework-cli fly finish -m "$MSG"
               # - design-framework-cli push -e auto
               - declare -x VERSION=$(node -pe "require('./package.json').version")
               # install gulp
