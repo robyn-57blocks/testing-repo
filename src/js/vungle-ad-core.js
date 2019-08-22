@@ -22,6 +22,7 @@ var adcore = {
 
         var vungleAd = document.getElementById('vungle-ad');
         var fullscreenVideoElem = document.getElementById('fullscreen-video');
+        var endcardView = document.getElementById('endcard-view');
         window.vungleMRAID = MRAIDHelper;
 
         //check for either vungle or standard MRAID
@@ -296,6 +297,10 @@ var adcore = {
         }
 
         function onVideoPlayComplete() {
+            //Trigger TPAT event for video close
+            window.vungle.mraidBridgeExt.notifyTPAT("video.close");
+            window.vungle.mraidBridgeExt.notifyEventValuePairEvent("video.close", 1);
+
             AdVideoPlayer.hideVideoView();
             AdVideoPlayer.endVideoAttributionListeners();
             AdClose.hideVideoCloseButtonTimer();
@@ -454,6 +459,7 @@ var adcore = {
             var privacyIcon = document.getElementById('privacy-icon');
 
             adModal.className = '';
+            AdHelper.addClass(adModal, 'active');
 
             if (creativeViewType === "video_and_endcard") {
                 AdClose.hideVideoCloseButtonTimer();
@@ -465,7 +471,7 @@ var adcore = {
 
             adModalContinue.onclick = function() {
                 AdHelper.addClass(adModal, 'hide');
-
+                AdHelper.removeClass(adModal, 'active');
                 if (creativeViewType === "video_and_endcard") {
                     AdClose.showVideoCloseButtonTimer();
                     AdVideoPlayer.playVideo();
@@ -479,6 +485,7 @@ var adcore = {
             adModalClose.onclick = function() {
                 if (creativeViewType === "video_and_endcard") {
                     AdHelper.addClass(adModal, 'hide');
+                    AdHelper.removeClass(adModal, 'active');
                     revealPrivacyButton();
                     onVideoPlayComplete();
                 } else {
@@ -500,17 +507,20 @@ var adcore = {
             document.getElementById('gdpr-notification-no-consent').innerHTML = window.vungle.mraid.getConsentDenyButtonText();
 
             AdHelper.removeClass(gdprView, 'hide');
+            AdHelper.addClass(gdprView, 'active');
 
             gdprViewConsentButton.onclick = function() {
                 window.vungle.mraidBridgeExt.consentAction("opted_in");
-                renderAdIFrame();
+                presentAd();
                 AdHelper.addClass(gdprView, 'hide');
+                AdHelper.removeClass(gdprView, 'active');
             }
 
             gdprViewDoNotConsentButton.onclick = function() {
                 window.vungle.mraidBridgeExt.consentAction("opted_out");
-                renderAdIFrame();
+                presentAd();
                 AdHelper.addClass(gdprView, 'hide');
+                AdHelper.removeClass(gdprView, 'active');
             }
         }
 
@@ -532,10 +542,6 @@ var adcore = {
                         if (achievedReward) {
                             fullscreenVideoElem.removeEventListener('ended', onVideoPlayComplete, false);
 
-                            //send video.close TPAT event when close button on video is clicked
-                            window.vungle.mraidBridgeExt.notifyTPAT("video.close");
-                            window.vungle.mraidBridgeExt.notifyEventValuePairEvent("video.close", 1);
-
                             onVideoPlayComplete();
                         } else {
                             revealAdNotificationModal();
@@ -543,10 +549,6 @@ var adcore = {
                     } else {
                         console.log('VIDEO TIMER CLOSE ICON - non-incentivised');
                         fullscreenVideoElem.removeEventListener('ended', onVideoPlayComplete, false);
-
-                        //send video.close TPAT event when close button on video is clicked
-                        window.vungle.mraidBridgeExt.notifyTPAT("video.close");
-                        window.vungle.mraidBridgeExt.notifyEventValuePairEvent("video.close", 1);
 
                         onVideoPlayComplete();
                     }
