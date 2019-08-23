@@ -32,20 +32,11 @@ window.sendMessage = function(title, obj) {
     window.parent.postMessage(JSON.stringify(data), '*');
 };
 
-window.recieveMessage = function(e) {
+window.receiveMessage = function(e) {
     if(e.data.length === 0)
         return
 
     var data = JSON.parse(e.data)
-
-    switch (data.title) {
-        case "test":
-            console.log('working');
-            break
-        case "test2":
-            console.log('working2');
-            break
-    }
 }
 
-window.addEventListener('message', window.recieveMessage)
+window.addEventListener('message', window.receiveMessage)
