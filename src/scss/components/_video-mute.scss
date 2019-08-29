@@ -16,34 +16,7 @@ $windowsCloseHeight:35em;
     -webkit-tap-highlight-color: transparent;
     z-index: 500;
 
-    a {
-        display: block;
-        padding: 0.8em 0.8em 0.5em 1.2em;
-        cursor: pointer;
-    }
-
-    .video-header-audio-icon-container {
-        left: 0em;
-        top: 0em;
-        position: relative;
-        height: modifySize($closeHeight, $ios-android-modifier);
-        width: modifySize($closeHeight, $ios-android-modifier);
-        text-align: center;
-
-        #video-unmute-icon, #video-mute-icon {
-            position: absolute;
-            left: 0;
-            fill: $vungle-ad-dark-theme-fill;
-            stroke: $vungle-ad-dark-theme-stroke;
-            stroke-width: 14;
-            stroke-miterlimit: 10;
-            transition: opacity .2s .2s ease-in-out;
-
-            &.hide {
-                opacity: 0;
-            }
-        }
-
+    .mute-unmute-btn {
         #{$light-theme} {
             #video-unmute-icon, #video-mute-icon {
                 fill: $vungle-ad-light-theme-fill;

@@ -332,7 +332,7 @@ var adcore = {
         }
 
         function onAdViewableChange() {
-            // Pause and Resume 
+            // Pause and Resume
             var isViewable = MRAIDHelper.isViewable();
             EventController.sendEvent('vungle-ad-viewable-change', isViewable)
             if (isViewable) {
@@ -404,8 +404,8 @@ var adcore = {
             VungleAd.theme = theme;
             VungleAd.os = AdHelper.getOS();
 
-            // @if NODE_ENV='dev' 
-            /*  
+            // @if NODE_ENV='dev'
+            /*
                 Debug mode: Displays the Vungle boilerplate classes to help you
                 identify each classname if you wish to make additional stylistic changes
             */
@@ -450,7 +450,7 @@ var adcore = {
             var adModalClose = document.getElementById('ad-notification-modal-close');
             var privacyIcon = document.getElementById('privacy-icon');
 
-            adModal.className = '';
+            AdHelper.removeClass(adModal, 'hide');
 
             if (creativeViewType === "video_and_endcard") {
                 AdClose.hideVideoCloseButtonTimer();
@@ -574,6 +574,7 @@ var adcore = {
                     AdClose.endEndcardCloseButtonTimer();
                     closeButton.onclick = function() {
                         vungleMRAID.close();
+                        console.log(close);
                     };
                 }, showCloseButtonTimeMilliSeconds);
 

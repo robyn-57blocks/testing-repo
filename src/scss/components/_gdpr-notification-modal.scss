@@ -1,118 +1,118 @@
-#gdpr-notification-view {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	background: $white;
-	z-index: 999999;
-
-	&.hide {
-		opacity: 0;
-		pointer-events: none;
-	}
-
-	.ad-notification-modal-content {
-		position: absolute;
-		left: 0%;
-		top: 50%;
-		margin: 0 auto;
-		width: 100%;
-		background: $white;
-		z-index: 5000;
-		box-sizing: border-box;
-		padding: 0 10vw;
-		transform: translate(0%, -50%);
-
-		.gdpr-notification-icon {
-			background: $vungle-light-blue;
-			border-radius: 10000px;
-			padding: 1.5vw;
-			width: 17vw;
-			left: 0;
-			right: 0;
-			margin: auto;
-
-			svg {
-				display: block;
-			}
-
-			.target-icon {
-				fill: $white;
-			}
-
-			#{$landscape} {
-				display: none;
-
-				@media all and (min-width: $tablet) {
-					display: block;
-					width: 8vw;
-				}
-			}
-		}
-
-		h3 {
-			text-align: center;
-			color: $black;
-			font-family: $vungle-typography;
-			@include responsive-font(4.5vw, 1.4em, 2em);
-			font-weight: 700;
-			padding: 5vw 0 1.5em;
-
-			#{$landscape} {
-				padding: 2vw 0 1em;
-				@include responsive-font(4.5vw, 1.2em, 1.5em);
-
-				@media all and (min-width: $tablet) {
-					@include responsive-font(4.5vw, 1.7em, 1.9em);
-				}
-			}
-		}
-
-		p {
-			text-align: center;
-			color: $black;
-			font-family: $vungle-typography;
-			@include responsive-font(2.5vw, 0.9em, 1.2em);
-			line-height: calc(120%);
-			padding: 0;
-		}
-
-		.gdpr-notification-buttons {
-			width: 100%;
-			padding: 5vw 0 0;
-
-			a {
-				width: 100%;
-				max-width: 50vw;
-				margin: auto;
-				display: block;
-				color: $black;
-				font-family: $vungle-typography;
-				@include responsive-font(3.5vw, 1.2em, 1.4em);
-				padding: 0.8em 0;
-				text-align: center;
-				border-radius: 2em;
-				margin-top: 0.5em;
-
-				&:first-child {
-					margin-top: 0;
-				}
-				&:last-child {
-					margin-bottom: 0;
-				}
-
-				&.action-border-green {
-					background: #05c237;
-					color: $white;
-				}
-				&.action-sub-grey {
-					background: $white;
-					color: $grey;
-				}
-			}
-		}
-	}
-}
+// #gdpr-notification-view {
+// 	position: absolute;
+// 	width: 100%;
+// 	height: 100%;
+// 	top: 0;
+// 	left: 0;
+// 	bottom: 0;
+// 	right: 0;
+// 	background: $white;
+// 	z-index: 999999;
+//
+// 	&.hide {
+// 		opacity: 0;
+// 		pointer-events: none;
+// 	}
+//
+// 	.ad-notification-modal-content {
+// 		position: absolute;
+// 		left: 0%;
+// 		top: 50%;
+// 		margin: 0 auto;
+// 		width: 100%;
+// 		background: $white;
+// 		z-index: 5000;
+// 		box-sizing: border-box;
+// 		padding: 0 10vw;
+// 		transform: translate(0%, -50%);
+//
+// 		.gdpr-notification-icon {
+// 			background: $vungle-light-blue;
+// 			border-radius: 10000px;
+// 			padding: 1.5vw;
+// 			width: 17vw;
+// 			left: 0;
+// 			right: 0;
+// 			margin: auto;
+//
+// 			svg {
+// 				display: block;
+// 			}
+//
+// 			.target-icon {
+// 				fill: $white;
+// 			}
+//
+// 			#{$landscape} {
+// 				display: none;
+//
+// 				@media all and (min-width: $tablet) {
+// 					display: block;
+// 					width: 8vw;
+// 				}
+// 			}
+// 		}
+//
+// 		h3 {
+// 			text-align: center;
+// 			color: $black;
+// 			font-family: $vungle-typography;
+// 			@include responsive-font(4.5vw, 1.4em, 2em);
+// 			font-weight: 700;
+// 			padding: 5vw 0 1.5em;
+//
+// 			#{$landscape} {
+// 				padding: 2vw 0 1em;
+// 				@include responsive-font(4.5vw, 1.2em, 1.5em);
+//
+// 				@media all and (min-width: $tablet) {
+// 					@include responsive-font(4.5vw, 1.7em, 1.9em);
+// 				}
+// 			}
+// 		}
+//
+// 		p {
+// 			text-align: center;
+// 			color: $black;
+// 			font-family: $vungle-typography;
+// 			@include responsive-font(2.5vw, 0.9em, 1.2em);
+// 			line-height: calc(120%);
+// 			padding: 0;
+// 		}
+//
+// 		.gdpr-notification-buttons {
+// 			width: 100%;
+// 			padding: 5vw 0 0;
+//
+// 			a {
+// 				width: 100%;
+// 				max-width: 50vw;
+// 				margin: auto;
+// 				display: block;
+// 				color: $black;
+// 				font-family: $vungle-typography;
+// 				@include responsive-font(3.5vw, 1.2em, 1.4em);
+// 				padding: 0.8em 0;
+// 				text-align: center;
+// 				border-radius: 2em;
+// 				margin-top: 0.5em;
+//
+// 				&:first-child {
+// 					margin-top: 0;
+// 				}
+// 				&:last-child {
+// 					margin-bottom: 0;
+// 				}
+//
+// 				&.action-border-green {
+// 					background: #05c237;
+// 					color: $white;
+// 				}
+// 				&.action-sub-grey {
+// 					background: $white;
+// 					color: $grey;
+// 				}
+// 			}
+// 		}
+// 	}
+// }

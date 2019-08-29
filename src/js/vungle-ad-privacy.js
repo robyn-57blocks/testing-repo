@@ -53,22 +53,22 @@ function showIFrame() {
 }
 
 function hidePrivacyIcon() {
-    AdHelper.removeClass(privacyIcon, 'privacy-extended');
+    AdHelper.removeClass(privacyIcon, 'open');
 
     privacySubTimer = setTimeout(function() {
-        AdHelper.removeClass(privacyIcon, 'privacy-reverse');
+        AdHelper.removeClass(privacyIcon, 'reverse');
     }, privacySubHideDuration);
 }
 
 function privacyExtend() {
 
-    if (AdHelper.hasClass(privacyIcon, 'privacy-extended')) {
+    if (AdHelper.hasClass(privacyIcon, 'open')) {
         showIFrame();
         hidePrivacyIcon();
         return;
     }
 
-    AdHelper.addClass(privacyIcon, 'privacy-extended');
+    AdHelper.addClass(privacyIcon, 'open');
 
     clearTimeout(privacyTimer);
 
@@ -77,6 +77,6 @@ function privacyExtend() {
     }, privacyDuration);
 
     privacySubTimer = setTimeout(function() {
-        AdHelper.addClass(privacyIcon, 'privacy-reverse');
+        AdHelper.addClass(privacyIcon, 'reverse');
     }, privacySubDuration);
 }

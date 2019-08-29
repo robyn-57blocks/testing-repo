@@ -11,10 +11,9 @@ export default {
 
 import { default as AdHelper } from './vungle-ad-helpers.js';
 
-var videoClose = document.getElementById('vungle-fullscreen-video-close');
-var videoCloseIconContainer = document.getElementById('vungle-fullscreen-video-close-icon-container');
+var videoClose = document.getElementById('vungle-fullscreen-video-close-icon-container');
 
-var endcardClose = document.getElementById('vungle-endcard-close');
+// var endcardClose = document.getElementById('vungle-endcard-close');
 var endcardCloseIconContainer = document.getElementById('vungle-endcard-close-icon-container');
 var endcardTimerCountdown = document.getElementById('vungle-endcard-timer-countdown');
 var endcardInterval, endcardCountdown;
@@ -34,8 +33,8 @@ function hideVideoCloseButtonTimer() {
 
 function initEndcardCloseButtonTimer(settings) {
 
-    AdHelper.removeClass(endcardClose, 'hide');
-    
+    AdHelper.removeClass(endcardCloseIconContainer, 'hide');
+
     if (settings.time !== 0) {
         AdHelper.addClass(endcardCloseIconContainer, 'show')
         var endcardCountdown = parseInt(settings.time);
@@ -57,15 +56,15 @@ function initEndcardCloseButtonTimer(settings) {
 }
 
 function showEndcardCloseButtonTimer() {
-    AdHelper.removeClass(endcardClose, 'hide');
+    AdHelper.removeClass(endcardCloseIconContainer, 'hide');
 }
 
 function hideEndcardCloseButtonTimer() {
-    AdHelper.addClass(endcardClose, 'hide');
+    AdHelper.addClass(endcardCloseIconContainer, 'hide');
 }
 
 function endEndcardCloseButtonTimer(rewarded, rewardedAdDuration, showCloseOnStart) {
-    AdHelper.removeClass(endcardClose, 'hide');
+    AdHelper.removeClass(endcardCloseIconContainer, 'hide');
     AdHelper.addClass(endcardCloseIconContainer, 'end');
 }
 
