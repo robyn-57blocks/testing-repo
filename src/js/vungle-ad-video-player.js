@@ -32,6 +32,10 @@ var videoCta = document.getElementById('video-cta');
 var videoSource, videoDurationCount, videoCurrentPlayTime, videoCheckpointIndex, videoPlaySuccessfulDuration;
 var videoViewedPerSecond = 0;
 
+
+var overlays = document.querySelectorAll('[overlay]');
+
+
 function initVideo(videoSrc, isMuted) {
 
     AdHelper.removeClass(fullscreenVideoView, 'hide');
@@ -47,7 +51,7 @@ function initVideo(videoSrc, isMuted) {
 
         //If video is set to not be muted, unmute video
         if (isMuted === 'false') {
-                unMuteVideo();
+            unMuteVideo();
         } else {
             muteVideo();
         }
@@ -67,8 +71,15 @@ function initVideo(videoSrc, isMuted) {
     });
 }
 
+function checkPauseResumeOverlays() {
+    for (var i = 0; i < overlays.length; i++)
+        if (AdHelper.hasClass(overlays[i], 'active')) return false
+    return true
+}
+
 function playVideo() {
-    fullscreenVideoElem.play();
+    if (checkPauseResumeOverlays())
+        fullscreenVideoElem.play();
 }
 
 function pauseVideo() {
@@ -84,15 +95,12 @@ function hideVideoView() {
 
     videoMuteButton.removeEventListener('click', toggleVideoMute);
 
-    //Trigger TPAT event for video close
-    window.vungle.mraidBridgeExt.notifyTPAT("video.close");
-
     AdHelper.addClass(fullscreenVideoView, 'hide');
     AdHelper.addClass(videoCta, 'hide');
 }
 
 function toggleVideoMute() {
-    soundSwitcher.setAttribute("checked", !soundSwitcher.checked);
+    console.log("video is " + fullscreenVideoElem.muted);
     if (fullscreenVideoElem.muted) {
         //Trigger TPAT event for unmuting video audio
         window.vungle.mraidBridgeExt.notifyTPAT("video.unmute");

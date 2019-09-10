@@ -16,6 +16,7 @@ const templateVariables = {
 
 module.exports = function() {
     gulp.src(config.src + '/*.html')
+        .pipe(gulpif(!isEnvDev(), processhtml({})))
         .pipe(gulp.dest(config.dist))
 
     return gulp.src(`${config.src}/index.hbs`)

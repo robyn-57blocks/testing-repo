@@ -14,6 +14,7 @@ var privacyDuration = 2000;
 var privacySubDuration = 1000;
 var privacySubHideDuration = 500;
 var privacyIcon = document.getElementById(prefix + 'privacy-icon');
+var privacyWrapper = document.getElementById('privacy-page-wrapper');
 
 function init() {
     // add click events
@@ -24,11 +25,13 @@ function init() {
 function hideIframe() {
     var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
 
+    AdHelper.removeClass(privacyWrapper, 'active');
     if (AdVideoPlayer.isVideoViewVisible) { EventController.sendEvent('vungle-fullscreen-video-play') };
 
     AdHelper.removeClass(loadingPage, 'loaded');
 
     document.getElementById(prefix + 'privacy-page-wrapper').style.display = "none";
+
     document.getElementById(prefix + 'privacy-back-button-container').style.display = "none";
 }
 
@@ -43,6 +46,7 @@ function showIFrame() {
 
     AdHelper.removeClass(loadingPage, 'loaded');
     AdHelper.addClass(loadingPage, 'loading');
+    AdHelper.addClass(privacyWrapper, 'active');
 
     privacyPg.onload = function() {
         AdHelper.removeClass(loadingPage, 'loading');
