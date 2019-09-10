@@ -2,8 +2,6 @@
 
 // -- Ratio Breakpoints
 $square: 'body.square &';
-
-$portrait: 'body.portrait &';
 $portrait-xs: 'body.portrait-xs &';
 $portrait-s: 'body.portrait-s &';
 $portrait-m: 'body.portrait-m &';
@@ -28,4 +26,3 @@ $windows: 'body.windows &';
 
 // -- OS Device Breakpoints
 $windows-large-screen: '900px';
-$tablet: '768px';

@@ -1,23 +1,10 @@
-// *** Vendor ***
-@import './base/sanitise';
-
-// *** Settings ***
-@import './base/settings';
-@import './base/colours';
-
 // *** Utils ***
+@import './utils/vars';
 @import './utils/mixins';
-@import './utils/functions';
-
-// *** Base ***
-@import './base/typography';
-@import './base/transitions';
-@import './base/breakpoints';
-@import './base/core';
+@import './utils/breakpoints';
+@import './utils/keyframes';
 
 // *** Components ***
+@import './components/view';
 @import './components/ad-debug';
-@import './components/close';
 @import './components/privacy';
-@import './components/video';
-@import './components/video-mute';
