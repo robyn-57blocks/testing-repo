@@ -63,7 +63,7 @@ export default {
                 notifySuccessfulViewAd: function() { console.log('TIMER SUCCESSFUL VIEW - notifySuccessfulViewAd event sent'); return true }
             },
             mraid: {
-                getConsentRequired: function() { return false; },
+                getConsentRequired: function() { return true; },
                 getConsentTitleText: function() { return "Ad-Interaction Data Collection"; },
                 getConsentBodyText: function() { return "With permission, Vungle collects your ad-interaction data to serve relevant ads to you. Note: you’ll see ads independent of your selection, but they may not be as relevant. Do you consent to data tracking for more relevant ads?"; },
                 getConsentAcceptButtonText: function() { return "I consent"; },

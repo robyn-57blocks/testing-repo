@@ -466,8 +466,7 @@ var adcore = {
             var adModalClose = document.getElementById('ad-notification-modal-close');
             var privacyIcon = document.getElementById('privacy-icon');
 
-            adModal.className = '';
-            AdHelper.addClass(adModal, 'active');
+            AdHelper.removeClass(adModal, 'hide');
 
             if (creativeViewType === "video_and_endcard") {
                 AdClose.hideVideoCloseButtonTimer();
@@ -479,7 +478,6 @@ var adcore = {
 
             adModalContinue.onclick = function() {
                 AdHelper.addClass(adModal, 'hide');
-                AdHelper.removeClass(adModal, 'active');
                 if (creativeViewType === "video_and_endcard") {
                     AdClose.showVideoCloseButtonTimer();
                     AdVideoPlayer.playVideo();
@@ -493,7 +491,6 @@ var adcore = {
             adModalClose.onclick = function() {
                 if (creativeViewType === "video_and_endcard") {
                     AdHelper.addClass(adModal, 'hide');
-                    AdHelper.removeClass(adModal, 'active');
                     revealPrivacyButton();
                     onVideoPlayComplete();
                 } else {

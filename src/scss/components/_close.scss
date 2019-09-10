@@ -22,14 +22,6 @@ $windowsCloseHeight:35em;
         opacity: 1;
     }
 
-    opacity:0;
-    position: absolute;
-    top: 0;
-    right: 0;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-tap-highlight-color: transparent;
-    z-index: 999998;
-
     a {
         #{$windows} {
             // padding: 0.25em 0.25em 0.45em 0.45em;

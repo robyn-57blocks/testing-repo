@@ -9,12 +9,6 @@ $closeHeight:40em;
 $windowsCloseHeight:35em;
 
 .video-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-tap-highlight-color: transparent;
-    z-index: 500;
 
     .mute-unmute-btn {
         #{$light-theme} {

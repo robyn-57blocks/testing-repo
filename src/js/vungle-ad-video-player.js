@@ -96,6 +96,7 @@ function hideVideoView() {
     videoMuteButton.removeEventListener('click', toggleVideoMute);
 
     AdHelper.addClass(fullscreenVideoView, 'hide');
+    AdHelper.addClass(videoMuteButton, 'hide');
     AdHelper.addClass(videoCta, 'hide');
 }
 
