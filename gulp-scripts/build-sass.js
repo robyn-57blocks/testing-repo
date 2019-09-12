@@ -14,7 +14,7 @@ const config = require('./config.js');
 module.exports = function() {
 
     return gulp.src(config.src + '/scss/**/*.scss')
-        // .pipe(gulpif(isEnvDev(), concat('styles.scss'), concat('vungle.min.scss')))
+        .pipe(gulpif(isEnvDev(), concat('styles.scss'), concat('vungle.min.scss')))
         .pipe(sass().on('error', sass.logError))
         .pipe(gulpif(!isEnvDev(), replace('img/', '')))
         .pipe(gulpif(!isEnvDev(), cleanCSS()))
