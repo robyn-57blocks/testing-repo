@@ -16,40 +16,40 @@
 @keyframes rotator {
     0% {
         -webkit-transform: rotate(0deg);
-        transform: rotate(0deg)
+        transform: rotate(0deg);
     }
 
     to {
         -webkit-transform: rotate(270deg);
-        transform: rotate(270deg)
+        transform: rotate(270deg);
     }
 }
 
 @keyframes colors {
     0% {
-        stroke: #4285f4
+        stroke: $color-cornflower;
     }
 
     25% {
-        stroke: #de3e35
+        stroke: $color-punch;
     }
 
     50% {
-        stroke: #f7c223
+        stroke: $color-orangellow;
     }
 
     75% {
-        stroke: #1b9a59
+        stroke: $color-eucalyptus;
     }
 
     to {
-        stroke: #4285f4
+        stroke: $color-cornflower;
     }
 }
 
 @keyframes dash {
     0% {
-        stroke-dashoffset: 187
+        stroke-dashoffset: 187;
     }
 
     50% {
