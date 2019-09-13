@@ -23,7 +23,7 @@ function sendMessage(title, obj) {
     }
 
     if (iframeLoaded)
-        iframe.contentWindow.postMessage(JSON.stringify(data), '*');
+        iframe.contentWindow.postMessage(data, '*');
     else
         buffer.push(data)
 }
@@ -45,12 +45,5 @@ function receiveMessage(e) {
     if (e.data.length === 0)
         return
 
-    var data;
-    try {
-        data = JSON.parse(e.data)
-    } catch (e) {
-        console.log(e)
-    }
-
-    EventController.sendEvent('vungle-creative-message-' + data.title, data.obj)
+    EventController.sendEvent(data.title, data.obj)
 }

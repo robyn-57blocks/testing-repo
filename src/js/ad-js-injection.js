@@ -1,4 +1,3 @@
-
 // Legacy IEC v1 Event
 window.callSDK = function(action) {
     parent.postMessage(action, '*');
@@ -19,6 +18,11 @@ window.addEventListener('touchstart', function() {
     parent.postMessage('interacted', '*');
 });
 
+function sendEvent(name, obj = {}) {
+    var event = new CustomEvent(name, { 'detail': obj });
+    window.dispatchEvent(event);
+}
+
 // Disable Event Propagation for touchstart event listeners
 Event.prototype.stopPropagation = function() {}
 
@@ -29,14 +33,13 @@ window.sendMessage = function(title, obj) {
         content: obj
     }
 
-    window.parent.postMessage(JSON.stringify(data), '*');
+    window.parent.postMessage(data, '*');
 };
 
 window.receiveMessage = function(e) {
-    if(e.data.length === 0)
+    if (e.data.length === 0)
         return
-
-    var data = JSON.parse(e.data)
+    sendEvent(e.data.title)
 }
 
 window.addEventListener('message', window.receiveMessage)
