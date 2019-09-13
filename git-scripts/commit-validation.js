@@ -1,5 +1,6 @@
-var fs = require('fs-extra');
-const commitMessage = fs.readFileSync('./.git/COMMIT_EDITMSG', 'utf8');
+const fs = require('fs-extra');
+const { execSync } = require("child_process");
+const commitMessage = execSync("git log -1 --pretty=%B").toString().trim();
 const head = fs.readFileSync('./.git/HEAD', 'utf8');
 const branch = head.substring(head.lastIndexOf('/') + 1, head.length).trim() || head.trim();
 if (branch === "master"  &&  !commitMessage.includes('[skip CI]')) {
