@@ -38,7 +38,6 @@
     "gulp-preprocess": "^2.0.0",
     "gulp-processhtml": "^1.2.0",
     "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.6.1",
     "gulp-sass": "^3.1.0",
     "gulp-sequence": "^1.0.0",
     "gulp-uglify": "^3.0.0",
@@ -52,8 +51,7 @@
     "run-sequence": "^2.2.1",
     "semver": "^5.6.0",
     "symlink-dir": "^2.0.2",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0"
+    "vinyl-buffer": "^1.0.1"
   },
   "repository": {
     "type": "git",
@@ -65,6 +63,11 @@
     "url": "bitbucket.org:vungle_creative_labs/design-framework-core"
   },
   "devDependencies": {
-    "gulp-zip": "^4.2.0"
+    "gulp-replace": "^0.6.1",
+    "gulp-zip": "^4.2.0",
+    "merge2": "^1.2.4",
+    "request": "^2.88.0",
+    "through2": "^3.0.1",
+    "vinyl-source-stream": "^2.0.0"
   }
 }
