@@ -500,11 +500,8 @@ var adcore = {
         }
 
         function revealGDPRNotificationView() {
-
             var gdprView = document.getElementById('gdpr-notification-view');
-
-            var gdprViewConsentButton = document.getElementById('gdpr-notification-consent');
-            var gdprViewDoNotConsentButton = document.getElementById('gdpr-notification-no-consent');
+            var gdprBtns = document.querySelectorAll('#gdpr-notification-view button');
 
             document.getElementById('gdpr-notification-title-text').innerHTML = window.vungle.mraid.getConsentTitleText();
             document.getElementById('gdpr-notification-body-text').innerHTML = window.vungle.mraid.getConsentBodyText();
@@ -512,20 +509,13 @@ var adcore = {
             document.getElementById('gdpr-notification-no-consent').innerHTML = window.vungle.mraid.getConsentDenyButtonText();
 
             AdHelper.removeClass(gdprView, 'hide');
-            AdHelper.addClass(gdprView, 'active');
 
-            gdprViewConsentButton.onclick = function() {
-                window.vungle.mraidBridgeExt.consentAction("opted_in");
-                presentAd();
-                AdHelper.addClass(gdprView, 'hide');
-                AdHelper.removeClass(gdprView, 'active');
-            }
-
-            gdprViewDoNotConsentButton.onclick = function() {
-                window.vungle.mraidBridgeExt.consentAction("opted_out");
-                presentAd();
-                AdHelper.addClass(gdprView, 'hide');
-                AdHelper.removeClass(gdprView, 'active');
+            for(var i=0; i<gdprBtns.length; i++) {
+              gdprBtns[i].addEventListener('click', function() {
+                  this.id === 'gdpr-notification-consent' ? window.vungle.mraidBridgeExt.consentAction('opted_in') : window.vungle.mraidBridgeExt.consentAction('opted_out');
+                  presentAd();
+                  AdHelper.addClass(gdprView, 'hide');
+              });
             }
         }
 
