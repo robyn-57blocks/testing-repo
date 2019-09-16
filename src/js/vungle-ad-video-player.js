@@ -60,10 +60,10 @@ function initVideo(videoSrc, isMuted) {
             muteVideo();
         }
 
-        // //Send event to ad core to begin close button timer for video
-        // EventController.sendEvent('vungle-fullscreen-video-ready');
+        //Send event to ad core to begin close button timer for video
+        EventController.sendEvent('vungle-fullscreen-video-ready');
 
-        // //Start event listeners for video start and TPAT attribution
+        //Start event listeners for video start and TPAT attribution
         fullscreenVideoElem.addEventListener('timeupdate', onVideoPlay);
         fullscreenVideoElem.addEventListener('vungle-fullscreen-video-ready', pauseVideo);
         videoMuteButton.addEventListener('click', toggleVideoMute);
