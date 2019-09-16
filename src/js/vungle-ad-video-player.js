@@ -27,7 +27,7 @@ var fullscreenVideoElem = document.getElementById('fullscreen-video');
 var fullscreenVideoView = document.getElementById('fullscreen-video-view');
 var fullscreenVideoViewProgress = document.getElementById('fullscreen-video-progress');
 var videoMuteButton = document.getElementById('video-mute');
-var soundSwitcher = document.getElementById("mute-unmute-switch");
+var soundSwitcher = document.getElementById('mute-unmute-switch');
 var videoCta = document.getElementById('video-cta');
 var videoSource, videoDurationCount, videoCurrentPlayTime, videoCheckpointIndex, videoPlaySuccessfulDuration;
 var videoViewedPerSecond = 0;
@@ -115,10 +115,12 @@ function toggleVideoMute() {
 
 function muteVideo() {
     fullscreenVideoElem.muted = true;
+    soundSwitcher.checked = false;
 }
 
 function unMuteVideo() {
     fullscreenVideoElem.muted = false;
+    soundSwitcher.checked = true;
 }
 
 function isVideoViewVisible() {
