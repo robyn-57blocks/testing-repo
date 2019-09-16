@@ -63,14 +63,6 @@ window.addEventListener('message', window.receiveMessage);
 //     console.log('touchend');
 // },true);
 
-document.ontouchmove = function(e) {
-       e.preventDefault();
-   }
-
-document.ontouchmove = function(e) {
-       e.preventDefault();
-   }
-
 // document.ontouchmove = function(e) {
 //     e.preventDefault();
 // }

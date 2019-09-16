@@ -64,13 +64,13 @@ function initVideo(videoSrc, isMuted) {
         // EventController.sendEvent('vungle-fullscreen-video-ready');
 
         // //Start event listeners for video start and TPAT attribution
-        // fullscreenVideoElem.addEventListener('timeupdate', onVideoPlay);
-        // fullscreenVideoElem.addEventListener('vungle-fullscreen-video-ready', pauseVideo);
-        // videoMuteButton.addEventListener('click', toggleVideoMute);
-        // window.addEventListener('vungle-fullscreen-video-pause', pauseVideo);
-        // window.addEventListener('vungle-fullscreen-video-play', playVideo);
+        fullscreenVideoElem.addEventListener('timeupdate', onVideoPlay);
+        fullscreenVideoElem.addEventListener('vungle-fullscreen-video-ready', pauseVideo);
+        videoMuteButton.addEventListener('click', toggleVideoMute);
+        window.addEventListener('vungle-fullscreen-video-pause', pauseVideo);
+        window.addEventListener('vungle-fullscreen-video-play', playVideo);
 
-        // videoLengthReport();
+        videoLengthReport();
         playVideo();
     });
 }

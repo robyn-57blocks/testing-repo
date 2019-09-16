@@ -79,17 +79,17 @@ var adcore = {
             event.preventDefault();
         };
 
-        window.addEventListener('resize', function(event) {
-            vungleAd.style.opacity = 0;
+        // window.addEventListener('resize', function(event) {
+        //     vungleAd.style.opacity = 0;
 
-            if (this.resizeTimer) {
-                clearTimeout(this.resizeTimer);
-            }
-            this.resizeTimer = setTimeout(function() {
-                renderVungleAdSizingClass();
-                vungleAd.style.opacity = 1;
-            }, 20);
-        });
+        //     if (this.resizeTimer) {
+        //         clearTimeout(this.resizeTimer);
+        //     }
+        //     this.resizeTimer = setTimeout(function() {
+        //         renderVungleAdSizingClass();
+        //         vungleAd.style.opacity = 1;
+        //     }, 20);
+        // });
 
         //Called when Ad loads
         renderVungleAdSizingClass();
@@ -311,6 +311,7 @@ var adcore = {
             endcardView.innerHTML = '<iframe id="ad-content" src="ad.html" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>';
             EventController.sendEvent('vungle-ad-iframe-reload');
             PostMessenger.init(); // Iframe Communication
+            PostMessenger.sendMessage('ad-event-init',VungleAd.tokens); // Iframe Communication
             AdHelper.removeClass(document.getElementById('endcard-view'), 'inactive');
             AdHelper.addClass(endcardView, 'active');
             //send postroll.view TPAT event once iFrame has loaded
