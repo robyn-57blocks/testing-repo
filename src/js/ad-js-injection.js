@@ -37,9 +37,40 @@ window.sendMessage = function(title, obj) {
 };
 
 window.receiveMessage = function(e) {
-    if (e.data.length === 0)
+    if (e.data.length === 0 || typeof e.data.title === 'undefined')
         return
     sendEvent(e.data.title)
 }
 
-window.addEventListener('message', window.receiveMessage)
+window.addEventListener('message', window.receiveMessage);
+
+
+// window.addEventListener('touchstart', function(e) {
+//     e.preventDefault();
+//     e.stopPropagation();
+//     console.log('touchstart');
+// },true);
+
+// window.addEventListener('touchmove', function(e) {
+//     e.preventDefault();
+//     e.stopPropagation();
+//     console.log('touchmove');
+// },true);
+
+// window.addEventListener('touchend', function(e) {
+//     e.preventDefault();
+//     e.stopPropagation();
+//     console.log('touchend');
+// },true);
+
+document.ontouchmove = function(e) {
+       e.preventDefault();
+   }
+
+document.ontouchmove = function(e) {
+       e.preventDefault();
+   }
+
+// document.ontouchmove = function(e) {
+//     e.preventDefault();
+// }

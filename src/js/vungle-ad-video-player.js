@@ -60,17 +60,17 @@ function initVideo(videoSrc, isMuted) {
             muteVideo();
         }
 
-        //Send event to ad core to begin close button timer for video
-        EventController.sendEvent('vungle-fullscreen-video-ready');
+        // //Send event to ad core to begin close button timer for video
+        // EventController.sendEvent('vungle-fullscreen-video-ready');
 
-        //Start event listeners for video start and TPAT attribution
-        fullscreenVideoElem.addEventListener('timeupdate', onVideoPlay);
-        fullscreenVideoElem.addEventListener('vungle-fullscreen-video-ready', pauseVideo);
-        videoMuteButton.addEventListener('click', toggleVideoMute);
-        window.addEventListener('vungle-fullscreen-video-pause', pauseVideo);
-        window.addEventListener('vungle-fullscreen-video-play', playVideo);
+        // //Start event listeners for video start and TPAT attribution
+        // fullscreenVideoElem.addEventListener('timeupdate', onVideoPlay);
+        // fullscreenVideoElem.addEventListener('vungle-fullscreen-video-ready', pauseVideo);
+        // videoMuteButton.addEventListener('click', toggleVideoMute);
+        // window.addEventListener('vungle-fullscreen-video-pause', pauseVideo);
+        // window.addEventListener('vungle-fullscreen-video-play', playVideo);
 
-        videoLengthReport();
+        // videoLengthReport();
         playVideo();
     });
 }
@@ -84,12 +84,12 @@ function checkPauseResumeOverlays() {
 function playVideo() {
     if (checkPauseResumeOverlays())
         fullscreenVideoElem.play();
-        PostMessenger.sendMessage('ad-unit-resume');
+        PostMessenger.sendMessage('ad-event-resume');
 }
 
 function pauseVideo() {
     fullscreenVideoElem.pause();
-    PostMessenger.sendMessage('ad-unit-pause');
+    PostMessenger.sendMessage('ad-event-pause');
 }
 
 function hideVideoView() {

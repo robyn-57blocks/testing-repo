@@ -79,7 +79,6 @@ var adcore = {
             event.preventDefault();
         };
 
-
         window.addEventListener('resize', function(event) {
             vungleAd.style.opacity = 0;
 
