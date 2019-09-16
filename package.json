@@ -65,7 +65,6 @@
   "devDependencies": {
     "gulp-replace": "^0.6.1",
     "gulp-zip": "^4.2.0",
-    "merge2": "^1.2.4",
     "request": "^2.88.0",
     "through2": "^3.0.1",
     "vinyl-source-stream": "^2.0.0"
