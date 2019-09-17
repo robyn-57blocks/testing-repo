@@ -48,11 +48,5 @@ window.sendInstructions = function() {
     window.sendMessage('ad-event-child-instructions', window.vungleSettings)
 }
 
-window.vungleSettings = {
-    ASOIEnabled: true,
-    ASOIDelayTimer: 0,
-    ASOITapInteractions: 2
-}
-
 if (typeof window.vungleSettings !== 'undefined')
     window.sendInstructions()
