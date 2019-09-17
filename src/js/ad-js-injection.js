@@ -39,8 +39,20 @@ window.sendMessage = function(title, obj) {
 window.receiveMessage = function(e) {
     if (e.data.length === 0 || typeof e.data.title === 'undefined')
         return
-    sendEvent(e.data.title , e.data.content || {})
+    sendEvent(e.data.title, e.data.content || {})
 }
 
 window.addEventListener('message', window.receiveMessage);
 
+window.sendInstructions = function() {
+    window.sendMessage('ad-event-child-instructions', window.vungleSettings)
+}
+
+window.vungleSettings = {
+    ASOIEnabled: true,
+    ASOIDelayTimer: 0,
+    ASOITapInteractions: 2
+}
+
+if (typeof window.vungleSettings !== 'undefined')
+    window.sendInstructions()

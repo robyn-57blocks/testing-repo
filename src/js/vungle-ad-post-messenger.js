@@ -42,8 +42,5 @@ window.addEventListener('vungle-ad-iframe-reload', function() { iframeLoaded = f
 window.addEventListener('message', receiveMessage)
 
 function receiveMessage(e) {
-    if (e.data.length === 0 || typeof e.data.title === 'undefined' )
-        return
-
-    EventController.sendEvent(data.title, data.obj || {})
+    EventController.sendEvent(e.data.title || e.data, e.data.content || {})
 }

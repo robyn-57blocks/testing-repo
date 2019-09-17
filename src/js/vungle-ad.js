@@ -17,7 +17,7 @@ export default {
         this.tokens = JSON.parse(`
         {
             "PRIVACY_BODY_TEXT": "Vungle, Inc. understands the importance of privacy. Vungle operates a mobile ad network (the 'Ad Network' or the 'Services') through which Vungle displays targeted, contextual ads.",
-            "MAIN_VIDEO": "http://172.31.1.57:8080/portrait.mp4",
+            "MAIN_VIDEO": "http://172.31.1.57:8081/portrait.mp4",
             "CTA_BUTTON_URL": "https://www.microsoft.com/en-us/p/bingo-blitz-free-bingo-slots/9nblggh42r8p",
             "INCENTIVIZED_CLOSE_TEXT": "Close",
             "CTA_BUTTON_TEXT": "Download",
