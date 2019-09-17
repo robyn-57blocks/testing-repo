@@ -11,6 +11,7 @@ import { default as EventController } from './vungle-ad-event-controller.js';
 import { default as PostMessenger } from './vungle-ad-post-messenger.js';
 import { default as DataStore } from './vungle-ad-post-messenger.js';
 import { default as ASOIController } from './vungle-ad-asoi-controller.js';
+import { default as ChildInstructions } from './vungle-ad-child-instructions.js';
 
 var adcore = {
     init: function(onEndcardStart) {
@@ -585,6 +586,7 @@ var adcore = {
                 });
 
                 setTimeout(function() {
+                    EventController.sendEvent('ad-event-close-button-reveal')
                     AdClose.endEndcardCloseButtonTimer();
                     closeButton.onclick = function() {
                         vungleMRAID.close();
@@ -599,6 +601,7 @@ var adcore = {
                 });
 
                 setTimeout(function() {
+                    EventController.sendEvent('ad-event-close-button-reveal')
                     AdClose.endEndcardCloseButtonTimer();
                     // AdClose.endEndcardCloseButtonTimer(VungleAd.isAdIncentivised(),rewardedAdDuration === null, showCloseButtonTimeMilliSeconds === 0);
 
