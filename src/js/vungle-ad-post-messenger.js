@@ -45,5 +45,5 @@ function receiveMessage(e) {
     if (e.data.length === 0 || typeof e.data.title === 'undefined' )
         return
 
-    EventController.sendEvent(data.title, data.obj)
+    EventController.sendEvent(data.title, data.obj || {})
 }

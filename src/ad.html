@@ -34,7 +34,14 @@
 </head>
 
 <body>
-    <a onclick="parent.postMessage('download','*')">DOWNLOAD</a>
+    <a onclick="parent.postMessage('download','*')">DOWNLOAD</a> 
 </body>
 
+<script type="text/javascript">
+    
+    setTimeout(function(){
+        parent.postMessage('complete', '*');
+    },10000);
+</script>
+    
 </html>

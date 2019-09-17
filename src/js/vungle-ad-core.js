@@ -9,6 +9,8 @@ import { default as AdVideoPlayer } from './vungle-ad-video-player.js';
 import { default as AdVideoCTA } from './vungle-ad-video-cta.js';
 import { default as EventController } from './vungle-ad-event-controller.js';
 import { default as PostMessenger } from './vungle-ad-post-messenger.js';
+import { default as DataStore } from './vungle-ad-post-messenger.js';
+import { default as ASOIController } from './vungle-ad-asoi-controller.js';
 
 var adcore = {
     init: function(onEndcardStart) {
@@ -67,6 +69,8 @@ var adcore = {
         for (var i = 0; i < ctaElements.length; i++) {
             ctaElements[i].addEventListener('click', ctaButtonClicked, false);
         }
+
+
 
         AdPrivacy.init();
 
@@ -197,6 +201,9 @@ var adcore = {
             }
         }
 
+
+
+
         function videoCloseButtonTimer() {
 
             window.removeEventListener('vungle-fullscreen-video-ready', videoCloseButtonTimer);
@@ -314,6 +321,7 @@ var adcore = {
             PostMessenger.sendMessage('ad-event-init',VungleAd.tokens); // Iframe Communication
             AdHelper.removeClass(document.getElementById('endcard-view'), 'inactive');
             AdHelper.addClass(endcardView, 'active');
+            ASOIController.init();
             //send postroll.view TPAT event once iFrame has loaded
             window.vungle.mraidBridgeExt.notifyTPAT("postroll.view");
 
