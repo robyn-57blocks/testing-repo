@@ -69,7 +69,6 @@ function handleInteraction() {
 
         settings.interactions++;
 
-
         // ASOI TAP: if user interactions is over a certain amount trigger ASOI
         if (settings.ASOIEnabled === true &&
             settings.ASOITapInteractions > 0 &&

@@ -2,14 +2,19 @@
 
 <head>
     <meta charset="UTF-8">
-
+    <script type="text/javascript">
+    window.vungleSettings = {
+        ASOIEnabled: true,
+        ASOIDelayTimer: 0,
+        ASOITapInteractions: 4
+    }
+    </script>
     <!-- build:js ad-js-injection.js -->
     <script src="js/ad-js-injection.js"></script>
     <!-- /build -->
-    
     <meta name="viewport" initial-scale=1.0, maximum-scale="1.0, user-scalable=no">
     <style>
-    /* THIS STYLING IS FOR DEMO PURPOSES ONLY AND CAN BE REMOVED */
+        /* THIS STYLING IS FOR DEMO PURPOSES ONLY AND CAN BE REMOVED */
     html,
     body {
         margin: 0;
@@ -34,14 +39,12 @@
 </head>
 
 <body>
-    <a onclick="parent.postMessage('download','*')">DOWNLOAD</a> 
+    <a onclick="parent.postMessage('download','*')">DOWNLOAD</a>
 </body>
-
 <script type="text/javascript">
-    
-    setTimeout(function(){
-        parent.postMessage('complete', '*');
-    },3000);
+setTimeout(function() {
+    parent.postMessage('complete', '*');
+}, 10000);
 </script>
-    
+
 </html>
