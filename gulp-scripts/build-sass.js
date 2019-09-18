@@ -14,7 +14,7 @@ const fs = require('fs');
 const isEnvDev = require('./env.js').isEnvDev;
 const config = require('./config.js');
 
-const external = 'https://vungle-design-system.s3.eu-west-1.amazonaws.com/creative.min.css';
+const external = 'https://vds.creative-labs.io/css/creative.min.css';
 
 module.exports = function() {
     return gulp.src(config.src + '/scss/**/*.scss')
