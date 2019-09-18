@@ -23,7 +23,7 @@ function sendMessage(title, obj) {
     }
 
     if (iframeLoaded)
-        iframe.contentWindow.postMessage(JSON.stringify(data), '*');
+        iframe.contentWindow.postMessage(data, '*');
     else
         buffer.push(data)
 }
@@ -42,15 +42,5 @@ window.addEventListener('vungle-ad-iframe-reload', function() { iframeLoaded = f
 window.addEventListener('message', receiveMessage)
 
 function receiveMessage(e) {
-    if (e.data.length === 0)
-        return
-
-    var data = e.data;
-    try {
-        data = JSON.parse(e.data)
-    } catch (e) {
-        console.log(e)
-    }
-
-    EventController.sendEvent(data.title || data, data.obj)
+    EventController.sendEvent(e.data.title || e.data, e.data.content || {})
 }
