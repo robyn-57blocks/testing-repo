@@ -23,6 +23,7 @@ export default {
 
 import { default as AdHelper } from './vungle-ad-helpers.js';
 import { default as EventController } from './vungle-ad-event-controller.js';
+import { default as PostMessenger } from './vungle-ad-post-messenger.js';
 
 var videoTPATCheckpoints = [0, 25, 50, 75, 100];
 var videoTPATCheckpointsReached = [];
@@ -83,10 +84,12 @@ function checkPauseResumeOverlays() {
 function playVideo() {
     if (checkPauseResumeOverlays())
         fullscreenVideoElem.play();
+        PostMessenger.sendMessage('ad-event-resume');
 }
 
 function pauseVideo() {
     fullscreenVideoElem.pause();
+    PostMessenger.sendMessage('ad-event-pause');
 }
 
 function hideVideoView() {

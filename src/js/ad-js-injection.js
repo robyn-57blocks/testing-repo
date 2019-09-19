@@ -10,7 +10,7 @@ window.actionClicked = function(action) {
 
 // Adwords Open Event
 window.open = function() {
-	//Open should always redirect to CTA Download
+    //Open should always redirect to CTA Download
     parent.postMessage('download', '*');
 };
 
@@ -18,5 +18,35 @@ window.addEventListener('touchstart', function() {
     parent.postMessage('interacted', '*');
 });
 
+function sendEvent(name, obj = {}) {
+    var event = new CustomEvent(name, { 'detail': obj });
+    window.dispatchEvent(event);
+}
+
 // Disable Event Propagation for touchstart event listeners
 Event.prototype.stopPropagation = function() {}
+
+window.sendMessage = function(title, obj) {
+    // Make sure you are sending a string, and to stringify JSON
+    var data = {
+        title: title,
+        content: obj
+    }
+
+    window.parent.postMessage(data, '*');
+};
+
+window.receiveMessage = function(e) {
+    if (e.data.length === 0 || typeof e.data.title === 'undefined')
+        return
+    sendEvent(e.data.title, e.data.content || {})
+}
+
+window.addEventListener('message', window.receiveMessage);
+
+window.sendInstructions = function() {
+    window.sendMessage('ad-event-child-instructions', window.vungleSettings)
+}
+
+if (typeof window.vungleSettings !== 'undefined')
+    window.sendInstructions()
