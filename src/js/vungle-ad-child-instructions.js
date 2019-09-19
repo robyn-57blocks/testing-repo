@@ -13,7 +13,7 @@ function updateTokens(e) {
     var settings = DataStore.get('settings', false)
     if (settings) {
         for (var key in content) {
-            if (content[key].length > 0)
+            if (content[key] !== '')
                 settings[key] = content[key]
         }
         DataStore.push('settings', settings)
