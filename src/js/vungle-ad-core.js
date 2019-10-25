@@ -84,18 +84,6 @@ var adcore = {
             event.preventDefault();
         };
 
-        // window.addEventListener('resize', function(event) {
-        //     vungleAd.style.opacity = 0;
-
-        //     if (this.resizeTimer) {
-        //         clearTimeout(this.resizeTimer);
-        //     }
-        //     this.resizeTimer = setTimeout(function() {
-        //         renderVungleAdSizingClass();
-        //         vungleAd.style.opacity = 1;
-        //     }, 20);
-        // });
-
         //Called when Ad loads
         renderVungleAdSizingClass();
 
@@ -469,6 +457,7 @@ var adcore = {
             var privacyIcon = document.getElementById('privacy-icon');
 
             AdHelper.removeClass(adModal, 'hide');
+            AdHelper.addClass(adModal, 'show');
 
             if (creativeViewType === "video_and_endcard") {
                 AdClose.hideVideoCloseButtonTimer();
@@ -480,6 +469,7 @@ var adcore = {
 
             adModalContinue.onclick = function() {
                 AdHelper.addClass(adModal, 'hide');
+                AdHelper.removeClass(adModal, 'show');
                 if (creativeViewType === "video_and_endcard") {
                     AdClose.showVideoCloseButtonTimer();
                     AdVideoPlayer.playVideo();
@@ -493,6 +483,7 @@ var adcore = {
             adModalClose.onclick = function() {
                 if (creativeViewType === "video_and_endcard") {
                     AdHelper.addClass(adModal, 'hide');
+                    AdHelper.removeClass(adModal, 'show');
                     revealPrivacyButton();
                     onVideoPlayComplete();
                 } else {
@@ -511,13 +502,15 @@ var adcore = {
             document.getElementById('gdpr-notification-no-consent').innerHTML = window.vungle.mraid.getConsentDenyButtonText();
 
             AdHelper.removeClass(gdprView, 'hide');
+            AdHelper.addClass(gdprView, 'show');
 
             for(var i=0; i<gdprBtns.length; i++) {
-              gdprBtns[i].addEventListener('click', function() {
-                  this.id === 'gdpr-notification-consent' ? window.vungle.mraidBridgeExt.consentAction('opted_in') : window.vungle.mraidBridgeExt.consentAction('opted_out');
-                  presentAd();
-                  AdHelper.addClass(gdprView, 'hide');
-              });
+                gdprBtns[i].addEventListener('click', function() {
+                    this.id === 'gdpr-notification-consent' ? window.vungle.mraidBridgeExt.consentAction('opted_in') : window.vungle.mraidBridgeExt.consentAction('opted_out');
+                    presentAd();
+                    AdHelper.addClass(gdprView, 'hide');
+                    AdHelper.removeClass(gdprView, 'show');
+                });
             }
         }
 
