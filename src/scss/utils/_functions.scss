@@ -1,5 +1,0 @@
-// $modifier:.7;
-
-@function modifySize($args, $modifier) {
-    @return $args * $modifier;
-}

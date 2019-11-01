@@ -22,12 +22,11 @@ module.exports = function() {
     return gulp.src(`${config.src}/index.hbs`)
         .pipe(compileHandlebars(templateVariables, {
             ignorePartials: true,
-            // batch: [`${config.templates}`]
+            batch: ['./src/components']
         }))
         .pipe(rename({
             extname: '.html'
         }))
-        //.pipe(gulpif(!isEnvDev(), replace('img/', '')))
         .pipe(gulpif(!isEnvDev(), processhtml({})))
         .pipe(prettify({ indent_char: ' ', indent_size: 2 }))
         .pipe(gulp.dest(config.dist));

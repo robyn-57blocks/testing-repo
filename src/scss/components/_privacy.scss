@@ -1,5 +1,5 @@
-#privacy-wrapper #privacy-page-wrapper {
-    position: absolute;
+#privacy-page-wrapper {
+    position: fixed;
     z-index: 5000001;
     width: 100%;
     height: 100%;
@@ -16,7 +16,7 @@
     z-index: 16000001;
 }
 
-#privacy-wrapper #privacy-page {
+#privacy-page {
     height: 100%;
     width: 100%;
     margin: 0;
@@ -24,7 +24,8 @@
     padding: 0;
 }
 
-#privacy-wrapper #privacy-back-button-container {
+#privacy-back-button-container {
+    box-sizing: initial;
     position: absolute;
     bottom: 2.5vmin;
     right: 2.5vmin;
@@ -35,86 +36,6 @@
     border-radius: 100%;
     display: none;
     z-index: 16000002;
-}
-
-
-/*Privacy Icon*/
-
-#privacy-wrapper #privacy-icon {
-    &.hide {
-        opacity: 0;
-        pointer-events: none;
-    }
-}
-
-#privacy-wrapper #privacy-icon #privacy-external {
-    width: 3vmin;
-    display: inline-block;
-    margin-left: 8.7vmin;
-    margin-top: -0.2vmin;
-}
-
-#privacy-wrapper #privacy-icon svg {
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    left: 4vmin;
-    width: 5vmin;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-#privacy-wrapper #privacy-icon svg path {
-    fill: rgba(190, 190, 190, 0.5);
-    stroke: rgba(0, 0, 0, 0.25);
-    stroke-width: 8;
-}
-
-#privacy-wrapper #privacy-icon.privacy-container {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    z-index: 5000000;
-    position: absolute;
-    left: 1vmin;
-    bottom: 1vmin;
-    font-size: 68px;
-    font-size: 10vmin;
-    color: #909090;
-    font-family: -apple-system, "Segoe UI", Roboto, "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    width: 8vmin;
-    height: 8vmin;
-    background: white;
-    border-radius: 50%;
-    transition: background .5s ease-in-out, width .5s ease-in-out, border-radius .2s ease-in-out, border .5s ease-in-out;
-    background: rgba(255, 255, 255, 0);
-    overflow: hidden;
-    border: 0.25vmin solid rgba(0, 0, 0, 0);
-}
-
-#privacy-wrapper #privacy-icon.privacy-container span {
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    color: #909090;
-    font-size: 12px;
-    font-size: 3vmin;
-    left: 8vmin;
-    white-space: nowrap;
-}
-
-#privacy-wrapper #privacy-icon.privacy-extended {
-    background: rgba(255, 255, 255, 1);
-    width: 26vmin;
-    border-radius: 5vmin 5vmin 5vmin 5vmin;
-    border: 0.25vmin solid rgba(0, 0, 0, .1);
-}
-
-#privacy-wrapper #privacy-icon.privacy-reverse {
-    transition: background .5s .5s ease-in-out, width .5s ease-in-out, border-radius .25s .2s ease-in-out, border .5s .5s ease-in-out;
-}
-
-#privacy-wrapper #privacy-icon .privacy-external-path {
-    fill: #909090;
 }
 
 #privacy-page-loading {
@@ -159,141 +80,4 @@
 #privacy-page-loading.loading svg.components__spinner circle.path {
     -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
     animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite
-}
-
-#privacy-wrapper #privacy-icon #privacy-external path {
-    stroke-width: 0;
-}
-
-
-
-/** TABLET VERSION **/
-
-@media only screen and (min-device-width: 768px) {
-
-    #privacy-icon,
-    #privacy-back-button-container {
-        -webkit-transform: scale(0.5, 0.5);
-        transform: scale(0.5, 0.5);
-        -webkit-transform-origin: left bottom;
-        transform-origin: left bottom;
-    }
-}
-
-
-/** WIDE MOBILES **/
-
-@media only screen and (min-device-width: 768px) and (max-device-height: 450px) and (orientation: landscape) {
-
-
-    #privacy-icon,
-    #privacy-back-button-container {
-        -webkit-transform: scale(1.0, 1.0);
-        transform: scale(1.0, 1.0);
-    }
-}
-
-
-@-webkit-keyframes rotator {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg)
-    }
-
-    to {
-        -webkit-transform: rotate(270deg);
-        transform: rotate(270deg)
-    }
-}
-
-@keyframes rotator {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg)
-    }
-
-    to {
-        -webkit-transform: rotate(270deg);
-        transform: rotate(270deg)
-    }
-}
-
-@-webkit-keyframes colors {
-    0% {
-        stroke: #4285f4
-    }
-
-    25% {
-        stroke: #de3e35
-    }
-
-    50% {
-        stroke: #f7c223
-    }
-
-    75% {
-        stroke: #1b9a59
-    }
-
-    to {
-        stroke: #4285f4
-    }
-}
-
-@keyframes colors {
-    0% {
-        stroke: #4285f4
-    }
-
-    25% {
-        stroke: #de3e35
-    }
-
-    50% {
-        stroke: #f7c223
-    }
-
-    75% {
-        stroke: #1b9a59
-    }
-
-    to {
-        stroke: #4285f4
-    }
-}
-
-@-webkit-keyframes dash {
-    0% {
-        stroke-dashoffset: 187
-    }
-
-    50% {
-        stroke-dashoffset: 46.75;
-        -webkit-transform: rotate(135deg);
-        transform: rotate(135deg)
-    }
-
-    to {
-        stroke-dashoffset: 187;
-        -webkit-transform: rotate(450deg);
-        transform: rotate(450deg)
-    }
-}
-
-@keyframes dash {
-    0% {
-        stroke-dashoffset: 187
-    }
-
-    50% {
-        stroke-dashoffset: 46.75;
-        -webkit-transform: rotate(135deg);
-        transform: rotate(135deg)
-    }
-
-    to {
-        stroke-dashoffset: 187;
-        -webkit-transform: rotate(450deg);
-        transform: rotate(450deg)
-    }
 }
