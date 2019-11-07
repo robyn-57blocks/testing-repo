@@ -34,7 +34,7 @@ window.sendMsg = function(title, obj) {
 
 function pushBufferedMessages() {
     for (var i = 0; i < buffer.length; i++)
-        sendMessage(buffer[i])
+        iframe.contentWindow.postMessage(buffer[i], '*');
     buffer = [];
 }
 
