@@ -23,7 +23,7 @@ export default {
             "CTA_BUTTON_TEXT": "Download",
             "APP_ICON": "/var/mobile/Containers/Data/Application/9C037305-5FBF-46BE-BCD5-31F0BC7B1F21/Library/Caches/com.vungle.ads/91904af6c89397f7822d169463c283b45bd6ee03/1530006649347-amz-icon.jpg",
             "ACTION_TRACKING": "false",
-            "VUNGLE_PRIVACY_URL": "https://vungle.com/privacy/",
+            "VUNGLE_PRIVACY_URL": "https://privacy.vungle.com/",
             "APP_RATING": "/var/mobile/Containers/Data/Application/9C037305-5FBF-46BE-BCD5-31F0BC7B1F21/Library/Caches/com.vungle.ads/91904af6c89397f7822d169463c283b45bd6ee03/4-stars.svg",
             "PRIVACY_CLOSE_TEXT": "Read Vungle's Privacy Policy",
             "FONT_URL": "/var/mobile/Containers/Data/Application/9C037305-5FBF-46BE-BCD5-31F0BC7B1F21/Library/Caches/com.vungle.ads/91904af6c89397f7822d169463c283b45bd6ee03/cJZKeOuBrn4kERxqtaUH3SZ2oysoEQEeKwjgmXLRnTc.ttf",
