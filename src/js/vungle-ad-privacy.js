@@ -9,7 +9,7 @@ import { default as AdVideoPlayer } from './vungle-ad-video-player.js';
 var privacyTimer, privacySubTimer;
 
 var prefix = ''; // stop clashes
-var privacyUrl = 'http://vungle.com/privacy/';
+var privacyUrl = 'https://privacy.vungle.com/';
 var privacyDuration = 2000;
 var privacySubDuration = 1000;
 var privacySubHideDuration = 500;
