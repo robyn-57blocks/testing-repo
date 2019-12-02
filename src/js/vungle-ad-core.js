@@ -73,7 +73,7 @@ var adcore = {
 
 
 
-        AdPrivacy.init();
+        AdPrivacy.init(VungleAd.tokens.VUNGLE_PRIVACY_URL, VungleAd.tokens.VUNGLE_PRIVACY_LOGO);
 
         document.getElementById('ad-notification-modal-title-text').innerHTML = VungleAd.tokens.INCENTIVIZED_TITLE_TEXT;
         document.getElementById('ad-notification-modal-body-text').innerHTML = VungleAd.tokens.INCENTIVIZED_BODY_TEXT;

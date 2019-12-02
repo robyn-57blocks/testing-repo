@@ -264,6 +264,36 @@
                 "valueRequired": true,
                 "overrides": []
             }
-        }	
+        },
+        {
+            "token_name": "VUNGLE_PRIVACY_LOGO",
+            "properties": {
+                "display_name": "Vungle Privacy Logo",
+                "cacheable": true,
+                "data_type": "image",
+                "default_value": "https://cdn-lb.vungle.com/creative/design-framework/assets/vungle-privacy.svg",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "system",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
+            "token_name": "VUNGLE_PRIVACY_URL",
+            "properties": {
+                "display_name": "Vungle Privacy URL",
+                "cacheable": false,
+                "data_type": "url",
+                "default_value": "https://privacy.vungle.com",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "system",
+                "valueRequired": true,
+                "overrides": []
+            }
+        }
     ]
 }
