@@ -4,33 +4,38 @@ The Design Framework Core is our centralised codebase which contains a boilerpla
 
 
 ## Getting Started
-### Gulp Tasks
-
-####Running Locally (Dev environment)
-* Uses mraid mock defined in `src/js/vungle-ad.js` to emulate tokens/MRAID values from the SDK.
-* This allows Design Framework to operate locally within the browser without the SDK.
+### Running Locally (Dev environment)
+- Uses mraid mock defined in `src/js/vungle-ad.js` to emulate tokens/MRAID values from the SDK.
+- This allows Design Framework to operate locally within the browser without the SDK.
 ```
 gulp
 ```
 
-####Running Locally (Prod environment)
-* Uses MRAID provided by the SDK.
-* This requires the ad unit to be viewed on the device via the SDK.
+### Running Locally (Prod environment)
+- Uses MRAID provided by the SDK.
+- This requires the ad unit to be viewed on the device via the SDK.
 ```
 gulp serve:prod
 ```
 
-####Compiling for Production
-* Compiles Design Framework into `/dist` folder.
-* `df-dist.zip` is also generated which contains the necessary files to run the bundle on the Vungle SDK.
-* Code is minified and merged into `index.html`. The following files are generated:
-	* `ad-js-injection.js`
-	* `ad.html` (this is a sample ad.html used as a placeholder, which would be replaced by the actual creative).
-	* `index.html`
-	* `mraid.js`
+### Compiling for Production
+- Compiles Design Framework into `/dist` folder.
+- `df-dist.zip` is also generated which contains the necessary files to run the bundle on the Vungle SDK.
+- Code is minified and merged into `index.html`. The following files are generated:
+	- `ad-js-injection.js`
+	- `ad.html` (this is a sample ad.html used as a placeholder, which would be replaced by the actual creative).
+	- `index.html`
+	- `mraid.js`
 ```
 gulp bundle:prod
 ```
+
+
+## Cacheable Replacements & Assets
+- Design Framework core files which are used to serve the most up to date codebase for ads are hosted in the following buckets:
+	- `vungle2-cdn-prod/creative/design-framework` (Production)
+	- `vungle2-cdn-qa/creative/design-framework` (Staging/QA)
+- Default assets for Design Framework are hosted in the following bucket: `vungle2-cdn-prod/creative/design-framework/assets`
 
 
 ## License
