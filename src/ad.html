@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript">
-    window.vungleSettings = {
-        ASOIEnabled: true,
-        ASOIDelayTimer: 0,
-        ASOITapInteractions: 4
-    }
+        window.vungleSettings = {
+            ASOIEnabled: true,
+            ASOIDelayTimer: 0,
+            ASOITapInteractions: 4
+        }
     </script>
     <!-- build:js ad-js-injection.js -->
     <script src="js/ad-js-injection.js"></script>
@@ -15,36 +15,38 @@
     <meta name="viewport" initial-scale=1.0, maximum-scale="1.0, user-scalable=no">
     <style>
         /* THIS STYLING IS FOR DEMO PURPOSES ONLY AND CAN BE REMOVED */
-    html,
-    body {
-        margin: 0;
-        height: 100%;
-        width: 100%;
-        color: white;
-        background: black;
-    }
-
-    a {
-        position: absolute;
-        left: 50%;
-        top: 85%;
-        transform: translate(-50%, -50%);
-        font-size: 30px;
-        background-color: orange;
-        border: 3px solid wheat;
-        color: #333;
-        padding: 20px;
-    }
+        
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            color: white;
+            background: black;
+        }
+        
+        a {
+            position: absolute;
+            left: 50%;
+            top: 85%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            background-color: orange;
+            border: 3px solid wheat;
+            color: #333;
+            padding: 20px;
+        }
     </style>
 </head>
 
 <body>
+    <pre id="token-placement" style="color:white;"></pre>
     <a onclick="parent.postMessage('download','*')">DOWNLOAD</a>
 </body>
 <script type="text/javascript">
-setTimeout(function() {
-    parent.postMessage('complete', '*');
-}, 10000);
+    window.addEventListener('ad-event-init', function() {
+        document.getElementById('token-placement').innerHTML = JSON.stringify(VungleHelper.tokens, undefined, 2)
+    });
 </script>
 
 </html>
