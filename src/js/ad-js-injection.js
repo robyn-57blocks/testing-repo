@@ -1,3 +1,6 @@
+// Storage for tokens
+var VungleHelper = {}
+
 // Legacy IEC v1 Event
 window.callSDK = function(action) {
     parent.postMessage(action, '*');
@@ -39,7 +42,17 @@ window.sendMessage = function(title, obj) {
 window.receiveMessage = function(e) {
     if (e.data.length === 0 || typeof e.data.title === 'undefined')
         return
+
+    window.processMessage(e.data.title, e.data.content || {})
     sendEvent(e.data.title, e.data.content || {})
+}
+
+window.processMessage = function(title, content) {
+    switch (title) {
+        case 'ad-event-init':
+            VungleHelper.tokens = content;
+            break;
+    }
 }
 
 window.addEventListener('message', window.receiveMessage);
