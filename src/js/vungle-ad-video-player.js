@@ -72,8 +72,10 @@ function initVideo(videoSrc, isMuted) {
 }
 
 function checkPauseResumeOverlays() {
-    for (var i = 0; i < overlays.length; i++)
+    for (var i = 0; i < overlays.length; i++) {
         if (AdHelper.hasClass(overlays[i], 'show')) return false
+        if (AdHelper.hasClass(overlays[i], 'active')) return false
+    }
     return true
 }
 
