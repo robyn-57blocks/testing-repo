@@ -37,6 +37,16 @@ gulp bundle:prod
 	- `vungle2-cdn-qa/creative/design-framework` (Staging/QA)
 - Default assets for Design Framework are hosted in the following bucket: `vungle2-cdn-prod/creative/design-framework/assets`
 
+## Event Listeners 
+- Design Framework Core provides all the tokens it recieves from the SDK to the ad-unit, these can be found in the globally defined variable `VungleHelper` The tokens will not be usable onload and should only be called for once the `ad-event-init` message has been sent from the core to the ad unit. 
+```javascript
+window.addEventListener('ad-event-init', function() { // Listening for event from Design Framework Core
+	document.getElementById('token-placement').innerHTML = JSON.stringify(VungleHelper.tokens, undefined, 2) // VungleHelper.tokens will now be defined and contain all the tokens provided from Design Framework Core.
+});
+```
+
+
+
 
 ## License
 © Vungle. All Rights Reserved. 
