@@ -92,10 +92,6 @@ function pauseVideo() {
 
 function hideVideoView() {
     pauseVideo();
-    //Remove event listeners for video pause and play if video view is no longer visible to the user
-    //This also allows the privacy iframe to be toggled without accidentally calling the video play/pause
-    // window.removeEventListener('vungle-fullscreen-video-pause', pauseVideo);
-    // window.removeEventListener('vungle-fullscreen-video-play', playVideo);
 
     videoMuteButton.removeEventListener('click', toggleVideoMute);
 
