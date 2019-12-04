@@ -5,7 +5,6 @@ export default {
     playVideo,
     pauseVideo,
     hideVideoView,
-    isVideoViewVisible,
     videoDuration,
     onVideoPlay,
     videoTPATCheckpointsIndex,
@@ -73,15 +72,17 @@ function initVideo(videoSrc, isMuted) {
 }
 
 function checkPauseResumeOverlays() {
-    for (var i = 0; i < overlays.length; i++)
+    for (var i = 0; i < overlays.length; i++) {
         if (AdHelper.hasClass(overlays[i], 'show')) return false
+        if (AdHelper.hasClass(overlays[i], 'active')) return false
+    }
     return true
 }
 
 function playVideo() {
     if (checkPauseResumeOverlays())
         fullscreenVideoElem.play();
-        PostMessenger.sendMessage('ad-event-resume');
+    PostMessenger.sendMessage('ad-event-resume');
 }
 
 function pauseVideo() {
@@ -91,10 +92,6 @@ function pauseVideo() {
 
 function hideVideoView() {
     pauseVideo();
-    //Remove event listeners for video pause and play if video view is no longer visible to the user
-    //This also allows the privacy iframe to be toggled without accidentally calling the video play/pause
-    window.removeEventListener('vungle-fullscreen-video-pause', pauseVideo);
-    window.removeEventListener('vungle-fullscreen-video-play', playVideo);
 
     videoMuteButton.removeEventListener('click', toggleVideoMute);
 
@@ -126,15 +123,6 @@ function unMuteVideo() {
     soundSwitcher.checked = true;
 }
 
-function isVideoViewVisible() {
-    if (AdHelper.hasClass(fullscreenVideoView, 'hide')) {
-        //Video container is hidden
-        return false;
-    } else {
-        //Video container is visible
-        return true;
-    }
-}
 
 function videoDuration() {
     return videoDurationCount;
@@ -145,7 +133,7 @@ function onVideoPlay() {
     videoCurrentPlayTime = fullscreenVideoElem.currentTime;
     var percent = Math.floor((100 / fullscreenVideoElem.duration) * videoCurrentPlayTime);
     var progressVal = fullscreenVideoViewProgress.getElementsByClassName('progress-value')[0];
-    fullscreenVideoViewProgress.setAttribute('aria-valuenow',  percent);
+    fullscreenVideoViewProgress.setAttribute('aria-valuenow', percent);
     progressVal.style.width = percent + '%';
     progressVal.innerHTML = percent + '%';
 

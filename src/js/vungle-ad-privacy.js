@@ -28,7 +28,7 @@ function init(privacyPageUrl, vunglePrivacyLogoImageSrc) {
         privacyBubbleImage = document.createElement('img');
         privacyBubbleImage.src = vunglePrivacyLogoImageSrc;
         privacyBubbleImage.classList.add('logo-privacy');
-        privacyBubbleImage.setAttribute("alt","Vungle Privacy");
+        privacyBubbleImage.setAttribute("alt", "Vungle Privacy");
         privacyIcon.appendChild(privacyBubbleImage);
     }
 
@@ -41,7 +41,7 @@ function hideIframe() {
     var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
 
     AdHelper.removeClass(privacyWrapper, 'active');
-    if (AdVideoPlayer.isVideoViewVisible) { EventController.sendEvent('vungle-fullscreen-video-play') };
+    EventController.sendEvent('vungle-fullscreen-video-play');
 
     AdHelper.removeClass(loadingPage, 'loaded');
 
@@ -54,7 +54,7 @@ function showIFrame() {
     var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
     var privacyPg = document.getElementById(prefix + 'privacy-page');
 
-    if (AdVideoPlayer.isVideoViewVisible) { EventController.sendEvent('vungle-fullscreen-video-pause') };
+    EventController.sendEvent('vungle-fullscreen-video-pause')
 
     document.getElementById(prefix + 'privacy-page-wrapper').style.display = "initial";
     document.getElementById(prefix + 'privacy-back-button-container').style.display = "initial";
