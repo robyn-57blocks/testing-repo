@@ -16,7 +16,7 @@ export default {
 
         this.tokens = JSON.parse(`
         {
-            "MAIN_VIDEO": "https://cdn-lb.vungle.com/zen/75fc8b393b6ee3d0e28239d09d301aee-720x1280-Q2.mp4",
+            "MAIN_VIDEO": "https://cdn-lb.vungle.com/zen/VungleBrandV2Portrait-720x1280-Q2.mp4",
             "CTA_BUTTON_URL": "https://www.microsoft.com/en-us/p/bingo-blitz-free-bingo-slots/9nblggh42r8p",
             "INCENTIVIZED_CLOSE_TEXT": "Close",
             "CTA_BUTTON_TEXT": "Download",
