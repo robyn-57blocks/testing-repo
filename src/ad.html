@@ -122,11 +122,7 @@
     });
 
     function startCreative() {
-        if (VungleHelper.tokens.START_MUTED === 'false') {
-            testVideo.muted = false;
-        } else {
-            testVideo.muted = true;
-        }
+        testVideo.muted = VungleHelper.tokens.START_MUTED === 'false' ? false : true;
         testVideo.play();
         createLogEntry(eventLogElementId, "play");
     }
@@ -142,11 +138,7 @@
         return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
             var cls = 'number';
             if (/^"/.test(match)) {
-                if (/:$/.test(match)) {
-                    cls = 'key';
-                } else {
-                    cls = 'string';
-                }
+                cls = /:$/.test(match) ? 'key' : 'string';
             } else if (/true|false/.test(match)) {
                 cls = 'boolean';
             } else if (/null/.test(match)) {
