@@ -26,6 +26,7 @@ var adcore = {
         var vungleAd = document.getElementById('vungle-ad');
         var fullscreenVideoElem = document.getElementById('fullscreen-video');
         var endcardView = document.getElementById('endcard-view');
+        var videoMuteButton = document.getElementById('video-mute');
         window.vungleMRAID = MRAIDHelper;
 
         //check for either vungle or standard MRAID
@@ -310,6 +311,7 @@ var adcore = {
             PostMessenger.sendMessage('ad-event-init',VungleAd.tokens); // Iframe Communication
             AdHelper.removeClass(document.getElementById('endcard-view'), 'inactive');
             AdHelper.addClass(endcardView, 'active');
+            AdHelper.addClass(videoMuteButton, 'hide');
             ASOIController.init();
             //send postroll.view TPAT event once iFrame has loaded
             window.vungle.mraidBridgeExt.notifyTPAT("postroll.view");
