@@ -41,7 +41,7 @@ function hideIframe() {
     var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
 
     AdHelper.removeClass(privacyWrapper, 'active');
-    EventController.sendEvent('vungle-fullscreen-video-play');
+    EventController.sendEvent('vungle-resume');
 
     AdHelper.removeClass(loadingPage, 'loaded');
 
@@ -54,7 +54,7 @@ function showIFrame() {
     var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
     var privacyPg = document.getElementById(prefix + 'privacy-page');
 
-    EventController.sendEvent('vungle-fullscreen-video-pause')
+    EventController.sendEvent('vungle-pause');
 
     document.getElementById(prefix + 'privacy-page-wrapper').style.display = "initial";
     document.getElementById(prefix + 'privacy-back-button-container').style.display = "initial";

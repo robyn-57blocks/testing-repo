@@ -18,7 +18,10 @@ var adcore = {
 
         MRAIDHelper.checkMRAIDStatus().then(() => {
             this.controller(onEndcardStart);
-        })
+        });
+
+        window.addEventListener('vungle-pause', AdHelper.pauseMedia);
+        window.addEventListener('vungle-resume', AdHelper.resumeMedia);
 
     },
     controller: function(onEndcardStart) {
