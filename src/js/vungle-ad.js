@@ -22,7 +22,7 @@ export default {
             "CTA_BUTTON_TEXT": "Download",
             "VUNGLE_PRIVACY_URL": "https://privacy.vungle.com",
             "INCENTIVIZED_BODY_TEXT": "Are you sure you want to skip this ad? You must finish watching to claim your reward.",
-            "START_MUTED": "false",
+            "START_MUTED": "true",
             "VUNGLE_PRIVACY_LOGO": "https://cdn-lb.vungle.com/creative/design-framework/assets/vungle-privacy.svg",
             "INCENTIVIZED_CONTINUE_TEXT": "Continue",
             "VIDEO_PROGRESS_BAR": "true",
@@ -30,7 +30,7 @@ export default {
             "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "2",
             "CLOSE_BUTTON_DELAY_SECONDS": "5",
             "ENDCARD_ONLY_DURATION_SECONDS":"30",
-            "CREATIVE_VIEW_TYPE": "endcard",
+            "CREATIVE_VIEW_TYPE": "video_and_endcard",
             "EC_CLOSE_BUTTON_DELAY_SECONDS":"5",
             "VIDEO_SHOW_CTA":"true",
             "FULL_CTA":"true",
@@ -51,7 +51,7 @@ export default {
                 notifySuccessfulViewAd: function() { console.log('TIMER SUCCESSFUL VIEW - notifySuccessfulViewAd event sent'); return true }
             },
             mraid: {
-                getConsentRequired: function() { return true; },
+                getConsentRequired: function() { return false; },
                 getConsentTitleText: function() { return "Ad-Interaction Data Collection"; },
                 getConsentBodyText: function() { return "With permission, Vungle collects your ad-interaction data to serve relevant ads to you. Note: you’ll see ads independent of your selection, but they may not be as relevant. Do you consent to data tracking for more relevant ads?"; },
                 getConsentAcceptButtonText: function() { return "I consent"; },
