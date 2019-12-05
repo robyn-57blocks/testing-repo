@@ -63,8 +63,8 @@ function initVideo(videoSrc, isMuted) {
         fullscreenVideoElem.addEventListener('timeupdate', onVideoPlay);
         fullscreenVideoElem.addEventListener('vungle-fullscreen-video-ready', pauseVideo);
         videoMuteButton.addEventListener('click', toggleVideoMute);
-        window.addEventListener('vungle-fullscreen-video-pause', pauseVideo);
-        window.addEventListener('vungle-fullscreen-video-play', playVideo);
+        window.addEventListener('vungle-pause', pauseVideo);
+        window.addEventListener('vungle-resume', playVideo);
 
         videoLengthReport();
         playVideo();
@@ -81,12 +81,10 @@ function checkPauseResumeOverlays() {
 function playVideo() {
     if (checkPauseResumeOverlays())
         fullscreenVideoElem.play();
-    PostMessenger.sendMessage('ad-event-resume');
 }
 
 function pauseVideo() {
     fullscreenVideoElem.pause();
-    PostMessenger.sendMessage('ad-event-pause');
 }
 
 function hideVideoView() {
