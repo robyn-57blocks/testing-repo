@@ -73,10 +73,9 @@ function initVideo(videoSrc, isMuted) {
 
 function checkPauseResumeOverlays() {
     for (var i = 0; i < overlays.length; i++) {
-        if (AdHelper.hasClass(overlays[i], 'show')) return false
-        if (AdHelper.hasClass(overlays[i], 'active')) return false
+        if (AdHelper.hasClass(overlays[i], 'show') || AdHelper.hasClass(overlays[i], 'active')) return false;
     }
-    return true
+    return true;
 }
 
 function playVideo() {
@@ -122,7 +121,6 @@ function unMuteVideo() {
     fullscreenVideoElem.muted = false;
     soundSwitcher.checked = true;
 }
-
 
 function videoDuration() {
     return videoDurationCount;
