@@ -347,9 +347,11 @@ var adcore = {
             var isViewable = MRAIDHelper.isViewable();
             EventController.sendEvent('vungle-ad-viewable-change', isViewable)
             if (isViewable) {
-                AdVideoPlayer.playVideo()
+                AdVideoPlayer.playVideo();
+                EventController.sendEvent('vungle-resume');
             } else {
-                AdVideoPlayer.pauseVideo()
+                AdVideoPlayer.pauseVideo();
+                EventController.sendEvent('vungle-pause');
             }
         }
 

@@ -79,8 +79,9 @@ function checkPauseResumeOverlays() {
 }
 
 function playVideo() {
-    if (checkPauseResumeOverlays())
+    if (checkPauseResumeOverlays()) {
         fullscreenVideoElem.play();
+    }
 }
 
 function pauseVideo() {
