@@ -53,7 +53,6 @@ window.processMessage = function(title, content) {
             VungleHelper.tokens = content.tokens;
             VungleHelper.closeDelay = content.closeDelay;
             VungleHelper.rewardedAd = content.rewardedAd;
-
             break;
     }
 }
