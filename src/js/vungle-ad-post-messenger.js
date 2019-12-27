@@ -14,7 +14,6 @@ function init() {
     }
 }
 
-
 function sendMessage(title, obj) {
 
     var data = {
@@ -22,10 +21,11 @@ function sendMessage(title, obj) {
         content: obj
     }
 
-    if (iframeLoaded)
+    if (iframeLoaded) {
         iframe.contentWindow.postMessage(data, '*');
-    else
-        buffer.push(data)
+    } else {
+        buffer.push(data);
+    }
 }
 
 window.sendMsg = function(title, obj) {

@@ -43,6 +43,7 @@ var adcore = {
         var storeViewTypes = ["unknown", "fullscreen"];
         var gdprConsentRequired = false;
 
+        var delaySeconds = 0;
         var defaultEndcardOnlyDurationSeconds = 30; //30 seconds
         var minimumPercentageContainerSize = 45;
 
@@ -213,7 +214,6 @@ var adcore = {
         }
 
         function endcardCloseButtonTimer() {
-            var delaySeconds = 0;
             var rewardedAdDuration;
 
             rewardedAdDuration = (80 / 100) * getMaxAdDuration(); //80% of max ad duration
@@ -310,8 +310,7 @@ var adcore = {
         function renderAdIFrame() {
             endcardView.innerHTML = '<iframe id="ad-content" src="ad.html" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>';
             EventController.sendEvent('vungle-ad-iframe-reload');
-            PostMessenger.init(); // Iframe Communication
-            PostMessenger.sendMessage('ad-event-init',VungleAd.tokens); // Iframe Communication
+            
             AdHelper.removeClass(document.getElementById('endcard-view'), 'inactive');
             AdHelper.addClass(endcardView, 'active');
             AdHelper.addClass(videoMuteButton, 'hide');
@@ -340,6 +339,16 @@ var adcore = {
                     endcardCloseButtonTimer();
                     endcardOnlyVideoAttribution();
             }
+
+            //Initialise post messenger, then prepare and send iFrame creative an init event containing useful attributes about the ad
+            var messageObject = {
+                tokens: VungleAd.tokens, 
+                closeDelay: delaySeconds, 
+                rewardedAd: VungleAd.isAdIncentivised()
+            };
+            
+            PostMessenger.init();
+            PostMessenger.sendMessage('ad-event-init', messageObject);
         }
 
         function onAdViewableChange() {
@@ -354,7 +363,6 @@ var adcore = {
                 EventController.sendEvent('vungle-pause');
             }
         }
-
 
         function endcardOnlyVideoAttribution() {
             //Used to ensure endcard only (short-form) creatives are served successfully
