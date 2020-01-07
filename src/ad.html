@@ -27,6 +27,10 @@
             margin: 1rem 0;
             padding: 0.3rem 0;
         }
+        h3 {
+            font-size: 1rem;
+            margin: 0;
+        }
         pre {
             font-size: 0.9rem;
             overflow-x: scroll;
@@ -34,7 +38,11 @@
         video {
             width: 100%;
             height: auto;
-        }   
+        }
+        .video-container p {
+            margin: 0.5rem 0 0 0;
+            font-size: 0.7rem;
+        }
         .tabs {
             display: flex;
             flex-wrap: wrap;
@@ -62,6 +70,15 @@
             padding: 1rem;
             box-sizing: border-box;
             color: #3C2A67;
+        }
+        .tabs .tab div {
+            background-color: rgba(255,255,255,0.5);
+            padding: 0.5rem;
+            margin: 1rem 0;
+        }
+        .tabs .tab div:first-child {
+            padding-top: 0.5rem;
+            margin-top: 0;
         }
         .tabs input[type="radio"] {
             display: none;
@@ -96,34 +113,47 @@
         <input type="radio" name="tabs" id="tabone" checked="checked">
         <label for="tabone">Pause/Resume</label>
         <div class="tab">
-            <video id="test-video" muted preload playsinline webkit-playsinline autoplay loop>
-                <source src="https://cdn-lb.vungle.com/zen/V_Shapes_landscape_audio-960x540-Q2.mp4" type="video/mp4"/>
-            </video>
+            <div class="video-container">
+                <video id="test-video" muted preload playsinline webkit-playsinline autoplay loop>
+                    <source src="https://cdn-lb.vungle.com/zen/V_Shapes_landscape_audio-960x540-Q2.mp4" type="video/mp4"/>
+                </video>
+                <p id="video-mute-status"></p>
+            </div>
             <a onclick="parent.postMessage('download','*')">Download Button</a>
             <div id="event-log"><h3>Event Log</h3></div>
         </div>
 
         <input type="radio" name="tabs" id="tabtwo">
-        <label for="tabtwo">Tokens</label>
+        <label for="tabtwo">Attributes</label>
         <div class="tab">
-            <div id="token-log"><h3>Tokens Log</h3></div>
+            <div id="close-delay-log"><h3>Close Delay</h3></div>
+            <div id="rewarded-ad-log"><h3>Rewarded Ad</h3></div>
+            <div id="token-log"><h3>Ad Request Tokens</h3></div>
         </div>
     </div>
 </body>
 <script type="text/javascript">
     var testVideo = document.getElementById("test-video");
-    var eventLogElementId = "event-log";
+    var videoMuteStatus = document.getElementById("video-mute-status");
+
+    var closeDelayLogElementId = "close-delay-log";
+    var rewardedAdLogElementId = "rewarded-ad-log";
     var tokenLogElementId = "token-log";
+    var eventLogElementId = "event-log";
 
     //Example of a VCL creative initialising by calling the ad-event-init, followed by any additional calls to start the creative
     window.addEventListener('ad-event-init', function() {
         var tokenJson = syntaxHighlight(JSON.stringify(VungleHelper.tokens, undefined, 2));
+        createLogEntry(closeDelayLogElementId, VungleHelper.closeDelay);
+        createLogEntry(rewardedAdLogElementId, VungleHelper.rewardedAd);
         createLogEntry(tokenLogElementId, tokenJson);
         startCreative();
     });
 
     function startCreative() {
+        //Set video audio to muted if START_MUTED token is set to true
         testVideo.muted = VungleHelper.tokens.START_MUTED === 'false' ? false : true;
+        videoMuteStatus.innerHTML = "Video on start is " + (VungleHelper.tokens.START_MUTED === 'false' ? "not muted" : "muted");
         testVideo.play();
         createLogEntry(eventLogElementId, "play");
     }

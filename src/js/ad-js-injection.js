@@ -50,7 +50,9 @@ window.receiveMessage = function(e) {
 window.processMessage = function(title, content) {
     switch (title) {
         case 'ad-event-init':
-            VungleHelper.tokens = content;
+            VungleHelper.tokens = content.tokens;
+            VungleHelper.closeDelay = content.closeDelay;
+            VungleHelper.rewardedAd = content.rewardedAd;
             break;
     }
 }
