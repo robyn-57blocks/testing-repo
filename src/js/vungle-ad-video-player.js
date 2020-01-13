@@ -32,10 +32,6 @@ var videoCta = document.getElementById('video-cta');
 var videoSource, videoDurationCount, videoCurrentPlayTime, videoCheckpointIndex, videoPlaySuccessfulDuration;
 var videoViewedPerSecond = 0;
 
-
-var overlays = document.querySelectorAll('[overlay]');
-
-
 function initVideo(videoSrc, isMuted) {
 
     AdHelper.removeClass(fullscreenVideoView, 'hide');
@@ -71,15 +67,9 @@ function initVideo(videoSrc, isMuted) {
     });
 }
 
-function checkPauseResumeOverlays() {
-    for (var i = 0; i < overlays.length; i++) {
-        if (AdHelper.hasClass(overlays[i], 'show') || AdHelper.hasClass(overlays[i], 'active')) return false;
-    }
-    return true;
-}
 
 function playVideo() {
-    if (checkPauseResumeOverlays()) {
+    if (AdHelper.checkPauseResumeOverlays()) {
         fullscreenVideoElem.play();
     }
 }

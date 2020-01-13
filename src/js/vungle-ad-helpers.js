@@ -164,6 +164,17 @@ export default {
         PostMessenger.sendMessage('ad-event-pause');
     },
 
+    checkPauseResumeOverlays: function() {
+        let overlays = document.querySelectorAll('[overlay]');
+        let _this = this;
+        for (var i = 0; i < overlays.length; i++) {
+            if (_this.hasClass(overlays[i], 'show') || _this.hasClass(overlays[i], 'active')) {
+                return false;
+            }
+        }
+        return true;
+    },
+
     getApiIdFromUrl: function(ctaUrl) {
         if (!ctaUrl) {
             return null;
