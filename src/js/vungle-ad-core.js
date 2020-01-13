@@ -355,7 +355,7 @@ var adcore = {
             // Pause and Resume
             var isViewable = MRAIDHelper.isViewable();
             EventController.sendEvent('vungle-ad-viewable-change', isViewable)
-            if (isViewable) {
+            if (isViewable && AdHelper.checkPauseResumeOverlays()) {
                 AdVideoPlayer.playVideo();
                 EventController.sendEvent('vungle-resume');
             } else {
