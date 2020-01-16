@@ -22,9 +22,7 @@ window.addEventListener('touchstart', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function(){
         window.sendMessage('ad-event-loaded')
-    },20)
 })
 
 function sendEvent(name, obj = {}) {
