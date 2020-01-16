@@ -23,7 +23,6 @@ window.addEventListener('touchstart', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function(){
-        console.log('loaded')
         window.sendMessage('ad-event-loaded')
     },20)
 })
