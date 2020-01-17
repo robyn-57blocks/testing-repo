@@ -7,11 +7,11 @@ var buffer = [];
 
 function init() {
     iframe = document.getElementById('ad-content');
-
-    iframe.onload = function() {
+    iframeLoaded = false;
+    window.addEventListener('ad-event-loaded', function(){
         iframeLoaded = true;
         pushBufferedMessages();
-    }
+    });
 }
 
 function sendMessage(title, obj) {

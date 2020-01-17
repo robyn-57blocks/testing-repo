@@ -21,7 +21,12 @@ window.addEventListener('touchstart', function() {
     parent.postMessage('interacted', '*');
 });
 
-function sendEvent(name, obj = {}) {
+document.addEventListener('DOMContentLoaded', function() {
+        window.sendMessage('ad-event-loaded')
+})
+
+function sendEvent(name, obj) {
+    if(typeof obj === 'undefined'){obj = {}}
     var event = new CustomEvent(name, { 'detail': obj });
     window.dispatchEvent(event);
 }
