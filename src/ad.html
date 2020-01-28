@@ -16,7 +16,7 @@
             background: #FED8E6;
             font-family: -apple-system, "Segoe UI", "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
-        a {
+        a, button {
             position: relative;
             display: block;
             font-size: 1.3rem;
@@ -26,6 +26,13 @@
             text-align: center;
             margin: 1rem 0;
             padding: 0.3rem 0;
+        }
+        button {
+            width: 100%;
+            border: none;
+            background-color: transparent;
+            outline: none;
+            color: #3C2A67;
         }
         h3 {
             font-size: 1rem;
@@ -38,6 +45,9 @@
         video {
             width: 100%;
             height: auto;
+        }
+        .hide {
+            display: none;
         }
         .video-container p {
             margin: 0.5rem 0 0 0;
@@ -75,6 +85,9 @@
             background-color: rgba(255,255,255,0.5);
             padding: 0.5rem;
             margin: 1rem 0;
+        }
+        #video-placement {
+            margin: 0;
         }
         .tabs .tab div:first-child {
             padding-top: 0.5rem;
@@ -114,9 +127,8 @@
         <label for="tabone">Pause/Resume</label>
         <div class="tab">
             <div class="video-container">
-                <video id="test-video" muted preload playsinline webkit-playsinline autoplay loop>
-                    <source src="https://cdn-lb.vungle.com/zen/V_Shapes_landscape_audio-960x540-Q2.mp4" type="video/mp4"/>
-                </video>
+                <button id="show-video">Display Video</button>
+                <div id="video-placement" class="hide"></div>
                 <p id="video-mute-status"></p>
             </div>
             <a onclick="parent.postMessage('download','*')">Download Button</a>
@@ -133,8 +145,10 @@
     </div>
 </body>
 <script type="text/javascript">
-    var testVideo = document.getElementById("test-video");
+    var testVideo, videoActivated;
     var videoMuteStatus = document.getElementById("video-mute-status");
+    var showVideoButton = document.getElementById("show-video");
+    var videoPlacement = document.getElementById("video-placement");
 
     var closeDelayLogElementId = "close-delay-log";
     var rewardedAdLogElementId = "rewarded-ad-log";
@@ -143,20 +157,13 @@
 
     //Example of a VCL creative initialising by calling the ad-event-init, followed by any additional calls to start the creative
     window.addEventListener('ad-event-init', function() {
+        createLogEntry(eventLogElementId, "ad event init");
+
         var tokenJson = syntaxHighlight(JSON.stringify(VungleHelper.tokens, undefined, 2));
         createLogEntry(closeDelayLogElementId, VungleHelper.closeDelay);
         createLogEntry(rewardedAdLogElementId, VungleHelper.rewardedAd);
         createLogEntry(tokenLogElementId, tokenJson);
-        startCreative();
     });
-
-    function startCreative() {
-        //Set video audio to muted if START_MUTED token is set to true
-        testVideo.muted = VungleHelper.tokens.START_MUTED === 'false' ? false : true;
-        videoMuteStatus.innerHTML = "Video on start is " + (VungleHelper.tokens.START_MUTED === 'false' ? "not muted" : "muted");
-        testVideo.play();
-        createLogEntry(eventLogElementId, "play");
-    }
 
     function createLogEntry(parentElement, value) {
         var element = document.createElement("pre");
@@ -179,13 +186,33 @@
         });
     }
 
+    showVideoButton.onclick = function(){
+        videoPlacement.innerHTML = '<video id="test-video" muted preload playsinline webkit-playsinline autoplay loop><source src="https://cdn-lb.vungle.com/zen/V_Shapes_landscape_audio-960x540-Q2.mp4" type="video/mp4"/></video>';
+        videoPlacement.classList.remove("hide");
+        testVideo = document.getElementById("test-video");
+        showVideoButton.style.display = "none";
+
+        //Set video audio to muted if START_MUTED token is set to true
+        testVideo.muted = VungleHelper.tokens.START_MUTED === 'false' ? false : true;
+        videoMuteStatus.innerHTML = "Video on start is " + (VungleHelper.tokens.START_MUTED === 'false' ? "not muted" : "muted");
+        testVideo.play();
+        videoActivated = true;
+        createLogEntry(eventLogElementId, "endcard video play");
+    };
+
     window.addEventListener('ad-event-pause', function() {
-        testVideo.pause();
+        if (videoActivated) {
+            testVideo.pause();
+            createLogEntry(eventLogElementId, "endcard video pause");            
+        }
         createLogEntry(eventLogElementId, "pause");
     });
 
     window.addEventListener('ad-event-resume', function() {
-        testVideo.play();
+        if (videoActivated) {
+            testVideo.play();
+            createLogEntry(eventLogElementId, "endcard video resume");
+        }
         createLogEntry(eventLogElementId, "resume");
     });
     

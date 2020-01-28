@@ -356,7 +356,10 @@ var adcore = {
             var isViewable = MRAIDHelper.isViewable();
             EventController.sendEvent('vungle-ad-viewable-change', isViewable)
             if (isViewable && AdHelper.checkPauseResumeOverlays()) {
-                AdVideoPlayer.playVideo();
+                //check if fullscreen video is present
+                if (AdVideoPlayer.isVideoPlayerVisible()) {
+                    AdVideoPlayer.playVideo();
+                }
                 EventController.sendEvent('vungle-resume');
             } else {
                 AdVideoPlayer.pauseVideo();
