@@ -13,7 +13,8 @@ export default {
     endVideoAttributionListeners,
     muteVideo,
     unMuteVideo,
-    toggleVideoMute
+    toggleVideoMute,
+    isVideoPlayerVisible
 }
 
 import { default as AdHelper } from './vungle-ad-helpers.js';
@@ -67,11 +68,16 @@ function initVideo(videoSrc, isMuted) {
     });
 }
 
-
 function playVideo() {
     if (AdHelper.checkPauseResumeOverlays()) {
-        fullscreenVideoElem.play();
+        if (isVideoPlayerVisible()) {
+            fullscreenVideoElem.play();
+        }
     }
+}
+
+function isVideoPlayerVisible() {
+    return !AdHelper.hasClass(fullscreenVideoView, 'hide');
 }
 
 function pauseVideo() {
