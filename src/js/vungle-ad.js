@@ -45,8 +45,8 @@ export default {
                 getOS: function() { return "ios"; }
             },
             mraidBridgeExt: {
-                notifyTPAT: function() { return true; },
-                notifyEventValuePairEvent: function() { return true; },
+                notifyTPAT: function(e) { console.log('notifyTPAT: '+e); return true; },
+                notifyEventValuePairEvent: function(e) { console.log('notifyEventValuePairEvent: '+e); return true; },
                 consentAction: function() { return true },
                 notifySuccessfulViewAd: function() { console.log('TIMER SUCCESSFUL VIEW - notifySuccessfulViewAd event sent'); return true }
             },

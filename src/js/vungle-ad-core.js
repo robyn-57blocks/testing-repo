@@ -37,6 +37,7 @@ var adcore = {
 
         var achievedReward, isStoreViewPrepared, mraidVersion, successfulViewTimeout, videoCloseButtonTimeout;
         var blockCtaEvent = false;
+        var ctaAlreadyClicked = false;
         var dynamicElement = null;
         var placementType = null; //["fullscreen", "Unknown", "flexview", "flexfeed", "mrec"]
         var creativeViewType = null;
@@ -632,10 +633,14 @@ var adcore = {
         }
 
         function ctaButtonClicked() {
-            //send postroll.click and clickUrl TPAT events when CTA is clicked for campaign level tracking,
-            //and postroll.click and download events for report_ad
-            window.vungle.mraidBridgeExt.notifyTPAT("postroll.click");
-            window.vungle.mraidBridgeExt.notifyTPAT("clickUrl");
+            //if CTA has not been previously clicked, send postroll.click and clickUrl TPAT events
+            if (!ctaAlreadyClicked) {
+                window.vungle.mraidBridgeExt.notifyTPAT("postroll.click");
+                window.vungle.mraidBridgeExt.notifyTPAT("clickUrl");
+                ctaAlreadyClicked = true;
+            }
+
+            //send postroll.click and download events for report_ad
             window.vungle.mraidBridgeExt.notifyEventValuePairEvent("postroll.click", 1);
             window.vungle.mraidBridgeExt.notifyEventValuePairEvent("download", 1);
 
