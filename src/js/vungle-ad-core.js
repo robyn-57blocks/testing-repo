@@ -589,7 +589,6 @@ var adcore = {
                     AdClose.endEndcardCloseButtonTimer();
                     closeButton.onclick = function() {
                         vungleMRAID.close();
-                        console.log(close);
                     };
                 }, showCloseButtonTimeMilliSeconds);
 
