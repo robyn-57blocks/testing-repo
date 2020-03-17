@@ -9,14 +9,29 @@ import { default as AdVideoPlayer } from './vungle-ad-video-player.js';
 var privacyTimer, privacySubTimer;
 
 var prefix = ''; // stop clashes
-var privacyUrl = 'http://vungle.com/privacy/';
+var privacyUrl = 'https://privacy.vungle.com';
+var privacyBubbleImage;
 var privacyDuration = 2000;
 var privacySubDuration = 1000;
 var privacySubHideDuration = 500;
 var privacyIcon = document.getElementById(prefix + 'privacy-icon');
 var privacyWrapper = document.getElementById('privacy-page-wrapper');
 
-function init() {
+function init(privacyPageUrl, vunglePrivacyLogoImageSrc) {
+
+    if (typeof privacyPageUrl !== 'undefined') {
+        privacyUrl = privacyPageUrl;
+    }
+
+    if (typeof vunglePrivacyLogoImageSrc !== 'undefined' && vunglePrivacyLogoImageSrc !== "") {
+        //generate image in privacy bubble
+        privacyBubbleImage = document.createElement('img');
+        privacyBubbleImage.src = vunglePrivacyLogoImageSrc;
+        privacyBubbleImage.classList.add('logo-privacy');
+        privacyBubbleImage.setAttribute("alt", "Vungle Privacy");
+        privacyIcon.appendChild(privacyBubbleImage);
+    }
+
     // add click events
     document.getElementById(prefix + 'privacy-icon').addEventListener("click", privacyExtend);
     document.getElementById(prefix + 'privacy-back-button-container').addEventListener("click", hideIframe);
@@ -26,7 +41,7 @@ function hideIframe() {
     var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
 
     AdHelper.removeClass(privacyWrapper, 'active');
-    if (AdVideoPlayer.isVideoViewVisible) { EventController.sendEvent('vungle-fullscreen-video-play') };
+    EventController.sendEvent('vungle-resume');
 
     AdHelper.removeClass(loadingPage, 'loaded');
 
@@ -39,7 +54,7 @@ function showIFrame() {
     var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
     var privacyPg = document.getElementById(prefix + 'privacy-page');
 
-    if (AdVideoPlayer.isVideoViewVisible) { EventController.sendEvent('vungle-fullscreen-video-pause') };
+    EventController.sendEvent('vungle-pause');
 
     document.getElementById(prefix + 'privacy-page-wrapper').style.display = "initial";
     document.getElementById(prefix + 'privacy-back-button-container').style.display = "initial";
@@ -57,22 +72,22 @@ function showIFrame() {
 }
 
 function hidePrivacyIcon() {
-    AdHelper.removeClass(privacyIcon, 'privacy-extended');
+    AdHelper.removeClass(privacyIcon, 'open');
 
     privacySubTimer = setTimeout(function() {
-        AdHelper.removeClass(privacyIcon, 'privacy-reverse');
+        AdHelper.removeClass(privacyIcon, 'reverse');
     }, privacySubHideDuration);
 }
 
 function privacyExtend() {
 
-    if (AdHelper.hasClass(privacyIcon, 'privacy-extended')) {
+    if (AdHelper.hasClass(privacyIcon, 'open')) {
         showIFrame();
         hidePrivacyIcon();
         return;
     }
 
-    AdHelper.addClass(privacyIcon, 'privacy-extended');
+    AdHelper.addClass(privacyIcon, 'open');
 
     clearTimeout(privacyTimer);
 
@@ -81,6 +96,6 @@ function privacyExtend() {
     }, privacyDuration);
 
     privacySubTimer = setTimeout(function() {
-        AdHelper.addClass(privacyIcon, 'privacy-reverse');
+        AdHelper.addClass(privacyIcon, 'reverse');
     }, privacySubDuration);
 }

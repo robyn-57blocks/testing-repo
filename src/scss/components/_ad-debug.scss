@@ -1,124 +1,119 @@
 #vungle-ad-debug {
     display: block;
-    position: absolute;
     width: 100%;
     height: 100%;
     z-index: 99999;
-    top: 0; left: 0; bottom: 0; right: 0; 
+    top: 0; left: 0; bottom: 0; right: 0;
     pointer-events: none;
-    background-color: rgba(0,0,0,0.3);
-    
-    p {
-		text-align: center;
-		position: absolute;
-		width: 80%;
-		left: 50%;
-		top: 50%;
-		-webkit-transform: translate(-50%, -50%);
-		transform: translate(-50%, -50%);
-		font-family: $vungle-typography;
+    background-color: rgba($dark-bg,0.3);
 
-		#{$landscape} {
-			width: 60%;
-		}
+    &, p {
+        position: absolute;
+    }
+
+    p {
+    		text-align: center;
+    		width: 80%;
+    		left: 50%;
+    		top: 50%;
+    		-webkit-transform: translate(-50%, -50%);
+    		transform: translate(-50%, -50%);
+    		font-family: $vungle-typography;
+
+    		#{$landscape} {
+    		    width: 60%;
+    		}
     }
 
     span {
-		display: block;
-		padding: 0.5em 1em;
-		background: rgba(100, 100, 100, 0.35);
-		color: $white;
-		font-weight: 400;
-		-webkit-backdrop-filter: blur(2px);
-		backdrop-filter: blur(2px);
-		@include responsive-font(3vw, 0.9em, 1.1em);
+    		display: block;
+    		padding: 0.5em 1em;
+    		background: rgba($color-dovegray, 0.35);
+    		color: $light-bg;
+    		font-weight: 400;
+    		-webkit-backdrop-filter: blur(2px);
+    		backdrop-filter: blur(2px);
+    		@include responsive-font(3vw, 0.9em, 1.1em);
 
-		&.title {
-			@include responsive-font(2.5vw, 1.4em, 1.7em);
-			background: rgba(0,0,0,0.8);
-		}
+    		&.title {
+    		    @include responsive-font(2.5vw, 1.4em, 1.7em);
+    		    background: rgba($dark-bg,0.8);
+    		}
 
-		b {
-			font-weight: 600;
-		}
+    		b {
+    		    font-weight: 600;
+    		}
 
-		&:first-child {
-			border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-		}
-		&:last-child {
-			border-bottom-left-radius: 5px;
-			border-bottom-right-radius: 5px;
-		}
-		&:nth-child(3) {
-			box-shadow: inset 0px 11px 0 -10px rgba(0,0,0,0.1), inset 0px -11px 0 -10px rgba(0,0,0,0.1); 
-		}
+    		&:first-child {
+      			border-top-left-radius: 5px;
+      			border-top-right-radius: 5px;
+    		}
+    		&:last-child {
+      			border-bottom-left-radius: 5px;
+      			border-bottom-right-radius: 5px;
+    		}
+    		&:nth-child(3) {
+    		    box-shadow: $shadow-1;
+    		}
 
-		#{$landscape} {
-			@include responsive-font(2vw, 0.7em, 0.9em);
+        #{$landscape},
+        #{$square} {
+      			@include responsive-font(2vw, 0.7em, 0.9em);
 
-			&.title {
-				@include responsive-font(2vw, 1.5em, 1.8em);
-			}
-		}
+      			&.title {
+                @include responsive-font(2vw, 1.5em, 1.8em);
+      			}
+    		}
 
-		#{$square} {
-			@include responsive-font(2vw, 0.7em, 0.9em);
-
-			&.title {
-				@include responsive-font(2vw, 1.5em, 1.8em);
-			}
-		}
-
-		&.title {
-			#{$square} {
-		    	background-color: rgba(113, 127, 155, 0.65); //717F9B
-			}
-			#{$portrait-xs} {
-			    background-color: rgba(215, 129, 106, 0.65); //D7816A
-			}
-			#{$portrait-s} {
-			    background-color: rgba(222, 151, 133, 0.65); //DE9785
-			}
-			#{$portrait-m} {
-			    background-color: rgba(229, 174, 160, 0.65); //E5AEA0
-			}
-			#{$portrait-l} {
-			    background-color: rgba(236, 197, 187, 0.65); //ECC5BB
-			}
-			#{$portrait-xl} {
-			    background-color: rgba(2244, 220, 214, 0.65); //F4DCD6
-			}
-			#{$landscape-xs} {
-			    background-color: rgba(126, 145, 111, 0.65); //7E916F
-			}
-			#{$landscape-s} {
-			    background-color: rgba(158, 180, 139, 0.65); //9EB48B
-			}
-			#{$landscape-m} {
-			    background-color: rgba(180, 203, 161, 0.65); //B4CBA1
-			}
-			#{$landscape-l} {
-			    background-color: rgba(195, 213, 180, 0.65); //C3D5B4
-			}
-			#{$landscape-xl} {
-			    background-color: rgba(210, 223, 198, 0.65); //D2DFC6
-			}
-		}
+    		&.title {
+      		  #{$square} {
+      		    	background-color: rgba($color-lynch, 0.65);
+      			}
+      			#{$portrait-xs} {
+      			    background-color: rgba($color-japonica, 0.65);
+      			}
+      			#{$portrait-s} {
+      			    background-color: rgba($color-japonica-6, 0.65);
+      			}
+      			#{$portrait-m} {
+      			    background-color: rgba($color-japonica-13, 0.65);
+      			}
+      			#{$portrait-l} {
+      			    background-color: rgba($color-japonica-19, 0.65);
+      			}
+      			#{$portrait-xl} {
+      			    background-color: rgba($color-japonica-27, 0.65);
+      			}
+      			#{$landscape-xs} {
+      			    background-color: rgba($color-camouflage, 0.65);
+      			}
+      			#{$landscape-s} {
+      			    background-color: rgba($color-camouflage-12, 0.65);
+      			}
+      			#{$landscape-m} {
+      			    background-color: rgba($color-camouflage-21, 0.65);
+      			}
+      			#{$landscape-l} {
+      			    background-color: rgba($color-camouflage-27, 0.65);
+      			}
+      			#{$landscape-xl} {
+      			    background-color: rgba($color-camouflage-33, 0.65);
+      			}
+    		}
     }
-	
-	&.oob {
-	    background-color: rgba(255, 0, 0, 0.4);
 
-	    span {
-	    	&.title {
-	    		background-color: rgba(255, 0, 0, 0.65) !important;
-	    	}
-	    }
-	    
-	    & p {
-		    color: #ffffff;
-		    font-weight: bold;
-	    }
-	}
-}    
+    &.oob {
+  	    background-color: rgba($color-red, 0.4);
+
+  	    span {
+    	    	&.title {
+                background-color: rgba($color-red, 0.65) !important;
+    	    	}
+  	    }
+
+  	    & p {
+  		      color: $light-bg;
+            font-weight: 600;
+  	    }
+    }
+}

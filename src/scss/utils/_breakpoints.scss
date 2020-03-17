@@ -2,8 +2,6 @@
 
 // -- Ratio Breakpoints
 $square: 'body.square &';
-
-$portrait: 'body.portrait &';
 $portrait-xs: 'body.portrait-xs &';
 $portrait-s: 'body.portrait-s &';
 $portrait-m: 'body.portrait-m &';
@@ -16,16 +14,3 @@ $landscape-s: 'body.landscape-s &';
 $landscape-m: 'body.landscape-m &';
 $landscape-l: 'body.landscape-l &';
 $landscape-xl: 'body.landscape-xl &';
-
-// -- Theme Stylistic Breakpoints
-$light-theme: 'body.light &';
-$dark-theme: 'body.dark &';
-
-// -- OS Stylistic Breakpoints
-$ios: 'body.ios &';
-$android: 'body.android &';
-$windows: 'body.windows &';
-
-// -- OS Device Breakpoints
-$windows-large-screen: '900px';
-$tablet: '768px';

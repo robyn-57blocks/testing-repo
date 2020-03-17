@@ -2,49 +2,225 @@
 
 <head>
     <meta charset="UTF-8">
-    <script type="text/javascript">
-    window.vungleSettings = {
-        ASOIEnabled: true,
-        ASOIDelayTimer: 0,
-        ASOITapInteractions: 4
-    }
-    </script>
     <!-- build:js ad-js-injection.js -->
     <script src="js/ad-js-injection.js"></script>
     <!-- /build -->
     <meta name="viewport" initial-scale=1.0, maximum-scale="1.0, user-scalable=no">
     <style>
         /* THIS STYLING IS FOR DEMO PURPOSES ONLY AND CAN BE REMOVED */
-    html,
-    body {
-        margin: 0;
-        height: 100%;
-        width: 100%;
-        color: white;
-        background: black;
-    }
-
-    a {
-        position: absolute;
-        left: 50%;
-        top: 85%;
-        transform: translate(-50%, -50%);
-        font-size: 30px;
-        background-color: orange;
-        border: 3px solid wheat;
-        color: #333;
-        padding: 20px;
-    }
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            background: #FED8E6;
+            font-family: -apple-system, "Segoe UI", "Roboto", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        a, button {
+            position: relative;
+            display: block;
+            font-size: 1.3rem;
+            background-color: #3C2A67;
+            border: 3px solid rgba(0,0,0,0.1);
+            color: white;
+            text-align: center;
+            margin: 1rem 0;
+            padding: 0.3rem 0;
+        }
+        button {
+            width: 100%;
+            border: none;
+            background-color: transparent;
+            outline: none;
+            color: #3C2A67;
+        }
+        h3 {
+            font-size: 1rem;
+            margin: 0;
+        }
+        pre {
+            font-size: 0.9rem;
+            overflow-x: scroll;
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+        .hide {
+            display: none;
+        }
+        .video-container p {
+            margin: 0.5rem 0 0 0;
+            font-size: 0.7rem;
+        }
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            overflow-y: scroll;
+        }
+        .tabs label {
+            width: 50%;
+            height: 20px;
+            order: 1;
+            display: block;
+            padding: 2rem 0 2rem 0;
+            cursor: pointer;
+            text-align: center;
+            background: #4c4e4e;
+            color: #7c7c7c;
+            font-weight: bold;
+            transition: background ease 0.2s;
+            box-shadow: inset rgba(0,0,0,0.1) -0.1rem 0 0 0;
+        }
+        .tabs .tab {
+            order: 99;
+            flex-grow: 1;
+            width: 100%;
+            display: none;
+            padding: 1rem;
+            box-sizing: border-box;
+            color: #3C2A67;
+        }
+        .tabs .tab div {
+            background-color: rgba(255,255,255,0.5);
+            padding: 0.5rem;
+            margin: 1rem 0;
+        }
+        #video-placement {
+            margin: 0;
+        }
+        .tabs .tab div:first-child {
+            padding-top: 0.5rem;
+            margin-top: 0;
+        }
+        .tabs input[type="radio"] {
+            display: none;
+        }
+        .tabs input[type="radio"]:checked + label {
+            background: #FC5B48;
+            color: #fff;
+            box-shadow: inset rgba(0,0,0,0.1) 0 -0.2rem 0 0;
+        }
+        .tabs input[type="radio"]:checked + label + .tab {
+            display: block;
+        }
+        .string { 
+            color: green;
+        }
+        .number {
+            color: darkorange;
+        }
+        .boolean {
+            color: blue;
+        }
+        .null {
+            color: magenta;
+        }
+        .key {
+            color: red;
+        }
     </style>
 </head>
-
 <body>
-    <a onclick="parent.postMessage('download','*')">DOWNLOAD</a>
+    <div class="tabs">
+        <input type="radio" name="tabs" id="tabone" checked="checked">
+        <label for="tabone">Pause/Resume</label>
+        <div class="tab">
+            <div class="video-container">
+                <button id="show-video">Display Video</button>
+                <div id="video-placement" class="hide"></div>
+                <p id="video-mute-status"></p>
+            </div>
+            <a onclick="parent.postMessage('download','*')">Download Button</a>
+            <div id="event-log"><h3>Event Log</h3></div>
+        </div>
+
+        <input type="radio" name="tabs" id="tabtwo">
+        <label for="tabtwo">Attributes</label>
+        <div class="tab">
+            <div id="close-delay-log"><h3>Close Delay</h3></div>
+            <div id="rewarded-ad-log"><h3>Rewarded Ad</h3></div>
+            <div id="token-log"><h3>Ad Request Tokens</h3></div>
+        </div>
+    </div>
 </body>
 <script type="text/javascript">
-setTimeout(function() {
-    parent.postMessage('complete', '*');
-}, 10000);
-</script>
+    var testVideo, videoActivated;
+    var videoMuteStatus = document.getElementById("video-mute-status");
+    var showVideoButton = document.getElementById("show-video");
+    var videoPlacement = document.getElementById("video-placement");
 
+    var closeDelayLogElementId = "close-delay-log";
+    var rewardedAdLogElementId = "rewarded-ad-log";
+    var tokenLogElementId = "token-log";
+    var eventLogElementId = "event-log";
+
+    //Example of a VCL creative initialising by calling the ad-event-init, followed by any additional calls to start the creative
+    window.addEventListener('ad-event-init', function() {
+        createLogEntry(eventLogElementId, "ad event init");
+
+        var tokenJson = syntaxHighlight(JSON.stringify(VungleHelper.tokens, undefined, 2));
+        createLogEntry(closeDelayLogElementId, VungleHelper.closeDelay);
+        createLogEntry(rewardedAdLogElementId, VungleHelper.rewardedAd);
+        createLogEntry(tokenLogElementId, tokenJson);
+    });
+
+    function createLogEntry(parentElement, value) {
+        var element = document.createElement("pre");
+        element.innerHTML = value;
+        document.getElementById(parentElement).appendChild(element);
+    }
+
+    function syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                cls = /:$/.test(match) ? 'key' : 'string';
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    showVideoButton.onclick = function(){
+        videoPlacement.innerHTML = '<video id="test-video" muted preload playsinline webkit-playsinline autoplay loop><source src="https://cdn-lb.vungle.com/zen/V_Shapes_landscape_audio-960x540-Q2.mp4" type="video/mp4"/></video>';
+        videoPlacement.classList.remove("hide");
+        testVideo = document.getElementById("test-video");
+        showVideoButton.style.display = "none";
+
+        //Set video audio to muted if START_MUTED token is set to true
+        testVideo.muted = VungleHelper.tokens.START_MUTED === 'false' ? false : true;
+        videoMuteStatus.innerHTML = "Video on start is " + (VungleHelper.tokens.START_MUTED === 'false' ? "not muted" : "muted");
+        testVideo.play();
+        videoActivated = true;
+        createLogEntry(eventLogElementId, "endcard video play");
+    };
+
+    window.addEventListener('ad-event-pause', function() {
+        if (videoActivated) {
+            testVideo.pause();
+            createLogEntry(eventLogElementId, "endcard video pause");            
+        }
+        createLogEntry(eventLogElementId, "pause");
+    });
+
+    window.addEventListener('ad-event-resume', function() {
+        if (videoActivated) {
+            testVideo.play();
+            createLogEntry(eventLogElementId, "endcard video resume");
+        }
+        createLogEntry(eventLogElementId, "resume");
+    });
+    
+    //Legacy ASOI settings
+    window.vungleSettings = {
+        ASOIEnabled: false,
+        ASOIDelayTimer: 0,
+        ASOITapInteractions: 4
+    }
+</script>
 </html>

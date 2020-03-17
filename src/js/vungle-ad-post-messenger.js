@@ -7,13 +7,12 @@ var buffer = [];
 
 function init() {
     iframe = document.getElementById('ad-content');
-
-    iframe.onload = function() {
+    iframeLoaded = false;
+    window.addEventListener('ad-event-loaded', function(){
         iframeLoaded = true;
         pushBufferedMessages();
-    }
+    });
 }
-
 
 function sendMessage(title, obj) {
 
@@ -22,10 +21,11 @@ function sendMessage(title, obj) {
         content: obj
     }
 
-    if (iframeLoaded)
+    if (iframeLoaded) {
         iframe.contentWindow.postMessage(data, '*');
-    else
-        buffer.push(data)
+    } else {
+        buffer.push(data);
+    }
 }
 
 window.sendMsg = function(title, obj) {
@@ -34,7 +34,7 @@ window.sendMsg = function(title, obj) {
 
 function pushBufferedMessages() {
     for (var i = 0; i < buffer.length; i++)
-        sendMessage(buffer[i])
+        iframe.contentWindow.postMessage(buffer[i], '*');
     buffer = [];
 }
 

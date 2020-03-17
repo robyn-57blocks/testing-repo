@@ -1,3 +1,6 @@
+// Storage for tokens
+var VungleHelper = {}
+
 // Legacy IEC v1 Event
 window.callSDK = function(action) {
     parent.postMessage(action, '*');
@@ -18,7 +21,12 @@ window.addEventListener('touchstart', function() {
     parent.postMessage('interacted', '*');
 });
 
-function sendEvent(name, obj = {}) {
+document.addEventListener('DOMContentLoaded', function() {
+        window.sendMessage('ad-event-loaded')
+})
+
+function sendEvent(name, obj) {
+    if(typeof obj === 'undefined'){obj = {}}
     var event = new CustomEvent(name, { 'detail': obj });
     window.dispatchEvent(event);
 }
@@ -39,7 +47,19 @@ window.sendMessage = function(title, obj) {
 window.receiveMessage = function(e) {
     if (e.data.length === 0 || typeof e.data.title === 'undefined')
         return
+
+    window.processMessage(e.data.title, e.data.content || {})
     sendEvent(e.data.title, e.data.content || {})
+}
+
+window.processMessage = function(title, content) {
+    switch (title) {
+        case 'ad-event-init':
+            VungleHelper.tokens = content.tokens;
+            VungleHelper.closeDelay = content.closeDelay;
+            VungleHelper.rewardedAd = content.rewardedAd;
+            break;
+    }
 }
 
 window.addEventListener('message', window.receiveMessage);

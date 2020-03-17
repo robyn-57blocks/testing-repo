@@ -12,6 +12,7 @@
     <!-- /build -->
     <!-- build:css vungle.min.css -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://vds.creative-labs.io/css/creative.min.css">
     <!-- /build -->
     <!-- build:remove -->
     <script>
@@ -33,171 +34,28 @@
 </head>
 
 <body id="dynamic">
-    <div id="vungle-header">
-        <a id="vungle-fullscreen-video-close" class="hide" href="javascript:void(0)">
-            <!-- CLOSE ICON -->
-            <div id="vungle-fullscreen-video-close-icon-container">
-                <!-- Close icon -->
-                <svg version="1.1" class="vungle-close-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 321.2 321" style="enable-background:new 0 0 321.2 321;" xml:space="preserve">
-                    <g>
-                        <g class="svg-vungle-close-icon-layer-1">
-                            <g class="svg-vungle-close-icon-layer-close">
-                                <g>
-                                    <polygon class="svg-vungle-close-icon" points="280.8,309.5 161,189.8 40.4,309.5 11.6,280.8 132.4,160 11.6,40.3 40.4,11.5 161,131.3 280.8,11.5
-                                        309.5,40.3 189.8,160 309.5,280.8" />
-                                </g>
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-            </div>
-        </a>
-        <a id="vungle-endcard-close" class="hide" href="javascript:void(0)">
-            <!-- CLOSE ICON -->
-            <div id="vungle-endcard-close-icon-container">
-                <!-- Countdown text -->
-                <div id="vungle-endcard-reward-timer">
-                    <div id="vungle-endcard-timer-countdown"></div>
-                </div>
-                <!-- Close icon -->
-                <svg version="1.1" class="vungle-close-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 321.2 321" style="enable-background:new 0 0 321.2 321;" xml:space="preserve">
-                    <g>
-                        <g class="svg-vungle-close-icon-layer-1">
-                            <g class="svg-vungle-close-icon-layer-close">
-                                <g>
-                                    <polygon class="svg-vungle-close-icon" points="280.8,309.5 161,189.8 40.4,309.5 11.6,280.8 132.4,160 11.6,40.3 40.4,11.5 161,131.3 280.8,11.5
-                                        309.5,40.3 189.8,160 309.5,280.8" />
-                                </g>
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-                <span>Close</span>
-            </div>
-        </a>
-    </div>
+
+    {{#> header}}{{/header}}
+
     <div id="vungle-ad">
         <div id="fullscreen-video-view" class="fullscreen-video-view hide">
-            <div id="video-header" class="video-header">
-                <a id="video-mute" href="javascript:void(0)">
-                    <div class="video-header-audio-icon-container">
-                        <svg version="1.1" id="video-unmute-icon" class="hide" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 321.2 321" style="enable-background:new 0 0 321.2 321;" xml:space="preserve">
-                            <g>
-                                <g class="svg-video-unmute-icon-layer-1">
-                                    <g>
-                                        <path class="svg-video-unmute-icon-speaker" d="M156.8,88.2v151.5l-59.2-47.6c-4.3-2.9-9.6-4.5-15.2-4.5H31.1v-55.9h51.5c5.4,0,10.6-1.5,14.8-4.3L156.8,83 M178.5,26.7
-                                            c-1.9,0-3.8,0.7-5.3,1.9L86.7,98.4c-1.5,1.2-3.4,1.9-5.3,1.9H10.7c-4.7,0-8.4,3.8-8.5,8.4c0,0,0,0,0,0v101c0,4.7,3.8,8.4,8.5,8.4
-                                            c0,0,0,0,0,0h70.6c2,0,3.9,0.8,5.4,2.1l86.4,72.1c1.5,1.3,3.4,2,5.4,2c4.7,0,8.5-3.7,8.5-8.4c0,0,0,0,0-0.1V35.1
-                                            C187,30.5,183.2,26.7,178.5,26.7C178.5,26.7,178.5,26.7,178.5,26.7z" />
-                                    </g>
-                                    <path class="svg-video-unmute-icon-slash" d="M277.8,277.8l-21.4-17c49.8-62.6,46.4-148.5-7.5-191.4l17-21.3c32.1,25.5,50.9,63.7,52.9,107.4
-                                        C320.8,198.6,306.2,242,277.8,277.8z M237.5,232.8l-21.4-17c26.4-33.3,24.9-78.8-3.4-101.4l17-21.3c19.7,15.7,31.2,39.1,32.4,65.8
-                                        C263.4,185,254.6,211.2,237.5,232.8z" />
-                                </g>
-                            </g>
-                        </svg>
-                        <svg version="1.1" id="video-mute-icon" class="hide" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 321.2 321" style="enable-background:new 0 0 321.2 321;" xml:space="preserve">
-                            <g>
-                                <path class="svg-video-mute-icon-speaker" d="M114.4,114.7L156.8,83v5.2v62.9l30.2,25.9V35.1c0-4.7-3.8-8.4-8.4-8.4c0,0,0,0,0,0c-1.9,0-3.8,0.7-5.3,1.9L91.1,94.8
-                                    L114.4,114.7z" />
-                                <path class="svg-video-mute-icon-speaker-back" d="M156.8,218.3v21.4l-59.2-47.6c-4.3-2.9-9.6-4.5-15.2-4.5H31.1v-55.9h24.8l-36.6-31.4h-8.5c-4.7,0-8.4,3.8-8.5,8.4v0v101
-                                    c0,4.7,3.8,8.4,8.5,8.4h0h70.6c2,0,3.9,0.8,5.4,2.1l86.4,72.1c1.5,1.3,3.4,2,5.4,2c4.7,0,8.5-3.7,8.5-8.4c0,0,0,0,0-0.1v-41.7
-                                    L156.8,218.3z" />
-                            </g>
-                            <path class="svg-video-mute-icon-slash" d="M227.2,260c-3.5,0-6.9-1.2-9.8-3.6L6.7,75.7c-6.3-5.4-7-14.9-1.6-21.2c5.4-6.3,14.9-7,21.2-1.6L237,233.6
-                                c6.3,5.4,7,14.9,1.6,21.2C235.6,258.2,231.4,260,227.2,260z" />
-                        </svg>
-                    </div>
-                </a>
-            </div>
+
             <video muted id="fullscreen-video" playsinline webkit-playsinline autoplay></video>
-            <progress id="fullscreen-video-progress" class="progress-bar" max="100" value="0"><span>0</span></progress>
-            <div id="video-footer" class="footer row small-12 columns">
-                <div id="video-cta" class="download small-6">
-                    <svg version="1.1" id="close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 454 522" style="enable-background:new 0 0 454 522;" xml:space="preserve">
-                        <g id="download">
-                            <path class="st0" d="M196,338.7l-128.9-129l31-31l106.8,106.8V50.1h44.2v235.4l106.8-106.8l31,31l-129,128.9l-31,31L196,338.7z
-                              M410.1,369.6h-46.5v55.6H90.4v-55.6H43.9v102.2h366.2V369.6L410.1,369.6z" />
-                        </g>
-                    </svg>
-                </div>
-            </div>
+
+            {{#> progress}}{{/progress}}
+
         </div>
-        <div id="endcard-view" overlay class="endcard-view"></div>
+        <div id="endcard-view" class="endcard-view"></div>
     </div>
-    <aside id="ad-notification-modal" overlay class="hide">
-        <div class="ad-notification-modal-content">
-            <h3 id="ad-notification-modal-title-text"></h3>
-            <p id="ad-notification-modal-body-text"></p>
-            <div class="ad-notification-modal-buttons">
-                <a id="ad-notification-modal-continue" href="javascript:void(0)" class="action-border-green"></a>
-                <a id="ad-notification-modal-close" href="javascript:void(0)" class="action-sub-grey"></a>
-            </div>
-        </div>
-    </aside>
-    <aside id="gdpr-notification-view" overlay class="hide">
-        <div class="ad-notification-modal-content">
-            <div class="gdpr-notification-icon">
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 96.5 96.6" style="enable-background:new 0 0 96.5 96.6;" xml:space="preserve">
-                    <g transform="translate(0,-952.36218)">
-                        <path class="target-icon" d="M46.2,953.6v12.1c-17.7,1-31.9,15.2-32.9,32.9H1.2v4h12.1c1,17.7,15.2,31.9,32.9,32.9v12.1h4v-12.1
-                            c17.7-1,31.9-15.2,32.9-32.9h12.1v-4H83.2c-1-17.7-15.2-31.9-32.9-32.9v-12.1H46.2z M46.2,969.7v14.1c-7.8,0.9-14,7.1-14.9,14.9
-                            H17.3C18.3,983.1,30.7,970.7,46.2,969.7z M50.2,969.7c15.5,1,27.9,13.4,28.9,28.9H65.1c-0.9-7.8-7.1-14-14.9-14.9V969.7z
-                             M40.9,993.3c10.8-8.1,22.8,3.9,14.7,14.7C44.8,1016.1,32.8,1004.1,40.9,993.3z M17.3,1002.6h14.1c0.9,7.8,7.1,14,14.9,14.9v14.1
-                            C30.7,1030.6,18.3,1018.2,17.3,1002.6z M65.1,1002.6h14.1c-1,15.5-13.4,28-28.9,28.9v-14.1C58,1016.6,64.2,1010.4,65.1,1002.6z" />
-                    </g>
-                </svg>
-            </div>
-            <h3 id="gdpr-notification-title-text"></h3>
-            <p id="gdpr-notification-body-text"></p>
-            <div class="gdpr-notification-buttons">
-                <a id="gdpr-notification-consent" href="javascript:void(0)" class="action-border-green"></a>
-                <a id="gdpr-notification-no-consent" href="javascript:void(0)" class="action-sub-grey"></a>
-            </div>
-        </div>
-    </aside>
+
+    {{#> overlay-full}}{{/overlay-full}}
+
+    {{#> overlay-notification}}{{/overlay-notification}}
+
     <!-- PRIVACY START HTML -->
-    <div id="privacy-wrapper">
-        <div id="privacy-icon" class="privacy-container">
-            <svg id="lock-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 390 390" style="enable-background:new 0 0 390 390;" xml:space="preserve">
-                <g>
-                    <path class="st1" d="M195,369.5C50.8,317.6,53,198.4,54.8,102.5c0.2-9.2,0.3-17.9,0.4-26.5c57.6-0.7,102.2-18,139.8-54.3
-                              C232.5,58,277.1,75.3,334.8,76c0,8.5,0.2,17.3,0.4,26.5C337,198.4,339.2,317.6,195,369.5z M177.8,289.4h34.4l0.9-2.3
-                              l60.7-166.8h-36.9L195,235.1l-41.8-114.8h-37L177.8,289.4z" />
-                </g>
-            </svg>
-            <span> Privacy
-                <svg id="privacy-external" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 194.818 194.818" style="enable-background:new 0 0 194.818 194.818;" xml:space="preserve">
-                    <g>
-                        <path class="privacy-external-path" d="M185.818,2.161h-57.04c-4.971,0-9,4.029-9,9s4.029,9,9,9h35.312l-86.3,86.3c-3.515,3.515-3.515,9.213,0,12.728
-                        c1.758,1.757,4.061,2.636,6.364,2.636s4.606-0.879,6.364-2.636l86.3-86.3v35.313c0,4.971,4.029,9,9,9s9-4.029,9-9v-57.04
-                        C194.818,6.19,190.789,2.161,185.818,2.161z" />
-                        <path class="privacy-external-path" d="M149,77.201c-4.971,0-9,4.029-9,9v88.456H18v-122h93.778c4.971,0,9-4.029,9-9s-4.029-9-9-9H9c-4.971,0-9,4.029-9,9v140
-                        c0,4.971,4.029,9,9,9h140c4.971,0,9-4.029,9-9V86.201C158,81.23,153.971,77.201,149,77.201z" />
-                    </g>
-                </svg>
-            </span>
-        </div>
-        <div id="privacy-page-wrapper" overlay >
-            <div id="privacy-page-loading">
-                <div id="privacy-page-spinner-wrapper">
-                    <svg class="components__spinner" width="60px" height="60px" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" style="">
-                        <circle class="path" fill="none" stroke-width="1" stroke-linecap="round" cx="17" cy="17" r="15"></circle>
-                    </svg>
-                </div>
-            </div>
-            <iframe id="privacy-page" src=""></iframe>
-        </div>
-        <div id="privacy-back-button-container" class="back-button-container" href="javascript:void(0)">
-            <div class="privacy-back-button-back-button">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 7000 7000" style="enable-background:new 0 0 7000 7000;" xml:space="preserve">
-                    <g>
-                        <path class="privacy-back-arrow" fill="#fff" d="M3590.2,6157.4L1234.8,3802H6927V3198H1234.8L3590.2,842.6l-422.8-422.8L72.2,3500l3080.1,3080.1L3590.2,6157.4z"></path>
-                    </g>
-                </svg>
-            </div>
-        </div>
-    </div>
+
+    {{#> footer}}{{/footer}}
+
     <!-- PRIVACY END HTML -->
     <!-- build:js vungle.min.js -->
     <script src="js/main.js" type="module"></script>

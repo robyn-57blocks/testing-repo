@@ -8,6 +8,8 @@
     resizeVideo() - resizes video to fit parent container without visible black bars based on our supported ratios
 */
 
+import { default as PostMessenger } from './vungle-ad-post-messenger.js';
+
 export default {
 
     addClass: function(elem, classString) {
@@ -152,6 +154,25 @@ export default {
                 }
             }
         }
+    },
+
+    resumeMedia: function() {
+        PostMessenger.sendMessage('ad-event-resume');
+    },
+
+    pauseMedia: function() {
+        PostMessenger.sendMessage('ad-event-pause');
+    },
+
+    checkPauseResumeOverlays: function() {
+        let overlays = document.querySelectorAll('[overlay]');
+        let _this = this;
+        for (var i = 0; i < overlays.length; i++) {
+            if (_this.hasClass(overlays[i], 'show') || _this.hasClass(overlays[i], 'active')) {
+                return false;
+            }
+        }
+        return true;
     },
 
     getApiIdFromUrl: function(ctaUrl) {
