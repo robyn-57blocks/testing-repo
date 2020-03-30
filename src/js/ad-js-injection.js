@@ -1,6 +1,13 @@
 // Storage for tokens
 var VungleHelper = {}
 
+var clickEvent = (function() {
+    if ('ontouchstart' in document.documentElement === true)
+      return 'touchstart';
+    else
+      return 'click';
+})();
+
 // Legacy IEC v1 Event
 window.callSDK = function(action) {
     parent.postMessage(action, '*');
@@ -17,8 +24,8 @@ window.open = function() {
     parent.postMessage('download', '*');
 };
 
-window.addEventListener('touchstart', function() {
-    parent.postMessage('interacted', '*');
+window.addEventListener(clickEvent, function() {
+    parent.postMessage('interacted', "*");
 });
 
 document.addEventListener('DOMContentLoaded', function() {
