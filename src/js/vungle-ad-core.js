@@ -77,8 +77,6 @@ var adcore = {
             ctaElements[i].addEventListener('click', ctaButtonClicked, false);
         }
 
-
-
         AdPrivacy.init(VungleAd.tokens.VUNGLE_PRIVACY_URL, VungleAd.tokens.VUNGLE_PRIVACY_LOGO);
 
         document.getElementById('ad-notification-modal-title-text').innerHTML = VungleAd.tokens.INCENTIVIZED_TITLE_TEXT;
