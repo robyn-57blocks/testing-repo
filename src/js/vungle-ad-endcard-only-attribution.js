@@ -51,7 +51,7 @@ function startTimer() {
             }
 
             if (++timeSeconds === endcardOnlyTPATCheckpoints.length) {
-                window.clearInterval(endcardOnlyAttributionTimer);
+                clearTimer();
             }
         }
     }, 1000);
