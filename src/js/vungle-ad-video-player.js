@@ -142,7 +142,6 @@ function endVideoAttributionListeners() {
 
     //Trigger videoViewed one final time after checkpoint.100 to ensure last event captures entire video duration
     if (videoTPATCheckpointsReached[videoTPATCheckpoints.length - 1] === true) {
-        console.log('%cvideoViewed ' + Math.floor(videoDurationCount * 1000), "color: #BADA55");
         window.vungle.mraidBridgeExt.notifyEventValuePairEvent("videoViewed", Math.floor(videoDurationCount * 1000));
     }
 
@@ -179,7 +178,6 @@ function onVideoTPATCheckpoint() {
 
     //Event value sent to the SDK each second during video play
     if (videoCurrentPlayTime > 0 && videoDurationCount && typeof videoDurationCount === "number" && videoViewedPerSecond <= Math.round(videoCurrentPlayTime)) {
-        console.log('%cvideoViewed ' + Math.floor(videoCurrentPlayTime * 1000), "color: #BADA55");
         window.vungle.mraidBridgeExt.notifyEventValuePairEvent("videoViewed", Math.floor(videoCurrentPlayTime * 1000));
         videoViewedPerSecond++;
     }

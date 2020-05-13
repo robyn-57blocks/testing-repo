@@ -12,6 +12,7 @@ import { default as PostMessenger } from './vungle-ad-post-messenger.js';
 import { default as DataStore } from './vungle-ad-post-messenger.js';
 import { default as ASOIController } from './vungle-ad-asoi-controller.js';
 import { default as ChildInstructions } from './vungle-ad-child-instructions.js';
+import { default as EndcardOnlyAttribution } from './vungle-ad-endcard-only-attribution.js';
 
 var adcore = {
     init: function(onEndcardStart) {
@@ -275,7 +276,6 @@ var adcore = {
                     console.log('TIMER SUCCESSFUL VIEW - complete');
 
                     window.vungle.mraidBridgeExt.notifySuccessfulViewAd();
-                    window.vungle.mraidBridgeExt.notifyEventValuePairEvent("videoViewed", 9);
                 }, eventTimer);
             }
         }
@@ -364,13 +364,19 @@ var adcore = {
                 AdVideoPlayer.pauseVideo();
                 EventController.sendEvent('vungle-pause');
             }
+
+            if (creativeViewType === "endcard") {
+                if (isViewable && AdHelper.checkPauseResumeOverlays()) {
+                    EndcardOnlyAttribution.resumeTimer();
+                } else {
+                    EndcardOnlyAttribution.pauseTimer();
+                }
+            }
         }
 
         function endcardOnlyVideoAttribution() {
             //Used to ensure endcard only (short-form) creatives are served successfully
-            window.vungle.mraidBridgeExt.notifyEventValuePairEvent("videoLength", 10);
-            window.vungle.mraidBridgeExt.notifyEventValuePairEvent("videoViewed", 0);
-            window.vungle.mraidBridgeExt.notifyEventValuePairEvent("videoViewed", 1);
+            EndcardOnlyAttribution.startTimer();
         }
 
         function renderVungleAdSizingClass() {
@@ -481,6 +487,7 @@ var adcore = {
                 AdVideoPlayer.pauseVideo();
             } else {
                 AdClose.hideEndcardCloseButtonTimer();
+                EndcardOnlyAttribution.pauseTimer();
             }
             hidePrivacyButton();
 
@@ -493,6 +500,7 @@ var adcore = {
                 } else {
                     AdClose.showEndcardCloseButtonTimer();
                     AdHelper.removeClass(privacyIcon, 'hide');
+                    EndcardOnlyAttribution.resumeTimer();
                 }
                 revealPrivacyButton();
             }
@@ -504,6 +512,7 @@ var adcore = {
                     revealPrivacyButton();
                     onVideoPlayComplete();
                 } else {
+                    EndcardOnlyAttribution.clearTimer();
                     vungleMRAID.close();
                 }
             }
