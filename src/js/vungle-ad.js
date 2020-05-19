@@ -47,6 +47,7 @@ export default {
             mraidBridgeExt: {
                 notifyTPAT: function(event) { console.log('%cnotifyTPAT%c ' + event, 'color: #2CA840;font-weight:bold', 'color: inherit'); return true; },
                 notifyEventValuePairEvent: function(event, value) { console.log('%cnotifyEventValuePairEvent%c ' + event + ', ' + value, 'color: #2987E5;font-weight:bold', 'color: inherit'); return true; },
+                notifyUserInteraction: function(event, value) { console.log('%cnotifyUserInteraction%c ' + event + ', ' + value, 'color: #2987E5;font-weight:bold', 'color: inherit'); return true; },
                 consentAction: function() { return true },
                 notifySuccessfulViewAd: function() { console.log('TIMER SUCCESSFUL VIEW - notifySuccessfulViewAd event sent'); return true }
             },

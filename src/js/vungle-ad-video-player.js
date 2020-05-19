@@ -20,6 +20,7 @@ export default {
 import { default as AdHelper } from './vungle-ad-helpers.js';
 import { default as EventController } from './vungle-ad-event-controller.js';
 import { default as PostMessenger } from './vungle-ad-post-messenger.js';
+import { default as SDKHelper } from './vungle-ad-sdk-helper.js';
 
 var videoTPATCheckpoints = [0, 25, 50, 75, 100];
 var videoTPATCheckpointsReached = [];
@@ -95,14 +96,27 @@ function hideVideoView() {
 }
 
 function toggleVideoMute() {
-    console.log("video is " + fullscreenVideoElem.muted);
     if (fullscreenVideoElem.muted) {
-        //Trigger TPAT event for unmuting video audio
-        window.vungle.mraidBridgeExt.notifyTPAT("video.unmute");
+        //Send report_ad event values
+        if (AdHelper.deviceOS() === "windows") {
+            SDKHelper.mraidBridgeExt().notifyUserInteraction("event", "unmute");
+        } else {
+            SDKHelper.mraidBridgeExt().notifyEventValuePairEvent("unmute", 1);
+        }
+
+        //Send TPAT events
+        SDKHelper.mraidBridgeExt().notifyTPAT("video.unmute");
         unMuteVideo();
     } else {
-        //Trigger TPAT event for muting video audio
-        window.vungle.mraidBridgeExt.notifyTPAT("video.mute");
+        //Send report_ad event values
+        if (AdHelper.deviceOS() === "windows") {
+            SDKHelper.mraidBridgeExt().notifyUserInteraction("event", "mute");
+        } else {
+            SDKHelper.mraidBridgeExt().notifyEventValuePairEvent("mute", 1);
+        }
+
+        //Send TPAT events
+        SDKHelper.mraidBridgeExt().notifyTPAT("video.mute");
         muteVideo();
     }
 }
