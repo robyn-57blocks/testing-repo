@@ -27,6 +27,7 @@ var adcore = {
     },
     controller: function(onEndcardStart) {
 
+        var vungleAdContainer = document.getElementById('dynamic');
         var vungleAd = document.getElementById('vungle-ad');
         var fullscreenVideoElem = document.getElementById('fullscreen-video');
         var endcardView = document.getElementById('endcard-view');
@@ -88,6 +89,8 @@ var adcore = {
         document.ontouchmove = function(event) {
             event.preventDefault();
         };
+
+        document.body.className = AdHelper.getOS();
 
         function getDynamicElement() {
             if (!dynamicElement) {
