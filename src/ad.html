@@ -2,9 +2,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- build:js ad-js-injection.js -->
-    <script src="js/ad-js-injection.js"></script>
-    <!-- /build -->
     <meta name="viewport" initial-scale=1.0, maximum-scale="1.0, user-scalable=no">
     <style>
         /* THIS STYLING IS FOR DEMO PURPOSES ONLY AND CAN BE REMOVED */
@@ -138,6 +135,7 @@
         <input type="radio" name="tabs" id="tabtwo">
         <label for="tabtwo">Attributes</label>
         <div class="tab">
+            <div id="asoi-log"><h3>ASOI Settings</h3></div>
             <div id="close-delay-log"><h3>Close Delay</h3></div>
             <div id="rewarded-ad-log"><h3>Rewarded Ad</h3></div>
             <div id="token-log"><h3>Ad Request Tokens</h3></div>
@@ -150,6 +148,7 @@
     var showVideoButton = document.getElementById("show-video");
     var videoPlacement = document.getElementById("video-placement");
 
+    var asoiLogElementId = "asoi-log";
     var closeDelayLogElementId = "close-delay-log";
     var rewardedAdLogElementId = "rewarded-ad-log";
     var tokenLogElementId = "token-log";
@@ -160,6 +159,7 @@
         createLogEntry(eventLogElementId, "ad event init");
 
         var tokenJson = syntaxHighlight(JSON.stringify(VungleHelper.tokens, undefined, 2));
+        createLogEntry(asoiLogElementId, syntaxHighlight(JSON.stringify(window.vungleSettings, undefined, 2)));
         createLogEntry(closeDelayLogElementId, VungleHelper.closeDelay);
         createLogEntry(rewardedAdLogElementId, VungleHelper.rewardedAd);
         createLogEntry(tokenLogElementId, tokenJson);
@@ -215,12 +215,16 @@
         }
         createLogEntry(eventLogElementId, "resume");
     });
-    
+
     //Legacy ASOI settings
     window.vungleSettings = {
-        ASOIEnabled: false,
-        ASOIDelayTimer: 0,
-        ASOITapInteractions: 4
-    }
+        ASOIEnabled: true,
+        ASOIDelayTimer: 2,
+        ASOITapInteractions: 3
+    };
 </script>
+
+<!-- build:js ad-js-injection.js -->
+<script src="js/ad-js-injection.js"></script>
+<!-- /build -->
 </html>
