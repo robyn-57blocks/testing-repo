@@ -90,7 +90,7 @@ var adcore = {
             event.preventDefault();
         };
 
-        document.body.className = AdHelper.getOS();
+        document.body.className = AdHelper.deviceOS();
 
         function getDynamicElement() {
             if (!dynamicElement) {
