@@ -326,6 +326,21 @@
             }
         },
         {
+            "token_name": "VIDEO_PROGRESS_BAR",
+            "properties": {
+                "display_name": "Video Progress Bar",
+                "cacheable": false,
+                "data_type": "boolean",
+                "default_value": "true",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
             "token_name": "VUNGLE_PRIVACY_LOGO",
             "properties": {
                 "display_name": "Vungle Privacy Logo",

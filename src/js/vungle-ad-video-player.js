@@ -34,10 +34,13 @@ var videoCta = document.getElementById('video-cta');
 var videoSource, videoDurationCount, videoCurrentPlayTime, videoCheckpointIndex, videoPlaySuccessfulDuration;
 var videoViewedPerSecond = 0;
 
-function initVideo(videoSrc, isMuted) {
+function initVideo(videoSrc, isMuted, isVideoProgressBarVisible) {
 
     AdHelper.removeClass(fullscreenVideoView, 'hide');
     AdHelper.removeClass(videoCta, 'show');
+
+    //Toggle visibility of video progress bar, if false then hide progress bar
+    if (isVideoProgressBarVisible === 'false') AdHelper.addClass(fullscreenVideoViewProgress, 'hide');
 
     videoSource = videoSrc;
     fullscreenVideoElem.src = videoSource;
