@@ -290,7 +290,7 @@ var adcore = {
             window.addEventListener('vungle-fullscreen-video-ready', videoCloseButtonTimer);
             window.addEventListener('vungle-fullscreen-video-successful-view', successfulViewEventTimer);
 
-            AdVideoPlayer.initVideo(VungleAd.tokens.MAIN_VIDEO, VungleAd.tokens.START_MUTED);
+            AdVideoPlayer.initVideo(VungleAd.tokens.MAIN_VIDEO, VungleAd.tokens.START_MUTED, VungleAd.tokens.VIDEO_PROGRESS_BAR);
             fullscreenVideoElem.addEventListener('ended', onVideoPlayComplete, false);
         }
 
