@@ -2,13 +2,11 @@ export default {
     initCloseButtonTimer,
     showVideoCloseButtonTimer,
     hideVideoCloseButtonTimer,
-    // initEndcardCloseButtonTimer,
     showEndcardCloseButtonTimer,
     hideEndcardCloseButtonTimer,
     endEndcardCloseButtonTimer,
     endEndcardCloseButtonRewardTimer,
-    endVideoCloseButtonTimer,
-    endVideoCloseButtonRewardTimer
+    endVideoCloseButtonTimer
 }
 
 import { default as AdHelper } from './vungle-ad-helpers.js';
@@ -47,30 +45,6 @@ function initCloseButtonTimer(settings) {
     }
 }
 
-// function initEndcardCloseButtonTimer(settings) {
-//
-//     AdHelper.removeClass(endcardCloseIconContainer, 'hide');
-//
-//     if (settings.time !== 0) {
-//         AdHelper.addClass(endcardCloseIconContainer, 'show')
-//         var endcardCountdown = parseInt(settings.time);
-//
-//         if (settings.rewarded)
-//             AdHelper.addClass(endcardCloseIconContainer, 'rewarded')
-//
-//         endcardTimerCountdown.textContent = endcardCountdown;
-//
-//         endcardInterval = setInterval(function() {
-//             endcardCountdown = --endcardCountdown <= 0 ? '' : endcardCountdown;
-//             endcardTimerCountdown.textContent = endcardCountdown;
-//         }, 1000);
-//
-//         setTimeout(function() {
-//             clearInterval(endcardInterval);
-//         }, endcardCountdown * 1000)
-//     }
-// }
-
 function showVideoCloseButtonTimer() {
     AdHelper.removeClass(videoCloseIconContainer, 'hide');
 }
@@ -87,18 +61,14 @@ function hideEndcardCloseButtonTimer() {
     AdHelper.addClass(endcardCloseIconContainer, 'hide');
 }
 
-function endVideoCloseButtonTimer(rewarded, rewardedAdDuration, showCloseOnStart) {
+function endVideoCloseButtonTimer() {
     AdHelper.removeClass(videoCloseIconContainer, 'hide');
     AdHelper.addClass(videoCloseIconContainer, 'end');
 }
 
-function endEndcardCloseButtonTimer(rewarded, rewardedAdDuration, showCloseOnStart) {
+function endEndcardCloseButtonTimer() {
     AdHelper.removeClass(endcardCloseIconContainer, 'hide');
     AdHelper.addClass(endcardCloseIconContainer, 'end');
-}
-
-function endVideoCloseButtonRewardTimer() {
-    videoTimerCountdown.textContent = '';
 }
 
 function endEndcardCloseButtonRewardTimer() {
