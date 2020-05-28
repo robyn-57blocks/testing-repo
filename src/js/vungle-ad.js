@@ -28,7 +28,7 @@ export default {
             "VIDEO_PROGRESS_BAR": "true",
             "INCENTIVIZED_TITLE_TEXT": "Close this ad?",
             "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "2",
-            "CLOSE_BUTTON_DELAY_SECONDS": "5",
+            "CLOSE_BUTTON_DELAY_SECONDS": "9999",
             "ENDCARD_ONLY_DURATION_SECONDS":"30",
             "CREATIVE_VIEW_TYPE": "video_and_endcard",
             "EC_CLOSE_BUTTON_DELAY_SECONDS":"5",
@@ -40,7 +40,7 @@ export default {
 
         window.vungle = {
             mraidExt: {
-                getIncentivized: function() { return true; },
+                getIncentivized: function() { return false; },
                 useCustomPrivacy: function() { return true; },
                 getOS: function() { return "ios"; }
             },
