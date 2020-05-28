@@ -455,12 +455,14 @@ var adcore = {
             var showCloseButtonTimeMilliSeconds = showVideoCloseButtonTime * 1000;
             var timerCountdown = document.getElementById('vungle-video-timer-countdown');
 
-            AdClose.initCloseButtonTimer({
-                time: showVideoCloseButtonTime,
-                rewarded: VungleAd.isAdIncentivised(),
-                closeBtn: videoCloseBtnContainer,
-                timer: timerCountdown
-            });
+            if (VungleAd.tokens.SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN === 'true') {
+                AdClose.initCloseButtonTimer({
+                    time: showVideoCloseButtonTime,
+                    rewarded: VungleAd.isAdIncentivised(),
+                    closeBtn: videoCloseBtnContainer,
+                    timer: timerCountdown
+                });
+            }
 
             var showVideoCloseButtonTimeMs = showVideoCloseButtonTime * 1000;
 

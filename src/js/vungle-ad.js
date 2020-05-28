@@ -32,6 +32,7 @@ export default {
             "ENDCARD_ONLY_DURATION_SECONDS":"30",
             "CREATIVE_VIEW_TYPE": "video_and_endcard",
             "EC_CLOSE_BUTTON_DELAY_SECONDS":"5",
+            "SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN": "true",
             "VIDEO_SHOW_CTA":"true",
             "FULL_CTA":"true",
             "DOWNLOAD_BUTTON_DELAY_SECONDS":"3.5",
