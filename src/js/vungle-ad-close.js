@@ -1,25 +1,15 @@
 export default {
     initCloseButtonTimer,
-    showVideoCloseButtonTimer,
-    hideVideoCloseButtonTimer,
-    showEndcardCloseButtonTimer,
-    hideEndcardCloseButtonTimer,
-    endEndcardCloseButtonTimer,
+    showCloseButtonTimer,
+    hideCloseButtonTimer,
     endEndcardCloseButtonRewardTimer,
-    endVideoCloseButtonTimer
+    endCloseButtonTimer
 }
 
 import { default as AdHelper } from './vungle-ad-helpers.js';
 
-// var videoClose = document.getElementById('vungle-fullscreen-video-close-icon-container');
-
-// var endcardClose = document.getElementById('vungle-endcard-close');
-var videoCloseIconContainer = document.getElementById('vungle-fullscreen-video-close-icon-container');
-var endcardCloseIconContainer = document.getElementById('vungle-endcard-close-icon-container');
-var videoTimerCountdown = document.getElementById('vungle-video-timer-countdown');
 var endcardTimerCountdown = document.getElementById('vungle-endcard-timer-countdown');
-var endcardInterval, endcardCountdown, countdown, interval;
-
+var countdown, interval;
 
 function initCloseButtonTimer(settings) {
 
@@ -45,30 +35,17 @@ function initCloseButtonTimer(settings) {
     }
 }
 
-function showVideoCloseButtonTimer() {
-    AdHelper.removeClass(videoCloseIconContainer, 'hide');
+function showCloseButtonTimer(closeBtnContainer) {
+    AdHelper.removeClass(closeBtnContainer, 'hide');
 }
 
-function showEndcardCloseButtonTimer() {
-    AdHelper.removeClass(endcardCloseIconContainer, 'hide');
+function hideCloseButtonTimer(closeBtnContainer) {
+    AdHelper.addClass(closeBtnContainer, 'hide');
 }
 
-function hideVideoCloseButtonTimer() {
-    AdHelper.addClass(videoCloseIconContainer, 'hide');
-}
-
-function hideEndcardCloseButtonTimer() {
-    AdHelper.addClass(endcardCloseIconContainer, 'hide');
-}
-
-function endVideoCloseButtonTimer() {
-    AdHelper.removeClass(videoCloseIconContainer, 'hide');
-    AdHelper.addClass(videoCloseIconContainer, 'end');
-}
-
-function endEndcardCloseButtonTimer() {
-    AdHelper.removeClass(endcardCloseIconContainer, 'hide');
-    AdHelper.addClass(endcardCloseIconContainer, 'end');
+function endCloseButtonTimer(closeBtnContainer) {
+    AdHelper.removeClass(closeBtnContainer, 'hide');
+    AdHelper.addClass(closeBtnContainer, 'end');
 }
 
 function endEndcardCloseButtonRewardTimer() {
