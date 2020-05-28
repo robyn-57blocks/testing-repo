@@ -216,7 +216,8 @@ var adcore = {
                 videoCloseButtonDelay = parseFloat(VungleAd.tokens.INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS);
                 console.log('INCENTIVISED - video close icon delay:' + videoCloseButtonDelay);
             } else {
-                if (VungleAd.tokens.CLOSE_BUTTON_DELAY_SECONDS === '9999') {
+                var closeDelaySeconds = VungleAd.tokens.CLOSE_BUTTON_DELAY_SECONDS;
+                if (closeDelaySeconds === '9999' || closeDelaySeconds > AdHelper.getVideoDuration()) {
                     videoCloseButtonDelay = AdHelper.getVideoDuration();
                 }
                 else {
