@@ -198,19 +198,18 @@ var adcore = {
         function videoCloseButtonTimer() {
 
             window.removeEventListener('vungle-fullscreen-video-ready', videoCloseButtonTimer);
-            var videoCloseButtonDelay, rewardedAdDuration;
+            var videoCloseButtonDelay, rewardedAdDuration, forcedOrExceeded;
 
             if (VungleAd.isAdIncentivised()) {
                 videoCloseButtonDelay = VungleAd.tokens.INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS;
-                console.log('INCENTIVISED - video close icon delay:' + videoCloseButtonDelay);
             } else {
                 videoCloseButtonDelay = VungleAd.tokens.CLOSE_BUTTON_DELAY_SECONDS;
-                console.log('NON-INCENTIVISED - video close icon delay:' + videoCloseButtonDelay);
             }
             if (videoCloseButtonDelay === '9999' || videoCloseButtonDelay > AdHelper.getVideoDuration()) {
-                videoCloseButtonDelay = AdHelper.getVideoDuration();
+                videoCloseButtonDelay = AdHelper.getVideoDuration()+0.5;
+                forcedOrExceeded = true;
             }
-            revealVideoCloseButton(parseFloat(videoCloseButtonDelay));
+            revealVideoCloseButton(parseFloat(videoCloseButtonDelay), forcedOrExceeded);
         }
 
         function endcardCloseButtonTimer() {
@@ -449,8 +448,7 @@ var adcore = {
             }
         }
 
-        function revealVideoCloseButton(showVideoCloseButtonTime = 0) {
-            console.log('VIDEO TIMER CLOSE ICON - begin');
+        function revealVideoCloseButton(showVideoCloseButtonTime = 0, forcedOrExceeded) {
             var videoCloseBtnContainer = document.getElementById('vungle-fullscreen-video-close-icon-container');
             var showCloseButtonTimeMilliSeconds = showVideoCloseButtonTime * 1000;
             var timerCountdown = document.getElementById('vungle-video-timer-countdown');
@@ -467,14 +465,12 @@ var adcore = {
             var showVideoCloseButtonTimeMs = showVideoCloseButtonTime * 1000;
 
             videoCloseButtonTimeout = setTimeout(function() {
-                console.log('VIDEO TIMER CLOSE ICON - complete');
 
                 EventController.sendEvent('ad-event-close-button-reveal')
-                AdClose.endCloseButtonTimer(videoCloseBtnContainer);
+                AdClose.endCloseButtonTimer(videoCloseBtnContainer, forcedOrExceeded);
 
                 videoCloseBtnContainer.onclick = function() {
                     if (VungleAd.isAdIncentivised()) {
-                        console.log('VIDEO TIMER CLOSE ICON - incentivised');
                         if (achievedReward) {
                             fullscreenVideoElem.removeEventListener('ended', onVideoPlayComplete, false);
 
@@ -483,7 +479,6 @@ var adcore = {
                             revealAdNotificationModal();
                         }
                     } else {
-                        console.log('VIDEO TIMER CLOSE ICON - non-incentivised');
                         fullscreenVideoElem.removeEventListener('ended', onVideoPlayComplete, false);
 
                         onVideoPlayComplete();
@@ -494,7 +489,6 @@ var adcore = {
         }
 
         function revealEndcardCloseButton(showCloseButtonTime = 0, rewardedAdDuration) {
-            console.log('TIMER CLOSE ICON - begin');
             var closeButton = document.getElementById('vungle-endcard-close');
             var closeBtnContainer = document.getElementById('vungle-endcard-close-icon-container');
             var timerCountdown = document.getElementById('vungle-endcard-timer-countdown');
@@ -507,12 +501,14 @@ var adcore = {
             //if video+endcard use EC token and avoid rewarded dialogue box timer should run down to 0 and then display close button
 
             if (creativeViewType === "video_and_endcard") {
-                AdClose.initCloseButtonTimer({
-                    time: showCloseButtonTime,
-                    rewarded: false,
-                    closeBtn: closeBtnContainer,
-                    timer: timerCountdown
-                });
+                if (VungleAd.tokens.SHOW_EC_CLOSE_BUTTON_COUNTDOWN === 'true') {
+                    AdClose.initCloseButtonTimer({
+                        time: showCloseButtonTime,
+                        rewarded: false,
+                        closeBtn: closeBtnContainer,
+                        timer: timerCountdown
+                    });
+                }
 
                 setTimeout(function() {
                     EventController.sendEvent('ad-event-close-button-reveal')

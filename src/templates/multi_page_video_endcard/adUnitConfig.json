@@ -343,7 +343,22 @@
         {
             "token_name": "SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN",
             "properties": {
-                "display_name": "Video Countdown",
+                "display_name": "Show Video Close Button Timer",
+                "cacheable": false,
+                "data_type": "boolean",
+                "default_value": "false",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
+            "token_name": "SHOW_EC_CLOSE_BUTTON_COUNTDOWN",
+            "properties": {
+                "display_name": "Show Endcard Close Button Timer",
                 "cacheable": false,
                 "data_type": "boolean",
                 "default_value": "true",

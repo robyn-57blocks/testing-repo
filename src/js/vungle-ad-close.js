@@ -40,12 +40,14 @@ function showCloseButtonTimer(closeBtnContainer) {
 }
 
 function hideCloseButtonTimer(closeBtnContainer) {
+    AdHelper.removeClass(closeBtnContainer, 'show');
     AdHelper.addClass(closeBtnContainer, 'hide');
 }
 
-function endCloseButtonTimer(closeBtnContainer) {
+function endCloseButtonTimer(closeBtnContainer, forcedOrExceeded = false) {
     AdHelper.removeClass(closeBtnContainer, 'hide');
-    AdHelper.addClass(closeBtnContainer, 'end');
+    //if forcedOrExceeded flag is not true
+    if (!forcedOrExceeded) AdHelper.addClass(closeBtnContainer, 'end');
 }
 
 function endEndcardCloseButtonRewardTimer() {
