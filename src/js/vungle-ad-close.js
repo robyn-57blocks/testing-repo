@@ -15,12 +15,14 @@ function initCloseButtonTimer(settings) {
 
     AdHelper.removeClass(settings.closeBtn, 'hide');
 
+    AdHelper.addClass(settings.closeBtn, 'show');
+    
     if (settings.time !== 0) {
-        AdHelper.addClass(settings.closeBtn, 'show')
         var countdown = parseInt(settings.time);
 
-        if (settings.rewarded)
-            AdHelper.addClass(settings.closeBtn, 'rewarded')
+        if (settings.rewarded) {
+            AdHelper.addClass(settings.closeBtn, 'rewarded');
+        }
 
         settings.timer.textContent = countdown;
 
@@ -47,7 +49,9 @@ function hideCloseButtonTimer(closeBtnContainer) {
 function endCloseButtonTimer(closeBtnContainer, forcedOrExceeded = false) {
     AdHelper.removeClass(closeBtnContainer, 'hide');
     //if forcedOrExceeded flag is not true
-    if (!forcedOrExceeded) AdHelper.addClass(closeBtnContainer, 'end');
+    if (!forcedOrExceeded){
+        AdHelper.addClass(closeBtnContainer, 'end');
+    }
 }
 
 function endEndcardCloseButtonRewardTimer() {

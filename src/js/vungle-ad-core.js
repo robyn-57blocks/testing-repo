@@ -461,6 +461,9 @@ var adcore = {
                     timer: timerCountdown
                 });
             }
+            else {
+                AdHelper.removeClass(videoCloseBtnContainer, 'hide');
+            }
 
             var showVideoCloseButtonTimeMs = showVideoCloseButtonTime * 1000;
 
