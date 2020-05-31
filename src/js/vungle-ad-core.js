@@ -535,13 +535,15 @@ var adcore = {
                 }, showCloseButtonTimeMilliSeconds);
 
             } else {
-                AdClose.initCloseButtonTimer({
-                    time: VungleAd.isAdIncentivised() ? rewardedAdDuration : showCloseButtonTime,
-                    rewarded: VungleAd.isAdIncentivised(),
-                    closeBtn: closeBtnContainer,
-                    timer: timerCountdown
-                });
-
+                if (VungleAd.tokens.SHOW_CLOSE_BUTTON_COUNTDOWN === 'true') {
+                    AdClose.initCloseButtonTimer({
+                        time: VungleAd.isAdIncentivised() ? rewardedAdDuration : showCloseButtonTime,
+                        rewarded: VungleAd.isAdIncentivised(),
+                        closeBtn: closeBtnContainer,
+                        timer: timerCountdown
+                    });
+                }
+                
                 setTimeout(function() {
                     EventController.sendEvent('ad-event-close-button-reveal')
                     AdClose.endCloseButtonTimer(closeBtnContainer);

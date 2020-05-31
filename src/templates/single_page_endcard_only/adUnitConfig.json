@@ -266,6 +266,21 @@
             }
         },
         {
+            "token_name": "SHOW_CLOSE_BUTTON_COUNTDOWN",
+            "properties": {
+                "display_name": "Show Single Page Close Button Timer",
+                "cacheable": false,
+                "data_type": "boolean",
+                "default_value": "true",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
             "token_name": "VUNGLE_PRIVACY_LOGO",
             "properties": {
                 "display_name": "Vungle Privacy Logo",
