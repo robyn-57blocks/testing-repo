@@ -16,7 +16,7 @@ export default {
 
         this.tokens = JSON.parse(`
         {
-            "MAIN_VIDEO": "http://techslides.com/demos/sample-videos/small.mp4",
+            "MAIN_VIDEO": "https://cdn-lb.vungle.com/zen/VungleBrandV2Portrait-720x1280-Q2.mp4",
             "CTA_BUTTON_URL": "https://www.microsoft.com/en-us/p/bingo-blitz-free-bingo-slots/9nblggh42r8p",
             "INCENTIVIZED_CLOSE_TEXT": "Close",
             "CTA_BUTTON_TEXT": "Download",
@@ -27,17 +27,17 @@ export default {
             "INCENTIVIZED_CONTINUE_TEXT": "Continue",
             "VIDEO_PROGRESS_BAR": "true",
             "INCENTIVIZED_TITLE_TEXT": "Close this ad?",
-            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "3",
-            "CLOSE_BUTTON_DELAY_SECONDS": "2",
-            "ENDCARD_ONLY_DURATION_SECONDS":"30",
             "CREATIVE_VIEW_TYPE": "video_and_endcard",
-            "EC_CLOSE_BUTTON_DELAY_SECONDS":"0",
-            "SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN": "false",
-            "SHOW_EC_CLOSE_BUTTON_COUNTDOWN": "true",
             "VIDEO_SHOW_CTA":"true",
             "FULL_CTA":"true",
             "DOWNLOAD_BUTTON_DELAY_SECONDS":"3.5",
-            "APP_STORE_ON_INTERACTION":"complete"
+            "APP_STORE_ON_INTERACTION":"complete",
+            "ENDCARD_ONLY_DURATION_SECONDS":"30",
+            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "4",
+            "CLOSE_BUTTON_DELAY_SECONDS": "2",
+            "EC_CLOSE_BUTTON_DELAY_SECONDS":"3",
+            "SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN": "true",
+            "SHOW_EC_CLOSE_BUTTON_COUNTDOWN": "true"
         }`);
 
         window.vungle = {

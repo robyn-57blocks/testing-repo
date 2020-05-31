@@ -495,19 +495,21 @@ var adcore = {
             var closeButton = document.getElementById('vungle-endcard-close');
             var closeBtnContainer = document.getElementById('vungle-endcard-close-icon-container');
             var timerCountdown = document.getElementById('vungle-endcard-timer-countdown');
+            var videoCloseBtnContainer = document.getElementById('vungle-fullscreen-video-close-icon-container');
 
             if (typeof rewardedAdDuration === 'undefined')
                 rewardedAdDuration = showCloseButtonTime;
 
             var showCloseButtonTimeMilliSeconds = showCloseButtonTime * 1000;
 
-            //if video+endcard use EC token and avoid rewarded dialogue box timer should run down to 0 and then display close button
+            AdHelper.addClass(videoCloseBtnContainer, 'complete');
 
+            //if video+endcard use EC token and avoid rewarded dialogue box timer should run down to 0 and then display close button
             if (creativeViewType === "video_and_endcard") {
                 if (VungleAd.tokens.SHOW_EC_CLOSE_BUTTON_COUNTDOWN === 'true') {
                     AdClose.initCloseButtonTimer({
                         time: showCloseButtonTime,
-                        rewarded: false,
+                        rewarded: VungleAd.isAdIncentivised(),
                         closeBtn: closeBtnContainer,
                         timer: timerCountdown
                     });
