@@ -32,6 +32,7 @@ var adcore = {
         var fullscreenVideoElem = document.getElementById('fullscreen-video');
         var endcardView = document.getElementById('endcard-view');
         var videoMuteButton = document.getElementById('video-mute');
+        var videoCTAButton = document.getElementById('video-cta');
         window.vungleMRAID = MRAIDHelper;
 
         //check for either vungle or standard MRAID
@@ -312,7 +313,13 @@ var adcore = {
 
             AdHelper.removeClass(document.getElementById('endcard-view'), 'inactive');
             AdHelper.addClass(endcardView, 'active');
+            
             AdHelper.addClass(videoMuteButton, 'hide');
+            AdHelper.addClass(videoMuteButton, 'complete');
+
+            AdHelper.addClass(videoCTAButton, 'hide');
+            AdHelper.addClass(videoCTAButton, 'complete');
+
             ASOIController.init();
             //send postroll.view TPAT event once iFrame has loaded
             window.vungle.mraidBridgeExt.notifyTPAT("postroll.view");
@@ -452,6 +459,9 @@ var adcore = {
             var videoCloseBtnContainer = document.getElementById('vungle-fullscreen-video-close-icon-container');
             var showCloseButtonTimeMilliSeconds = showVideoCloseButtonTime * 1000;
             var timerCountdown = document.getElementById('vungle-video-timer-countdown');
+            var endcardCloseBtnContainer = document.getElementById('vungle-endcard-close-icon-container');
+
+            AdHelper.addClass(endcardCloseBtnContainer, 'complete');
 
             if (VungleAd.tokens.SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN === 'true') {
                 AdClose.initCloseButtonTimer({
@@ -502,6 +512,7 @@ var adcore = {
 
             var showCloseButtonTimeMilliSeconds = showCloseButtonTime * 1000;
 
+            AdHelper.removeClass(closeBtnContainer, 'complete');
             AdHelper.addClass(videoCloseBtnContainer, 'complete');
 
             //if video+endcard use EC token and avoid rewarded dialogue box timer should run down to 0 and then display close button
