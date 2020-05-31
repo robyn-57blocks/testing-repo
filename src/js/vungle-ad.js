@@ -37,7 +37,8 @@ export default {
             "CLOSE_BUTTON_DELAY_SECONDS": "2",
             "EC_CLOSE_BUTTON_DELAY_SECONDS":"3",
             "SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN": "true",
-            "SHOW_EC_CLOSE_BUTTON_COUNTDOWN": "true"
+            "SHOW_EC_CLOSE_BUTTON_COUNTDOWN": "true",
+            "SHOW_CLOSE_BUTTON_COUNTDOWN": "true"
         }`);
 
         window.vungle = {
