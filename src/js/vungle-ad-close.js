@@ -45,14 +45,9 @@ function hideCloseButtonTimer(closeBtnContainer) {
     AdHelper.addClass(closeBtnContainer, 'hide');
 }
 
-function endCloseButtonTimer(closeBtnContainer, forcedOrExceeded = false) {
+function endCloseButtonTimer(closeBtnContainer) {
     AdHelper.removeClass(closeBtnContainer, 'hide');
-    //if forcedOrExceeded flag is not true
-    if (!forcedOrExceeded){
-        setTimeout(function() {
-            AdHelper.addClass(closeBtnContainer, 'end');
-        }, 10)
-    }
+    AdHelper.addClass(closeBtnContainer, 'end');
 }
 
 function endEndcardCloseButtonRewardTimer() {
