@@ -13,6 +13,7 @@ import { default as DataStore } from './vungle-ad-post-messenger.js';
 import { default as ASOIController } from './vungle-ad-asoi-controller.js';
 import { default as ChildInstructions } from './vungle-ad-child-instructions.js';
 import { default as EndcardOnlyAttribution } from './vungle-ad-endcard-only-attribution.js';
+import { default as SDKHelper } from './vungle-ad-sdk-helper.js';
 
 var adcore = {
     init: function(onEndcardStart) {
@@ -582,8 +583,13 @@ var adcore = {
             }
 
             //send postroll.click and download events for report_ad
-            window.vungle.mraidBridgeExt.notifyEventValuePairEvent("postroll.click", 1);
-            window.vungle.mraidBridgeExt.notifyEventValuePairEvent("download", 1);
+            if (AdHelper.deviceOS() === "windows") {
+                SDKHelper.mraidBridgeExt().notifyUserInteraction("event", "postroll.click");
+                SDKHelper.mraidBridgeExt().notifyUserInteraction("event", "download");
+            } else {
+                SDKHelper.mraidBridgeExt().notifyEventValuePairEvent("postroll.click", 1);
+                SDKHelper.mraidBridgeExt().notifyEventValuePairEvent("download", 1);
+            }
 
             // 6.3.2 Hack - IOS-2140
             if (!mraidVersion && operatingSystem === "ios" && appStoreId && isStoreViewPrepared) {
