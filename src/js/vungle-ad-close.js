@@ -49,7 +49,9 @@ function endCloseButtonTimer(closeBtnContainer, forcedOrExceeded = false) {
     AdHelper.removeClass(closeBtnContainer, 'hide');
     //if forcedOrExceeded flag is not true
     if (!forcedOrExceeded){
-        AdHelper.addClass(closeBtnContainer, 'end');
+        setTimeout(function() {
+            AdHelper.addClass(closeBtnContainer, 'end');
+        }, 10)
     }
 }
 

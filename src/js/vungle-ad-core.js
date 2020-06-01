@@ -313,12 +313,10 @@ var adcore = {
 
             AdHelper.removeClass(document.getElementById('endcard-view'), 'inactive');
             AdHelper.addClass(endcardView, 'active');
-            
+
             AdHelper.addClass(videoMuteButton, 'hide');
-            AdHelper.addClass(videoMuteButton, 'complete');
 
             AdHelper.addClass(videoCTAButton, 'hide');
-            AdHelper.addClass(videoCTAButton, 'complete');
 
             ASOIController.init();
             //send postroll.view TPAT event once iFrame has loaded
@@ -461,8 +459,6 @@ var adcore = {
             var timerCountdown = document.getElementById('vungle-video-timer-countdown');
             var endcardCloseBtnContainer = document.getElementById('vungle-endcard-close-icon-container');
 
-            AdHelper.addClass(endcardCloseBtnContainer, 'complete');
-
             if (VungleAd.tokens.SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN === 'true') {
                 AdClose.initCloseButtonTimer({
                     time: showVideoCloseButtonTime,
@@ -512,9 +508,6 @@ var adcore = {
 
             var showCloseButtonTimeMilliSeconds = showCloseButtonTime * 1000;
 
-            AdHelper.removeClass(closeBtnContainer, 'complete');
-            AdHelper.addClass(videoCloseBtnContainer, 'complete');
-
             //if video+endcard use EC token and avoid rewarded dialogue box timer should run down to 0 and then display close button
             if (creativeViewType === "video_and_endcard") {
                 if (VungleAd.tokens.SHOW_EC_CLOSE_BUTTON_COUNTDOWN === 'true') {
@@ -543,7 +536,12 @@ var adcore = {
                         timer: timerCountdown
                     });
                 }
-                
+                var closeBtnDelay = VungleAd.isAdIncentivised() ? VungleAd.tokens.INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS : VungleAd.tokens.CLOSE_BUTTON_DELAY_SECONDS;
+
+                if (closeBtnDelay === '0') {
+                    AdHelper.addClass(timerCountdown, 'hide');
+                }
+
                 setTimeout(function() {
                     EventController.sendEvent('ad-event-close-button-reveal')
                     AdClose.endCloseButtonTimer(closeBtnContainer);
