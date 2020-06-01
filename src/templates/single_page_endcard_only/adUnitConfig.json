@@ -272,12 +272,17 @@
                 "cacheable": false,
                 "data_type": "boolean",
                 "default_value": "true",
-                "group_id": "Advanced Settings"
+                "group_id": "Button Controls"
             },
             "role": {
                 "name": "publisher",
                 "valueRequired": true,
-                "overrides": []
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
             }
         },
         {
