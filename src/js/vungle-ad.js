@@ -27,15 +27,18 @@ export default {
             "INCENTIVIZED_CONTINUE_TEXT": "Continue",
             "VIDEO_PROGRESS_BAR": "true",
             "INCENTIVIZED_TITLE_TEXT": "Close this ad?",
-            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "2",
-            "CLOSE_BUTTON_DELAY_SECONDS": "5",
-            "ENDCARD_ONLY_DURATION_SECONDS":"30",
             "CREATIVE_VIEW_TYPE": "video_and_endcard",
-            "EC_CLOSE_BUTTON_DELAY_SECONDS":"5",
             "VIDEO_SHOW_CTA":"true",
             "FULL_CTA":"true",
             "DOWNLOAD_BUTTON_DELAY_SECONDS":"3.5",
-            "APP_STORE_ON_INTERACTION":"complete"
+            "APP_STORE_ON_INTERACTION":"complete",
+            "ENDCARD_ONLY_DURATION_SECONDS":"30",
+            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "4",
+            "CLOSE_BUTTON_DELAY_SECONDS": "2",
+            "EC_CLOSE_BUTTON_DELAY_SECONDS":"3",
+            "SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN": "true",
+            "SHOW_EC_CLOSE_BUTTON_COUNTDOWN": "true",
+            "SHOW_CLOSE_BUTTON_COUNTDOWN": "true"
         }`);
 
         window.vungle = {

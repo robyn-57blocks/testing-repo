@@ -1,71 +1,58 @@
 export default {
-    initVideoCloseButtonTimer,
-    showVideoCloseButtonTimer,
-    hideVideoCloseButtonTimer,
-    initEndcardCloseButtonTimer,
-    showEndcardCloseButtonTimer,
-    hideEndcardCloseButtonTimer,
-    endEndcardCloseButtonTimer,
-    endEndcardCloseButtonRewardTimer
+    initCloseButtonTimer,
+    showCloseButtonTimer,
+    hideCloseButtonTimer,
+    endEndcardCloseButtonRewardTimer,
+    endCloseButtonTimer
 }
 
 import { default as AdHelper } from './vungle-ad-helpers.js';
 
-var videoClose = document.getElementById('vungle-fullscreen-video-close-icon-container');
-
-// var endcardClose = document.getElementById('vungle-endcard-close');
-var endcardCloseIconContainer = document.getElementById('vungle-endcard-close-icon-container');
 var endcardTimerCountdown = document.getElementById('vungle-endcard-timer-countdown');
-var endcardInterval, endcardCountdown;
+var countdown, interval;
 
+function initCloseButtonTimer(settings) {
 
-function initVideoCloseButtonTimer(delayDuration) {
-    AdHelper.removeClass(videoClose, 'hide');
-}
-
-function showVideoCloseButtonTimer() {
-    AdHelper.removeClass(videoClose, 'hide');
-}
-
-function hideVideoCloseButtonTimer() {
-    AdHelper.addClass(videoClose, 'hide');
-}
-
-function initEndcardCloseButtonTimer(settings) {
-
-    AdHelper.removeClass(endcardCloseIconContainer, 'hide');
-
+    AdHelper.removeClass(settings.closeBtn, 'hide');
+    
     if (settings.time !== 0) {
-        AdHelper.addClass(endcardCloseIconContainer, 'show')
-        var endcardCountdown = parseInt(settings.time);
+        AdHelper.addClass(settings.closeBtn, 'show');
+        var countdown = parseInt(settings.time);
 
-        if (settings.rewarded)
-            AdHelper.addClass(endcardCloseIconContainer, 'rewarded')
+        if (settings.rewarded) {
+            AdHelper.addClass(settings.closeBtn, 'rewarded');
+        }
 
-        endcardTimerCountdown.textContent = endcardCountdown;
+        settings.timer.textContent = countdown;
 
-        endcardInterval = setInterval(function() {
-            endcardCountdown = --endcardCountdown <= 0 ? '' : endcardCountdown;
-            endcardTimerCountdown.textContent = endcardCountdown;
+        interval = setInterval(function() {
+            countdown = --countdown <= 0 ? '' : countdown;
+            settings.timer.textContent = countdown;
         }, 1000);
 
         setTimeout(function() {
-            clearInterval(endcardInterval);
-        }, endcardCountdown * 1000)
+            clearInterval(interval);
+        }, countdown * 1000)
     }
 }
 
-function showEndcardCloseButtonTimer() {
-    AdHelper.removeClass(endcardCloseIconContainer, 'hide');
+function showCloseButtonTimer(closeBtnContainer) {
+    AdHelper.removeClass(closeBtnContainer, 'hide');
 }
 
-function hideEndcardCloseButtonTimer() {
-    AdHelper.addClass(endcardCloseIconContainer, 'hide');
+function hideCloseButtonTimer(closeBtnContainer) {
+    AdHelper.removeClass(closeBtnContainer, 'show');
+    AdHelper.addClass(closeBtnContainer, 'hide');
 }
 
-function endEndcardCloseButtonTimer(rewarded, rewardedAdDuration, showCloseOnStart) {
-    AdHelper.removeClass(endcardCloseIconContainer, 'hide');
-    AdHelper.addClass(endcardCloseIconContainer, 'end');
+function endCloseButtonTimer(closeBtnContainer, forcedOrExceeded = false) {
+    AdHelper.removeClass(closeBtnContainer, 'hide');
+    //if forcedOrExceeded flag is not true
+    if (!forcedOrExceeded){
+        setTimeout(function() {
+            AdHelper.addClass(closeBtnContainer, 'end');
+        }, 10)
+    }
 }
 
 function endEndcardCloseButtonRewardTimer() {

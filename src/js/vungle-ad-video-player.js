@@ -48,6 +48,7 @@ function initVideo(videoSrc, isMuted, isVideoProgressBarVisible) {
     //Only start video once file is ready and source is set
     fullscreenVideoElem.addEventListener('loadedmetadata', function() {
         videoDurationCount = fullscreenVideoElem.duration;
+        AdHelper.setVideoDuration(videoDurationCount);
         videoPlaySuccessfulDuration = (80 / 100) * fullscreenVideoElem.duration;
 
         //If video is set to not be muted, unmute video

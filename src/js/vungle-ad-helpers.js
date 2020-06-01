@@ -11,6 +11,8 @@
 import { default as PostMessenger } from './vungle-ad-post-messenger.js';
 import { default as SDKHelper } from './vungle-ad-sdk-helper.js';
 
+export var videoDuration = 0;
+
 export default {
 
     addClass: function(elem, classString) {
@@ -39,6 +41,14 @@ export default {
 
     isValid: function(obj) {
         return (typeof obj !== 'undefined');
+    },
+
+    setVideoDuration: function(durationCount) {
+        videoDuration = durationCount;
+    },
+
+    getVideoDuration: function() {
+        return videoDuration;
     },
 
     getOS: function() {
