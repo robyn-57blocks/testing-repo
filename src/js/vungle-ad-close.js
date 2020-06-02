@@ -14,9 +14,9 @@ var countdown, interval;
 function initCloseButtonTimer(settings) {
 
     AdHelper.removeClass(settings.closeBtn, 'hide');
-    
+    AdHelper.addClass(settings.closeBtn, 'show');
+
     if (settings.time !== 0) {
-        AdHelper.addClass(settings.closeBtn, 'show');
         var countdown = parseInt(settings.time);
 
         if (settings.rewarded) {
@@ -46,8 +46,9 @@ function hideCloseButtonTimer(closeBtnContainer) {
 }
 
 function endCloseButtonTimer(closeBtnContainer) {
-    AdHelper.removeClass(closeBtnContainer, 'hide');
-    AdHelper.addClass(closeBtnContainer, 'end');
+    setTimeout(function() {
+        AdHelper.addClass(closeBtnContainer, 'end');
+    }, 10);
 }
 
 function endEndcardCloseButtonRewardTimer() {

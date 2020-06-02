@@ -459,7 +459,7 @@ var adcore = {
             var timerCountdown = document.getElementById('vungle-video-timer-countdown');
             var endcardCloseBtnContainer = document.getElementById('vungle-endcard-close-icon-container');
 
-            if (VungleAd.tokens.SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN === 'false') {
+            if (VungleAd.tokens.SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN === 'false' || showVideoCloseButtonTime === 0) {
                 AdHelper.addClass(timerCountdown, 'hide');
             }
             AdClose.initCloseButtonTimer({
@@ -508,7 +508,7 @@ var adcore = {
 
             //if video+endcard use EC token and avoid rewarded dialogue box timer should run down to 0 and then display close button
             if (creativeViewType === "video_and_endcard") {
-                if (VungleAd.tokens.SHOW_EC_CLOSE_BUTTON_COUNTDOWN === 'false') {
+                if (VungleAd.tokens.SHOW_EC_CLOSE_BUTTON_COUNTDOWN === 'false' || showCloseButtonTime === 0) {
                     AdHelper.addClass(timerCountdown, 'hide');
                 }
 
