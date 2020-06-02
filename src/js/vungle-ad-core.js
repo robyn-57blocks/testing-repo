@@ -462,6 +462,9 @@ var adcore = {
             if (VungleAd.tokens.SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN === 'false' || showVideoCloseButtonTime === 0) {
                 AdHelper.addClass(timerCountdown, 'hide');
             }
+            else {
+                AdHelper.addClass(videoCloseBtnContainer, 'show');
+            }
             AdClose.initCloseButtonTimer({
                 time: showVideoCloseButtonTime,
                 rewarded: VungleAd.isAdIncentivised(),
@@ -511,6 +514,9 @@ var adcore = {
                 if (VungleAd.tokens.SHOW_EC_CLOSE_BUTTON_COUNTDOWN === 'false' || showCloseButtonTime === 0) {
                     AdHelper.addClass(timerCountdown, 'hide');
                 }
+                else {
+                    AdHelper.addClass(closeBtnContainer, 'show');
+                }
 
                 AdClose.initCloseButtonTimer({
                     time: showCloseButtonTime,
@@ -532,6 +538,9 @@ var adcore = {
 
                 if (VungleAd.tokens.SHOW_CLOSE_BUTTON_COUNTDOWN === 'false' || closeBtnDelay === '0') {
                     AdHelper.addClass(timerCountdown, 'hide');
+                }
+                else {
+                    AdHelper.addClass(closeBtnContainer, 'show');
                 }
 
                 AdClose.initCloseButtonTimer({

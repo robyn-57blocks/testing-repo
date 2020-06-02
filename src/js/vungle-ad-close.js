@@ -14,7 +14,6 @@ var countdown, interval;
 function initCloseButtonTimer(settings) {
 
     AdHelper.removeClass(settings.closeBtn, 'hide');
-    AdHelper.addClass(settings.closeBtn, 'show');
 
     if (settings.time !== 0) {
         var countdown = parseInt(settings.time);
@@ -46,6 +45,7 @@ function hideCloseButtonTimer(closeBtnContainer) {
 }
 
 function endCloseButtonTimer(closeBtnContainer) {
+    AdHelper.removeClass(closeBtnContainer, 'hide');
     setTimeout(function() {
         AdHelper.addClass(closeBtnContainer, 'end');
     }, 10);
