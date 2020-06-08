@@ -9,6 +9,9 @@
 */
 
 import { default as PostMessenger } from './vungle-ad-post-messenger.js';
+import { default as SDKHelper } from './vungle-ad-sdk-helper.js';
+
+export var videoDuration = 0;
 
 export default {
 
@@ -40,6 +43,14 @@ export default {
         return (typeof obj !== 'undefined');
     },
 
+    setVideoDuration: function(durationCount) {
+        videoDuration = durationCount;
+    },
+
+    getVideoDuration: function() {
+        return videoDuration;
+    },
+
     getOS: function() {
         var userAgent = window.navigator.userAgent,
             platform = window.navigator.platform,
@@ -59,6 +70,10 @@ export default {
         }
 
         return os;
+    },
+
+    deviceOS: function() {
+        return SDKHelper.mraidExt().getOS().trim();
     },
 
     greatestCommonDivisor: function(a, b) {

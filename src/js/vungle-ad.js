@@ -27,15 +27,18 @@ export default {
             "INCENTIVIZED_CONTINUE_TEXT": "Continue",
             "VIDEO_PROGRESS_BAR": "true",
             "INCENTIVIZED_TITLE_TEXT": "Close this ad?",
-            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "2",
-            "CLOSE_BUTTON_DELAY_SECONDS": "5",
-            "ENDCARD_ONLY_DURATION_SECONDS":"30",
             "CREATIVE_VIEW_TYPE": "video_and_endcard",
-            "EC_CLOSE_BUTTON_DELAY_SECONDS":"5",
             "VIDEO_SHOW_CTA":"true",
             "FULL_CTA":"true",
             "DOWNLOAD_BUTTON_DELAY_SECONDS":"3.5",
-            "APP_STORE_ON_INTERACTION":"complete"
+            "APP_STORE_ON_INTERACTION":"complete",
+            "ENDCARD_ONLY_DURATION_SECONDS":"30",
+            "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "4",
+            "CLOSE_BUTTON_DELAY_SECONDS": "2",
+            "EC_CLOSE_BUTTON_DELAY_SECONDS":"3",
+            "SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN": "true",
+            "SHOW_EC_CLOSE_BUTTON_COUNTDOWN": "true",
+            "SHOW_CLOSE_BUTTON_COUNTDOWN": "true"
         }`);
 
         window.vungle = {
@@ -47,6 +50,7 @@ export default {
             mraidBridgeExt: {
                 notifyTPAT: function(event) { console.log('%cnotifyTPAT%c ' + event, 'color: #2CA840;font-weight:bold', 'color: inherit'); return true; },
                 notifyEventValuePairEvent: function(event, value) { console.log('%cnotifyEventValuePairEvent%c ' + event + ', ' + value, 'color: #2987E5;font-weight:bold', 'color: inherit'); return true; },
+                notifyUserInteraction: function(event, value) { console.log('%cnotifyUserInteraction%c ' + event + ', ' + value, 'color: #A57235;font-weight:bold', 'color: inherit'); return true; },
                 consentAction: function() { return true },
                 notifySuccessfulViewAd: function() { console.log('TIMER SUCCESSFUL VIEW - notifySuccessfulViewAd event sent'); return true }
             },

@@ -20,6 +20,7 @@ export default {
 import { default as AdHelper } from './vungle-ad-helpers.js';
 import { default as EventController } from './vungle-ad-event-controller.js';
 import { default as PostMessenger } from './vungle-ad-post-messenger.js';
+import { default as SDKHelper } from './vungle-ad-sdk-helper.js';
 
 var videoTPATCheckpoints = [0, 25, 50, 75, 100];
 var videoTPATCheckpointsReached = [];
@@ -33,10 +34,13 @@ var videoCta = document.getElementById('video-cta');
 var videoSource, videoDurationCount, videoCurrentPlayTime, videoCheckpointIndex, videoPlaySuccessfulDuration;
 var videoViewedPerSecond = 0;
 
-function initVideo(videoSrc, isMuted) {
+function initVideo(videoSrc, isMuted, isVideoProgressBarVisible) {
 
     AdHelper.removeClass(fullscreenVideoView, 'hide');
     AdHelper.removeClass(videoCta, 'show');
+
+    //Toggle visibility of video progress bar, if false then hide progress bar
+    if (isVideoProgressBarVisible === 'false') AdHelper.addClass(fullscreenVideoViewProgress, 'hide');
 
     videoSource = videoSrc;
     fullscreenVideoElem.src = videoSource;
@@ -44,6 +48,7 @@ function initVideo(videoSrc, isMuted) {
     //Only start video once file is ready and source is set
     fullscreenVideoElem.addEventListener('loadedmetadata', function() {
         videoDurationCount = fullscreenVideoElem.duration;
+        AdHelper.setVideoDuration(videoDurationCount);
         videoPlaySuccessfulDuration = (80 / 100) * fullscreenVideoElem.duration;
 
         //If video is set to not be muted, unmute video
@@ -95,14 +100,27 @@ function hideVideoView() {
 }
 
 function toggleVideoMute() {
-    console.log("video is " + fullscreenVideoElem.muted);
     if (fullscreenVideoElem.muted) {
-        //Trigger TPAT event for unmuting video audio
-        window.vungle.mraidBridgeExt.notifyTPAT("video.unmute");
+        //Send report_ad event values
+        if (AdHelper.deviceOS() === "windows") {
+            SDKHelper.mraidBridgeExt().notifyUserInteraction("event", "unmute");
+        } else {
+            SDKHelper.mraidBridgeExt().notifyEventValuePairEvent("unmute", 1);
+        }
+
+        //Send TPAT events
+        SDKHelper.mraidBridgeExt().notifyTPAT("video.unmute");
         unMuteVideo();
     } else {
-        //Trigger TPAT event for muting video audio
-        window.vungle.mraidBridgeExt.notifyTPAT("video.mute");
+        //Send report_ad event values
+        if (AdHelper.deviceOS() === "windows") {
+            SDKHelper.mraidBridgeExt().notifyUserInteraction("event", "mute");
+        } else {
+            SDKHelper.mraidBridgeExt().notifyEventValuePairEvent("mute", 1);
+        }
+
+        //Send TPAT events
+        SDKHelper.mraidBridgeExt().notifyTPAT("video.mute");
         muteVideo();
     }
 }
