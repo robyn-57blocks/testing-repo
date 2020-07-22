@@ -16,7 +16,7 @@
         a, button {
             position: relative;
             display: block;
-            font-size: 1.3rem;
+            font-size: 0.9rem;
             background-color: #3C2A67;
             border: 3px solid rgba(0,0,0,0.1);
             color: white;
@@ -129,6 +129,7 @@
                 <p id="video-mute-status"></p>
             </div>
             <a onclick="parent.postMessage('download','*')">Download Button</a>
+            <a id="on-complete-button">Send interaction and on-complete event</a>
             <div id="event-log"><h3>Event Log</h3></div>
         </div>
 
@@ -147,12 +148,15 @@
     var videoMuteStatus = document.getElementById("video-mute-status");
     var showVideoButton = document.getElementById("show-video");
     var videoPlacement = document.getElementById("video-placement");
+    var onCompleteButton = document.getElementById("on-complete-button");
 
     var asoiLogElementId = "asoi-log";
     var closeDelayLogElementId = "close-delay-log";
     var rewardedAdLogElementId = "rewarded-ad-log";
     var tokenLogElementId = "token-log";
     var eventLogElementId = "event-log";
+
+    var timer, clock = 5;
 
     //Example of a VCL creative initialising by calling the ad-event-init, followed by any additional calls to start the creative
     window.addEventListener('ad-event-init', function() {
@@ -185,6 +189,27 @@
             return '<span class="' + cls + '">' + match + '</span>';
         });
     }
+
+    function startTimer() {
+        onCompleteButton.innerHTML = "Interacted! On-complete event will send in " + clock +"s";
+        timer = setInterval(countdown, 1000);
+        onCompleteButton.style.pointerEvents="none";
+        onCompleteButton.style.pointerEvents="none";
+    }
+
+    function countdown() {
+        clock-=1; 
+        onCompleteButton.innerHTML = "On-complete event will send in " + clock +"s";
+        if (clock == 0 ) {
+            parent.postMessage('complete','*');
+            clearInterval(timer);
+            onCompleteButton.innerHTML = "On-complete event sent";
+        }
+    }
+
+    onCompleteButton.addEventListener('click', function() {
+        startTimer();
+    });
 
     showVideoButton.onclick = function(){
         videoPlacement.innerHTML = '<video id="test-video" muted preload playsinline webkit-playsinline autoplay loop><source src="https://cdn-lb.vungle.com/zen/V_Shapes_landscape_audio-960x540-Q2.mp4" type="video/mp4"/></video>';
@@ -220,7 +245,7 @@
     window.vungleSettings = {
         ASOIEnabled: true,
         ASOIDelayTimer: 2,
-        ASOITapInteractions: 3
+        ASOITapInteractions: 1
     };
 </script>
 

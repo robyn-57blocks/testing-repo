@@ -318,7 +318,7 @@ var adcore = {
 
             AdHelper.addClass(videoCTAButton, 'hide');
 
-            ASOIController.init();
+            ASOIController.init(VungleAd.tokens.ASOI_SETTINGS);
             //send postroll.view TPAT event once iFrame has loaded
             window.vungle.mraidBridgeExt.notifyTPAT("postroll.view");
 
