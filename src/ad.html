@@ -35,6 +35,11 @@
             font-size: 1rem;
             margin: 0;
         }
+        h4 {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin: 0;
+        }
         pre {
             font-size: 0.9rem;
             overflow-x: scroll;
@@ -136,7 +141,10 @@
         <input type="radio" name="tabs" id="tabtwo">
         <label for="tabtwo">Attributes</label>
         <div class="tab">
-            <div id="asoi-log"><h3>ASOI Settings</h3></div>
+            <div id="asoi-log"><h3>ASOI Settings</h3>
+                <div id="asoi-pub"><h4>Publisher ASOI setting</h4></div>
+                <div id="asoi-creative"><h4>Creative ASOI settings</h4></div>
+            </div>
             <div id="close-delay-log"><h3>Close Delay</h3></div>
             <div id="rewarded-ad-log"><h3>Rewarded Ad</h3></div>
             <div id="token-log"><h3>Ad Request Tokens</h3></div>
@@ -150,7 +158,9 @@
     var videoPlacement = document.getElementById("video-placement");
     var onCompleteButton = document.getElementById("on-complete-button");
 
-    var asoiLogElementId = "asoi-log";
+    var asoiLogPub = "asoi-pub";
+    var asoiLogCreative = "asoi-creative";
+
     var closeDelayLogElementId = "close-delay-log";
     var rewardedAdLogElementId = "rewarded-ad-log";
     var tokenLogElementId = "token-log";
@@ -163,7 +173,8 @@
         createLogEntry(eventLogElementId, "ad event init");
 
         var tokenJson = syntaxHighlight(JSON.stringify(VungleHelper.tokens, undefined, 2));
-        createLogEntry(asoiLogElementId, syntaxHighlight(JSON.stringify(window.vungleSettings, undefined, 2)));
+        createLogEntry(asoiLogPub, syntaxHighlight(JSON.stringify(VungleHelper.tokens.ASOI_SETTINGS, undefined, 2)));
+        createLogEntry(asoiLogCreative, syntaxHighlight(JSON.stringify(window.vungleSettings, undefined, 2)));
         createLogEntry(closeDelayLogElementId, VungleHelper.closeDelay);
         createLogEntry(rewardedAdLogElementId, VungleHelper.rewardedAd);
         createLogEntry(tokenLogElementId, tokenJson);
