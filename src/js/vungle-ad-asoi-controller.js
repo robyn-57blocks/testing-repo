@@ -3,7 +3,9 @@ export default { init }
 import { default as VungleAd } from './vungle-ad.js';
 import { default as DataStore } from './vungle-ad-data-store.js';
 
-function init() {
+var tokenisedASOI;
+
+function init(asoiTokenValue) {
     var settings = DataStore.get('settings', false) || {}
     settings.ASOIEnabled = false;
     settings.ASOIDelayTimer = 0;
@@ -15,9 +17,17 @@ function init() {
     settings.hasInteracted = false;
     settings.ASOIDelayTimerAutoplay = 5;
     settings.ASOIEnded = false;
-    // Define ASOI
+    settings.ASOITriggered = false;
+
+    //If ASOI token exists then use token value, otherwise fall back to default which is complete
+    if (asoiTokenValue) {
+        tokenisedASOI = asoiTokenValue;
+    } else {
+        tokenisedASOI = "complete";
+    }
 
     DataStore.push('settings', settings)
+
     // Event Listeners will be fired from the post-messenger or event-controller
     window.addEventListener('interacted', handleInteraction)
     window.addEventListener('complete', completeAd)
@@ -25,11 +35,15 @@ function init() {
 }
 
 function initASOIDelayTimerAutoplay() {
+    // @if NODE_ENV='dev'
+    console.log('%cASOI%c close button visible - autoplay', 'color: #EB7500;font-weight:bold', 'color: inherit');
+    // @endif
     var settings = DataStore.get('settings', false)
 
     if (settings.ASOIEnabled === true &&
         settings.asoiDelayStarted !== true &&
-        settings.ASOIEnded === false) {
+        settings.ASOIEnded === false &&
+        (tokenisedASOI == "aggressive" || tokenisedASOI == "complete")) {
 
         settings.ASOIDelayTimerAutoplay = settings.ASOIDelayTimerAutoplay || 5;
 
@@ -57,9 +71,15 @@ function initASOIDelayTimerAutoplay() {
 }
 
 function handleInteraction() {
+    // @if NODE_ENV='dev'
+    console.log('%cASOI%c interaction', 'color: #EB7500;font-weight:bold', 'color: inherit');
+    // @endif
     var settings = DataStore.get('settings', false)
 
-    if (settings && typeof settings.ASOIEnabled !== 'undefined' && settings.ASOIEnabled && settings.ASOIEnded === false) {
+    if (settings && typeof settings.ASOIEnabled !== 'undefined' && 
+        settings.ASOIEnabled && settings.ASOIEnded === false && 
+        (tokenisedASOI == "aggressive" || tokenisedASOI == "complete")) {
+
         settings.hasInteracted = true;
 
         // dont call multiple downloads
@@ -72,34 +92,57 @@ function handleInteraction() {
         // ASOI TAP: if user interactions is over a certain amount trigger ASOI
         if (settings.ASOIEnabled === true &&
             settings.ASOITapInteractions > 0 &&
-            settings.interactions >= settings.ASOITapInteractions) {
+            settings.interactions >= settings.ASOITapInteractions &&
+            tokenisedASOI == "aggressive") {
 
             settings.interactions = -1;
-
             settings.ASOIEnded = true;
+            settings.ASOITriggered = true;
+
             setTimeout(function() {
                 window.callSDK('download');
-
             }, settings.ASOIDelayTimer * 1000);
         }
+
+        // ASOI event for aggressive or complete, only if previous ASOI logic above has not be triggered
+        if (settings.ASOIEnabled === true &&
+            settings.hasInteracted === true && 
+            settings.completeAd === true &&
+            settings.ASOITriggered === false &&
+            (tokenisedASOI == "aggressive" || tokenisedASOI == "complete")) {
+            
+            settings.ASOITriggered = true;
+            
+            setTimeout(function() {
+                window.callSDK('download');
+            }, settings.ASOIDelayTimer * 1000);
+        }
+
         DataStore.push('settings', settings)
     }
 }
 
 function completeAd() {
+    // @if NODE_ENV='dev'
+    console.log('%cASOI%c complete', 'color: #EB7500;font-weight:bold', 'color: inherit');
+    // @endif
     var settings = DataStore.get('settings', false)
 
     if (settings.completeAd || settings.ASOIEnded)
         return
 
     settings.completeAd = true;
-    if (settings.ASOIEnabled === true && settings.hasInteracted === true || settings.asoiDelayCompleted === true) {
+
+    if (settings.ASOIEnabled === true &&
+       (settings.hasInteracted === true || settings.asoiDelayCompleted === true) &&
+       (tokenisedASOI == "aggressive" || tokenisedASOI == "complete")) {
+        
         settings.ASOIEnded = true;
+
         setTimeout(function() {
             window.callSDK('download');
         }, settings.ASOIDelayTimer * 1000);
     }
+
     DataStore.push('settings', settings)
 }
-
-// Complete , 1 , 2 and OFF

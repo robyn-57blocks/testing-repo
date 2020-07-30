@@ -409,6 +409,26 @@
                 "valueRequired": true,
                 "overrides": []
             }
+        },
+        {
+            "token_name": "ASOI_SETTINGS",
+            "properties": {
+                "display_name": "App Store on Interaction",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "complete",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
         }
     ]
 }
