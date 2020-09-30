@@ -31,14 +31,14 @@ export default {
             "VIDEO_SHOW_CTA":"true",
             "FULL_CTA":"true",
             "DOWNLOAD_BUTTON_DELAY_SECONDS":"3.5",
-            "APP_STORE_ON_INTERACTION":"complete",
             "ENDCARD_ONLY_DURATION_SECONDS":"30",
             "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "4",
             "CLOSE_BUTTON_DELAY_SECONDS": "2",
             "EC_CLOSE_BUTTON_DELAY_SECONDS":"3",
             "SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN": "true",
             "SHOW_EC_CLOSE_BUTTON_COUNTDOWN": "true",
-            "SHOW_CLOSE_BUTTON_COUNTDOWN": "true"
+            "SHOW_CLOSE_BUTTON_COUNTDOWN": "true",
+            "ASOI_SETTINGS": "aggressive"
         }`);
 
         window.vungle = {
