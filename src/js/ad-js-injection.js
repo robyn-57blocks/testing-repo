@@ -1,5 +1,25 @@
 // Storage for tokens
-var VungleHelper = {}
+var VungleHelper = {};
+
+VungleHelper.setSKPresentation = function(eventType, presentationType, presentationOptions = null) {
+
+    var creativeEventTypes = {  skPresentationASOIInteraction: 'asoi-interaction', 
+                                skPresentationASOIComplete: 'asoi-complete',
+                                skPresentationCTAClick: 'cta-click'};
+
+    //Check if creative event matches supported events
+    var objectKey = Object.keys(creativeEventTypes).find(key => creativeEventTypes[key] === eventType);
+
+    if (objectKey) {
+        var skPresentationSettings = {};
+        skPresentationSettings[objectKey] = {presentationType: presentationType, presentationOptions: presentationOptions};
+        window.sendMessage('ad-event-sk-presentation', skPresentationSettings);
+    }
+};
+
+VungleHelper.dismissSKOverlay = function() {
+    window.sendMessage('ad-event-sk-dismiss');
+};
 
 var clickEvent = (function() {
     if ('ontouchstart' in document.documentElement === true)

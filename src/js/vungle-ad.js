@@ -17,7 +17,7 @@ export default {
         this.tokens = JSON.parse(`
         {
             "MAIN_VIDEO": "https://cdn-lb.vungle.com/zen/VungleBrandV2Portrait-720x1280-Q2.mp4",
-            "CTA_BUTTON_URL": "https://www.microsoft.com/en-us/p/bingo-blitz-free-bingo-slots/9nblggh42r8p",
+            "CTA_BUTTON_URL": "https://apps.apple.com/gb/app/disneyland/id1022164656",
             "INCENTIVIZED_CLOSE_TEXT": "Close",
             "CTA_BUTTON_TEXT": "Download",
             "VUNGLE_PRIVACY_URL": "https://privacy.vungle.com",
@@ -30,22 +30,32 @@ export default {
             "CREATIVE_VIEW_TYPE": "video_and_endcard",
             "VIDEO_SHOW_CTA":"true",
             "FULL_CTA":"true",
-            "DOWNLOAD_BUTTON_DELAY_SECONDS":"3.5",
-            "ENDCARD_ONLY_DURATION_SECONDS":"30",
+            "DOWNLOAD_BUTTON_DELAY_SECONDS":"1",
+            "ENDCARD_ONLY_DURATION_SECONDS":"3",
             "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "4",
             "CLOSE_BUTTON_DELAY_SECONDS": "2",
             "EC_CLOSE_BUTTON_DELAY_SECONDS":"3",
             "SHOW_VIDEO_CLOSE_BUTTON_COUNTDOWN": "true",
             "SHOW_EC_CLOSE_BUTTON_COUNTDOWN": "true",
             "SHOW_CLOSE_BUTTON_COUNTDOWN": "true",
-            "ASOI_SETTINGS": "aggressive"
+            "ASOI_SETTINGS": "aggressive",
+            "SK_FSC": "default",
+            "SK_ASOI_AGGRESSIVE": "default",
+            "SK_ASOI_COMPLETE": "default",
+            "SK_CTA_ONLY": "default",
+            "SKOVERLAY_POSITION": "default",
+            "SKOVERLAY_DISMISSIBLE": "default"
         }`);
 
         window.vungle = {
             mraidExt: {
                 getIncentivized: function() { return true; },
                 useCustomPrivacy: function() { return true; },
-                getOS: function() { return "ios"; }
+                getOS: function() { return "ios"; },
+                getOSVersion: function() { return "14.0"; },
+                getSDKVersion: function() { return "16.8.1"; },
+                prepareStoreView: function() { return console.log('%cSDK prepareStoreView%c', 'color: #984984;font-weight:bold', 'color: inherit'); return true; },
+                prepareStoreOverlayView: function() { return console.log('%cSDK prepareStoreOverlayView%c', 'color: #984984;font-weight:bold', 'color: inherit'); return true; }
             },
             mraidBridgeExt: {
                 notifyTPAT: function(event) { console.log('%cnotifyTPAT%c ' + event, 'color: #2CA840;font-weight:bold', 'color: inherit'); return true; },

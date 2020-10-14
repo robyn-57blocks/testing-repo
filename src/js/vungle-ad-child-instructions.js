@@ -3,6 +3,7 @@ export default { updateTokens }
 import { default as DataStore } from './vungle-ad-data-store.js';
 
 window.addEventListener('ad-event-child-instructions', updateTokens);
+window.addEventListener('ad-event-sk-presentation', updateTokens);
 
 function updateTokens(e) {
     if (typeof e.detail === 'undefined' || e.detail.length)
