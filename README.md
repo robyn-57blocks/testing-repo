@@ -54,7 +54,7 @@ Design Framework Core sends specific events and attributes it recieves from the 
 
 ## Events
 Specific events are posted to the creative to allow the user experience to be updated based on the user environment. You can use the following event handlers to change the creative experience:
-<br/>
+
 
 #### `ad-event-init`
 Event is triggered once communication between the parent `index.html` and child `ad.html` has been established and completed. Use this event to ensure `VungleHelper` global variable is correctly defined (more information below).
@@ -64,7 +64,7 @@ window.addEventListener('ad-event-init', function() {
 	// Initialise or load anything inside here
 });
 ```
-<br/>
+
 
 #### `ad-event-pause`
 Event is triggered when either the application is closed by the user, or the privacy page is displayed. Use this event to pause animations, audio or video in the creative so they don't continue to play outside the ad experience. 
@@ -74,7 +74,7 @@ window.addEventListener('ad-event-pause', function() {
 	// Pause anything inside here
 });
 ```
-<br/>
+
 
 #### `ad-event-resume`
 Event is triggered when either the application is resumed by the user, or the privacy page is closed. Use this event to resume animations, audio or video in the creative so they begin to play once the creative is once again visible to the user.
@@ -84,7 +84,7 @@ window.addEventListener('ad-event-resume', function() {
 	// Resume anything inside here
 });
 ```
-<br/>
+
 
 #### `ad-event-overlay-view-visible`
 Event is triggered when SKOverlay is presented on screen.
@@ -94,7 +94,7 @@ window.addEventListener('ad-event-overlay-view-visible', function() {
 	// Make any updates to the creative inside here. E.g hide the CTA button when SKOverlay appears.
 });
 ```
-<br/>
+
 
 #### `ad-event-overlay-view-finished`
 Event is triggered when SKOverlay is no longer visible.
@@ -104,7 +104,7 @@ window.addEventListener('ad-event-overlay-view-finished', function() {
 	// Make any updates to the creative inside here. E.g show the CTA button when SKOverlay is not visible.
 });
 ```
-<br/>
+
 
 #### `ad-event-overlay-view-failed`
 Event is triggered if SKOverlay fails to present on screen.
@@ -114,7 +114,7 @@ window.addEventListener('ad-event-overlay-view-failed', function() {
 	// Make any updates to the creative inside here. E.g re-show the CTA button as the 'ad-event-overlay-view-visible' event would not have been triggered due to the failure.
 });
 ```
-<br/>
+
 
 ## Vungle Helper
 A global variable called `VungleHelper` defined in the `ad-js-injection.js` provides additional creative capabilities to enhance the ad experience.
@@ -128,7 +128,7 @@ window.addEventListener('ad-event-init', function() {
 	document.body.innerHTML = VungleHelper.tokens.CTA_BUTTON_URL 
 });
 ```
-<br/>
+
 
 ### Attributes
 **`VungleHelper.closeDelay`**
@@ -143,7 +143,7 @@ Ad-unit tokens. Returns an object of all token key/value pairs. (To use a specif
 **`VungleHelper.tokens.[token name]`**
 Ad-unit tokens. Returns the value of the specified token. For example: `VungleHelper.tokens.CTA_BUTTON_URL`
 
-<br/>
+
 
 ### Methods
 
@@ -183,7 +183,7 @@ VungleHelper.setSKPresentation("asoi-complete", "product-view");
 ```javascript
 VungleHelper.setSKPresentation("asoi-interaction", "off");
 ```
-<br/>
+
 
  **`VungleHelper.dismissSKOverlay()`**
 Used to programatically dismiss SKOverlay without user interaction (if visible).
