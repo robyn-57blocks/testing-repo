@@ -45,60 +45,145 @@ gulp bundle:prod
 © Vungle. All Rights Reserved. 
 
 
-- - - - - - -
 
-
-## Creative-level Features
+# Creative-level Features
 Design Framework Core sends specific events and attributes it recieves from the SDK and Ad response to the creative-level:
 - Events can be used to control the user experience when an environment changes (e.g video in the creative can be paused if the user hides the application, or resumed when they return to the application).
 - Attributes can be used to customise the ad experience based on SDK settings, or tokens provided at the Application, Placement or Creative level.
 
 
-### Events
+## Events
 Specific events are posted to the creative to allow the user experience to be updated based on the user environment. You can use the following event handlers to change the creative experience:
+<br/>
 
 #### `ad-event-init`
 Event is triggered once communication between the parent `index.html` and child `ad.html` has been established and completed. Use this event to ensure `VungleHelper` global variable is correctly defined (more information below).
 ```javascript
-window.addEventListener('ad-event-init', function() { // Listening for init event from Design Framework Core
+window.addEventListener('ad-event-init', function() {
+	// Listening for init event from Design Framework Core
 	// Initialise or load anything inside here
 });
 ```
+<br/>
 
 #### `ad-event-pause`
 Event is triggered when either the application is closed by the user, or the privacy page is displayed. Use this event to pause animations, audio or video in the creative so they don't continue to play outside the ad experience. 
 ```javascript
-window.addEventListener('ad-event-pause', function() { // Listening for pause event from Design Framework Core
+window.addEventListener('ad-event-pause', function() {
+	// Listening for pause event from Design Framework Core
 	// Pause anything inside here
 });
 ```
+<br/>
 
 #### `ad-event-resume`
 Event is triggered when either the application is resumed by the user, or the privacy page is closed. Use this event to resume animations, audio or video in the creative so they begin to play once the creative is once again visible to the user.
 ```javascript
-window.addEventListener('ad-event-resume', function() { // Listening for resume event from Design Framework Core
+window.addEventListener('ad-event-resume', function() {
+	// Listening for resume event from Design Framework Core
 	// Resume anything inside here
 });
 ```
+<br/>
 
-
-### Attributes (VungleHelper)
-A global variable called `VungleHelper` defined in the `ad-js-injection.js` provides attributes which can be used at the creative level.
-
-**Important!** Attributes in `VungleHelper` may not be made available immediately when `ad.html` loads, as there is a very small delay in communication between the parent `index.html` and child `ad.html` files. You should use the `ad-event-init` event to ensure `VungleHelper` has been initialised fully. For example:
-
+#### `ad-event-overlay-view-visible`
+Event is triggered when SKOverlay is presented on screen.
 ```javascript
-window.addEventListener('ad-event-init', function() { // Listening for init event from Design Framework Core
-	document.body.innerHTML = VungleHelper.tokens.CTA_BUTTON_URL // Write to the document the CTA_BUTTON_URL token value
+window.addEventListener('ad-event-overlay-view-visible', function() {
+	// Listening for SKOverlay visible event from Design Framework Core
+	// Make any updates to the creative inside here. E.g hide the CTA button when SKOverlay appears.
 });
 ```
+<br/>
 
-#### `VungleHelper.closeDelay`
-Close button delay. Value (in seconds) of the close button delay for the ad-unit.
+#### `ad-event-overlay-view-finished`
+Event is triggered when SKOverlay is no longer visible.
+```javascript
+window.addEventListener('ad-event-overlay-view-finished', function() {
+	// Listening for SKOverlay finished event from Design Framework Core
+	// Make any updates to the creative inside here. E.g show the CTA button when SKOverlay is not visible.
+});
+```
+<br/>
 
-#### `VungleHelper.rewardedAd`
-Ad-unit rewarded. Displays whether the ad-unit is rewarded or not (true/false).
+#### `ad-event-overlay-view-failed`
+Event is triggered if SKOverlay fails to present on screen.
+```javascript
+window.addEventListener('ad-event-overlay-view-failed', function() {
+	// Listening for SKOverlay failed event from Design Framework Core
+	// Make any updates to the creative inside here. E.g re-show the CTA button as the 'ad-event-overlay-view-visible' event would not have been triggered due to the failure.
+});
+```
+<br/>
 
-#### `VungleHelper.tokens`
-Ad-unit tokens. Displays token values from ad response (as an object). Returns an object of all token key/value pairs.
-To use a specific token, call it's key. For example: `VungleHelper.tokens.CTA_BUTTON_URL`
+## Vungle Helper
+A global variable called `VungleHelper` defined in the `ad-js-injection.js` provides additional creative capabilities to enhance the ad experience.
+
+:warning: **Important!**
+`VungleHelper` may not be immediately accessible when `ad.html` is loading, as there is a short delay in communication between the parent `index.html` and child `ad.html` files. **You should always use the `ad-event-init` event to guarantee `VungleHelper` accessibility.** For example, use the following:
+```javascript
+window.addEventListener('ad-event-init', function() {
+	// Listening for init event from Design Framework Core
+	// Write to the document the CTA_BUTTON_URL token value
+	document.body.innerHTML = VungleHelper.tokens.CTA_BUTTON_URL 
+});
+```
+<br/>
+
+### Attributes
+**`VungleHelper.closeDelay`**
+Endcard close button delay. Returns a value (in seconds).
+
+**`VungleHelper.rewardedAd`**
+Displays if the ad is rewarded or not. Returns true/false.
+
+**`VungleHelper.tokens`**
+Ad-unit tokens. Returns an object of all token key/value pairs. (To use a specific token, use the attribute listed below).
+
+**`VungleHelper.tokens.[token name]`**
+Ad-unit tokens. Returns the value of the specified token. For example: `VungleHelper.tokens.CTA_BUTTON_URL`
+
+<br/>
+
+### Methods
+
+ **`VungleHelper.setSKPresentation(eventType, presentationType, presentationOptions[optional])`**
+Used to define which StoreKit view should be presented based on the CTA event.
+
+ - **eventType** options:
+Defines the type of user interaction that triggers a 'download' event.
+	 - `"cta-click"` - used when a user interacts with a CTA, or calling `parent.postMessage('download','*')` directly
+	 - `"asoi-complete"` - used when ASOI complete event is triggered
+	 - `"asoi-interaction"` - used when ASOI interaction event is triggered
+
+ - **presentationType**  options:
+Defines the type of presentation to be displayed for the 'download' event.
+	 - `"overlay-view"` - display SKOverlay
+	 - `"product-view"` - display SKProductView
+	 - `"off"` - display App Store (outside of publisher app) or browser
+
+- **presentationOptions** *(optional parameter, used only for SKOverlay)*:
+Format for presentation options must be provided as an object. For example: `{"position": "bottom-raised", "dismissible": true}`
+	 - `"position"` - defines position of SKOverlay. One of the following options can be used:
+		 - `"bottom"` - SKOverlay is positioned at the bottom of the screen
+		 - `"bottom-raised"` - SKOverlay is positioned at a raised position near the bottom of the screen
+	 - `"dismissible"` - defines whether SKOverlay can be dismissed by the user. One of the following options can be used:
+		 - `true` - SKOverlay can be dismissed by the user
+		 - `false` - SKOverlay cannot be dismissed by the user
+
+
+How to use method (examples):
+
+```javascript
+VungleHelper.setSKPresentation("cta-click", "overlay-view", {"position": "bottom-raised", "dismissible": true});
+```
+```javascript
+VungleHelper.setSKPresentation("asoi-complete", "product-view");
+```
+```javascript
+VungleHelper.setSKPresentation("asoi-interaction", "off");
+```
+<br/>
+
+ **`VungleHelper.dismissSKOverlay()`**
+Used to programatically dismiss SKOverlay without user interaction (if visible).
