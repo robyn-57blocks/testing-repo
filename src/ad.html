@@ -223,40 +223,40 @@
                 <h4>Creative Override:</h4>
                 <div class="row">
                     <div class="column">
-                        <a id="ctaClickOverlayOptions1" class="sk-overlay">SKOverlay - all options<br>
+                        <a id="ctaClickOverlayOptions1" class="sk-overlay">1 SKOverlay - all options<br>
                             <sub>cta-click<br>overlay-view<br>position: bottom-raised<br>dismissible: true</sub>
                         </a>
-                        <a id="ctaClickOverlayOptions2" class="sk-overlay">SKOverlay - all options<br>
+                        <a id="ctaClickOverlayOptions2" class="sk-overlay">2 SKOverlay - all options<br>
                             <sub>cta-click<br>overlay-view<br>position: bottom<br>dismissible: true</sub>
                         </a>
-                        <a id="ctaClickOverlayNoOptions" class="sk-overlay">SKOverlay - no options<br>
+                        <a id="ctaClickOverlayNoOptions" class="sk-overlay">3 SKOverlay - no options<br>
                             <sub>cta-click<br>overlay-view</sub>
                         </a>
-                        <a id="ctaClickOverlayPartialOptions1" class="sk-overlay">SKOverlay - partial options<br>
+                        <a id="ctaClickOverlayPartialOptions1" class="sk-overlay">4 SKOverlay - partial options<br>
                             <sub>cta-click<br>overlay-view<br>position: bottom-raised</sub>
                         </a>
-                        <a id="ctaClickOverlayPartialOptions2" class="sk-overlay">SKOverlay - partial options<br>
+                        <a id="ctaClickOverlayPartialOptions2" class="sk-overlay">5 SKOverlay - partial options<br>
                             <sub>cta-click<br>overlay-view<br>dismissible: false</sub>
                         </a>
-                        <a id="ctaClickOverlayDismiss" class="sk-overlay">Dismiss SKOverlay</a>
+                        <a id="ctaClickOverlayDismiss" class="sk-overlay">6 Dismiss SKOverlay</a>
                     </div>
                     <div class="column">
-                        <a id="ctaClickProductView" class="sk-product">SKProductView<br>
+                        <a id="ctaClickProductView" class="sk-product">1 SKProductView<br>
                             <sub>cta-click<br>product-view</sub>
                         </a>
-                        <a id="ctaClickProductViewOptions" class="sk-product">SKProductView - options (not valid)<br>
+                        <a id="ctaClickProductViewOptions" class="sk-product">2 SKProductView - options (not valid)<br>
                             <sub>cta-click<br>product-view<br>position: bottom<br>dismissible: true</sub>
                         </a>
-                        <a id="ctaClickOff" class="sk-off">Off - no options<br>
+                        <a id="ctaClickOff" class="sk-off">1 Off - no options<br>
                             <sub>cta-click<br>off</sub>
                         </a>
-                        <a id="ctaClickOffOptions" class="sk-off">Off - options (not valid)<br>
+                        <a id="ctaClickOffOptions" class="sk-off">2 Off - options (not valid)<br>
                             <sub>cta-click<br>off<br>position: bottom-raised<br>dismissible: true</sub>
                         </a>
-                        <a id="ctaClickOverlayInvalidView" class="invalid">Invalid view type<br>
+                        <a id="ctaClickOverlayInvalidView" class="invalid">1 Invalid view type<br>
                             <sub>cta-click<br>invalid-view</sub>
                         </a>
-                        <a id="ctaClickOverlayInvalidType" class="invalid">Invalid interaction type<br>
+                        <a id="ctaClickOverlayInvalidType" class="invalid">2 Invalid interaction type<br>
                             <sub>invalid-text<br>overlay-view</sub>
                         </a>
                     </div>
@@ -386,6 +386,10 @@
         };
         ctaClickOff.onclick = function(){
             VungleHelper.setSKPresentation("cta-click", "off");
+            parent.postMessage('download','*');
+        };
+        ctaClickOverlayInvalidView.onclick = function(){
+            VungleHelper.setSKPresentation("cta-click", "invalid-view");
             parent.postMessage('download','*');
         };
         ctaClickOverlayInvalidType.onclick = function(){
