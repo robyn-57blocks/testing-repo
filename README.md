@@ -149,6 +149,7 @@ Ad-unit tokens. Returns the value of the specified token. For example: `VungleHe
 
  **`VungleHelper.setSKPresentation(eventType, presentationType, presentationOptions[optional])`**
 Used to define which StoreKit view should be presented based on the CTA event.
+Remember to call these methods during the initialisation of the creative, so the creative can set the correct StoreKit presentation as early into the ad experience as possible. You can also call these methods at a later time during the creative if you want to change the SK presentation based on the creative experience. Once a method has been called, it will be used for future interactions based on the `eventType`, unless another `setSKPresentation` method is subsequently called.
 
  - **eventType** options:
 Defines the type of user interaction that triggers a 'download' event.
