@@ -46,7 +46,6 @@ var adcore = {
         var placementType = null; //["fullscreen", "Unknown", "flexview", "flexfeed", "mrec"]
         var creativeViewType = null;
         var storeViewTypes = ["unknown", "fullscreen"];
-        var skViewTypes = ["product-view", "overlay-view", "off"];
         var skOverlayOptions = { "position": "bottom", "dismissible": true };
         var gdprConsentRequired = false;
 
@@ -180,7 +179,7 @@ var adcore = {
                 window.vungle.mraid.addEventListener('viewableChange', function() {
                     console.log('Vungle Ad - viewable: ' + window.vungle.mraid.isViewable());
                     onAdViewableChange();
-                })
+                });
             }
 
             switch (creativeViewType) {
