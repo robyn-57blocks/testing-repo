@@ -63,7 +63,7 @@ function initASOIDelayTimerAutoplay() {
                 else
                     tmpSettings.ASOIEnded = true
 
-                window.callSDK('download');
+                window.callSDK('download', 'asoi-complete');
             }
             DataStore.push('settings', tmpSettings)
         }, settings.ASOIDelayTimerAutoplay * 1000);
@@ -100,7 +100,7 @@ function handleInteraction() {
             settings.ASOITriggered = true;
 
             setTimeout(function() {
-                window.callSDK('download');
+                window.callSDK('download', 'asoi-interaction');
             }, settings.ASOIDelayTimer * 1000);
         }
 
@@ -114,7 +114,7 @@ function handleInteraction() {
             settings.ASOITriggered = true;
             
             setTimeout(function() {
-                window.callSDK('download');
+                window.callSDK('download', 'asoi-interaction');
             }, settings.ASOIDelayTimer * 1000);
         }
 
@@ -140,7 +140,7 @@ function completeAd() {
         settings.ASOIEnded = true;
 
         setTimeout(function() {
-            window.callSDK('download');
+            window.callSDK('download', 'asoi-complete');
         }, settings.ASOIDelayTimer * 1000);
     }
 

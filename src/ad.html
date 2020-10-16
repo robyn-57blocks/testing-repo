@@ -16,13 +16,17 @@
         a, button {
             position: relative;
             display: block;
-            font-size: 0.9rem;
+            font-size: 0.7rem;
             background-color: #3C2A67;
             border: 3px solid rgba(0,0,0,0.1);
             color: white;
             text-align: center;
-            margin: 1rem 0;
+            margin: 0.1rem 0;
             padding: 0.3rem 0;
+            border-radius: 0.3rem;
+        }
+        a.main {
+            min-height: 2.5rem;
         }
         button {
             width: 100%;
@@ -32,13 +36,20 @@
             color: #3C2A67;
         }
         h3 {
-            font-size: 1rem;
+            font-size: 0.8rem;
             margin: 0;
+            text-transform: uppercase;
         }
         h4 {
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             font-weight: 500;
-            margin: 0;
+            margin: 0.7rem 0 0;
+            text-transform: uppercase;
+        }
+        h5 {
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin: 0.2rem 0;
         }
         pre {
             font-size: 0.9rem;
@@ -47,6 +58,11 @@
         video {
             width: 100%;
             height: auto;
+        }
+        sub {
+            color: rgba(255,255,255,0.8);
+            font-style: italic;
+            font-size: 0.6rem;
         }
         .hide {
             display: none;
@@ -79,14 +95,14 @@
             flex-grow: 1;
             width: 100%;
             display: none;
-            padding: 1rem;
+            padding: 0.5rem;
             box-sizing: border-box;
             color: #3C2A67;
         }
         .tabs .tab div {
-            background-color: rgba(255,255,255,0.5);
+            background-color: white;
             padding: 0.5rem;
-            margin: 1rem 0;
+            margin: 0.5rem 0;
         }
         #video-placement {
             margin: 0;
@@ -121,26 +137,142 @@
         .key {
             color: red;
         }
+        .sk-overlay {
+            background-color: rgba(60, 100, 209, 1);
+        }
+        .sk-product {
+            background-color: rgba(11, 185, 187, 1);
+        }
+        .sk-off {
+            background-color: rgba(187, 88, 37, 1);
+        }
+        .invalid {
+            background-color: rgba(71, 84, 117, 1);
+        }
+        .tabs .tab div.row {
+            background: none;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 0;
+        }
+        .tabs .tab div.column {
+            background: none;
+            display: flex;
+            flex-direction: column;
+            flex-basis: 100%;
+            flex: 1;
+            padding: 0;
+        }
+        .tabs .tab div.column:first-child {
+            padding-right: 0.5rem;
+        }
+        .tabs .tab div.column:lasr-child {
+            padding-left: 0.5rem;
+        }
+        .tabs .tab .column {
+            margin: 0;
+        }
+        .selected {
+            border: 3px solid red;
+        }
+        .margin-top {
+            margin-top: 1rem;
+        }
     </style>
 </head>
 <body>
     <div class="tabs">
         <input type="radio" name="tabs" id="tabone" checked="checked">
-        <label for="tabone">Pause/Resume</label>
+        <label for="tabone">CTA & Events</label>
+        <div class="tab">
+            <div class="button-group">
+                <div class="row">
+                    <div class="column">
+                        <h3>ASOI Complete</h3>
+                        <h4>Token:</h4>
+                        <a id="asoiCompleteEventButton" class="main">Trigger ASOI Complete Event<br><sub></sub></a>
+                    </div>
+                    <div class="column">
+                        <h3>ASOI Interaction</h3>
+                        <h4>Token:</h4>
+                        <a id="asoiInteractionEventButton" class="main"><br><sub></sub></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <h4>Creative Override:</h4>
+                        <a id="asoiCompleteSetOverlay" class="sk-overlay">Set to SKOverlay</a>
+                        <a id="asoiCompleteSetProductView" class="sk-product">Set to SKProductView</a>
+                        <a id="asoiCompleteSetOff" class="sk-off">Set to Off</a>
+                    </div>
+                    <div class="column">
+                        <h4>Creative Override:</h4>
+                        <a id="asoiInteractionSetOverlay" class="sk-overlay">Set to SKOverlay</a>
+                        <a id="asoiInteractionSetProductView" class="sk-product">Set to SKProductView</a>
+                        <a id="asoiInteractionSetOff" class="sk-off">Set to Off</a>
+                    </div>
+                </div>
+            </div>
+            <div class="button-group">
+                <h3>CTA Click</h3>
+
+                <h4>Token:</h4>
+                <a id="ctaDefaultButton">Download Button<br><sub></sub></a>
+                <h4>Creative Override:</h4>
+                <div class="row">
+                    <div class="column">
+                        <a id="ctaClickOverlayOptions1" class="sk-overlay">1 SKOverlay - all options<br>
+                            <sub>cta-click<br>overlay-view<br>position: bottom-raised<br>dismissible: true</sub>
+                        </a>
+                        <a id="ctaClickOverlayOptions2" class="sk-overlay">2 SKOverlay - all options<br>
+                            <sub>cta-click<br>overlay-view<br>position: bottom<br>dismissible: true</sub>
+                        </a>
+                        <a id="ctaClickOverlayNoOptions" class="sk-overlay">3 SKOverlay - no options<br>
+                            <sub>cta-click<br>overlay-view</sub>
+                        </a>
+                        <a id="ctaClickOverlayPartialOptions1" class="sk-overlay">4 SKOverlay - partial options<br>
+                            <sub>cta-click<br>overlay-view<br>position: bottom-raised</sub>
+                        </a>
+                        <a id="ctaClickOverlayPartialOptions2" class="sk-overlay">5 SKOverlay - partial options<br>
+                            <sub>cta-click<br>overlay-view<br>dismissible: false</sub>
+                        </a>
+                        <a id="ctaClickOverlayDismiss" class="sk-overlay">6 Dismiss SKOverlay</a>
+                    </div>
+                    <div class="column">
+                        <a id="ctaClickProductView" class="sk-product">1 SKProductView<br>
+                            <sub>cta-click<br>product-view</sub>
+                        </a>
+                        <a id="ctaClickProductViewOptions" class="sk-product">2 SKProductView - options (not valid)<br>
+                            <sub>cta-click<br>product-view<br>position: bottom<br>dismissible: true</sub>
+                        </a>
+                        <a id="ctaClickOff" class="sk-off">1 Off - no options<br>
+                            <sub>cta-click<br>off</sub>
+                        </a>
+                        <a id="ctaClickOffOptions" class="sk-off">2 Off - options (not valid)<br>
+                            <sub>cta-click<br>off<br>position: bottom-raised<br>dismissible: true</sub>
+                        </a>
+                        <a id="ctaClickOverlayInvalidView" class="invalid">1 Invalid view type<br>
+                            <sub>cta-click<br>invalid-view</sub>
+                        </a>
+                        <a id="ctaClickOverlayInvalidType" class="invalid">2 Invalid interaction type<br>
+                            <sub>invalid-text<br>overlay-view</sub>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="event-log"><h3>Event Log</h3></div>
+        </div>
+
+        <input type="radio" name="tabs" id="tabtwo">
+        <label for="tabtwo">Media & Tokens</label>
         <div class="tab">
             <div class="video-container">
                 <button id="show-video">Display Video</button>
                 <div id="video-placement" class="hide"></div>
                 <p id="video-mute-status"></p>
             </div>
-            <a onclick="parent.postMessage('download','*')">Download Button</a>
-            <a id="on-complete-button">Send interaction and on-complete event</a>
-            <div id="event-log"><h3>Event Log</h3></div>
-        </div>
-
-        <input type="radio" name="tabs" id="tabtwo">
-        <label for="tabtwo">Attributes</label>
-        <div class="tab">
             <div id="asoi-log"><h3>ASOI Settings</h3>
                 <div id="asoi-pub"><h4>Publisher ASOI setting</h4></div>
                 <div id="asoi-creative"><h4>Creative ASOI settings</h4></div>
@@ -156,7 +288,28 @@
     var videoMuteStatus = document.getElementById("video-mute-status");
     var showVideoButton = document.getElementById("show-video");
     var videoPlacement = document.getElementById("video-placement");
-    var onCompleteButton = document.getElementById("on-complete-button");
+
+    var ctaDefaultButton = document.getElementById("ctaDefaultButton");
+    var asoiCompleteEventButton = document.getElementById("asoiCompleteEventButton");
+    var asoiInteractionEventButton = document.getElementById("asoiInteractionEventButton");
+    var ctaClickOverlayOptions1 = document.getElementById("ctaClickOverlayOptions1");
+    var ctaClickOverlayOptions2 = document.getElementById("ctaClickOverlayOptions2");
+    var ctaClickOverlayNoOptions = document.getElementById("ctaClickOverlayNoOptions");
+    var ctaClickOverlayPartialOptions1 = document.getElementById("ctaClickOverlayPartialOptions1");
+    var ctaClickOverlayPartialOptions2 = document.getElementById("ctaClickOverlayPartialOptions2");
+    var ctaClickProductViewOptions = document.getElementById("ctaClickProductViewOptions");
+    var ctaClickProductView = document.getElementById("ctaClickProductView");
+    var ctaClickOffOptions = document.getElementById("ctaClickOffOptions");
+    var ctaClickOff = document.getElementById("ctaClickOff");
+    var ctaClickOverlayInvalidType = document.getElementById("ctaClickOverlayInvalidType");
+    var ctaClickOverlayInvalidView = document.getElementById("ctaClickOverlayInvalidView");
+    var asoiCompleteSetOverlay = document.getElementById("asoiCompleteSetOverlay");
+    var asoiCompleteSetProductView = document.getElementById("asoiCompleteSetProductView");
+    var asoiCompleteSetOff = document.getElementById("asoiCompleteSetOff");
+    var asoiInteractionSetOverlay = document.getElementById("asoiInteractionSetOverlay");
+    var asoiInteractionSetProductView = document.getElementById("asoiInteractionSetProductView");
+    var asoiInteractionSetOff = document.getElementById("asoiInteractionSetOff");
+    var ctaClickOverlayDismiss = document.getElementById("ctaClickOverlayDismiss");
 
     var asoiLogPub = "asoi-pub";
     var asoiLogCreative = "asoi-creative";
@@ -178,7 +331,105 @@
         createLogEntry(closeDelayLogElementId, VungleHelper.closeDelay);
         createLogEntry(rewardedAdLogElementId, VungleHelper.rewardedAd);
         createLogEntry(tokenLogElementId, tokenJson);
+
+        createTokenName(ctaDefaultButton, VungleHelper.tokens.SK_CTA_ONLY);
+        createTokenName(asoiCompleteEventButton, VungleHelper.tokens.SK_ASOI_COMPLETE);
+        createTokenName(asoiInteractionEventButton, VungleHelper.tokens.SK_ASOI_AGGRESSIVE);
+
+        asoiInteractionEventButton.insertAdjacentHTML("afterbegin", "Send ASOI Interaction<br>("+window.vungleSettings.ASOITapInteractions+" interactions)");
+
+        ctaDefaultButton.onclick = function(){
+            parent.postMessage('download','*');
+        };
+        asoiCompleteEventButton.onclick = function(){
+            startTimer(asoiCompleteEventButton);
+        };
+        asoiInteractionEventButton.onclick = function(){
+            console.log("ASOI interaction button pressed");
+        };
+
+        ctaClickOverlayOptions1.onclick = function(){
+            VungleHelper.setSKPresentation("cta-click", "overlay-view", {"position": "bottom-raised", "dismissible": true});
+            parent.postMessage('download','*');
+        };
+        ctaClickOverlayOptions2.onclick = function(){
+            VungleHelper.setSKPresentation("cta-click", "overlay-view", {"position": "bottom", "dismissible": true});
+            parent.postMessage('download','*');
+        };
+        ctaClickOverlayNoOptions.onclick = function(){
+            VungleHelper.setSKPresentation("cta-click", "overlay-view");
+            parent.postMessage('download','*');
+        };
+        ctaClickOverlayPartialOptions1.onclick = function(){
+            VungleHelper.setSKPresentation("cta-click", "overlay-view", {"position": "bottom-raised"});
+            parent.postMessage('download','*');
+        };
+        ctaClickOverlayPartialOptions2.onclick = function(){
+            VungleHelper.setSKPresentation("cta-click", "overlay-view", {"dismissible": false});
+            parent.postMessage('download','*');
+        };
+        ctaDefaultButton.onclick = function(){
+            parent.postMessage('download','*');
+        };
+
+        ctaClickProductViewOptions.onclick = function(){
+            VungleHelper.setSKPresentation("cta-click", "product-view", {"position": "bottom", "dismissible": true});
+            parent.postMessage('download','*');
+        };
+        ctaClickProductView.onclick = function(){
+            VungleHelper.setSKPresentation("cta-click", "product-view");
+            parent.postMessage('download','*');
+        };
+        ctaClickOffOptions.onclick = function(){
+            VungleHelper.setSKPresentation("cta-click", "off", {"position": "bottom-raised", "dismissible": true});
+            parent.postMessage('download','*');
+        };
+        ctaClickOff.onclick = function(){
+            VungleHelper.setSKPresentation("cta-click", "off");
+            parent.postMessage('download','*');
+        };
+        ctaClickOverlayInvalidView.onclick = function(){
+            VungleHelper.setSKPresentation("cta-click", "invalid-view");
+            parent.postMessage('download','*');
+        };
+        ctaClickOverlayInvalidType.onclick = function(){
+            VungleHelper.setSKPresentation("invalid-text", "overlay-view");
+            parent.postMessage('download','*');
+        };
+        ctaClickOverlayDismiss.onclick = function(){
+            VungleHelper.dismissSKOverlay();
+        };
+
+        asoiCompleteSetOverlay.onclick = function(){
+            this.classList.add("selected");
+            VungleHelper.setSKPresentation("asoi-complete", "overlay-view", {"position": "bottom-raised", "dismissible": true});
+        };
+        asoiCompleteSetProductView.onclick = function(){
+            this.classList.add("selected");
+            VungleHelper.setSKPresentation("asoi-complete", "product-view");
+        };
+        asoiCompleteSetOff.onclick = function(){
+            this.classList.add("selected");
+            VungleHelper.setSKPresentation("asoi-complete", "off");
+        };
+
+        asoiInteractionSetOverlay.onclick = function(){
+            this.classList.add("selected");
+            VungleHelper.setSKPresentation("asoi-interaction", "overlay-view", {"position": "bottom-raised", "dismissible": true});
+        };
+        asoiInteractionSetProductView.onclick = function(){
+            this.classList.add("selected");
+            VungleHelper.setSKPresentation("asoi-interaction", "product-view");
+        };
+        asoiInteractionSetOff.onclick = function(){
+            this.classList.add("selected");
+            VungleHelper.setSKPresentation("asoi-interaction", "off");
+        };
     });
+
+    function createTokenName(element, value) {
+        element.getElementsByTagName("sub")[0].innerHTML = "Token: "+value;
+    }
 
     function createLogEntry(parentElement, value) {
         var element = document.createElement("pre");
@@ -201,26 +452,22 @@
         });
     }
 
-    function startTimer() {
-        onCompleteButton.innerHTML = "Interacted! On-complete event will send in " + clock +"s";
-        timer = setInterval(countdown, 1000);
-        onCompleteButton.style.pointerEvents="none";
-        onCompleteButton.style.pointerEvents="none";
+    function startTimer(element) {
+        element.innerHTML = "ASOI complete event in " + clock +"s";
+        timer = setInterval( function() { countdown(element) }, 1000 );
+        element.style.pointerEvents="none";
+        element.style.pointerEvents="none";
     }
 
-    function countdown() {
+    function countdown(element) {
         clock-=1; 
-        onCompleteButton.innerHTML = "On-complete event will send in " + clock +"s";
+        element.innerHTML = "ASOI complete event in " + clock +"s";
         if (clock == 0 ) {
             parent.postMessage('complete','*');
             clearInterval(timer);
-            onCompleteButton.innerHTML = "On-complete event sent";
+            element.innerHTML = "ASOI complete event sent";
         }
     }
-
-    onCompleteButton.addEventListener('click', function() {
-        startTimer();
-    });
 
     showVideoButton.onclick = function(){
         videoPlacement.innerHTML = '<video id="test-video" muted preload playsinline webkit-playsinline autoplay loop><source src="https://cdn-lb.vungle.com/zen/V_Shapes_landscape_audio-960x540-Q2.mp4" type="video/mp4"/></video>';
@@ -251,12 +498,24 @@
         }
         createLogEntry(eventLogElementId, "resume");
     });
+    
+    window.addEventListener('ad-event-overlay-view-finished', function() {
+        createLogEntry(eventLogElementId, "SKOverlay finished");
+    });
 
-    //Legacy ASOI settings
+    window.addEventListener('ad-event-overlay-view-visible', function() {
+        createLogEntry(eventLogElementId, "SKOverlay visible");
+    });
+
+    window.addEventListener('ad-event-overlay-view-failed', function() {
+        createLogEntry(eventLogElementId, "SKOverlay failed");
+    });
+
+    //Creative defined ASOI settings
     window.vungleSettings = {
         ASOIEnabled: true,
         ASOIDelayTimer: 2,
-        ASOITapInteractions: 1
+        ASOITapInteractions: 8
     };
 </script>
 
