@@ -54,8 +54,8 @@ export default {
                 getOS: function() { return "ios"; },
                 getOSVersion: function() { return "14.0"; },
                 getSDKVersion: function() { return "16.8.1"; },
-                prepareStoreView: function() { return console.log('%cSDK prepareStoreView%c', 'color: #984984;font-weight:bold', 'color: inherit'); return true; },
-                prepareStoreOverlayView: function() { return console.log('%cSDK prepareStoreOverlayView%c', 'color: #984984;font-weight:bold', 'color: inherit'); return true; }
+                prepareStoreView: function() { console.log('%cSDK prepareStoreView%c', 'color: #984984;font-weight:bold', 'color: inherit'); return true; },
+                prepareStoreOverlayView: function() { console.log('%cSDK prepareStoreOverlayView%c', 'color: #984984;font-weight:bold', 'color: inherit'); return true; }
             },
             mraidBridgeExt: {
                 notifyTPAT: function(event) { console.log('%cnotifyTPAT%c ' + event, 'color: #2CA840;font-weight:bold', 'color: inherit'); return true; },
