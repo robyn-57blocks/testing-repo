@@ -429,6 +429,126 @@
                     }
                 ]
             }
+        },
+        {
+            "token_name": "SK_FSC",
+            "properties": {
+                "display_name": "StoreKit Full Screen Clickable",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "default",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "SK_ASOI_AGGRESSIVE",
+            "properties": {
+                "display_name": "StoreKit ASOI Aggressive",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "default",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "SK_ASOI_COMPLETE",
+            "properties": {
+                "display_name": "StoreKit ASOI Complete",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "default",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "SK_CTA_ONLY",
+            "properties": {
+                "display_name": "StoreKit CTA Only",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "default",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "SKOVERLAY_POSITION",
+            "properties": {
+                "display_name": "SKOverlay Position",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "default",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "SKOVERLAY_DISMISSIBLE",
+            "properties": {
+                "display_name": "SKOverlay Dismissible",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "default",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
         }
     ]
 }

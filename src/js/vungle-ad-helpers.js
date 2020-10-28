@@ -72,8 +72,71 @@ export default {
         return os;
     },
 
+    checkSKOverlaySupportedOSVersion: function() {
+        //SKOverlay is supported on iOS 14 and above
+        var os = SDKHelper.mraidExt().getOS();
+        var osVersion = SDKHelper.mraidExt().getOSVersion();
+        var versionArr = osVersion.split(".");
+
+        if (os.toLowerCase() === "ios" && Number(versionArr[0]) >= 14) {
+            return true;
+        }
+        return false;
+    },
+
     deviceOS: function() {
         return SDKHelper.mraidExt().getOS().trim();
+    },
+
+    checkSKOverlaySupportedSDKVersion() {
+        //SKOverlay is supported on iOS SDK 6.8.1 and above
+        try {
+            var sdkVersion = SDKHelper.mraidExt().getSDKVersion();
+            var target = [6, 8, 1];
+            var versionArr = sdkVersion.split(".");
+
+            for (let i = 0; i < versionArr.length; i++) {
+                var version = isNaN(Number(versionArr[i])) ? Number(versionArr[i].charAt(0)) : Number(versionArr[i]);
+                if (i < target.length && Number(target[i]) > version) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (e) {
+            console.log(e);
+        }
+        return false;
+
+    },
+
+    getSKEventType(eventType) {
+        var creativeEventTypes = {  skPresentationASOIInteraction: 'asoi-interaction', 
+                                    skPresentationASOIComplete: 'asoi-complete',
+                                    skPresentationCTAClick: 'cta-click'};
+
+        var objectKey = Object.keys(creativeEventTypes).find(key => creativeEventTypes[key] === eventType);
+
+        if (objectKey) {
+            return objectKey;
+        } else {
+            return false;
+        }
+    },
+
+    underscoreString(string) {
+        if (typeof string !== 'undefined') {
+            return string.replace("-", '_');
+        }
+
+        return false;
+    },
+
+    parseBoolean(string) {
+        if (string === "true") {
+            return true;
+        } else {
+            return false;
+        }
     },
 
     greatestCommonDivisor: function(a, b) {
@@ -177,6 +240,18 @@ export default {
 
     pauseMedia: function() {
         PostMessenger.sendMessage('ad-event-pause');
+    },
+
+    skOverlayFinished: function() {
+        PostMessenger.sendMessage('ad-event-overlay-view-finished');
+    },
+
+    skOverlayVisible: function() {
+        PostMessenger.sendMessage('ad-event-overlay-view-visible');
+    },
+
+    skOverlayFailed: function() {
+        PostMessenger.sendMessage('ad-event-overlay-view-failed');
     },
 
     checkPauseResumeOverlays: function() {

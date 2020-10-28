@@ -9,7 +9,7 @@ import { default as AdVideoPlayer } from './vungle-ad-video-player.js';
 import { default as AdVideoCTA } from './vungle-ad-video-cta.js';
 import { default as EventController } from './vungle-ad-event-controller.js';
 import { default as PostMessenger } from './vungle-ad-post-messenger.js';
-import { default as DataStore } from './vungle-ad-post-messenger.js';
+import { default as DataStore } from './vungle-ad-data-store.js';
 import { default as ASOIController } from './vungle-ad-asoi-controller.js';
 import { default as ChildInstructions } from './vungle-ad-child-instructions.js';
 import { default as EndcardOnlyAttribution } from './vungle-ad-endcard-only-attribution.js';
@@ -39,13 +39,14 @@ var adcore = {
         //check for either vungle or standard MRAID
         vungleMRAID.checkMRAIDStatus();
 
-        var achievedReward, isStoreViewPrepared, mraidVersion, successfulViewTimeout, videoCloseButtonTimeout;
+        var achievedReward, isSKProductViewPrepared, isSKOverlayPrepared, mraidVersion, successfulViewTimeout, videoCloseButtonTimeout;
         var blockCtaEvent = false;
         var ctaAlreadyClicked = false;
         var dynamicElement = null;
         var placementType = null; //["fullscreen", "Unknown", "flexview", "flexfeed", "mrec"]
         var creativeViewType = null;
         var storeViewTypes = ["unknown", "fullscreen"];
+        var skOverlayOptions = { "position": "bottom", "dismissible": true };
         var gdprConsentRequired = false;
 
         var delaySeconds = 0;
@@ -61,9 +62,7 @@ var adcore = {
             mraidVersion = window.vungle.mraidExt.getMraidVersion();
         }
 
-        var operatingSystem = window.vungle.mraidExt.getOS().trim();
-
-        window.callSDK = function(event) {
+        window.callSDK = function(event, eventSource) {
             if (!(window.vungle && window.vungle.mraidBridgeExt)) {
                 // console log successful SDK call in dev mode
                 console.log('%c Vungle SDK action ' + event, 'color: #008800');
@@ -71,7 +70,7 @@ var adcore = {
             }
 
             if (!blockCtaEvent) {
-                ctaButtonClicked();
+                ctaButtonClicked(eventSource);
             }
         };
 
@@ -101,29 +100,76 @@ var adcore = {
             return dynamicElement;
         }
 
-        getDynamicElement().addEventListener("vungle.events.preparestore.finished", onNotifyPresentStoreViewFinished);
-        getDynamicElement().addEventListener("vungle.events.preparestore.success", onNotifyPrepareStoreViewSuccess);
-
-        function prepareStoreView() {
+        //iOS Specific - SKProductView
+        function prepareSKProductView() {
             window.vungle.mraidExt.prepareStoreView(appStoreId);
+            console.log('SKProductView - prepare');
         }
 
-        function onNotifyPrepareStoreViewSuccess() {
-            isStoreViewPrepared = true;
+        function onNotifyPrepareSKProductViewSuccess() {
+            isSKProductViewPrepared = true;
+            console.log('SKProductView - success');
         }
 
-        function onNotifyPresentStoreViewFinished() {
-            // In-app store view is supported only on iOS. We should trigger this.prepareStoreView() only for iOS.
-            isStoreViewPrepared = false;
-            if (operatingSystem === "ios" && storeViewTypes.indexOf(placementType) !== -1) {
-                prepareStoreView();
+        function onNotifyPresentSKProductViewFinished() {
+            // In-app store view is supported only on iOS. We should trigger this.prepareSKProductView() only for iOS.
+            console.log('SKProductView - finished');
+            isSKProductViewPrepared = false;
+            if (AdHelper.deviceOS() === "ios" && storeViewTypes.indexOf(placementType) !== -1) {
+                prepareSKProductView();
             }
         }
 
-        if (mraidVersion) {
-            onNotifyPresentStoreViewFinished();
+        //iOS Specific - SKOverlay
+        function prepareSKOverlay() {
+            window.vungle.mraidExt.prepareStoreOverlayView(appStoreId, skOverlayOptions);
+            console.log('SKOverlay - prepare');
         }
 
+        function onNotifyPrepareSKOverlaySuccess() {
+            isSKOverlayPrepared = true;
+            console.log('SKOverlay - success');
+        }
+
+        function onNotifyPresentSKOverlayFinished() {
+            AdHelper.skOverlayFinished();
+            console.log('SKOverlay - finished');
+            // In-app store view is supported only on iOS. We should trigger this.prepareSKOverlay() only for iOS.
+            isSKOverlayPrepared = false;
+            if (AdHelper.deviceOS() === "ios" && storeViewTypes.indexOf(placementType) !== -1) {
+                prepareSKOverlay();
+            }
+        }
+
+        function onNotifySKOverlayVisible() {
+            AdHelper.skOverlayVisible();
+            console.log('SKOverlay - visible');
+        }
+
+        function onNotifySKOverlayFailed() {
+            AdHelper.skOverlayFailed();
+            console.log('SKOverlay - failed');
+        }
+
+        function dismissSKOverlay() {
+            window.vungle.mraidExt.dismissStoreOverlayView(appStoreId);
+            console.log('SKOverlay - dismissed');
+        }
+
+        window.addEventListener('vungle-ad-load-complete', function(){
+            console.log('Vungle Ad - load complete');
+            if (AdHelper.deviceOS() === "ios" && mraidVersion && storeViewTypes.indexOf(placementType) !== -1) {
+                onNotifyPresentSKProductViewFinished();
+            }
+            if (AdHelper.deviceOS() === "ios" && AdHelper.checkSKOverlaySupportedOSVersion() && AdHelper.checkSKOverlaySupportedSDKVersion() && appStoreId && storeViewTypes.indexOf(placementType) !== -1) {
+                onNotifyPresentSKOverlayFinished();
+            }
+        });
+
+
+
+
+        //Presenting Ad
         function presentAd() {
             if (VungleAd.tokens.hasOwnProperty("CREATIVE_VIEW_TYPE")) {
                 creativeViewType = VungleAd.tokens.CREATIVE_VIEW_TYPE.trim().toLowerCase();
@@ -131,9 +177,9 @@ var adcore = {
 
             if (typeof window.vungle.mraid.addEventListener !== 'undefined') {
                 window.vungle.mraid.addEventListener('viewableChange', function() {
-                    console.log(window.vungle.mraid.isViewable());
+                    console.log('Vungle Ad - viewable: ' + window.vungle.mraid.isViewable());
                     onAdViewableChange();
-                })
+                });
             }
 
             switch (creativeViewType) {
@@ -581,7 +627,7 @@ var adcore = {
             AdHelper.addClass(privacyIcon, 'hide');
         }
 
-        function ctaButtonClicked() {
+        function ctaButtonClicked(ctaEventSource) {
             //if CTA has not been previously clicked, send postroll.click and clickUrl TPAT events
             if (!ctaAlreadyClicked) {
                 window.vungle.mraidBridgeExt.notifyTPAT("postroll.click");
@@ -599,17 +645,187 @@ var adcore = {
             }
 
             // 6.3.2 Hack - IOS-2140
-            if (!mraidVersion && operatingSystem === "ios" && appStoreId && isStoreViewPrepared) {
+            if (!mraidVersion && AdHelper.deviceOS() === "ios" && appStoreId && isSKProductViewPrepared) {
                 //Block future CTA events on 6.3.2 to avoid StoreKit bug
                 blockCtaEvent = true;
             }
+            
+            if (AdHelper.deviceOS() === "ios" && appStoreId) {
+                //Only if platform is iOS and App Store URL
+                switch (ctaEventSource) {
+                    case "fsc-video":
+                        presentStoreKitView(ctaEventSource, VungleAd.tokens.SK_FSC);
+                        break;
 
-            if (operatingSystem === "ios" && appStoreId && isStoreViewPrepared) {
-                window.vungle.mraidExt.presentStoreView(appStoreId);
+                    case "asoi-interaction":
+                        presentStoreKitView(ctaEventSource, VungleAd.tokens.SK_ASOI_AGGRESSIVE);
+                        break;
+
+                    case "asoi-complete":
+                        presentStoreKitView(ctaEventSource, VungleAd.tokens.SK_ASOI_COMPLETE);
+                        break;
+
+                    case "cta-click":
+                        presentStoreKitView(ctaEventSource, VungleAd.tokens.SK_CTA_ONLY);
+                        break;
+
+                    case undefined:
+                        showSKProductView();
+                        break;
+
+                    default:
+                        showSKProductView();
+                }
             } else {
-                vungleMRAID.open(VungleAd.tokens.CTA_BUTTON_URL);
+                //If platform is not iOS or CTA is not an App Store URL
+                triggerMraidOpen();
+            }
+            
+
+            //SKOVERLAY_POSITION VungleAd.tokens.SKOVERLAY_POSITION = default, bottom, bottom-raised
+
+            //SKOVERLAY_DISMISSIBLE VungleAd.tokens.SKOVERLAY_DISMISSIBLE = default, true, false
+
+        }
+
+        //check the SK token value and attempt to present the selected SK view
+        function presentStoreKitView(ctaEventSource, viewType) {
+            var skOverlayCreativePresentation;
+            
+            //if default, use specified SK view from creative, otherwise fallback to SKProductView
+            if (viewType === "default") {
+                //check if the event source if valid, otherwise fallback to SKProductView
+                var storeKeyName = AdHelper.getSKEventType(ctaEventSource);
+                if (storeKeyName) {
+                    //check if presentation options have been defined
+                    if (typeof DataStore.get('settings')[storeKeyName] !== 'undefined') {
+                        viewType = AdHelper.underscoreString(DataStore.get('settings')[storeKeyName].presentationType); 
+
+                        //check for options if view type is SKOverlay
+                        if (viewType === "overlay_view") {
+                            //check position and dismissible token
+                            skOverlayCreativePresentation = validateSKOverlayOptions(DataStore.get('settings')[storeKeyName].presentationOptions);
+                        }
+                    } else {
+                        //if no presentation options are defined in the creative, default to product_view 
+                        viewType === "product_view";
+                    }                    
+                }
+            }
+
+            if (viewType === "product_view") {
+                showSKProductView();
+            } else if (viewType === "overlay_view") {
+                
+                updateSKOverlayOptions(skOverlayCreativePresentation);
+                //if fullscreen clickable, use overlay defaults, otherwise use creative override
+                // ctaEventSource === "fsc-video" ? showSKOverlay(skOverlayOptions) : showSKOverlay(skOverlayCreativePresentation);
+                showSKOverlay(skOverlayOptions);
+
+            } else if (viewType === "off") {
+                triggerMraidOpen();
+            } else {
+                showSKProductView();
             }
         }
+
+        function updateSKOverlayOptions(options) {
+            //if skOverlayCreativePresentation has options, check tokens and then finalise
+            if (options) {
+                Object.keys(options).forEach(function(key) {
+                    if (key === "position") {
+                        //check if SKOVERLAY_POSITION is default and use creative override, otherwise use token value
+                        if (VungleAd.tokens.SKOVERLAY_POSITION === "default") {
+                            if (options[key] === "bottom" || options[key] === "bottom-raised") {
+                                skOverlayOptions.position = options[key];
+                            }
+                        }
+                    }
+
+                    if (key === "dismissible") {
+                        //check if SKOVERLAY_DISMISSIBLE is default and use creative override, otherwise use token value
+                        if (VungleAd.tokens.SKOVERLAY_DISMISSIBLE === "default") {
+                            if (options[key] == true || options[key] == false) {
+                                skOverlayOptions.dismissible = options[key];
+                            }
+                        }
+                    }
+                });               
+            }
+
+            //update SKOverlay presentation options to token value. If token is default, then don't override
+            if (VungleAd.tokens.SKOVERLAY_POSITION === "bottom" || VungleAd.tokens.SKOVERLAY_POSITION === "bottom-raised") {
+                skOverlayOptions.position = VungleAd.tokens.SKOVERLAY_POSITION;
+            }
+
+            if (VungleAd.tokens.SKOVERLAY_DISMISSIBLE === "true" || VungleAd.tokens.SKOVERLAY_DISMISSIBLE === "false") {
+                skOverlayOptions.dismissible = AdHelper.parseBoolean(VungleAd.tokens.SKOVERLAY_DISMISSIBLE);
+            }
+        }
+
+        function validateSKOverlayOptions(options) {
+            //check that defined options map to valid presentation styles supported by the SDK
+            //check for each option if corresponding SK presentation token has been defined and if it is set to default
+            //rebuild the object to be safe
+            //if invalid, skOverlayOptions default options will be returned
+            var validatedOptions = {};
+            if (options) {
+                Object.keys(options).forEach(function(key) {
+                    if (key === "position") {
+                        //check if SKOVERLAY_POSITION is default and use creative override, otherwise use token value
+                        if (options[key] === "bottom" || options[key] === "bottom-raised") {
+                            validatedOptions.position = options[key];
+                        } else {
+                            validatedOptions.position = "bottom";
+                        }
+                    }
+
+                    if (key === "dismissible") {
+                        //check if SKOVERLAY_DISMISSIBLE is default and use creative override, otherwise use token value
+                        if (options[key] == true || options[key] == false) {
+                            validatedOptions.dismissible = options[key];
+                        } else {
+                            validatedOptions.dismissible = true;
+                        }
+                    }
+                });
+            }
+            return validatedOptions;
+        }
+
+        //opens CTA URL in browser or deep-link if applicable (applies to all platforms)
+        function triggerMraidOpen() {
+            vungleMRAID.open(VungleAd.tokens.CTA_BUTTON_URL);
+        }
+
+        function showSKOverlay(skOverlayPresentationOptions) {
+            //attempt to open SKOverlay if prepared, otherwise fallback to SKProductView
+            if (isSKOverlayPrepared) {
+                console.log("SKOverlay - present with options:" + JSON.stringify(skOverlayPresentationOptions));
+                window.vungle.mraidExt.presentStoreOverlayView(appStoreId, skOverlayPresentationOptions);
+            } else {
+                showSKProductView();
+            }
+        }
+
+        function showSKProductView() {
+            //attempt to open SKProductView if prepared, otherwise fallback to mraid.open
+            if (isSKProductViewPrepared) {
+                window.vungle.mraidExt.presentStoreView(appStoreId);
+            } else {
+                triggerMraidOpen();
+            }
+        }
+
+        getDynamicElement().addEventListener("vungle.events.preparestore.finished", onNotifyPresentSKProductViewFinished);
+        getDynamicElement().addEventListener("vungle.events.preparestore.success", onNotifyPrepareSKProductViewSuccess);
+        
+        getDynamicElement().addEventListener("vungle.events.storeoverlay.finished", onNotifyPresentSKOverlayFinished);
+        getDynamicElement().addEventListener("vungle.events.storeoverlay.success", onNotifyPrepareSKOverlaySuccess);
+        getDynamicElement().addEventListener("vungle.events.storeoverlay.visible", onNotifySKOverlayVisible);
+        getDynamicElement().addEventListener("vungle.events.storeoverlay.failed", onNotifySKOverlayFailed);
+
+        window.addEventListener('ad-event-sk-dismiss', dismissSKOverlay);
     }
 };
 

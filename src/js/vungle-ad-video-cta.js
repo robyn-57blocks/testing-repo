@@ -24,11 +24,11 @@ function initCTA(pkg) {
         AdHelper.addClass(videoCta, 'show');
     if (pkg.fullscreen === 'true') {
         fullscreenVideo.addEventListener('click', function() {
-            window.callSDK('download')
+            window.callSDK('download', 'fsc-video')
         });
     }
     videoCta.addEventListener('click', function() {
-        window.callSDK('download')
+        window.callSDK('download', 'fsc-video')
     });
 
 }

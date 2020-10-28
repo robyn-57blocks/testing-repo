@@ -1,8 +1,10 @@
 import { default as AdCore } from './vungle-ad-core.js';
+import { default as EventController } from './vungle-ad-event-controller.js';
 
 window.addEventListener('load', function() {
     AdCore.init(function() {
         console.log('VUNGLE AD - ready');
+        EventController.sendEvent('vungle-ad-load-complete');
     });
 });
 
@@ -16,7 +18,7 @@ eventer(messageEvent, function(e) {
             window.callSDK('close');
             break;
         case 'download':
-            window.callSDK('download');
+            window.callSDK('download', 'cta-click');
             break;
     }
 }, false);
