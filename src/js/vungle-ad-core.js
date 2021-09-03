@@ -14,6 +14,7 @@ import { default as ASOIController } from './vungle-ad-asoi-controller.js';
 import { default as ChildInstructions } from './vungle-ad-child-instructions.js';
 import { default as EndcardOnlyAttribution } from './vungle-ad-endcard-only-attribution.js';
 import { default as SDKHelper } from './vungle-ad-sdk-helper.js';
+import { tpats, fireTpat } from './events.js'
 
 const autoOpenKey = "video-storekitoverlay-autoopen" 
 
@@ -38,7 +39,22 @@ export function openStoreKitOverlay(skOverlayOptions, appStoreId, postrollAlread
     const validatedSkOverlayOptions = validateSKOverlayOptions(skOverlayOptions);
 
     window.vungle.mraidExt.presentStoreOverlayView(appStoreId, validatedSkOverlayOptions);
+} 
     
+
+export const fireCtaClickTPATEvent = (ctaEventSource) => {
+            switch (ctaEventSource) {
+                case "cta-click":
+                  fireTpat(tpats.ctaClick);
+                break;
+                case "fsc-video":
+                  fireTpat(tpats.fullScreenClick);
+                break;
+            }
+}
+
+export const fireCloseClickTpatEvent = () => {
+    fireTpat(tpats.closeButtonClick);
 }
 
 var adcore = {
@@ -556,7 +572,9 @@ var adcore = {
                 EventController.sendEvent('ad-event-close-button-reveal')
                 AdClose.endCloseButtonTimer(videoCloseBtnContainer);
 
-                videoCloseBtnContainer.onclick = function() {
+                videoCloseBtnContainer.onclick = function(e) {
+                        e.stopPropagation();
+                    fireTpat(tpats.closeButtonClick);
                     if (VungleAd.isAdIncentivised()) {
                         if (achievedReward) {
                             fullscreenVideoElem.removeEventListener('ended', onVideoPlayComplete, false);
@@ -605,7 +623,9 @@ var adcore = {
                 setTimeout(function() {
                     EventController.sendEvent('ad-event-close-button-reveal')
                     AdClose.endCloseButtonTimer(closeBtnContainer);
-                    closeButton.onclick = function() {
+                    closeButton.onclick = function(e) {
+                        e.stopPropagation();
+                        fireCloseClickTpatEvent();
                         vungleMRAID.close();
                     };
                 }, showCloseButtonTimeMilliSeconds);
@@ -631,7 +651,9 @@ var adcore = {
                     EventController.sendEvent('ad-event-close-button-reveal')
                     AdClose.endCloseButtonTimer(closeBtnContainer);
 
-                    closeButton.onclick = function() {
+                    closeButton.onclick = function(e) {
+                        e.stopPropagation();
+                        fireCloseClickTpatEvent();
                         if (VungleAd.isAdIncentivised()) {
                             console.log('TIMER CLOSE ICON - incentivised');
                             if (achievedReward) {
@@ -659,7 +681,8 @@ var adcore = {
         }
 
         function ctaButtonClicked(ctaEventSource) {
-            //if CTA has not been previously clicked, send postroll.click and clickUrl TPAT events
+            fireCtaClickTPATEvent(ctaEventSource);
+
             if (!ctaAlreadyClicked) {
                 window.vungle.mraidBridgeExt.notifyTPAT("postroll.click");
                 window.vungle.mraidBridgeExt.notifyTPAT("clickUrl");
