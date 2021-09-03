@@ -1,0 +1,23 @@
+#near-close-btn-area {
+  right: 0;
+  top: 0;
+  position: absolute;
+  z-index: 9000;
+  padding: .8em .8em .5em 1.2em;
+  line-height: 1;
+  
+  > [class*='-btn'].hide {
+      display: none;
+      opacity: 0;
+      pointer-events: none; 
+  }
+}
+
+#vungle-fullscreen-video-close-icon-container {
+  margin: 0;
+}
+
+#vungle-endcard-close-icon-container {
+  margin: 0;
+}
+
