@@ -68,6 +68,7 @@ function initVideo(videoSrc, isMuted, isVideoProgressBarVisible) {
         //Start event listeners for video start and TPAT attribution
         fullscreenVideoElem.addEventListener('timeupdate', onVideoPlay);
         fullscreenVideoElem.addEventListener('vungle-fullscreen-video-ready', pauseVideo);
+        fullscreenVideoElem.addEventListener('seeking', onVideoSeeking);
         videoMuteButton.addEventListener('click', toggleVideoMute);
         window.addEventListener('vungle-pause', pauseVideo);
         window.addEventListener('vungle-resume', playVideo);
@@ -211,3 +212,14 @@ function onVideoTPATCheckpoint() {
 function videoLengthReport() {
     window.vungle.mraidBridgeExt.notifyEventValuePairEvent("videoLength", Math.floor(videoDurationCount * 1000));
 }
+
+function onVideoSeeking() {
+    var currentTime = fullscreenVideoElem.currentTime;
+    var delta = currentTime - videoCurrentPlayTime;
+
+    if (Math.abs(delta) > 0.01) {
+        fullscreenVideoElem.pause();
+        fullscreenVideoElem.currentTime = videoCurrentPlayTime;
+    }
+}
+
