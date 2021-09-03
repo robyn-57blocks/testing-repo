@@ -25,6 +25,7 @@ import {
     isAutoOpenStoreKitOverlayOnVideoEnabled,
     openStoreKitOverlayInFiveSeconds
 } from "./vungle-ad-video-skoverlay.js"
+import { fireTpat, tpats } from './events.js'
 
 var videoTPATCheckpoints = [0, 25, 50, 75, 100];
 var videoTPATCheckpointsReached = [];
@@ -70,6 +71,7 @@ function initVideo(videoSrc, isMuted, isVideoProgressBarVisible) {
         fullscreenVideoElem.addEventListener('vungle-fullscreen-video-ready', pauseVideo);
         fullscreenVideoElem.addEventListener('seeking', onVideoSeeking);
         videoMuteButton.addEventListener('click', toggleVideoMute);
+    videoMuteButton.addEventListener('click', logMuteElementClick);
         window.addEventListener('vungle-pause', pauseVideo);
         window.addEventListener('vungle-resume', playVideo);
 
@@ -101,10 +103,15 @@ function hideVideoView() {
     pauseVideo();
 
     videoMuteButton.removeEventListener('click', toggleVideoMute);
+    videoMuteButton.removeEventListener('click', logMuteElementClick);
 
     AdHelper.addClass(fullscreenVideoView, 'hide');
     AdHelper.addClass(videoMuteButton, 'hide');
     AdHelper.addClass(videoCta, 'hide');
+}
+
+function logMuteElementClick() {
+    fireTpat(tpats.muteClick);
 }
 
 function toggleVideoMute() {
