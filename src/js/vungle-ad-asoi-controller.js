@@ -1,7 +1,8 @@
-export default { init }
+export default { init, handleInteraction, triggerAsoiEvent, completeAd}
 
 import { default as VungleAd } from './vungle-ad.js';
 import { default as DataStore } from './vungle-ad-data-store.js';
+import { fireTpat, tpats } from './events.js';
 
 var tokenisedASOI;
 
@@ -53,8 +54,6 @@ function initASOIDelayTimerAutoplay() {
             var tmpSettings = DataStore.get('settings', false)
             tmpSettings.asoiDelayCompleted = true;
 
-
-
             if (tmpSettings.completeAd === true &&
                 tmpSettings.hasInteracted === false) {
 
@@ -63,19 +62,41 @@ function initASOIDelayTimerAutoplay() {
                 else
                     tmpSettings.ASOIEnded = true
 
-                window.callSDK('download', 'asoi-complete');
+                triggerAsoiEvent(asoiEventTypes.complete);
             }
             DataStore.push('settings', tmpSettings)
         }, settings.ASOIDelayTimerAutoplay * 1000);
     }
 }
 
+  const asoiEventTypes = {
+    interaction: "interaction",
+    complete: "complete"
+  }
+
+function triggerAsoiEvent(eventType) {
+  if(eventType === asoiEventTypes.interaction) {
+    fireTpat(tpats.asoiInteraction);
+    window.callSDK('download', 'asoi-interaction');
+  } else if (eventType === asoiEventTypes.complete) {
+    fireTpat(tpats.asoiComplete);
+    window.callSDK('download', 'asoi-complete');
+  }
+}
+
+
 function handleInteraction() {
-    // @if NODE_ENV='dev'
-    console.log('%cASOI%c interaction', 'color: #EB7500;font-weight:bold', 'color: inherit');
-    // @endif
+
     var settings = DataStore.get('settings', false)
 
+    // @if NODE_ENV='dev'
+    console.log('%cASOI%c interaction', 'color: #EB7500;font-weight:bold', 'color: inherit');
+    console.log(`settings: ${JSON.stringify(settings)}`);
+    // @endif
+
+    fireTpat(tpats.endcardClick);
+
+    
     if (settings && typeof settings.ASOIEnabled !== 'undefined' && 
         settings.ASOIEnabled && settings.ASOIEnded === false && 
         (tokenisedASOI == "aggressive" || tokenisedASOI == "complete")) {
@@ -100,7 +121,7 @@ function handleInteraction() {
             settings.ASOITriggered = true;
 
             setTimeout(function() {
-                window.callSDK('download', 'asoi-interaction');
+                triggerAsoiEvent(asoiEventTypes.interaction);
             }, settings.ASOIDelayTimer * 1000);
         }
 
@@ -114,7 +135,7 @@ function handleInteraction() {
             settings.ASOITriggered = true;
             
             setTimeout(function() {
-                window.callSDK('download', 'asoi-interaction');
+                triggerAsoiEvent(asoiEventTypes.interaction);
             }, settings.ASOIDelayTimer * 1000);
         }
 
@@ -123,24 +144,27 @@ function handleInteraction() {
 }
 
 function completeAd() {
+    var settings = DataStore.get('settings', false)
+
     // @if NODE_ENV='dev'
     console.log('%cASOI%c complete', 'color: #EB7500;font-weight:bold', 'color: inherit');
+    console.log(`settings: ${JSON.stringify(settings)}`);
     // @endif
-    var settings = DataStore.get('settings', false)
 
     if (settings.completeAd || settings.ASOIEnded)
         return
 
     settings.completeAd = true;
-
-    if (settings.ASOIEnabled === true &&
+    const shouldFireCompleteEvent = settings.ASOIEnabled === true &&
        (settings.hasInteracted === true || settings.asoiDelayCompleted === true) &&
-       (tokenisedASOI == "aggressive" || tokenisedASOI == "complete")) {
-        
-        settings.ASOIEnded = true;
+       (tokenisedASOI == "aggressive" || tokenisedASOI == "complete")
+    
 
+    if (shouldFireCompleteEvent) {
+        settings.ASOIEnded = true;
+        
         setTimeout(function() {
-            window.callSDK('download', 'asoi-complete');
+          triggerAsoiEvent(asoiEventTypes.complete);
         }, settings.ASOIDelayTimer * 1000);
     }
 
