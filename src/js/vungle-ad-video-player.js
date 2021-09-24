@@ -21,6 +21,10 @@ import { default as AdHelper } from './vungle-ad-helpers.js';
 import { default as EventController } from './vungle-ad-event-controller.js';
 import { default as PostMessenger } from './vungle-ad-post-messenger.js';
 import { default as SDKHelper } from './vungle-ad-sdk-helper.js';
+import {
+    isAutoOpenStoreKitOverlayOnVideoEnabled,
+    openStoreKitOverlayInFiveSeconds
+} from "./vungle-ad-video-skoverlay.js"
 
 var videoTPATCheckpoints = [0, 25, 50, 75, 100];
 var videoTPATCheckpointsReached = [];
@@ -70,6 +74,9 @@ function initVideo(videoSrc, isMuted, isVideoProgressBarVisible) {
 
         videoLengthReport();
         playVideo();
+        if(isAutoOpenStoreKitOverlayOnVideoEnabled()) {
+            openStoreKitOverlayInFiveSeconds()
+        }
     });
 }
 

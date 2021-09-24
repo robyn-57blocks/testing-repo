@@ -1,6 +1,32 @@
 {
     "default_tokens": [
         {
+            "token_name": "SKOVERLAY_AUTO",
+            "properties": {
+                "display_name": "StoreKit Overlay Auto Show",
+                "cacheable": false,
+                "data_type": "boolean",
+                "default_value": "false",
+                "group_id": "Button Controls",
+                "description": "100% CTR"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": false,
+                "overrides": []
+            },
+            "hides": [
+                "FULL_CTA",
+                "VIDEO_SHOW_CTA",
+                "DOWNLOAD_BUTTON_DELAY_SECONDS"
+            ],
+            "ignoredPlatforms": [
+                "android",
+                "windows",
+                "amazon"
+            ]
+        },
+        {
             "token_name": "CLOSE_BUTTON_DELAY_SECONDS",
             "properties": {
                 "display_name": "Close Button Delay",
@@ -268,31 +294,12 @@
         {
             "token_name": "FULL_CTA",
             "properties": {
-                "display_name": "CTA Overlay",
+                "display_name": "Full Screen Clickable",
                 "cacheable": false,
                 "data_type": "boolean",
                 "default_value": "false",
-                "group_id": "Button Controls"
-            },
-            "role": {
-                "name": "advertiser",
-                "valueRequired": true,
-                "overrides": [
-                    {
-                        "name": "system",
-                        "priority": 1
-                    }
-                ]
-            }
-        },
-        {
-            "token_name": "DOWNLOAD_BUTTON_DELAY_SECONDS",
-            "properties": {
-                "display_name": "Video CTA Delay",
-                "cacheable": false,
-                "data_type": "float",
-                "default_value": "3.5",
-                "group_id": "Button Controls"
+                "group_id": "Button Controls",
+                "description": "High CTR. If enabled this is full screen clickable"
             },
             "role": {
                 "name": "advertiser",
@@ -312,7 +319,29 @@
                 "cacheable": false,
                 "data_type": "boolean",
                 "default_value": "false",
-                "group_id": "Button Controls"
+                "group_id": "Button Controls",
+                "description": "Low CTR. Fullscreen clickable OFF, and CTA"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "DOWNLOAD_BUTTON_DELAY_SECONDS",
+            "properties": {
+                "display_name": "Video CTA Delay",
+                "cacheable": false,
+                "data_type": "float",
+                "default_value": "3.5",
+                "group_id": "Button Controls",
+                "description": "Seconds delay for the CTA to show"
             },
             "role": {
                 "name": "advertiser",
@@ -548,6 +577,21 @@
                         "priority": 1
                     }
                 ]
+            }
+        },
+        {
+            "token_name": "FULL_CTA_OPTION",
+                "properties": {
+                "display_name": "Video Clickable Area",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "",
+                "group_id": "Advanced Settings"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": false,
+                "overrides": []
             }
         }
     ]

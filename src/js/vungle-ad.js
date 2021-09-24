@@ -28,8 +28,6 @@ export default {
             "VIDEO_PROGRESS_BAR": "true",
             "INCENTIVIZED_TITLE_TEXT": "Close this ad?",
             "CREATIVE_VIEW_TYPE": "video_and_endcard",
-            "VIDEO_SHOW_CTA":"true",
-            "FULL_CTA":"true",
             "DOWNLOAD_BUTTON_DELAY_SECONDS":"1",
             "ENDCARD_ONLY_DURATION_SECONDS":"3",
             "INCENTIVIZED_CLOSE_BUTTON_DELAY_SECONDS": "4",
@@ -44,7 +42,11 @@ export default {
             "SK_ASOI_COMPLETE": "default",
             "SK_CTA_ONLY": "default",
             "SKOVERLAY_POSITION": "default",
-            "SKOVERLAY_DISMISSIBLE": "default"
+            "SKOVERLAY_DISMISSIBLE": "default",
+            "FULL_CTA_OPTION": "adv_pref",
+            "SKOVERLAY_AUTO": "true",
+            "FULL_CTA":"true",
+            "VIDEO_SHOW_CTA":"true"
         }`);
 
         window.vungle = {
@@ -55,7 +57,8 @@ export default {
                 getOSVersion: function() { return "14.0"; },
                 getSDKVersion: function() { return "16.8.1"; },
                 prepareStoreView: function() { console.log('%cSDK prepareStoreView%c', 'color: #984984;font-weight:bold', 'color: inherit'); return true; },
-                prepareStoreOverlayView: function() { console.log('%cSDK prepareStoreOverlayView%c', 'color: #984984;font-weight:bold', 'color: inherit'); return true; }
+                prepareStoreOverlayView: function() { console.log('%cSDK prepareStoreOverlayView%c', 'color: #984984;font-weight:bold', 'color: inherit'); return true; },
+                presentStoreOverlayView: function(appStoreId, skOverlayOptions) { console.log(`%cSDK presentStoreOverlayView%c appStoreId: ${appStoreId}, skOverlayOptions: ${JSON.stringify(skOverlayOptions)}`, 'color: #984984;font-weight:bold', 'color: inherit'); return true; }
             },
             mraidBridgeExt: {
                 notifyTPAT: function(event) { console.log('%cnotifyTPAT%c ' + event, 'color: #2CA840;font-weight:bold', 'color: inherit'); return true; },
@@ -70,7 +73,8 @@ export default {
                 getConsentBodyText: function() { return "With permission, Vungle collects your ad-interaction data to serve relevant ads to you. Note: you’ll see ads independent of your selection, but they may not be as relevant. Do you consent to data tracking for more relevant ads?"; },
                 getConsentAcceptButtonText: function() { return "I consent"; },
                 getPlacementType: function() { return "fullscreen"; },
-                getConsentDenyButtonText: function() { return "I do not consent"; }
+                getConsentDenyButtonText: function() { return "I do not consent"; },
+                open: function(url) { console.log(`mraid.open called with url ${url}`) }
             }
         };
 

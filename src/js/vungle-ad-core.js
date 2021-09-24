@@ -15,6 +15,32 @@ import { default as ChildInstructions } from './vungle-ad-child-instructions.js'
 import { default as EndcardOnlyAttribution } from './vungle-ad-endcard-only-attribution.js';
 import { default as SDKHelper } from './vungle-ad-sdk-helper.js';
 
+const autoOpenKey = "video-storekitoverlay-autoopen" 
+
+export function openStoreKitOverlay(skOverlayOptions, appStoreId, postrollAlreadyFired, markPostrollFired, validateSKOverlayOptions) {
+
+    const canFireStoreKitOverlay = AdHelper.checkSKOverlaySupportedOSVersion() && AdHelper.checkSKOverlaySupportedSDKVersion() && appStoreId 
+
+    if (!canFireStoreKitOverlay) {
+        return;
+    }
+
+    // postroll behaviour for SKO auto show has been written to match the same behaviour in SKDT/StoreEndcard ad unit.
+    if (!postrollAlreadyFired) {
+        window.vungle.mraidBridgeExt.notifyTPAT("postroll.click");
+        window.vungle.mraidBridgeExt.notifyTPAT("clickUrl");
+        markPostrollFired();
+    }
+ 
+    SDKHelper.mraidBridgeExt().notifyEventValuePairEvent("postroll.click", 1);
+    SDKHelper.mraidBridgeExt().notifyEventValuePairEvent("download", 2);
+    
+    const validatedSkOverlayOptions = validateSKOverlayOptions(skOverlayOptions);
+
+    window.vungle.mraidExt.presentStoreOverlayView(appStoreId, validatedSkOverlayOptions);
+    
+}
+
 var adcore = {
     init: function(onEndcardStart) {
 
@@ -69,7 +95,13 @@ var adcore = {
                 return;
             }
 
-            if (!blockCtaEvent) {
+            //do we want to put this inside the blockCtaEvent?
+            // blockCtaEvent is exclusively to protect against a bug scenario. Do we need to implement the same functionality with SKOverlay
+            const markCtaClicked = () => ctaAlreadyClicked = true
+
+            if (eventSource === autoOpenKey) {
+                 openStoreKitOverlay(skOverlayOptions, appStoreId, ctaAlreadyClicked, markCtaClicked, validateSKOverlayOptions);
+            } else if (!blockCtaEvent) {
                 ctaButtonClicked(eventSource);
             }
         };
@@ -329,7 +361,6 @@ var adcore = {
         function renderAdFullscreenVideo() {
             AdVideoCTA.initCTAListener({
                 showCTA: AdHelper.isValid(VungleAd.tokens.VIDEO_SHOW_CTA) ? VungleAd.tokens.VIDEO_SHOW_CTA : null,
-                fullscreen: AdHelper.isValid(VungleAd.tokens.FULL_CTA) ? VungleAd.tokens.FULL_CTA : null,
                 delay: AdHelper.isValid(VungleAd.tokens.DOWNLOAD_BUTTON_DELAY_SECONDS) ? VungleAd.tokens.DOWNLOAD_BUTTON_DELAY_SECONDS : 0,
             });
 
