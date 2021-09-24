@@ -42,7 +42,7 @@ gulp bundle:prod
 
 
 ## License
-© Vungle. All Rights Reserved. 
+© Vungle. All Rights Reserved.
 
 
 
@@ -67,7 +67,7 @@ window.addEventListener('ad-event-init', function() {
 
 
 #### `ad-event-pause`
-Event is triggered when either the application is closed by the user, or the privacy page is displayed. Use this event to pause animations, audio or video in the creative so they don't continue to play outside the ad experience. 
+Event is triggered when either the application is closed by the user, or the privacy page is displayed. Use this event to pause animations, audio or video in the creative so they don't continue to play outside the ad experience.
 ```javascript
 window.addEventListener('ad-event-pause', function() {
 	// Listening for pause event from Design Framework Core
@@ -125,7 +125,7 @@ A global variable called `VungleHelper` defined in the `ad-js-injection.js` prov
 window.addEventListener('ad-event-init', function() {
 	// Listening for init event from Design Framework Core
 	// Write to the document the CTA_BUTTON_URL token value
-	document.body.innerHTML = VungleHelper.tokens.CTA_BUTTON_URL 
+	document.body.innerHTML = VungleHelper.tokens.CTA_BUTTON_URL
 });
 ```
 
@@ -186,5 +186,5 @@ VungleHelper.setSKPresentation("asoi-interaction", "off");
 ```
 
 
- **`VungleHelper.dismissSKOverlay()`**
+**`VungleHelper.dismissSKOverlay()`**
 Used to programatically dismiss SKOverlay without user interaction (if visible).
