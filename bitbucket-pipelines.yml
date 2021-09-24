@@ -3,7 +3,7 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: nikolaik/python-nodejs:python3.5-nodejs8
+image: nikolaik/python-nodejs:python3.7-nodejs10
 definitions:
   caches:
     globalnode: /usr/local/lib/node_modules
@@ -24,7 +24,7 @@ pipelines:
              # install gulp
              - npm i gulp-cli -g
              # install node modules
-             - npm i          
+             - npm i
              # increment version
              - npm run versioning
              # build dist folder
@@ -33,31 +33,31 @@ pipelines:
              - npm run create-version-file
              # Get version from package.json
              - declare -x VERSION=$(node -pe "require('./package.json').version")
-             # display version 
+             # display version
              - echo $VERSION
              # config setup for git push
-             - git config --global push.default simple 
-             # Commit package.json 
+             - git config --global push.default simple
+             # Commit package.json
              - git add package.json
              # push Commit with message ,"skip CI" Required to avoid re-running this CI upon git push
-             - git commit -m "bumped to version $VERSION [skip CI]" 
+             - git commit -m "bumped to version $VERSION [skip CI]"
              - git push origin
              # commit will be tagged with version
              - git tag $VERSION
              - git remote -v
              # push new tagging
              - git push origin --tags
-             # download pip 
+             # download pip
              - curl -O https://bootstrap.pypa.io/get-pip.py
              # install pip
              - python get-pip.py
-             # install aws CLI  
+             # install aws CLI
              - pip install awscli
              # copy files to s3 bucket with versioned folder
              - aws s3 cp ./dist/ s3://design-framework-core/$VERSION/ --recursive
-             - aws s3 cp df-dist.zip s3://design-framework-core/$VERSION/ 
+             - aws s3 cp df-dist.zip s3://design-framework-core/$VERSION/
              # overwrite latest folder with new version
              - aws s3 cp ./dist/ s3://design-framework-core/latest/ --recursive
-             - aws s3 cp df-dist.zip s3://design-framework-core/latest/ 
+             - aws s3 cp df-dist.zip s3://design-framework-core/latest/
              # Store JSON file in latest to see the current version
-             - aws s3 cp ./s3/version-info.json s3://design-framework-core/latest/ 
+             - aws s3 cp ./s3/version-info.json s3://design-framework-core/latest/
