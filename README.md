@@ -186,5 +186,5 @@ VungleHelper.setSKPresentation("asoi-interaction", "off");
 ```
 
 
-**`VungleHelper.dismissSKOverlay()`**
+- **`VungleHelper.dismissSKOverlay()`**
 Used to programatically dismiss SKOverlay without user interaction (if visible).
