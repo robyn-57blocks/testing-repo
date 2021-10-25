@@ -3,7 +3,6 @@
 The Design Framework Core is our centralised codebase which contains a boilerplate to render custom ad formats on the Vungle network through our SDK. These custom ad formats run as MRAID ad units (using the internal *vungle_mraid* ad format).
 
 
-
 ## Getting Started
 ### Running Locally (Dev environment)
 - Uses mraid mock defined in `src/js/vungle-ad.js` to emulate tokens/MRAID values from the SDK.
