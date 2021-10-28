@@ -7,6 +7,7 @@ import { default as AdHelper } from './vungle-ad-helpers.js';
 import { default as EventController } from './vungle-ad-event-controller.js';
  
 import { isFullScreenClickOnVideoEnabled, isCtaOnlyOnVideoEnabled } from "./vungle-ad-video-skoverlay.js"
+import { fireTpat, tpats } from './events.js';
 
 
 function initCTAListener(pkg) {
@@ -36,6 +37,7 @@ function initCTA(pkg) {
 
     if (isCtaOnlyOnVideoEnabled()) {
         videoCta.addEventListener('click', function() {
+            fireTpat(tpats.ctaClick);
             window.callSDK('download', 'fsc-video')
         });
     }

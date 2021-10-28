@@ -1,10 +1,13 @@
 export default {
-    init
+    init,
+    firePrivacyTpat
 }
 
 import { default as AdHelper } from './vungle-ad-helpers.js';
 import { default as EventController } from './vungle-ad-event-controller.js';
 import { default as AdVideoPlayer } from './vungle-ad-video-player.js';
+import { default as SDKHelper } from './vungle-ad-sdk-helper.js';
+import {fireTpat, tpats} from "./events.js"
 
 var privacyTimer, privacySubTimer;
 
@@ -37,6 +40,10 @@ function init(privacyPageUrl, vunglePrivacyLogoImageSrc) {
     document.getElementById(prefix + 'privacy-back-button-container').addEventListener("click", hideIframe);
 }
 
+export function firePrivacyTpat() {
+    fireTpat(tpats.privacyButtonClick)
+}
+
 function hideIframe() {
     var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
 
@@ -51,6 +58,7 @@ function hideIframe() {
 }
 
 function showIFrame() {
+    firePrivacyTpat();
     var loadingPage = document.getElementById(prefix + 'privacy-page-loading');
     var privacyPg = document.getElementById(prefix + 'privacy-page');
 
@@ -69,6 +77,7 @@ function showIFrame() {
     };
 
     privacyPg.src = privacyUrl;
+
 }
 
 function hidePrivacyIcon() {

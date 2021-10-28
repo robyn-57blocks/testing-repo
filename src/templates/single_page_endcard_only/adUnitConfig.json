@@ -256,7 +256,7 @@
                 "display_name": "CTA URL",
                 "cacheable": false,
                 "data_type": "url",
-                "default_value": null,
+                "default_value": "",
                 "group_id": "Product Description"
             },
             "role": {
