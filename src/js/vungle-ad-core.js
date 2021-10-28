@@ -43,14 +43,14 @@ export function openStoreKitOverlay(skOverlayOptions, appStoreId, postrollAlread
     
 
 export const fireCtaClickTPATEvent = (ctaEventSource) => {
-            switch (ctaEventSource) {
-                case "cta-click":
-                  fireTpat(tpats.ctaClick);
-                break;
-                case "fsc-video":
-                  fireTpat(tpats.fullScreenClick);
-                break;
-            }
+    switch (ctaEventSource) {
+        case "cta-click":
+          fireTpat(tpats.ctaClick);
+        break;
+        case "fsc-video":
+          fireTpat(tpats.fullScreenClick);
+        break;
+    }
 }
 
 export const fireCloseClickTpatEvent = () => {
