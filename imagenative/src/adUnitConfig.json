@@ -1,0 +1,229 @@
+{
+    "pages": ["ImageNative"],
+    "components": [],
+    "default_tokens": [
+        {
+            "token_name": "APP_TITLE",
+            "properties": {
+                "display_name": "App Name",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "",
+                "group_id": "Product Description",
+                "description": "Application name, this field is auto-pulled but can be changed later. 25 character maximum"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": []
+            },
+            "validation": {
+                "maxLength": 25
+            }
+        },
+        {
+            "token_name": "APP_TEXT",
+            "properties": {
+                "display_name": "Description",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "",
+                "group_id": "Product Description",
+                "description": "Describe this app, add anything. 90 character maximum"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": false,
+                "overrides": []
+            },
+            "validation": {
+                "maxLength": 90
+            }
+        },
+        {
+            "token_name": "APP_ICON",
+            "properties": {
+                "display_name": "App Icon",
+                "cacheable": true,
+                "data_type": "image",
+                "default_value": "",
+                "group_id": "Product Description",
+                "description": "Icon for application, this is auto-pulled but can be changed later. 80x80px size minimum"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
+            "token_name": "CTA_BUTTON_URL",
+            "properties": {
+                "display_name": "CTA URL",
+                "cacheable": false,
+                "data_type": "url",
+                "default_value": "",
+                "group_id": "Product Description",
+                "description": "URL for application, this is auto-pulled but can be changed later"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
+            "token_name": "MAIN_IMAGE",
+            "properties": {
+                "display_name": "Image",
+                "cacheable": true,
+                "data_type": "image",
+                "default_value": "",
+                "group_id": "Product Description",
+                "description": "Ratio: 1.91x1.00. Strict Dimension Requirement: 800 pixels (width) x 417 pixels (height) or higher. Note: Animated images (.GIF) are not supported for native ads."
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
+            "token_name": "CTA_TEXT",
+            "properties": {
+                "display_name": "CTA Text",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "Download",
+                "group_id": "Product Description",
+                "description": "Default is “Download”, 15 character maximum"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            },
+            "validation": {
+                "maxLength": 15
+            }
+        },
+        {
+            "token_name": "SPONSORED_BY",
+            "properties": {
+                "display_name": "Sponsored Text",
+                "cacheable": false,
+                "data_type": "string",
+                "default_value": "Sponsored",
+                "group_id": "Product Description",
+                "description": "Default is “Sponsored”, 25 character maximum"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": []
+            },
+            "validation": {
+                "maxLength": 25
+            }
+        },
+        {
+            "token_name": "AUTO_LOCALIZE",
+            "properties": {
+                "display_name": "Auto Localize",
+                "cacheable": false,
+                "data_type": "boolean",
+                "default_value": "true",
+                "group_id": "Product Description"
+            },
+            "role": {
+                "name": "advertiser",
+                "valueRequired": true,
+                "overrides": [
+                    {
+                        "name": "system",
+                        "priority": 1
+                    }
+                ]
+            }
+        },
+        {
+            "token_name": "CTA_BUTTON_FONT_COLOR",
+            "properties": {
+                "display_name": "CTA Button Font Color",
+                "cacheable": false,
+                "data_type": "color",
+                "default_value": "",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
+            "token_name": "CTA_BUTTON_BACKGROUND_COLOR",
+            "properties": {
+                "display_name": "CTA Button Background Color",
+                "cacheable": false,
+                "data_type": "color",
+                "default_value": "",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
+            "token_name": "BACKGROUND_COLOR",
+            "properties": {
+                "display_name": "Background Color",
+                "cacheable": false,
+                "data_type": "color",
+                "default_value": "#00FFFFFF",
+                "group_id": "Button Controls"
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": []
+            }
+        },
+        {
+            "token_name": "FONT_NAME",
+            "properties": {
+                "display_name": "Font Name",
+                "cacheable": false,
+                "data_type": "color",
+                "default_value": "",
+                "group_id": "Button Controls",
+                "enum": [
+                    {
+                        "value": "Verdana",
+                        "name": "Verdana"
+                    },
+                    {
+                        "value": "Arial",
+                        "name": "Arial"
+                    },
+                    {
+                        "value": "sans-serif",
+                        "name": "sans-serif"
+                    }
+                ]
+            },
+            "role": {
+                "name": "publisher",
+                "valueRequired": true,
+                "overrides": []
+            }
+        }
+    ]
+}
