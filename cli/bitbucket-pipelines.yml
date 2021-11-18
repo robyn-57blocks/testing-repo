@@ -1,0 +1,11 @@
+image: node:10.13.0
+
+pipelines:
+  default:
+    - step:
+        name: Lint
+        caches:
+          - node
+        script:
+          - npm install
+          - npm run lint
