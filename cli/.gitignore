@@ -1,6 +1,0 @@
-*.DS_Store
-.idea/*
-.sass-cache/*
-node_modules/*
-CHANGELOG.md
-.history

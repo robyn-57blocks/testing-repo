@@ -1,8 +1,0 @@
-*.DS_Store
-.idea/*
-.sass-cache/*
-node_modules/*
-dist
-release
-.env
-.history
