@@ -1,1 +1,0 @@
-(c) Vungle. All rights reserved.
